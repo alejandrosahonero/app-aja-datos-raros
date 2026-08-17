@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:math' as math;
 
-import 'package:app_template/core/config/ad_config.dart';
-import 'package:app_template/core/config/app_config.dart';
-import 'package:app_template/core/utils/app_logger.dart';
-import 'package:app_template/services/ads/consent_service.dart';
+import 'package:aja/core/config/ad_config.dart';
+import 'package:aja/core/config/app_config.dart';
+import 'package:aja/core/utils/app_logger.dart';
+import 'package:aja/services/ads/consent_service.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 /// Result of an attempt to show a full screen ad.
@@ -38,6 +38,9 @@ typedef AdService = AdsService;
 /// * Failed loads retry with exponential backoff, capped.
 /// * A missing ad never blocks a user flow: callers get [AdShowResult.notReady]
 ///   and continue.
+///
+/// There is deliberately no rewarded format: browsing the deck is passive, so
+/// there is nothing a user could want to unlock badly enough to watch a video.
 class AdsService {
   AdsService({required ConsentService consentService, required this.isPremium})
     : _consent = consentService;
@@ -55,12 +58,6 @@ class AdsService {
   int _interstitialRetries = 0;
   bool _interstitialLoading = false;
   Timer? _interstitialRetryTimer;
-
-  RewardedAd? _rewarded;
-  DateTime? _rewardedLoadedAt;
-  int _rewardedRetries = 0;
-  bool _rewardedLoading = false;
-  Timer? _rewardedRetryTimer;
 
   int _actionsSinceInterstitial = 0;
   DateTime? _lastInterstitialAt;
@@ -106,12 +103,11 @@ class AdsService {
     preload();
   }
 
-  /// Warms up the full screen formats. Cheap to call repeatedly: each loader
-  /// no-ops while a request is in flight or a valid creative is cached.
+  /// Warms up the interstitial. Cheap to call repeatedly: the loader no-ops
+  /// while a request is in flight or a valid creative is cached.
   void preload() {
     if (!adsEnabled) return;
     _loadInterstitial();
-    _loadRewarded();
   }
 
   // --- Interstitial -------------------------------------------------------
@@ -222,102 +218,6 @@ class AdsService {
     _interstitialLoadedAt = null;
   }
 
-  // --- Rewarded -----------------------------------------------------------
-
-  /// Shows a rewarded video.
-  ///
-  /// [onRewardEarned] fires **only** from the SDK's `onUserEarnedReward`
-  /// callback — never assume the reward from a dismissal. The caller is
-  /// responsible for showing the "watch a video to get X" dialog beforehand and
-  /// for persisting the reward.
-  Future<AdShowResult> showRewarded({
-    required void Function(RewardItem reward) onRewardEarned,
-  }) async {
-    if (!adsEnabled) return AdShowResult.disabled;
-
-    if (_isExpired(_rewardedLoadedAt)) {
-      _disposeRewarded();
-      _loadRewarded();
-    }
-
-    final RewardedAd? ad = _rewarded;
-    if (ad == null) {
-      _loadRewarded();
-      return AdShowResult.notReady;
-    }
-
-    _rewarded = null;
-    _rewardedLoadedAt = null;
-
-    ad.fullScreenContentCallback = FullScreenContentCallback<RewardedAd>(
-      onAdDismissedFullScreenContent: (RewardedAd ad) {
-        ad.dispose();
-        // Preload the next one immediately: rewarded inventory is the main
-        // revenue driver and a cold cache means a lost impression.
-        _loadRewarded();
-      },
-      onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
-        AppLogger.error('Rewarded show failed: $error', name: 'ads');
-        ad.dispose();
-        _loadRewarded();
-      },
-    );
-
-    await ad.show(
-      onUserEarnedReward: (AdWithoutView ad, RewardItem reward) =>
-          onRewardEarned(reward),
-    );
-    return AdShowResult.shown;
-  }
-
-  /// Whether a rewarded video is cached right now. Use it to disable or relabel
-  /// the entry point instead of letting the user tap into a dead end.
-  bool get isRewardedReady =>
-      _rewarded != null && !_isExpired(_rewardedLoadedAt);
-
-  void _loadRewarded() {
-    if (!adsEnabled ||
-        _rewardedLoading ||
-        _rewarded != null ||
-        AdConfig.rewardedAdUnitId.isEmpty) {
-      return;
-    }
-
-    _rewardedLoading = true;
-    unawaited(
-      RewardedAd.load(
-        adUnitId: AdConfig.rewardedAdUnitId,
-        request: buildRequest(),
-        rewardedAdLoadCallback: RewardedAdLoadCallback(
-          onAdLoaded: (RewardedAd ad) {
-            _rewardedLoading = false;
-            _rewardedRetries = 0;
-            _rewarded = ad;
-            _rewardedLoadedAt = DateTime.now();
-          },
-          onAdFailedToLoad: (LoadAdError error) {
-            _rewardedLoading = false;
-            AppLogger.debug('Rewarded load failed: $error', name: 'ads');
-            _scheduleRetry(
-              retries: _rewardedRetries,
-              onRetry: () {
-                _rewardedRetries++;
-                _loadRewarded();
-              },
-              assignTimer: (Timer? timer) => _rewardedRetryTimer = timer,
-            );
-          },
-        ),
-      ),
-    );
-  }
-
-  void _disposeRewarded() {
-    _rewarded?.dispose();
-    _rewarded = null;
-    _rewardedLoadedAt = null;
-  }
-
   // --- Shared helpers -----------------------------------------------------
 
   bool _isExpired(DateTime? loadedAt) {
@@ -343,10 +243,7 @@ class AdsService {
   /// provider's `onDispose`.
   void disposeAds() {
     _interstitialRetryTimer?.cancel();
-    _rewardedRetryTimer?.cancel();
     _interstitialRetryTimer = null;
-    _rewardedRetryTimer = null;
     _disposeInterstitial();
-    _disposeRewarded();
   }
 }

@@ -1,0 +1,420 @@
+{
+  "version": 1,
+  "_editorial": "Cada entrada lleva una cita textual en 'source'. 'sourceUrl' va vacio a proposito: antes de publicar hay que verificar el dato una por una y pegar el enlace permanente. Un dato falso viral se convierte en resenas de 1 estrella.",
+  "facts": [
+    {
+      "id": "vomito-verde",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Por qué el vómito se dibuja verde si casi nunca lo es?",
+        "en": "Why is vomit always drawn green when it almost never is?"
+      },
+      "answer": {
+        "es": "Porque a veces sí lo es: cuando el estómago ya está vacío, sube bilis y la tiñe de verde.",
+        "en": "Because sometimes it really is: once the stomach empties, bile comes up and dyes it green."
+      },
+      "detail": {
+        "es": "El pigmento responsable es la biliverdina. Los dibujantes cogieron el caso más llamativo (vomitar con el estómago vacío) y lo convirtieron en el color por defecto.",
+        "en": "The pigment behind it is biliverdin. Cartoonists took the most striking case — throwing up on an empty stomach — and turned it into the default colour."
+      },
+      "source": "MedlinePlus, Enciclopedia médica: náuseas y vómitos",
+      "sourceUrl": ""
+    },
+    {
+      "id": "mapa-lengua",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Por qué te enseñaron que la lengua tiene zonas para cada sabor?",
+        "en": "Why were you taught the tongue has a zone for each taste?"
+      },
+      "answer": {
+        "es": "Por una traducción mal hecha. El mapa de la lengua nunca existió: cada zona detecta todos los sabores.",
+        "en": "Because of a bad translation. The tongue map never existed: every zone detects every taste."
+      },
+      "detail": {
+        "es": "En 1901 el alemán David Hänig midió diferencias mínimas de sensibilidad. En 1942 Edwin Boring tradujo sus datos exagerando las diferencias, y el dibujo acabó en los libros de texto durante 60 años.",
+        "en": "In 1901 David Hänig measured tiny differences in sensitivity. In 1942 Edwin Boring translated his data exaggerating them, and the diagram sat in textbooks for 60 years."
+      },
+      "source": "Hänig (1901); Boring (1942); revisado en Nature, 2006",
+      "sourceUrl": ""
+    },
+    {
+      "id": "brillo-humano",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Brillas en la oscuridad?",
+        "en": "Do you glow in the dark?"
+      },
+      "answer": {
+        "es": "Sí. Emites luz visible todo el rato, pero mil veces más débil de lo que tu ojo puede ver.",
+        "en": "Yes. You emit visible light constantly — about a thousand times fainter than your eye can see."
+      },
+      "detail": {
+        "es": "Es un subproducto del metabolismo. Con cámaras ultrasensibles se ve que el brillo sigue un ciclo diario y que la cara es la zona que más emite.",
+        "en": "It is a by-product of metabolism. Ultra-sensitive cameras show the glow follows a daily cycle and that the face emits the most."
+      },
+      "source": "Kobayashi et al., PLoS ONE, 2009",
+      "sourceUrl": ""
+    },
+    {
+      "id": "estomago-se-renueva",
+      "category": "cuerpo",
+      "question": {
+        "es": "Si el ácido del estómago disuelve carne, ¿por qué no te disuelve a ti?",
+        "en": "If stomach acid dissolves meat, why doesn't it dissolve you?"
+      },
+      "answer": {
+        "es": "Porque tu estómago se está reconstruyendo por dentro cada pocos días.",
+        "en": "Because your stomach is rebuilding its own lining every few days."
+      },
+      "detail": {
+        "es": "Una capa de moco con bicarbonato neutraliza el ácido en la superficie, y las células del epitelio gástrico se reemplazan constantemente. Cuando esa defensa falla aparece la úlcera.",
+        "en": "A bicarbonate-rich mucus layer neutralises the acid at the surface, and the gastric lining cells are replaced constantly. When that defence fails you get an ulcer."
+      },
+      "source": "Allen & Flemström, American Journal of Physiology, 2005",
+      "sourceUrl": ""
+    },
+    {
+      "id": "sangre-nunca-azul",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Por qué tus venas se ven azules si la sangre nunca lo es?",
+        "en": "Why do your veins look blue if blood never is?"
+      },
+      "answer": {
+        "es": "Es un efecto óptico de la piel. La sangre sin oxígeno es roja oscura, nunca azul.",
+        "en": "It is an optical effect of your skin. Deoxygenated blood is dark red, never blue."
+      },
+      "detail": {
+        "es": "La luz roja penetra más profundo en el tejido y es absorbida por la sangre; la azul rebota antes y vuelve a tu ojo. Por eso la vena se ve azulada aunque su contenido sea granate.",
+        "en": "Red light travels deeper into tissue and gets absorbed by blood; blue light scatters back sooner and reaches your eye. The vein looks bluish even though its contents are dark red."
+      },
+      "source": "Kienle et al., Applied Optics, 1996",
+      "sourceUrl": ""
+    },
+    {
+      "id": "astronautas-crecen",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Cuánto mide un astronauta después de seis meses en órbita?",
+        "en": "How tall is an astronaut after six months in orbit?"
+      },
+      "answer": {
+        "es": "Hasta 3 cm más que al despegar. Y lo pierde todo en los días siguientes al aterrizaje.",
+        "en": "Up to 3 cm taller than at launch — and loses it all within days of landing."
+      },
+      "detail": {
+        "es": "Sin gravedad los discos intervertebrales se descomprimen y la columna se estira. Al volver, el peso los vuelve a comprimir; el estirón se paga con dolor de espalda.",
+        "en": "Without gravity the intervertebral discs decompress and the spine stretches. Back on the ground weight compresses them again — the growth spurt is paid for in back pain."
+      },
+      "source": "NASA Human Research Program",
+      "sourceUrl": ""
+    },
+    {
+      "id": "origen-ok",
+      "category": "lenguaje",
+      "question": {
+        "es": "¿De dónde sale «OK», la palabra más usada del planeta?",
+        "en": "Where does \"OK\", the most used word on the planet, come from?"
+      },
+      "answer": {
+        "es": "De una broma de periodistas de Boston en 1839: escribir «all correct» mal a propósito, «oll korrect».",
+        "en": "From a joke by Boston journalists in 1839: misspelling \"all correct\" on purpose as \"oll korrect\"."
+      },
+      "detail": {
+        "es": "Habría muerto como todas las bromas de moda si al año siguiente la campaña de Martin Van Buren no hubiera usado «Old Kinderhook», su apodo, con las mismas iniciales.",
+        "en": "It would have died like every other passing joke if Martin Van Buren's campaign hadn't run with \"Old Kinderhook\", his nickname, the next year."
+      },
+      "source": "Allen Walker Read, American Speech, 1963-1964",
+      "sourceUrl": ""
+    },
+    {
+      "id": "salario-sal",
+      "category": "lenguaje",
+      "question": {
+        "es": "¿Es verdad que a los romanos les pagaban con sal?",
+        "en": "Is it true that Romans were paid in salt?"
+      },
+      "answer": {
+        "es": "La palabra «salario» sí viene de la sal. Que cobraran en sal, probablemente no.",
+        "en": "The word \"salary\" does come from salt. That they were actually paid in salt, probably not."
+      },
+      "detail": {
+        "es": "«Salarium» era una asignación relacionada con la sal, pero ninguna fuente romana describe un pago en sacos de sal. La versión bonita de la historia se coló en los diccionarios y ya no salió.",
+        "en": "\"Salarium\" was an allowance connected to salt, but no Roman source describes payment in sacks of salt. The prettier version slipped into dictionaries and never left."
+      },
+      "source": "Plinio el Viejo, Naturalis Historia XXXI; revisión en Journal of Roman Studies",
+      "sourceUrl": ""
+    },
+    {
+      "id": "sandwich-conde",
+      "category": "lenguaje",
+      "question": {
+        "es": "¿Quién fue el señor Sándwich?",
+        "en": "Who was Mr Sandwich?"
+      },
+      "answer": {
+        "es": "John Montagu, cuarto conde de Sandwich, que pedía la carne entre dos panes para no soltar lo que tenía en la mano.",
+        "en": "John Montagu, 4th Earl of Sandwich, who asked for meat between two slices so he wouldn't have to put down what he was holding."
+      },
+      "detail": {
+        "es": "La leyenda dice que eran cartas de juego; sus biógrafos apuntan más bien a papeles de trabajo: el conde era Primer Lord del Almirantazgo y comía en el escritorio.",
+        "en": "Legend says it was playing cards; his biographers point rather at paperwork — the Earl was First Lord of the Admiralty and ate at his desk."
+      },
+      "source": "N. A. M. Rodger, The Insatiable Earl, 1993",
+      "sourceUrl": ""
+    },
+    {
+      "id": "letra-enye",
+      "category": "lenguaje",
+      "question": {
+        "es": "¿De dónde salió el sombrerito de la Ñ?",
+        "en": "Where did the little hat on the Spanish Ñ come from?"
+      },
+      "answer": {
+        "es": "De la pereza de los copistas medievales: era una «n» pequeña dibujada encima de otra para ahorrar pergamino.",
+        "en": "From lazy medieval scribes: it was a small \"n\" drawn on top of another one to save parchment."
+      },
+      "detail": {
+        "es": "El pergamino era caro y «annus» o «damnum» se abreviaban con una raya encima. Esa raya se estilizó hasta convertirse en la virgulilla y acabó siendo una letra propia.",
+        "en": "Parchment was expensive, so \"annus\" or \"damnum\" were abbreviated with a stroke above. That stroke got stylised into the tilde and ended up as a letter of its own."
+      },
+      "source": "Real Academia Española, Ortografía de la lengua española",
+      "sourceUrl": ""
+    },
+    {
+      "id": "cuarentena-cuarenta",
+      "category": "lenguaje",
+      "question": {
+        "es": "¿Por qué se llama «cuarentena» y no «treintena»?",
+        "en": "Why is it called \"quarantine\" and not something else?"
+      },
+      "answer": {
+        "es": "Porque en la Venecia del siglo XIV los barcos sospechosos esperaban cuarenta días fondeados antes de desembarcar.",
+        "en": "Because in 14th-century Venice suspect ships waited forty days at anchor before anyone could come ashore."
+      },
+      "detail": {
+        "es": "Ragusa empezó con treinta días («trentino») y se amplió a cuarenta, «quaranta giorni». El número tenía tanto de observación médica como de simbolismo bíblico.",
+        "en": "Ragusa started with thirty days (\"trentino\") and it was extended to forty, \"quaranta giorni\". The number was as much biblical symbolism as medical observation."
+      },
+      "source": "Tognotti, Emerging Infectious Diseases (CDC), 2013",
+      "sourceUrl": ""
+    },
+    {
+      "id": "muralla-espacio",
+      "category": "historia",
+      "question": {
+        "es": "¿Se ve la Gran Muralla China desde el espacio?",
+        "en": "Can you see the Great Wall of China from space?"
+      },
+      "answer": {
+        "es": "No. Es larguísima, pero tiene la anchura de una carretera y el color del terreno que la rodea.",
+        "en": "No. It is enormously long, but as wide as a road and the same colour as the ground around it."
+      },
+      "detail": {
+        "es": "El primer astronauta chino, Yang Liwei, lo confirmó en 2003: no la vio. El mito es anterior a los vuelos espaciales — aparece impreso ya en 1932.",
+        "en": "China's first astronaut, Yang Liwei, confirmed it in 2003: he could not see it. The myth predates spaceflight — it was already in print in 1932."
+      },
+      "source": "NASA Earth Observatory; declaraciones de Yang Liwei, 2003",
+      "sourceUrl": ""
+    },
+    {
+      "id": "cleopatra-piramides",
+      "category": "historia",
+      "question": {
+        "es": "¿Vivió Cleopatra más cerca de las pirámides o de la llegada a la Luna?",
+        "en": "Did Cleopatra live closer to the pyramids or to the Moon landing?"
+      },
+      "answer": {
+        "es": "De la Luna. Le faltaban 2.500 años para ver una pirámide recién construida y 2.000 para el Apolo 11.",
+        "en": "The Moon landing. The Great Pyramid was 2,500 years old in her day; Apollo 11 was 2,000 years away."
+      },
+      "detail": {
+        "es": "La Gran Pirámide se terminó hacia el 2560 a. C. y Cleopatra murió en el 30 a. C. Para ella, las pirámides ya eran una antigüedad turística.",
+        "en": "The Great Pyramid was finished around 2560 BC and Cleopatra died in 30 BC. To her the pyramids were already a tourist antiquity."
+      },
+      "source": "Cronología del Reino Antiguo, British Museum",
+      "sourceUrl": ""
+    },
+    {
+      "id": "oxford-aztecas",
+      "category": "historia",
+      "question": {
+        "es": "¿Qué es más antiguo, la Universidad de Oxford o el Imperio azteca?",
+        "en": "Which is older, Oxford University or the Aztec empire?"
+      },
+      "answer": {
+        "es": "Oxford. Ya se daban clases allí más de 200 años antes de que se fundara Tenochtitlán.",
+        "en": "Oxford. Lectures were being given there over 200 years before Tenochtitlan was founded."
+      },
+      "detail": {
+        "es": "Hay constancia de enseñanza en Oxford desde 1096. Tenochtitlán se fundó en 1325 y el imperio azteca como tal se formó en 1428.",
+        "en": "Teaching is documented at Oxford from 1096. Tenochtitlan was founded in 1325 and the Aztec empire itself formed in 1428."
+      },
+      "source": "University of Oxford, historia oficial; INAH, fundación de Tenochtitlán",
+      "sourceUrl": ""
+    },
+    {
+      "id": "miel-tumbas",
+      "category": "historia",
+      "question": {
+        "es": "¿Cuánto tarda la miel en caducar?",
+        "en": "How long does honey take to go off?"
+      },
+      "answer": {
+        "es": "No caduca. Se ha encontrado miel comestible en tumbas egipcias de hace más de 3.000 años.",
+        "en": "It doesn't. Edible honey has been found in Egyptian tombs over 3,000 years old."
+      },
+      "detail": {
+        "es": "Tiene tan poca agua y es tan ácida que ninguna bacteria sobrevive dentro, y las abejas añaden una enzima que genera peróxido de hidrógeno. Sellada, es prácticamente eterna.",
+        "en": "It holds so little water and is so acidic that no bacteria survives inside, and bees add an enzyme that generates hydrogen peroxide. Sealed, it is practically eternal."
+      },
+      "source": "National Honey Board; Smithsonian Magazine, 2013",
+      "sourceUrl": ""
+    },
+    {
+      "id": "fax-antes-telefono",
+      "category": "historia",
+      "question": {
+        "es": "¿Qué se inventó antes, el fax o el teléfono?",
+        "en": "Which came first, the fax or the telephone?"
+      },
+      "answer": {
+        "es": "El fax, por 33 años. Se patentó en 1843, cuando aún viajaban las diligencias.",
+        "en": "The fax, by 33 years. It was patented in 1843, when stagecoaches were still running."
+      },
+      "detail": {
+        "es": "El escocés Alexander Bain patentó un aparato que transmitía imágenes por telégrafo. El teléfono de Bell llegó en 1876.",
+        "en": "The Scot Alexander Bain patented a device that transmitted images over telegraph wires. Bell's telephone arrived in 1876."
+      },
+      "source": "Patente británica 9745 de Alexander Bain, 1843",
+      "sourceUrl": ""
+    },
+    {
+      "id": "platano-baya",
+      "category": "ciencia",
+      "question": {
+        "es": "¿Cuál de estas dos es una baya: el plátano o la fresa?",
+        "en": "Which of these is a berry: the banana or the strawberry?"
+      },
+      "answer": {
+        "es": "El plátano. La fresa, botánicamente, ni siquiera es una fruta única.",
+        "en": "The banana. The strawberry, botanically, isn't even a single fruit."
+      },
+      "detail": {
+        "es": "Una baya nace de un solo ovario y lleva las semillas dentro: plátano, tomate, uva, aguacate. La parte roja de la fresa es el receptáculo hinchado, y los «puntitos» son los frutos de verdad.",
+        "en": "A berry grows from a single ovary with the seeds inside: banana, tomato, grape, avocado. The red part of a strawberry is a swollen receptacle, and the \"seeds\" on it are the actual fruits."
+      },
+      "source": "Judd et al., Plant Systematics, 4.ª ed.",
+      "sourceUrl": ""
+    },
+    {
+      "id": "flamencos-rosas",
+      "category": "ciencia",
+      "question": {
+        "es": "¿De qué color nace un flamenco?",
+        "en": "What colour is a flamingo when it hatches?"
+      },
+      "answer": {
+        "es": "Gris. El rosa se lo come: viene de los carotenoides de las algas y los crustáceos de su dieta.",
+        "en": "Grey. It eats its way to pink: the colour comes from carotenoids in the algae and crustaceans it feeds on."
+      },
+      "detail": {
+        "es": "Un flamenco al que le falten carotenoides palidece. En los zoos se les añaden a la comida, y no por estética: el rosa intenso es una señal de salud que usan para elegir pareja.",
+        "en": "A flamingo short on carotenoids fades. Zoos add them to the feed, and not for looks: intense pink is a health signal they use to choose mates."
+      },
+      "source": "Fox, Comparative Biochemistry and Physiology, 1962",
+      "sourceUrl": ""
+    },
+    {
+      "id": "dia-venus",
+      "category": "ciencia",
+      "question": {
+        "es": "¿En qué planeta dura más un día que un año?",
+        "en": "On which planet does a day last longer than a year?"
+      },
+      "answer": {
+        "es": "En Venus. Tarda 243 días terrestres en girar sobre sí mismo y solo 225 en dar la vuelta al Sol.",
+        "en": "Venus. It takes 243 Earth days to spin once and only 225 to orbit the Sun."
+      },
+      "detail": {
+        "es": "Además gira al revés que casi todos los demás, así que allí el Sol sale por el oeste. Si pudieras ver el cielo a través de las nubes, claro.",
+        "en": "It also spins backwards compared with almost every other planet, so the Sun rises in the west there — if you could see the sky through the clouds."
+      },
+      "source": "NASA Planetary Fact Sheet",
+      "sourceUrl": ""
+    },
+    {
+      "id": "relampago-sol",
+      "category": "ciencia",
+      "question": {
+        "es": "¿Qué está más caliente, un rayo o la superficie del Sol?",
+        "en": "What is hotter, a lightning bolt or the surface of the Sun?"
+      },
+      "answer": {
+        "es": "El rayo. Calienta el aire hasta unos 30.000 °C, cinco veces más que la superficie solar.",
+        "en": "The lightning. It heats the air to around 30,000 °C, five times hotter than the Sun's surface."
+      },
+      "detail": {
+        "es": "Ese calentamiento brutal y repentino expande el aire de golpe, y esa onda de choque es exactamente lo que oyes como trueno.",
+        "en": "That sudden, brutal heating expands the air explosively, and that shock wave is exactly what you hear as thunder."
+      },
+      "source": "NOAA National Severe Storms Laboratory",
+      "sourceUrl": ""
+    },
+    {
+      "id": "pulpo-corazones",
+      "category": "ciencia",
+      "question": {
+        "es": "¿Por qué a un pulpo le cansa tanto nadar?",
+        "en": "Why does swimming exhaust an octopus?"
+      },
+      "answer": {
+        "es": "Porque de sus tres corazones, el principal se para cuando nada. Por eso prefiere caminar.",
+        "en": "Because of its three hearts, the main one stops while it swims. That's why it would rather walk."
+      },
+      "detail": {
+        "es": "Dos corazones bombean sangre a las branquias y el tercero al resto del cuerpo. Su sangre es azul: transporta oxígeno con hemocianina, basada en cobre, en vez de hierro.",
+        "en": "Two hearts pump blood to the gills and the third to the rest of the body. Its blood is blue: it carries oxygen with copper-based haemocyanin instead of iron."
+      },
+      "source": "Wells, Octopus: Physiology and Behaviour of an Advanced Invertebrate, 1978",
+      "sourceUrl": ""
+    },
+    {
+      "id": "petricor",
+      "category": "ciencia",
+      "question": {
+        "es": "¿A qué huele exactamente la lluvia?",
+        "en": "What exactly does rain smell of?"
+      },
+      "answer": {
+        "es": "A bacterias. El olor se llama petricor y lo produce la geosmina, fabricada por microbios del suelo.",
+        "en": "Bacteria. The smell is called petrichor and comes from geosmin, made by soil microbes."
+      },
+      "detail": {
+        "es": "Detectamos la geosmina a cinco partes por billón: somos más sensibles a ella que un tiburón a la sangre. Se cree que es una herencia de cuando encontrar agua era cuestión de vida o muerte.",
+        "en": "We detect geosmin at five parts per trillion — we are more sensitive to it than a shark is to blood. It is thought to be a leftover from when finding water was a matter of life or death."
+      },
+      "source": "Bear & Thomas, Nature, 1964; Polak & Provasi, Chemical Senses, 1992",
+      "sourceUrl": ""
+    },
+    {
+      "id": "huellas-koala",
+      "category": "ciencia",
+      "question": {
+        "es": "¿Qué animal podría incriminarte en la escena de un crimen?",
+        "en": "Which animal could frame you at a crime scene?"
+      },
+      "answer": {
+        "es": "El koala. Sus huellas dactilares son tan parecidas a las humanas que confunden a un forense.",
+        "en": "The koala. Its fingerprints are so close to human ones that they can fool a forensic examiner."
+      },
+      "detail": {
+        "es": "No es parentesco: los koalas y nosotros nos separamos hace más de 100 millones de años. Es evolución convergente, provocada por agarrar ramas con precisión.",
+        "en": "It is not kinship: koalas and humans split over 100 million years ago. It is convergent evolution, driven by gripping branches precisely."
+      },
+      "source": "Henneberg et al., Naturwissenschaften, 1997",
+      "sourceUrl": ""
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import 'package:app_template/core/config/app_config.dart';
+import 'package:aja/core/config/app_config.dart';
 
 /// AdMob identifiers.
 ///
@@ -17,23 +17,21 @@ abstract final class AdConfig {
   static const String _testBanner = 'ca-app-pub-3940256099942544/9214589741';
   static const String _testInterstitial =
       'ca-app-pub-3940256099942544/1033173712';
-  static const String _testRewarded = 'ca-app-pub-3940256099942544/5224354917';
 
   // --- Production unit ids (fill in from the AdMob console) ---------------
   // Leave empty until the real units exist: an empty id disables the format
   // instead of crashing.
   static const String _prodBanner = '';
   static const String _prodInterstitial = '';
-  static const String _prodRewarded = '';
 
+  /// Serves both the anchored adaptive banner and the medium rectangle used by
+  /// the ad card inside the deck: a banner unit serves any banner size, so a
+  /// second unit would only split the reporting.
   static String get bannerAdUnitId =>
       AppConfig.useProductionAds ? _prodBanner : _testBanner;
 
   static String get interstitialAdUnitId =>
       AppConfig.useProductionAds ? _prodInterstitial : _testInterstitial;
-
-  static String get rewardedAdUnitId =>
-      AppConfig.useProductionAds ? _prodRewarded : _testRewarded;
 
   /// Whether the app targets children. Drives `tagForChildDirectedTreatment`
   /// and `maxAdContentRating`; must match the Play Console target audience

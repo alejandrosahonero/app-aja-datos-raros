@@ -1,8 +1,8 @@
-import 'package:app_template/core/routing/app_routes.dart';
-import 'package:app_template/core/widgets/error_view.dart';
-import 'package:app_template/features/home/presentation/screens/home_screen.dart';
-import 'package:app_template/features/premium/presentation/screens/paywall_screen.dart';
-import 'package:app_template/features/settings/presentation/screens/settings_screen.dart';
+import 'package:aja/core/routing/app_routes.dart';
+import 'package:aja/core/widgets/error_view.dart';
+import 'package:aja/features/facts/presentation/screens/deck_screen.dart';
+import 'package:aja/features/premium/presentation/screens/paywall_screen.dart';
+import 'package:aja/features/settings/presentation/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -30,7 +30,7 @@ final Provider<GoRouter> routerProvider = Provider<GoRouter>((Ref ref) {
         path: AppRoutes.homePath,
         name: AppRoutes.homeName,
         builder: (BuildContext context, GoRouterState state) =>
-            const HomeScreen(),
+            const DeckScreen(),
         routes: <RouteBase>[
           GoRoute(
             path: 'settings',

@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:app_template/app.dart';
-import 'package:app_template/core/utils/app_logger.dart';
-import 'package:app_template/services/ads/ads_providers.dart';
-import 'package:app_template/services/billing/premium_controller.dart';
-import 'package:app_template/services/review/review_providers.dart';
-import 'package:app_template/services/storage/storage_providers.dart';
+import 'package:aja/app.dart';
+import 'package:aja/core/utils/app_logger.dart';
+import 'package:aja/services/ads/ads_providers.dart';
+import 'package:aja/services/billing/premium_controller.dart';
+import 'package:aja/services/review/review_providers.dart';
+import 'package:aja/services/storage/storage_providers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

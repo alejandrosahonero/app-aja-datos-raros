@@ -1,8 +1,8 @@
 # CLAUDE.md — Guía del proyecto para agentes de IA
 
-> **Contexto obligatorio.** Este repositorio es una **plantilla base (Base Starter Template)** de Flutter para publicar apps Android en Google Play con monetización freemium (AdMob + IAP "quitar anuncios").
+> **Contexto obligatorio.** Este repositorio es **Ajá: Datos Curiosos Raros**, una app Android de datos curiosos en formato mazo deslizable estilo Tinder, con monetización freemium (AdMob + IAP "quitar anuncios").
 >
-> La fuente de verdad arquitectónica es `GUIA_ESTANDAR_FLUTTER_ANDROID.md` (documento del usuario, fuera del repo). Este archivo explica **qué** hay implementado, **cómo** funciona y **por qué** se decidió así. Ante cualquier duda o conflicto, manda la guía estándar.
+> Nació de una plantilla base de Flutter; queda de ella toda la infraestructura (`core/`, `services/`), pero las features de demostración ya no existen. La fuente de verdad arquitectónica es `GUIA_ESTANDAR_FLUTTER_ANDROID.md` (documento del usuario, fuera del repo). Este archivo explica **qué** hay implementado, **cómo** funciona y **por qué** se decidió así. Ante cualquier duda o conflicto, manda la guía estándar.
 
 ---
 
@@ -11,7 +11,7 @@
 1. **Stack fijo:** Flutter stable, Dart 3.x, target **Android**. iOS no se implementa salvo orden explícita.
 2. **Nunca fijar versiones de paquetes de memoria.** Usar `flutter pub add <paquete>` para que pub resuelva la última estable compatible.
 3. **Ninguna dependencia nueva sin justificación** de peso e impacto en el arranque, escrita en el `pubspec.yaml`.
-4. **Idioma:** código y comentarios en **inglés**; UI en **español + inglés** (archivos `.arb`).
+4. **Idioma:** código y comentarios en **inglés**; UI en **español + inglés** (archivos `.arb`). El **contenido** (preguntas y respuestas) no vive en los `.arb`, sino en `assets/data/facts.json`, con los dos idiomas dentro de cada entrada.
 5. **Antes de cerrar cualquier tarea**, en este orden:
    ```bash
    dart format lib test && flutter analyze && flutter test
@@ -19,6 +19,20 @@
    `flutter analyze` debe terminar con *No issues found!*.
 6. **Prohibido:** `print`, `setState` en widgets con lógica no trivial, `FutureBuilder` anidado, JSON pesado en el isolate principal, imágenes sin `cacheWidth`/`cacheHeight`, `ListView(children: [...])` con colecciones dinámicas.
 7. **`const` siempre que sea posible.**
+
+### 0.1 Identidad — inmutable tras publicar
+
+| Cosa | Valor |
+|---|---|
+| Paquete Dart (`pubspec.yaml`) | `aja` |
+| `applicationId` / `namespace` | `com.alejandrosahonero.aja` |
+| Paquete Kotlin | `com.alejandrosahonero.aja` |
+| `android:label` | `Ajá` |
+| Deep link | `aja://` |
+| Producto IAP | `premium_remove_ads` |
+| Seed color | `0xFFC026D3` |
+
+`applicationId` y el ID del producto IAP **no se pueden cambiar** después de la primera publicación sin perder las compras existentes.
 
 ---
 
@@ -39,23 +53,24 @@ lib/
 │   ├── extensions/           # BuildContextX (theme, l10n, snackbars)
 │   ├── utils/                # AppLogger
 │   └── widgets/              # BaseScreen, AdaptiveBannerAd, SectionCard,
-│                             # EmptyState, ErrorView, AppLoader,
-│                             # PermissionFlow (diálogos de permisos)
+│                             # EmptyState, ErrorView, AppLoader
 ├── features/
-│   ├── home/presentation/    # feature de ejemplo (providers/screens/widgets)
+│   ├── facts/                # ← la app entera
+│   │   ├── data/             # FactRepository (lee y parsea el JSON)
+│   │   ├── domain/           # Fact, FactCategory, DeckItem, buildDeck()
+│   │   └── presentation/     # providers / screens / widgets
 │   ├── settings/presentation/
 │   └── premium/presentation/ # paywall
 ├── services/
 │   ├── ads/                  # AdsService + ConsentService (UMP) + providers
 │   ├── billing/              # PremiumService + PremiumController + estado
-│   ├── permissions/          # PermissionService + providers
 │   ├── review/               # ReviewService + providers
 │   └── storage/              # KeyValueStore (prefs) + SecureStore + providers
 └── l10n/                     # app_es.arb (plantilla) + app_en.arb
 ```
 
 **Regla de dependencia:** `presentation` → `domain` → `data`. `domain` no conoce a nadie.
-**`domain/` solo se crea cuando la feature tiene lógica de negocio real.** Las features de la plantilla son triviales, por eso solo tienen `presentation/`. No crear carpetas vacías.
+`facts/` es la única feature con `domain/`, porque es la única con lógica de negocio real (composición del mazo, progreso). `settings/` y `premium/` son triviales y solo tienen `presentation/`. **No crear carpetas vacías.**
 
 **Cada feature es autocontenida y borrable.** Si un helper solo lo usa una feature, vive dentro de esa feature, nunca en `core/utils/`.
 
@@ -74,14 +89,14 @@ Estándar único: **Riverpod 3** (`flutter_riverpod`).
 
 Convenciones aplicadas en el repo:
 
-- **Estados de UI con `sealed class`**, nunca booleanos sueltos. Ver `services/billing/premium_state.dart` (`PurchaseFlow` → `PurchaseIdle` / `PurchasePending` / `PurchaseFailed`). La dimensión carga/error la aporta `AsyncValue`.
+- **Estados de UI con `sealed class`**, nunca booleanos sueltos. Ver `services/billing/premium_state.dart` (`PurchaseFlow`) y `features/facts/domain/deck_item.dart` (`DeckItem` → `FactItem` / `AdItem`). La dimensión carga/error la aporta `AsyncValue`.
 - **`ref.read` dentro de callbacks; `ref.watch` solo en `build`.** Ejemplo: `AdsService` recibe `isPremium: () => ref.read(isPremiumProvider)`.
-- **`select` para observar solo lo que se pinta**: `homeControllerProvider.select((s) => s.credits)`.
-- **`autoDispose`**: en Riverpod 3 se activa con `isAutoDispose: true`. Los providers de servicios (`adsServiceProvider`, `premiumControllerProvider`, `routerProvider`) son **keepAlive a propósito** y cada uno lleva el comentario que lo justifica (mantienen anuncios precargados, la suscripción al `purchaseStream` y la pila de navegación).
+- **`select` para observar solo lo que se pinta.**
+- **`autoDispose`**: en Riverpod 3 se activa con `isAutoDispose: true`. Los providers de servicios (`adsServiceProvider`, `premiumControllerProvider`, `routerProvider`, `factRepositoryProvider`) son **keepAlive a propósito** y cada uno lleva el comentario que lo justifica (anuncios precargados, suscripción al `purchaseStream`, pila de navegación, catálogo parseado).
 
 ### ⚠️ Desviación conocida: sin `riverpod_generator` / `riverpod_lint`
 
-La guía pide codegen con `build_runner`. **No se pudo instalar**: con Flutter 3.44.9 / Dart 3.12.2, `riverpod_generator` y `riverpod_lint` exigen versiones de `analyzer` incompatibles con las que `flutter_test` fija (`matcher` / `test_api`), y `pub` no resuelve.
+La guía pide codegen con `build_runner`. **No se pudo instalar**: `riverpod_generator` y `riverpod_lint` exigen versiones de `analyzer` incompatibles con las que `flutter_test` fija (`matcher` / `test_api`), y `pub` no resuelve.
 
 Por eso **los providers están escritos a mano** con la API declarativa de Riverpod 3, que es equivalente y totalmente soportada. Cuando el ecosistema se actualice:
 
@@ -93,17 +108,57 @@ y migrar los providers a `@riverpod`. Añadir entonces `custom_lint` al `analysi
 
 ---
 
-## 3. Monetización
+## 3. El mazo (feature `facts`)
 
-### 3.1 Modelo económico
+### 3.1 Interacción
+
+Una pila de tarjetas, una detrás de otra. Solo la de arriba responde al dedo.
+
+| Gesto | Efecto |
+|---|---|
+| **Deslizar a la derecha** | La tarjeta **se voltea** y enseña la respuesta. Vuelve al centro, no se descarta. |
+| **Deslizar a la izquierda** | La tarjeta **sale volando** y sube la siguiente. |
+| **Tocar la tarjeta** | Igual que deslizar a la derecha (voltear). |
+| **Botones inferiores** | "Siguiente" y "Ver respuesta". **No son decorativos**: una interfaz solo-arrastre es inutilizable con lector de pantalla y la penaliza el escaneo de accesibilidad de Play. No borrarlos. |
+
+`SwipeDeck` (`features/facts/presentation/widgets/swipe_deck.dart`) **solo posee el gesto**. Notifica hacia arriba y repinta a partir de `items`/`index`. El estado del mazo — posición, volteo — vive en `DeckController`, y por eso se puede testear sin animaciones.
+
+Umbrales en `AppConfig`: `deckSwipeThreshold` (28 % del ancho) **o** `deckSwipeVelocity` (700 px/s) confirman el gesto.
+
+El volteo es un `rotateY` con perspectiva (`setEntry(3, 2, 0.0012)`); a mitad de la animación se cambia la cara y se des-espeja la trasera con otro `rotateY(pi)`. Va dentro de un `RepaintBoundary` para no repintar las tarjetas de debajo.
+
+### 3.2 Contenido
+
+`assets/data/facts.json`: una entrada por tarjeta con `question` / `answer` / `detail` en `es` y `en`, más `category` y `source`.
+
+- **Cada dato lleva fuente.** Un "dato curioso" falso viral se convierte en reseñas de 1 estrella y en burla pública. `sourceUrl` va vacío a propósito: **antes de publicar hay que verificar cada entrada a mano y pegar el enlace permanente.** Si generas contenido con IA, verificación manual obligatoria.
+- El contenido está localizado **en el asset**, no en los `.arb`, porque traducir o ampliar el catálogo no debe exigir una versión nueva — y porque ese mismo JSON vendrá luego de Firebase Remote Config o Firestore.
+- `FactCategory` es un enum cerrado: una categoría desconocida en el JSON **revienta al parsear**, no pinta un chip vacío en producción.
+- El parseo corre en un isolate aparte (`compute`) y se cachea en `FactRepository` durante toda la vida del proceso.
+
+### 3.3 Composición del mazo
+
+`buildDeck(facts, withAds:)` intercala las tarjetas de anuncio:
+
+- Un `AdItem` cada `AppConfig.adCardEveryNCards` (6) tarjetas de contenido. **Nunca bajar de 5.**
+- **El mazo jamás termina en un anuncio**: cerrar la sesión con una tarjeta de publicidad se lee como un muro de pago.
+- `withAds: false` si el usuario es premium → el mazo no reserva ni un hueco.
+
+El progreso se persiste como **número de tarjetas de contenido vistas** (`deck_facts_seen_<categoría>`), no como índice: los huecos de anuncio se desplazan cuando el usuario compra premium, y un índice guardado apuntaría a otra tarjeta.
+
+---
+
+## 4. Monetización
+
+### 4.1 Modelo económico
 
 - Núcleo gratuito completo y usable (apps de "funcionalidad mínima" se retiran).
-- **Rewarded = formato principal** (mayor eCPM, aceptación voluntaria).
-- **Interstitial = secundario**, solo en transiciones naturales.
-- **Banner = opcional**, solo en pantallas de lista/consulta.
+- **Tarjeta de anuncio dentro del mazo = formato principal.** Se desliza igual que el contenido.
+- **Interstitial = secundario**, cada ~9 tarjetas y nunca antes de 3 min desde el anterior.
+- **Sin rewarded.** El uso es pasivo: no hay nada que desbloquear que justifique un vídeo. `AdsService` ya no tiene ese formato — **no reintroducirlo** sin una razón de producto nueva.
 - **IAP no consumible "quitar anuncios"** = conversión principal.
 
-### 3.2 AdMob (`google_mobile_ads`)
+### 4.2 AdMob (`google_mobile_ads`)
 
 **IDs.** `core/config/ad_config.dart` mantiene dos juegos: los **IDs oficiales de prueba de Google** y los de producción (vacíos hasta que existan). La selección es automática:
 
@@ -113,10 +168,12 @@ AppConfig.useProductionAds  // == kReleaseMode
 
 Un ID vacío **desactiva** ese formato en vez de romper. **Nunca** usar IDs de producción en debug: es causa directa de baneo por tráfico inválido.
 
+Hay **una sola unidad de banner** y sirve tanto al banner adaptativo anclado como al rectángulo 300x250 de la tarjeta de anuncio: una unidad de banner sirve cualquier tamaño de banner, y una segunda solo partiría los informes en dos.
+
 El App ID de prueba también está declarado en `android/app/src/main/AndroidManifest.xml`
 (`ca-app-pub-3940256099942544~3347511713`).
 
-**`AdsService` (`services/ads/ads_service.dart`)** — punto único de entrada. Se llama `AdsService` porque así lo nombra la guía estándar; existe el alias `typedef AdService = AdsService` para quien busque ese nombre. Responsabilidades:
+**`AdsService` (`services/ads/ads_service.dart`)** — punto único de entrada:
 
 | Regla | Dónde |
 |---|---|
@@ -125,30 +182,30 @@ El App ID de prueba también está declarado en `android/app/src/main/AndroidMan
 | Interstitial cada N acciones **y** con intervalo mínimo | `registerActionAndMaybeShowInterstitial()` |
 | Caducidad ~1 h de anuncios full screen | `_isExpired()` + `AppConfig.fullScreenAdTtl` |
 | Reintentos con backoff exponencial (4s, 8s, 16s, 32s, máx. 4) | `_scheduleRetry()` |
-| Precargar el siguiente rewarded al cerrar uno | `onAdDismissedFullScreenContent` |
 | Nunca bloquear al usuario por falta de inventario | devuelve `AdShowResult.notReady`; la UI degrada |
 
 **Pacing del interstitial:** deben cumplirse **las dos** condiciones —
-`AppConfig.interstitialEveryNActions` (3) **y** `AppConfig.minIntervalBetweenInterstitials` (3 min).
-No añadir atajos que salten el pacing.
+`AppConfig.interstitialEveryNActions` (9) **y** `AppConfig.minIntervalBetweenInterstitials` (3 min).
+Una "acción de valor" aquí es **una tarjeta descartada**. Como las tarjetas se consumen rápido, el que manda en la práctica es el suelo de 3 minutos. No añadir atajos que salten el pacing.
 
-**Flujo rewarded correcto** (implementado en `features/home/.../rewards_card.dart`):
-1. Diálogo previo explicando la recompensa → el usuario acepta.
-2. `AdsService.showRewarded(...)`.
-3. La recompensa se entrega **solo** dentro de `onUserEarnedReward`.
-4. Se persiste inmediatamente (`HomeController.addCredits`).
-5. Si no hay anuncio → snackbar informativo, nunca un callejón sin salida.
+**Tarjeta de anuncio (`AdDeckCard`).** Dos reglas que no se relajan:
+
+1. El creativo **solo se pide cuando la tarjeta está arriba del todo** (`active`). Las que esperan detrás están tapadas al 95 %, y pintar un anuncio que nadie puede ver es justo lo que AdMob cuenta como impresión inválida.
+2. La etiqueta **"Publicidad" siempre visible**. Un anuncio mimetizado sin etiqueta es un rechazo por *deceptive ads*.
+
+Si no entra ningún creativo (sin consentimiento, sin inventario, sin unidad configurada) la tarjeta cae a un argumento discreto de "quitar anuncios" en vez de un rectángulo en blanco: mantiene el ritmo del mazo y coloca el paywall justo detrás de un momento de valor.
+
+> **Pendiente:** el plan original pedía un *native ad* real. Requiere una `NativeAdFactory` en Kotlin más su layout XML. Lo que hay ahora es un 300x250 dentro del mismo `DeckCardShell` que el contenido — cero código nativo y misma sensación. Migrar solo si el eCPM lo justifica.
+
+**Banner anclado.** `AdaptiveBannerAd` se coloca desde `BaseScreen` **debajo** del contenido, nunca superpuesto. Hoy **ninguna pantalla lo activa**: el mazo es una superficie de arrastre a pantalla completa y un banner anclado bajo un gesto de arrastre es el ejemplo de manual del clic accidental. `SettingsScreen` y `PaywallScreen` tampoco lo llevan. Se mantiene el widget porque la política de colocación tiene que seguir viviendo en un solo sitio.
 
 **Consentimiento (UMP).** `services/ads/consent_service.dart` usa el UMP SDK que ya incluye `google_mobile_ads` (sin dependencia extra):
 `requestConsentInfoUpdate` → `loadAndShowConsentFormIfRequired` → `canRequestAds()`.
 En Ajustes hay una fila **"Opciones de privacidad"** que reabre el formulario, visible solo cuando `getPrivacyOptionsRequirementStatus() == required`.
 
-**Banner.** `AdaptiveBannerAd` (anchored adaptive, no 320x50 fijo) se coloca desde `BaseScreen` **debajo** del contenido dentro de un `Column`, nunca superpuesto. Si no hay anuncio o el usuario es premium ocupa **cero** altura.
-Poner `showBanner: false` en pantallas con controles densos, formularios, onboarding o acciones destructivas cerca del borde inferior (así están `SettingsScreen` y `PaywallScreen`).
-
 **Mediación:** no activarla en el lanzamiento. A partir de ~10k usuarios activos, 2–3 redes.
 
-### 3.3 IAP (`in_app_purchase`)
+### 4.3 IAP (`in_app_purchase`)
 
 - Producto **gestionado no consumible**: `premium_remove_ads` (`core/config/billing_config.dart`). Debe existir y estar **activo** en Play Console y requiere una versión subida a un canal de pruebas.
 - `PremiumService` = plomería del store; `PremiumController` (`AsyncNotifier`) = estado.
@@ -157,31 +214,27 @@ Poner `showBanner: false` en pantallas con controles densos, formularios, onboar
 - Entitlement cacheado en `flutter_secure_storage` + `restorePurchases()` al arrancar para verificar contra el store. Nunca confiar solo en un flag de `shared_preferences`.
 - **Botón "Restaurar compras" obligatorio y visible** en Ajustes (y también en el paywall). Su ausencia es motivo de rechazo.
 - Verificación local del token (app sin backend). Con servidor: validar contra la Google Play Developer API en `PremiumService.isValidPurchase`.
-- **Paywall tras un momento de valor**, nunca en el primer arranque. Puntos de entrada: enlace discreto en Home, fila en Ajustes, deep link `apptemplate://premium`.
+- **Paywall tras un momento de valor**, nunca en el primer arranque. Puntos de entrada: la tarjeta de anuncio sin relleno, fila en Ajustes, deep link `aja://premium`.
 
-### 3.4 Política
+### 4.4 Política
 
 - **Data Safety form** debe declarar exactamente lo que recogen AdMob y los SDKs (ID de publicidad, datos de uso). Declaración incompleta = rechazo.
 - El permiso `com.google.android.gms.permission.AD_ID` está declarado explícitamente en el manifiesto para que no se olvide en el formulario.
-- Si la app se dirige a menores: poner `AdConfig.isChildDirected = true` y aplicar Families Policy.
+- Si la app se dirige a menores: poner `AdConfig.isChildDirected = true` y aplicar Families Policy. **Ojo**: parte del contenido es de cuerpo humano; revisar el content rating antes de marcar público infantil.
 
 ---
 
-## 4. Permisos (`permission_handler`)
+## 5. Permisos
 
-`services/permissions/permission_service.dart` es **lógica pura sin `BuildContext`**; los diálogos viven en `core/widgets/permission_dialogs.dart` (`PermissionFlow`). Esta separación permite testear el servicio y llamarlo desde código en background.
+**La app no pide ninguno.** El manifiesto declara solo `INTERNET`, `ACCESS_NETWORK_STATE` y `AD_ID`, todos de instalación.
 
-- Enum propio `AppPermission` (bluetoothScan, bluetoothConnect, location, notifications) para que el plugin no se filtre a la UI y para que añadir un permiso sea una decisión consciente.
-- Resultado normalizado `PermissionOutcome`: `granted` / `denied` / `permanentlyDenied` / `unsupported`.
-- `PermissionFlow.ensure(...)`: comprueba → muestra explicación si el SO lo pide (`shouldShowRequestRationale`) → solicita → si está bloqueado permanentemente ofrece **abrir ajustes**.
-- `PermissionFlow.ensureAll(...)`: para grupos que van juntos (Bluetooth scan + connect) — una sola explicación y una sola secuencia de diálogos, porque encadenar diálogos dispara la tasa de rechazo.
-- **Nunca pedir permisos al arrancar.** Siempre tras un toque explícito del usuario.
-- Manifiesto: `BLUETOOTH_SCAN` con `usesPermissionFlags="neverForLocation"` (quitarlo solo si la app deriva ubicación de dispositivos cercanos) y `BLUETOOTH`/`BLUETOOTH_ADMIN` con `maxSdkVersion="30"` para Android 11 e inferiores.
-- `ACCESS_BACKGROUND_LOCATION` **no** está incluido: requiere revisión adicional en Play Console.
+`permission_handler` y toda la capa de permisos (servicio, diálogos, providers) **se eliminaron**: no había nada que pidiera un permiso, y un permiso declarado sin usar es riesgo de rechazo en Play y una casilla más que justificar en el Data Safety form.
+
+Cuando llegue la **notificación diaria** hay que volver a añadir `POST_NOTIFICATIONS` al manifiesto y `flutter pub add permission_handler`, y pedirlo **siempre tras un toque explícito del usuario**, nunca al arrancar.
 
 ---
 
-## 5. Reseñas in-app (`in_app_review`)
+## 6. Reseñas in-app (`in_app_review`)
 
 `services/review/review_service.dart`. Google limita el diálogo silenciosamente: si se gasta la cuota en un mal momento, el usuario no lo vuelve a ver en meses. Por eso hay tres guardas (`AppConfig`):
 
@@ -189,35 +242,36 @@ Poner `showBanner: false` en pantallas con controles densos, formularios, onboar
 - `reviewMinAppAge` = 3 días desde la instalación.
 - `reviewMinInterval` = 120 días entre solicitudes.
 
-`requestReviewAfterSuccess()` se llama **solo tras un éxito** (`TaskCard._completeTask`). Nunca al arrancar, nunca tras un error, nunca desde Ajustes.
+En Ajá el **momento de valor es voltear una tarjeta para leer la respuesta**: es lo único que el usuario viene a hacer. `requestReviewAfterSuccess()` se llama solo desde ahí (`DeckScreen._reveal`), nunca al arrancar, nunca tras un error, nunca desde Ajustes.
 Para el botón explícito "Valorar la aplicación" de Ajustes se usa `openStoreListing()`, que no consume la cuota del diálogo nativo.
 
 ---
 
-## 6. Tema y diseño (Material 3)
+## 7. Tema y diseño (Material 3)
 
-- Un **único seed color** (`AppColors.seed`) genera los esquemas claro y oscuro con `ColorScheme.fromSeed`. Rebrandear una app nueva = cambiar esa constante.
-- `AppTheme.light([scheme])` / `AppTheme.dark([scheme])` aceptan un `ColorScheme` externo: si algún día se quiere Material You (colores del fondo de pantalla), se inyecta ahí sin tocar el resto del tema.
+- Un **único seed color** (`AppColors.seed = 0xFFC026D3`) genera los esquemas claro y oscuro con `ColorScheme.fromSeed`.
+- `AppTheme.light([scheme])` / `AppTheme.dark([scheme])` aceptan un `ColorScheme` externo: si algún día se quiere Material You, se inyecta ahí sin tocar el resto del tema.
 - Colores semánticos (success/warning) vía `ThemeExtension<AppSemanticColors>`, accesibles con `context.semanticColors`.
 - **Tokens de espaciado y radios** en `AppSpacing` / `AppRadius`. Prohibido escribir paddings a pelo.
 - `ThemeModeController` persiste claro/oscuro/sistema en `shared_preferences` de forma **síncrona** (las prefs ya están cargadas en `bootstrap`), así el primer frame no parpadea con el brillo equivocado.
 - Widgets base: `BaseScreen`, `SectionCard`, `AppLoader`, `EmptyState`, `ErrorView`, `AdaptiveBannerAd`.
+- Todas las tarjetas del mazo — contenido y anuncio — comparten `DeckCardShell`. Ahí es donde se cambia la forma de una tarjeta, no en cada widget.
 
-**Toda pantalla nueva debe construirse sobre `BaseScreen`**, no sobre un `Scaffold` pelado: así la política de colocación del banner vive en un solo sitio.
+**Toda pantalla nueva debe construirse sobre `BaseScreen`**, no sobre un `Scaffold` pelado.
 
 ---
 
-## 7. Navegación (`go_router`)
+## 8. Navegación (`go_router`)
 
 - Rutas declarativas en `core/routing/app_router.dart`, constantes en `app_routes.dart`. **Nunca escribir un path literal en una pantalla.**
 - Navegación por nombre: `context.goNamed(AppRoutes.settingsName)`.
 - `rootNavigatorKey` disponible para código fuera del árbol (callbacks de anuncios, stream de compras) en vez de guardar un `BuildContext` obsoleto.
-- Deep links activos desde el día 1: esquema `apptemplate://` en el manifiesto + `flutter_deeplinking_enabled`. App Links (`https`, `autoVerify`) están comentados: activarlos requiere publicar `assetlinks.json` en el dominio.
+- Deep links activos desde el día 1: esquema `aja://` en el manifiesto + `flutter_deeplinking_enabled`. App Links (`https`, `autoVerify`) están comentados: activarlos requiere publicar `assetlinks.json` en el dominio.
 - `errorBuilder` → `RouteErrorScreen`, para que un deep link de campaña obsoleto no crashee.
 
 ---
 
-## 8. Arranque (`bootstrap.dart`)
+## 9. Arranque (`bootstrap.dart`)
 
 Objetivo: **primer frame < 2 s en gama media**.
 
@@ -225,10 +279,12 @@ Antes de `runApp` solo se permite:
 1. `WidgetsFlutterBinding.ensureInitialized()`
 2. cargar `SharedPreferences` (unos ms, y evita parpadeos de tema/contadores)
 
+El catálogo **no** se carga aquí: `factsProvider` lo pide desde la pantalla y el mazo enseña `AppLoader` mientras tanto.
+
 Todo lo demás arranca **después del primer frame** (`addPostFrameCallback`), en este orden y con `try/catch` individual:
 1. `premiumControllerProvider` — el entitlement debe conocerse **antes** de pedir anuncios.
 2. `AdsService.initialize()` (RequestConfiguration → consentimiento → `MobileAds.initialize()` → precarga).
-3. `adsInitializedProvider.markInitialized()` — hace que los banners aparezcan sin esperar a un rebuild ajeno.
+3. `adsInitializedProvider.markInitialized()`.
 
 Todo va dentro de `runZonedGuarded`, con `FlutterError.onError` y `PlatformDispatcher.instance.onError` enrutados a `AppLogger`.
 
@@ -236,21 +292,21 @@ Todo va dentro de `runZonedGuarded`, con `FlutterError.onError` y `PlatformDispa
 
 ---
 
-## 9. Configuración Android
+## 10. Configuración Android
 
 `android/app/build.gradle.kts`:
 
-- `compileSdk = 37` — **obligatorio**, lo exigen `permission_handler 13` y `flutter_secure_storage 11`. No bajarlo.
+- `compileSdk = 37` — lo exige `flutter_secure_storage 11`. No bajarlo.
 - `minSdk = 24`, `targetSdk = flutter.targetSdkVersion`.
-- `applicationId = com.alejandrosahonero.app_template` — **no se puede cambiar nunca** tras publicar.
+- `applicationId = com.alejandrosahonero.aja` — **no se puede cambiar nunca** tras publicar.
 - Release: `isMinifyEnabled = true`, `isShrinkResources = true`, `proguard-rules.pro`.
 - **Firma:** lee `android/key.properties` (git-ignored). Si no existe, cae a la firma de debug para no romper builds locales. Antes de publicar, verificar que `key.properties` existe y que el AAB **no** va firmado con debug.
-- **Sin product flavors ni entornos.** Hay una sola configuración: `flutter run` y `flutter build` funcionan sin `--flavor` ni `--dart-define`. No reintroducirlos.
+- **Sin product flavors ni entornos.** `flutter run` y `flutter build` funcionan sin `--flavor` ni `--dart-define`. No reintroducirlos.
 - El nombre visible se declara directamente en `AndroidManifest.xml` (`android:label`), no como `resValue`: AGP 9 desactiva la build feature `resValues` por defecto.
 
 ---
 
-## 10. Comandos
+## 11. Comandos
 
 ```bash
 # Desarrollo
@@ -272,31 +328,34 @@ flutter build appbundle --release --analyze-size
 
 ---
 
-## 11. Pasar a producción — checklist del template
+## 12. Pendiente antes de publicar
 
-1. `pubspec.yaml`: `name`, `description`, `version`.
-2. `android/app/build.gradle.kts`: `namespace` y `applicationId` definitivos (formato `com.empresa.app`).
-3. Renombrar el paquete Kotlin en `android/app/src/main/kotlin/...` acorde.
-4. `AndroidManifest.xml` → `android:label` con el nombre visible real.
-5. `core/config/ad_config.dart`: rellenar `_prodBanner`, `_prodInterstitial`, `_prodRewarded`.
-6. `AndroidManifest.xml`: sustituir el App ID de prueba de AdMob por el de producción.
-7. `core/config/billing_config.dart`: ID del producto (debe coincidir con Play Console).
-8. `core/theme/app_colors.dart`: `seed`.
-9. `lib/l10n/*.arb`: textos reales.
-10. Iconos adaptativos (`flutter_launcher_icons`) y splash nativo (`flutter_native_splash`) — **no incluidos** en la plantilla porque necesitan assets reales; añadirlos por app.
-11. Crash reporting (Crashlytics o Sentry) — **pendiente**, obligatorio desde la v1. Enganchar en `AppLogger.error` y en `bootstrap`.
-12. Política de privacidad publicada en una URL accesible (obligatoria por usar AdMob).
-13. Data Safety form, content rating (IARC), público objetivo, declaración "contiene anuncios".
-14. Testing interno → closed testing (**12 testers / 14 días** para cuentas personales creadas después de nov-2023) → producción con rollout escalonado 10–20 %.
-15. Vigilar Android Vitals: crash rate > 1,09 % o ANR > 0,47 % penalizan la visibilidad → parar el rollout.
+1. **Verificar a mano las 23 entradas de `assets/data/facts.json`** y rellenar `sourceUrl` en cada una. Es lo más importante de esta lista.
+2. `core/config/ad_config.dart`: rellenar `_prodBanner` y `_prodInterstitial`.
+3. `AndroidManifest.xml`: sustituir el App ID de prueba de AdMob por el de producción.
+4. Iconos adaptativos (`flutter_launcher_icons`) y splash nativo (`flutter_native_splash`) — necesitan assets reales.
+5. Crash reporting (Crashlytics o Sentry) — **obligatorio desde la v1**. Enganchar en `AppLogger.error` y en `bootstrap`.
+6. Política de privacidad publicada en una URL accesible (obligatoria por usar AdMob).
+7. Data Safety form, content rating (IARC), público objetivo, declaración "contiene anuncios".
+8. Testing interno → closed testing (**12 testers / 14 días** para cuentas personales creadas después de nov-2023) → producción con rollout escalonado 10–20 %.
+9. Vigilar Android Vitals: crash rate > 1,09 % o ANR > 0,47 % penalizan la visibilidad → parar el rollout.
+
+### Features del plan original todavía sin implementar
+
+- **Notificación push diaria** con la pregunta del día (el motor de retención). Requiere volver a añadir `POST_NOTIFICATIONS` — ver §5.
+- **Compartir la tarjeta como imagen** para Instagram/TikTok. Es el canal de distribución orgánica del que depende la app, así que es la siguiente pieza en prioridad.
+- **Favoritos** guardados localmente.
+- **Widget de pantalla de inicio** con la pregunta del día.
+- **Remote Config / Firestore** para ampliar el catálogo sin publicar versión.
 
 ---
 
-## 12. Definición de "hecho" para cada release
+## 13. Definición de "hecho" para cada release
 
 - [ ] `flutter analyze` sin issues y `dart format` aplicado.
 - [ ] Tests pasando.
 - [ ] Probado en dispositivo físico de gama baja en **modo release** (R8 rompe cosas que en debug funcionan).
+- [ ] El gesto del mazo probado con `textScaleFactor` alto y en pantalla pequeña.
 - [ ] Sin IDs de prueba de AdMob ni logs de debug en el build de producción.
 - [ ] `versionCode` incrementado.
 - [ ] Símbolos de ofuscación archivados y subidos al crash reporting.
@@ -306,12 +365,13 @@ flutter build appbundle --release --analyze-size
 
 ---
 
-## 13. Rendimiento — recordatorios al escribir código
+## 14. Rendimiento — recordatorios al escribir código
 
 - Listas: `ListView.builder` / `SliverList` siempre.
+- El mazo monta como mucho `AppConfig.deckVisibleCards` (3) tarjetas; el resto no existe. No subirlo "por si acaso".
 - Extraer widgets propios en vez de métodos `_buildX()`, para acotar rebuilds.
-- `RepaintBoundary` en animaciones y elementos que se repintan solos.
+- `RepaintBoundary` en animaciones y elementos que se repintan solos (ya lo lleva `FactCard`).
 - Imágenes: WebP para bitmaps, SVG para iconografía, `cacheWidth`/`cacheHeight` obligatorios.
-- Liberar recursos en `dispose()`: controllers, streams, timers (`AdsService.disposeAds` y `AdaptiveBannerAd.dispose` ya lo hacen).
-- Trabajo pesado fuera del isolate principal (`compute()` / `Isolate.run()`).
+- Liberar recursos en `dispose()`: controllers, streams, timers (`AdsService.disposeAds`, `AdaptiveBannerAd`, `AdDeckCard` y los `AnimationController` del mazo ya lo hacen).
+- Trabajo pesado fuera del isolate principal (`compute()` / `Isolate.run()`) — el catálogo ya lo hace.
 - Perfilar en **modo profile en dispositivo físico**, nunca en debug ni emulador.

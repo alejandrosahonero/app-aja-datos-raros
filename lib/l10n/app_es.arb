@@ -1,7 +1,7 @@
 {
   "@@locale": "es",
 
-  "appTitle": "App Template",
+  "appTitle": "Ajá",
   "@appTitle": {
     "description": "Nombre visible de la aplicación"
   },
@@ -13,83 +13,47 @@
   "commonClose": "Cerrar",
   "commonErrorGeneric": "Algo ha salido mal. Inténtalo de nuevo.",
 
-  "homeTitle": "Inicio",
-  "homeSubtitle": "Plantilla base con AdMob, permisos, reseñas y compras integradas.",
-  "homeCounterLabel": "Acciones completadas: {count}",
-  "@homeCounterLabel": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
+  "deckHintReveal": "Desliza a la derecha para ver la respuesta",
+  "@deckHintReveal": {
+    "description": "Pista en el frente de la tarjeta"
   },
-  "homeCompleteTask": "Completar tarea",
-  "homeTaskDone": "Tarea completada",
-
-  "rewardsTitle": "Recompensas",
-  "rewardsBalance": "Créditos disponibles: {credits}",
-  "@rewardsBalance": {
+  "deckHintNext": "Desliza a la izquierda para pasar a la siguiente",
+  "deckAnswerLabel": "La respuesta",
+  "deckSource": "Fuente: {source}",
+  "@deckSource": {
     "placeholders": {
-      "credits": {
-        "type": "int"
-      }
-    }
-  },
-  "rewardsWatchAd": "Ver anuncio y ganar {amount} créditos",
-  "@rewardsWatchAd": {
-    "placeholders": {
-      "amount": {
-        "type": "int"
-      }
-    }
-  },
-  "rewardsDialogTitle": "¿Quieres {amount} créditos?",
-  "@rewardsDialogTitle": {
-    "placeholders": {
-      "amount": {
-        "type": "int"
-      }
-    }
-  },
-  "rewardsDialogBody": "Verás un vídeo corto y al terminarlo recibirás la recompensa.",
-  "rewardsEarned": "¡Has ganado {amount} créditos!",
-  "@rewardsEarned": {
-    "placeholders": {
-      "amount": {
-        "type": "int"
-      }
-    }
-  },
-  "rewardsAdUnavailable": "No hay vídeo disponible ahora mismo. Inténtalo más tarde.",
-
-  "permissionsTitle": "Permisos",
-  "permissionBluetooth": "Bluetooth",
-  "permissionLocation": "Ubicación",
-  "permissionNotifications": "Notificaciones",
-  "permissionBluetoothReason": "Necesitamos Bluetooth para buscar y conectar con dispositivos cercanos.",
-  "permissionLocationReason": "Necesitamos tu ubicación para mostrarte resultados cercanos.",
-  "permissionNotificationsReason": "Activa las notificaciones para avisarte cuando termine un proceso.",
-  "permissionRationaleTitle": "Permiso necesario",
-  "permissionDeniedForeverTitle": "Permiso bloqueado",
-  "permissionDeniedForeverBody": "Has denegado este permiso permanentemente. Ábrelo desde los ajustes del sistema para poder usar esta función.",
-  "permissionOpenSettings": "Abrir ajustes",
-  "permissionGranted": "Permiso de {permission} concedido",
-  "@permissionGranted": {
-    "placeholders": {
-      "permission": {
+      "source": {
         "type": "String"
       }
     }
   },
-  "permissionDenied": "Permiso de {permission} denegado",
-  "@permissionDenied": {
+  "deckShowAnswer": "Ver respuesta",
+  "deckHideAnswer": "Ocultar",
+  "deckNext": "Siguiente",
+  "deckProgress": "{current}/{total}",
+  "@deckProgress": {
     "placeholders": {
-      "permission": {
-        "type": "String"
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
       }
     }
   },
-  "permissionUnsupported": "Este permiso no aplica en esta versión de Android",
+  "deckFinishedTitle": "Te has quedado sin preguntas",
+  "deckFinishedBody": "Has visto todas las de esta categoría. Empieza de nuevo o prueba con otra.",
+  "deckRestart": "Volver a empezar",
+  "deckLoadError": "No hemos podido cargar las preguntas.",
+  "deckCategoryTooltip": "Filtrar por categoría",
+  "deckCategoryAll": "Todas",
+
+  "categoryBody": "Cuerpo humano",
+  "categoryLanguage": "Lenguaje",
+  "categoryHistory": "Historia",
+  "categoryScience": "Ciencia cotidiana",
+
+  "adLabel": "Publicidad",
 
   "settingsTitle": "Ajustes",
   "settingsAppearance": "Apariencia",
@@ -115,9 +79,9 @@
 
   "premiumActive": "Premium activo. Sin anuncios.",
   "paywallTitle": "Quitar anuncios",
-  "paywallHeadline": "Disfruta de la app sin interrupciones",
-  "paywallBenefitNoAds": "Sin banners ni anuncios a pantalla completa",
-  "paywallBenefitSupport": "Apoyas el desarrollo de la aplicación",
+  "paywallHeadline": "Lee sin interrupciones",
+  "paywallBenefitNoAds": "Ni tarjetas de publicidad ni anuncios a pantalla completa",
+  "paywallBenefitSupport": "Apoyas la investigación y la redacción de cada dato",
   "paywallBenefitOneTime": "Pago único, sin suscripción",
   "paywallBuy": "Comprar por {price}",
   "@paywallBuy": {

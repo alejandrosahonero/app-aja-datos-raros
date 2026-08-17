@@ -15,11 +15,13 @@ abstract final class AppConfig {
 
   // --- Ad pacing ----------------------------------------------------------
 
-  /// Number of "value actions" between two interstitials.
+  /// Number of "value actions" between two interstitials. In Ajá a value action
+  /// is one card swiped away, so this is "an interstitial every 9 cards".
   ///
   /// Combined with [minIntervalBetweenInterstitials]: BOTH conditions must be
-  /// satisfied. The guide caps interstitials at ~1 every 3–4 minutes.
-  static const int interstitialEveryNActions = 3;
+  /// satisfied. The guide caps interstitials at ~1 every 3–4 minutes, and cards
+  /// are consumed fast, so the time floor is what actually binds here.
+  static const int interstitialEveryNActions = 9;
 
   /// Hard floor between two interstitials, regardless of the action counter.
   static const Duration minIntervalBetweenInterstitials = Duration(minutes: 3);
@@ -47,8 +49,24 @@ abstract final class AppConfig {
   /// anyway; asking less often keeps the quota for the good moments.
   static const Duration reviewMinInterval = Duration(days: 120);
 
-  // --- Rewards ------------------------------------------------------------
+  // --- Deck ---------------------------------------------------------------
 
-  /// Credits granted by one rewarded video in the demo feature.
-  static const int rewardedCredits = 10;
+  /// Fact cards between two ad cards in the deck.
+  ///
+  /// The ad card is the "native-like" slot from the monetization plan: it is
+  /// swiped exactly like any other card, so it must be rare enough that the
+  /// deck still feels like content. Never lower this below 5.
+  static const int adCardEveryNCards = 6;
+
+  /// Cards kept mounted in the stack (the draggable one plus the ones peeking
+  /// behind it). Anything beyond this is built lazily on demand.
+  static const int deckVisibleCards = 3;
+
+  /// Fraction of the card width a horizontal drag has to cover before it counts
+  /// as a swipe instead of a hesitation.
+  static const double deckSwipeThreshold = 0.28;
+
+  /// Velocity (logical px/s) that commits a swipe regardless of distance, so a
+  /// quick flick works without dragging the card across the screen.
+  static const double deckSwipeVelocity = 700;
 }

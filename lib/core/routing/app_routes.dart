@@ -4,8 +4,9 @@
 /// a single edit and deep links stay consistent with the Android intent filter
 /// declared in `AndroidManifest.xml`.
 abstract final class AppRoutes {
+  /// The card deck. It is the whole app, so it sits at the root.
   static const String homePath = '/';
-  static const String homeName = 'home';
+  static const String homeName = 'deck';
 
   static const String settingsPath = '/settings';
   static const String settingsName = 'settings';

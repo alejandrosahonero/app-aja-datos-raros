@@ -1,4 +1,4 @@
-package com.alejandrosahonero.app_template
+package com.alejandrosahonero.aja
 
 import io.flutter.embedding.android.FlutterActivity
 

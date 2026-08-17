@@ -17,29 +17,10 @@
          forgotten in the Data Safety form, where it MUST be reported. -->
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
 
-    <!-- Bluetooth, Android 12+ (API 31). Remove `neverForLocation` if the app
-         actually derives the user's location from nearby devices. -->
-    <uses-permission
-        android:name="android.permission.BLUETOOTH_SCAN"
-        android:usesPermissionFlags="neverForLocation" />
-    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-
-    <!-- Legacy Bluetooth for Android 11 and below (install-time permissions). -->
-    <uses-permission
-        android:name="android.permission.BLUETOOTH"
-        android:maxSdkVersion="30" />
-    <uses-permission
-        android:name="android.permission.BLUETOOTH_ADMIN"
-        android:maxSdkVersion="30" />
-
-    <!-- Foreground location only. ACCESS_BACKGROUND_LOCATION requires a
-         separate Play Console review and a recorded demo video: do not add it
-         unless the app genuinely needs it. -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
-    <!-- Notifications, Android 13+ (API 33). -->
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Ajá browses a bundled catalogue: it needs nothing else. POST_NOTIFICATIONS
+         comes back together with the "question of the day" push, and not one
+         release earlier — an unused permission is a Play rejection risk and it
+         has to be justified in the Data Safety form. -->
 
     <!-- Reminder: a plugin may inject a permission you do not use. Check the
          merged manifest (build/app/intermediates/merged_manifest/...) after
@@ -51,7 +32,7 @@
          required by Play Billing and the AdMob SDK. -->
 
     <application
-        android:label="App Template"
+        android:label="Ajá"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:enableOnBackInvokedCallback="true">
@@ -101,13 +82,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <!-- Custom scheme deep links: apptemplate://premium
-                 Wired from day one — campaigns and notifications rely on it. -->
+            <!-- Custom scheme deep links: aja://premium, aja://card/<id>
+                 Wired from day one — campaigns, shared cards and the daily
+                 notification all land through here. -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="apptemplate" />
+                <data android:scheme="aja" />
             </intent-filter>
 
             <!-- App Links (verified https). Enable after publishing
