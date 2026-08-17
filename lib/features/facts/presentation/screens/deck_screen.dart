@@ -105,7 +105,7 @@ class _DeckBody extends ConsumerWidget {
               onSwipeRight: () => _reveal(ref),
               onSwipeUp: () => unawaited(_toggleFavorite(context, ref)),
               hintLeft: const _SwipeBadge(
-                icon: Icons.arrow_back,
+                icon: Icons.close_rounded,
                 alignment: Alignment.topLeft,
               ),
               hintRight: const _SwipeBadge(
@@ -224,10 +224,14 @@ class _Progress extends StatelessWidget {
   }
 }
 
-/// Buttons mirroring the two swipes.
+/// The three swipes mirrored as round buttons, laid out the way a card deck
+/// trains you to expect: discard on the left, save in the middle, reveal on the
+/// right — each control on the side its gesture throws the card towards, and
+/// wearing the same icon as the badge that fades in mid-drag.
 ///
 /// Not decoration: a drag-only interface is unusable with a screen reader or
-/// switch access, and Play flags that in the accessibility scan.
+/// switch access, and Play flags that in the accessibility scan. The tooltip is
+/// what gets announced, so every button carries one.
 class _DeckControls extends StatelessWidget {
   const _DeckControls({
     required this.state,
@@ -248,37 +252,91 @@ class _DeckControls extends StatelessWidget {
     final bool isFact = state.current is FactItem;
 
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Expanded(
-          child: OutlinedButton.icon(
-            onPressed: onNext,
-            icon: const Icon(Icons.arrow_forward),
-            label: Text(context.l10n.deckNext),
-          ),
+        _DeckButton(
+          icon: Icons.close_rounded,
+          color: context.colors.onSurfaceVariant,
+          tooltip: context.l10n.deckNext,
+          onPressed: onNext,
         ),
-        const SizedBox(width: AppSpacing.sm),
-        Expanded(
-          child: FilledButton.icon(
-            onPressed: isFact ? onReveal : null,
-            icon: const Icon(Icons.flip_to_back),
-            label: Text(
-              state.revealed
-                  ? context.l10n.deckHideAnswer
-                  : context.l10n.deckShowAnswer,
-            ),
-          ),
-        ),
-        const SizedBox(width: AppSpacing.sm),
-        // Never disabled for a locked user: tapping it is how they find out the
+        const SizedBox(width: AppSpacing.lg),
+        // Smaller and in the middle, where the upward swipe points. Never
+        // disabled for a locked user: tapping it is how they find out the
         // feature exists and what unlocks it.
-        IconButton.filledTonal(
-          onPressed: isFact ? onFavorite : null,
-          icon: Icon(favorited ? Icons.bookmark : Icons.bookmark_add_outlined),
+        _DeckButton(
+          icon: favorited ? Icons.bookmark : Icons.bookmark_add_outlined,
+          color: context.colors.tertiary,
           tooltip: favorited
               ? context.l10n.favoritesRemove
               : context.l10n.favoritesAdd,
+          onPressed: isFact ? onFavorite : null,
+          diameter: _DeckButton.small,
+        ),
+        const SizedBox(width: AppSpacing.lg),
+        _DeckButton(
+          icon: state.revealed ? Icons.flip_to_front : Icons.flip_to_back,
+          color: context.colors.primary,
+          tooltip: state.revealed
+              ? context.l10n.deckHideAnswer
+              : context.l10n.deckShowAnswer,
+          onPressed: isFact ? onReveal : null,
         ),
       ],
+    );
+  }
+}
+
+/// One round control: a tinted ring over the surface colour, with the icon in
+/// the same tint.
+class _DeckButton extends StatelessWidget {
+  const _DeckButton({
+    required this.icon,
+    required this.color,
+    required this.tooltip,
+    required this.onPressed,
+    this.diameter = large,
+  });
+
+  /// Comfortably past the 48dp minimum touch target on both sizes.
+  static const double large = 64;
+  static const double small = 52;
+
+  final IconData icon;
+  final Color color;
+  final String tooltip;
+
+  /// Null disables the button, which only happens while the ad card is on top.
+  final VoidCallback? onPressed;
+
+  final double diameter;
+
+  @override
+  Widget build(BuildContext context) {
+    final bool enabled = onPressed != null;
+    // Faded rather than greyed: the button keeps its identity while it waits.
+    final Color tint = enabled ? color : color.withValues(alpha: 0.3);
+
+    return Tooltip(
+      message: tooltip,
+      child: SizedBox.square(
+        dimension: diameter,
+        child: Material(
+          color: context.colors.surface,
+          elevation: enabled ? 2 : 0,
+          shadowColor: context.colors.shadow,
+          shape: CircleBorder(
+            side: BorderSide(color: tint.withValues(alpha: 0.4)),
+          ),
+          clipBehavior: Clip.antiAlias,
+          child: InkWell(
+            onTap: onPressed,
+            child: Center(
+              child: Icon(icon, color: tint, size: diameter * 0.42),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

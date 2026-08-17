@@ -77,7 +77,7 @@ void main() {
   ) async {
     await _pumpDeck(tester);
 
-    await tester.tap(find.text('Ver respuesta'));
+    await tester.tap(find.byTooltip('Ver respuesta'));
     await tester.pumpAndSettle();
 
     expect(find.text('Respuesta 1'), findsOneWidget);
@@ -91,11 +91,11 @@ void main() {
   ) async {
     await _pumpDeck(tester);
 
-    await tester.tap(find.text('Ver respuesta'));
+    await tester.tap(find.byTooltip('Ver respuesta'));
     await tester.pumpAndSettle();
     expect(find.text('Respuesta 1'), findsOneWidget);
 
-    await tester.tap(find.text('Siguiente'));
+    await tester.tap(find.byTooltip('Siguiente'));
     await tester.pumpAndSettle();
 
     expect(find.text('Pregunta 2'), findsOneWidget);
