@@ -55,12 +55,12 @@ lib/
 │   └── widgets/              # BaseScreen, AdaptiveBannerAd, SectionCard,
 │                             # EmptyState, ErrorView, AppLoader
 ├── features/
-│   ├── facts/                # ← la app entera
+│   ├── facts/                # ← la app entera (mazo + favoritos)
 │   │   ├── data/             # FactRepository (lee y parsea el JSON)
 │   │   ├── domain/           # Fact, FactCategory, DeckItem, buildDeck()
 │   │   └── presentation/     # providers / screens / widgets
 │   ├── settings/presentation/
-│   └── premium/presentation/ # paywall
+│   └── premium/presentation/ # paywall + diálogo de función bloqueada
 ├── services/
 │   ├── ads/                  # AdsService + ConsentService (UMP) + providers
 │   ├── billing/              # PremiumService + PremiumController + estado
@@ -118,8 +118,12 @@ Una pila de tarjetas, una detrás de otra. Solo la de arriba responde al dedo.
 |---|---|
 | **Deslizar a la derecha** | La tarjeta **se voltea** y enseña la respuesta. Vuelve al centro, no se descarta. |
 | **Deslizar a la izquierda** | La tarjeta **sale volando** y sube la siguiente. |
+| **Deslizar hacia arriba** | **Guarda la tarjeta** en favoritos (premium, ver §3.4). También vuelve al centro: guardar no es motivo para dejar de leerla. |
+| **Deslizar hacia abajo** | Nada, a propósito. Un flick hacia arriba impreciso que acaba yendo al revés no debe disparar la acción equivocada. |
 | **Tocar la tarjeta** | Igual que deslizar a la derecha (voltear). |
-| **Botones inferiores** | "Siguiente" y "Ver respuesta". **No son decorativos**: una interfaz solo-arrastre es inutilizable con lector de pantalla y la penaliza el escaneo de accesibilidad de Play. No borrarlos. |
+| **Botones inferiores** | "Siguiente", "Ver respuesta" y el icono de guardar. **No son decorativos**: una interfaz solo-arrastre es inutilizable con lector de pantalla y la penaliza el escaneo de accesibilidad de Play. No borrarlos. |
+
+El eje dominante decide la acción: un arrastre de 200 px hacia arriba y 60 px a la izquierda es un guardado, no un descarte.
 
 `SwipeDeck` (`features/facts/presentation/widgets/swipe_deck.dart`) **solo posee el gesto**. Notifica hacia arriba y repinta a partir de `items`/`index`. El estado del mazo — posición, volteo — vive en `DeckController`, y por eso se puede testear sin animaciones.
 
@@ -146,6 +150,18 @@ El volteo es un `rotateY` con perspectiva (`setEntry(3, 2, 0.0012)`); a mitad de
 
 El progreso se persiste como **número de tarjetas de contenido vistas** (`deck_facts_seen_<categoría>`), no como índice: los huecos de anuncio se desplazan cuando el usuario compra premium, y un índice guardado apuntaría a otra tarjeta.
 
+### 3.4 Favoritos — función de pago
+
+Guardar tarjetas está detrás del **mismo pago único `premium_remove_ads`**. No hay un segundo producto: añadir SKUs multiplica el soporte y las combinaciones de entitlement que hay que probar.
+
+- `favoritesProvider` guarda **ids**, no copias de las tarjetas: si un dato se reescribe en una actualización de contenido, el favorito sigue siendo correcto. Los ids que ya no existen en el catálogo se descartan en silencio.
+- `canUseFavoritesProvider` está separado de `isPremiumProvider` aunque hoy devuelva lo mismo, para que desacoplarlo más adelante sea una línea.
+- **La comprobación del entitlement vive en la UI**, no en `FavoritesController`. La rama del "no" tiene que abrir el paywall y eso necesita un `BuildContext`; duplicar la comprobación en el controller solo haría que las dos copias se separaran.
+- Un usuario sin premium **sí puede hacer el gesto**: es así como descubre que la función existe. Sale un diálogo que explica qué desbloquea, con un "Ahora no" a un toque. **No saltar directamente al paywall**: secuestrar la pantalla tras un deslizamiento que pudo ser accidental se lee como una trampa.
+- Los ids guardados **no se borran nunca** al perder el entitlement. Un reembolso o una reinstalación no deben destruir la lista; la pantalla se bloquea, los datos siguen ahí.
+
+> **Ojo en Play Console:** la ficha del producto `premium_remove_ads` tiene que mencionar los favoritos. Vender "quitar anuncios" y usarlo además para desbloquear una función es motivo de reembolso y de reseña negativa si el usuario no lo sabía al pagar.
+
 ---
 
 ## 4. Monetización
@@ -156,7 +172,7 @@ El progreso se persiste como **número de tarjetas de contenido vistas** (`deck_
 - **Tarjeta de anuncio dentro del mazo = formato principal.** Se desliza igual que el contenido.
 - **Interstitial = secundario**, cada ~9 tarjetas y nunca antes de 3 min desde el anterior.
 - **Sin rewarded.** El uso es pasivo: no hay nada que desbloquear que justifique un vídeo. `AdsService` ya no tiene ese formato — **no reintroducirlo** sin una razón de producto nueva.
-- **IAP no consumible "quitar anuncios"** = conversión principal.
+- **IAP no consumible "quitar anuncios"** = conversión principal. Desbloquea además los favoritos (§3.4), así que tiene dos puntos de venta: la tarjeta de anuncio sin relleno y el intento de guardar una tarjeta.
 
 ### 4.2 AdMob (`google_mobile_ads`)
 
@@ -214,7 +230,7 @@ En Ajustes hay una fila **"Opciones de privacidad"** que reabre el formulario, v
 - Entitlement cacheado en `flutter_secure_storage` + `restorePurchases()` al arrancar para verificar contra el store. Nunca confiar solo en un flag de `shared_preferences`.
 - **Botón "Restaurar compras" obligatorio y visible** en Ajustes (y también en el paywall). Su ausencia es motivo de rechazo.
 - Verificación local del token (app sin backend). Con servidor: validar contra la Google Play Developer API en `PremiumService.isValidPurchase`.
-- **Paywall tras un momento de valor**, nunca en el primer arranque. Puntos de entrada: la tarjeta de anuncio sin relleno, fila en Ajustes, deep link `aja://premium`.
+- **Paywall tras un momento de valor**, nunca en el primer arranque. Puntos de entrada: el intento de guardar una tarjeta, la pantalla de guardadas bloqueada, la tarjeta de anuncio sin relleno, fila en Ajustes, deep link `aja://premium`.
 
 ### 4.4 Política
 
@@ -344,7 +360,6 @@ flutter build appbundle --release --analyze-size
 
 - **Notificación push diaria** con la pregunta del día (el motor de retención). Requiere volver a añadir `POST_NOTIFICATIONS` — ver §5.
 - **Compartir la tarjeta como imagen** para Instagram/TikTok. Es el canal de distribución orgánica del que depende la app, así que es la siguiente pieza en prioridad.
-- **Favoritos** guardados localmente.
 - **Widget de pantalla de inicio** con la pregunta del día.
 - **Remote Config / Firestore** para ampliar el catálogo sin publicar versión.
 
@@ -360,7 +375,7 @@ flutter build appbundle --release --analyze-size
 - [ ] `versionCode` incrementado.
 - [ ] Símbolos de ofuscación archivados y subidos al crash reporting.
 - [ ] Tamaño del AAB verificado, sin regresión.
-- [ ] Compra premium y restauración probadas con cuenta de tester licenciado.
+- [ ] Compra premium y restauración probadas con cuenta de tester licenciado, comprobando que los favoritos se desbloquean con la compra y que la lista sobrevive a una reinstalación.
 - [ ] Notas de la versión en todas las localizaciones.
 
 ---

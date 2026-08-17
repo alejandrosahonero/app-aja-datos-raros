@@ -11,9 +11,11 @@ import 'package:aja/features/facts/domain/deck_item.dart';
 import 'package:aja/features/facts/domain/fact.dart';
 import 'package:aja/features/facts/presentation/providers/deck_controller.dart';
 import 'package:aja/features/facts/presentation/providers/facts_providers.dart';
+import 'package:aja/features/facts/presentation/providers/favorites_controller.dart';
 import 'package:aja/features/facts/presentation/widgets/ad_deck_card.dart';
 import 'package:aja/features/facts/presentation/widgets/fact_card.dart';
 import 'package:aja/features/facts/presentation/widgets/swipe_deck.dart';
+import 'package:aja/features/premium/presentation/widgets/premium_feature_dialog.dart';
 import 'package:aja/services/ads/ads_providers.dart';
 import 'package:aja/services/review/review_providers.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +40,11 @@ class DeckScreen extends ConsumerWidget {
       showBanner: false,
       actions: <Widget>[
         const _CategoryMenu(),
+        IconButton(
+          onPressed: () => context.goNamed(AppRoutes.favoritesName),
+          icon: const Icon(Icons.bookmarks_outlined),
+          tooltip: context.l10n.favoritesTitle,
+        ),
         IconButton(
           onPressed: () => context.goNamed(AppRoutes.settingsName),
           icon: const Icon(Icons.settings_outlined),
@@ -77,6 +84,8 @@ class _DeckBody extends ConsumerWidget {
       );
     }
 
+    final Set<String> favorites = ref.watch(favoritesProvider);
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(
         AppSpacing.md,
@@ -94,6 +103,7 @@ class _DeckBody extends ConsumerWidget {
               index: state.index,
               onSwipeLeft: () => unawaited(_next(ref)),
               onSwipeRight: () => _reveal(ref),
+              onSwipeUp: () => unawaited(_toggleFavorite(context, ref)),
               hintLeft: const _SwipeBadge(
                 icon: Icons.arrow_back,
                 alignment: Alignment.topLeft,
@@ -102,11 +112,16 @@ class _DeckBody extends ConsumerWidget {
                 icon: Icons.flip_to_back,
                 alignment: Alignment.topRight,
               ),
+              hintUp: const _SwipeBadge(
+                icon: Icons.bookmark_add_outlined,
+                alignment: Alignment.bottomCenter,
+              ),
               builder: (BuildContext context, DeckItem item, bool isTop) =>
                   switch (item) {
                     FactItem(:final Fact fact) => FactCard(
                       fact: fact,
                       revealed: isTop && state.revealed,
+                      favorited: favorites.contains(fact.id),
                       onTap: isTop ? () => _reveal(ref) : null,
                     ),
                     AdItem() => AdDeckCard(active: isTop),
@@ -116,12 +131,35 @@ class _DeckBody extends ConsumerWidget {
           const SizedBox(height: AppSpacing.md),
           _DeckControls(
             state: state,
+            favorited: switch (state.current) {
+              FactItem(:final Fact fact) => favorites.contains(fact.id),
+              _ => false,
+            },
             onNext: () => unawaited(_next(ref)),
             onReveal: () => _reveal(ref),
+            onFavorite: () => unawaited(_toggleFavorite(context, ref)),
           ),
         ],
       ),
     );
+  }
+
+  /// Swipe up / bookmark button.
+  ///
+  /// The entitlement is checked here and not in [FavoritesController] because
+  /// the "no" branch has to open the paywall, which needs a context. A locked
+  /// user still gets to make the gesture: that attempt is the value moment the
+  /// upsell hangs off.
+  Future<void> _toggleFavorite(BuildContext context, WidgetRef ref) async {
+    final DeckItem? current = state.current;
+    if (current is! FactItem) return;
+
+    if (!ref.read(canUseFavoritesProvider)) {
+      await showPremiumFeatureDialog(context);
+      return;
+    }
+
+    await ref.read(favoritesProvider.notifier).toggle(current.fact.id);
   }
 
   /// Flipping a card to read the answer is the value moment of this app, so it
@@ -193,13 +231,17 @@ class _Progress extends StatelessWidget {
 class _DeckControls extends StatelessWidget {
   const _DeckControls({
     required this.state,
+    required this.favorited,
     required this.onNext,
     required this.onReveal,
+    required this.onFavorite,
   });
 
   final DeckState state;
+  final bool favorited;
   final VoidCallback onNext;
   final VoidCallback onReveal;
+  final VoidCallback onFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -214,7 +256,7 @@ class _DeckControls extends StatelessWidget {
             label: Text(context.l10n.deckNext),
           ),
         ),
-        const SizedBox(width: AppSpacing.md),
+        const SizedBox(width: AppSpacing.sm),
         Expanded(
           child: FilledButton.icon(
             onPressed: isFact ? onReveal : null,
@@ -225,6 +267,16 @@ class _DeckControls extends StatelessWidget {
                   : context.l10n.deckShowAnswer,
             ),
           ),
+        ),
+        const SizedBox(width: AppSpacing.sm),
+        // Never disabled for a locked user: tapping it is how they find out the
+        // feature exists and what unlocks it.
+        IconButton.filledTonal(
+          onPressed: isFact ? onFavorite : null,
+          icon: Icon(favorited ? Icons.bookmark : Icons.bookmark_add_outlined),
+          tooltip: favorited
+              ? context.l10n.favoritesRemove
+              : context.l10n.favoritesAdd,
         ),
       ],
     );

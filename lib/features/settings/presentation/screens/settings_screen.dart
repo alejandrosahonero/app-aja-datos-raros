@@ -67,6 +67,12 @@ class SettingsScreen extends ConsumerWidget {
               ],
             ),
           ),
+          ListTile(
+            leading: const Icon(Icons.bookmarks_outlined),
+            title: Text(context.l10n.favoritesTitle),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => context.goNamed(AppRoutes.favoritesName),
+          ),
           const Divider(),
           _SectionHeader(title: context.l10n.settingsMonetization),
           if (isPremium)

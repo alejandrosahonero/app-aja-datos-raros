@@ -66,6 +66,12 @@ abstract final class AppConfig {
   /// as a swipe instead of a hesitation.
   static const double deckSwipeThreshold = 0.28;
 
+  /// Fraction of the card height an upward drag has to cover to count as
+  /// "save to favourites". Lower than [deckSwipeThreshold] because the card is
+  /// taller than it is wide, so the same fraction would mean a much longer
+  /// gesture.
+  static const double deckSwipeUpThreshold = 0.16;
+
   /// Velocity (logical px/s) that commits a swipe regardless of distance, so a
   /// quick flick works without dragging the card across the screen.
   static const double deckSwipeVelocity = 700;

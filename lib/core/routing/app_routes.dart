@@ -11,6 +11,11 @@ abstract final class AppRoutes {
   static const String settingsPath = '/settings';
   static const String settingsName = 'settings';
 
+  /// Saved cards. Premium only, but the route itself is not guarded: the screen
+  /// sells the upgrade instead of pretending it does not exist.
+  static const String favoritesPath = '/favorites';
+  static const String favoritesName = 'favorites';
+
   /// Paywall. Reachable by deep link so a campaign can land directly on it.
   static const String paywallPath = '/premium';
   static const String paywallName = 'premium';

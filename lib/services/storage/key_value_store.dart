@@ -25,6 +25,15 @@ class KeyValueStore {
   Future<void> setString(String key, String value) =>
       _prefs.setString(key, value);
 
+  /// Returns an empty list rather than null: every call site wants to iterate,
+  /// and none of them cares about the difference between "never written" and
+  /// "written empty".
+  List<String> getStringList(String key) =>
+      _prefs.getStringList(key) ?? const <String>[];
+
+  Future<void> setStringList(String key, List<String> value) =>
+      _prefs.setStringList(key, value);
+
   /// Stored as milliseconds since epoch (UTC) to stay timezone independent.
   DateTime? getDateTime(String key) {
     final int? millis = _prefs.getInt(key);

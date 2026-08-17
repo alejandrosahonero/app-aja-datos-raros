@@ -32,6 +32,17 @@
 
   "adLabel": "Ad",
 
+  "favoritesTitle": "Saved",
+  "favoritesAdd": "Save this card",
+  "favoritesRemove": "Remove from saved",
+  "favoritesSaved": "Saved card",
+  "favoritesEmptyTitle": "Nothing saved yet",
+  "favoritesEmptyBody": "Swipe a card up to keep it here.",
+
+  "premiumFeatureTitle": "Premium feature",
+  "premiumFeatureBody": "Saving cards is part of \"Remove ads\": one payment, no subscription.",
+  "premiumFeatureCta": "See what's included",
+
   "settingsTitle": "Settings",
   "settingsAppearance": "Appearance",
   "settingsThemeMode": "Theme",
@@ -51,6 +62,7 @@
   "paywallTitle": "Remove ads",
   "paywallHeadline": "Read without interruptions",
   "paywallBenefitNoAds": "No ad cards and no full screen ads",
+  "paywallBenefitFavorites": "Save any card and read it again whenever you like",
   "paywallBenefitSupport": "You support the research and writing behind every fact",
   "paywallBenefitOneTime": "One time payment, no subscription",
   "paywallBuy": "Buy for {price}",

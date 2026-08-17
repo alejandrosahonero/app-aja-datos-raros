@@ -26,11 +26,17 @@ class FactCard extends StatefulWidget {
     required this.fact,
     required this.revealed,
     super.key,
+    this.favorited = false,
     this.onTap,
   });
 
   final Fact fact;
   final bool revealed;
+
+  /// Painted on both faces: the user has to be able to tell a card is saved
+  /// without flipping it back.
+  final bool favorited;
+
   final VoidCallback? onTap;
 
   @override
@@ -94,9 +100,17 @@ class _FactCardState extends State<FactCard>
                       // Un-mirror the back, which is otherwise painted
                       // reversed by the parent rotation.
                       transform: Matrix4.identity()..rotateY(math.pi),
-                      child: _CardBack(fact: widget.fact, language: language),
+                      child: _CardBack(
+                        fact: widget.fact,
+                        language: language,
+                        favorited: widget.favorited,
+                      ),
                     )
-                  : _CardFront(fact: widget.fact, language: language),
+                  : _CardFront(
+                      fact: widget.fact,
+                      language: language,
+                      favorited: widget.favorited,
+                    ),
             );
           },
         ),
@@ -106,10 +120,15 @@ class _FactCardState extends State<FactCard>
 }
 
 class _CardFront extends StatelessWidget {
-  const _CardFront({required this.fact, required this.language});
+  const _CardFront({
+    required this.fact,
+    required this.language,
+    required this.favorited,
+  });
 
   final Fact fact;
   final String language;
+  final bool favorited;
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +136,13 @@ class _CardFront extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          _CategoryChip(category: fact.category),
+          Row(
+            children: <Widget>[
+              _CategoryChip(category: fact.category),
+              const Spacer(),
+              if (favorited) _FavoriteMark(color: context.colors.primary),
+            ],
+          ),
           const Spacer(),
           Text(
             fact.question.resolve(language),
@@ -138,10 +163,15 @@ class _CardFront extends StatelessWidget {
 }
 
 class _CardBack extends StatelessWidget {
-  const _CardBack({required this.fact, required this.language});
+  const _CardBack({
+    required this.fact,
+    required this.language,
+    required this.favorited,
+  });
 
   final Fact fact;
   final String language;
+  final bool favorited;
 
   @override
   Widget build(BuildContext context) {
@@ -150,11 +180,21 @@ class _CardBack extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            context.l10n.deckAnswerLabel,
-            style: context.texts.labelLarge?.copyWith(
-              color: context.colors.onPrimaryContainer.withValues(alpha: 0.7),
-            ),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: Text(
+                  context.l10n.deckAnswerLabel,
+                  style: context.texts.labelLarge?.copyWith(
+                    color: context.colors.onPrimaryContainer.withValues(
+                      alpha: 0.7,
+                    ),
+                  ),
+                ),
+              ),
+              if (favorited)
+                _FavoriteMark(color: context.colors.onPrimaryContainer),
+            ],
           ),
           const SizedBox(height: AppSpacing.md),
           // The detail text is the only part that can overflow on a small
@@ -199,6 +239,22 @@ class _CardBack extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+/// Marks a saved card. Carries a semantic label because the icon alone says
+/// nothing to a screen reader.
+class _FavoriteMark extends StatelessWidget {
+  const _FavoriteMark({required this.color});
+
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      label: context.l10n.favoritesSaved,
+      child: Icon(Icons.bookmark, color: color),
     );
   }
 }

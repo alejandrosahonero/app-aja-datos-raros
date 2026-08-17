@@ -55,6 +55,20 @@
 
   "adLabel": "Publicidad",
 
+  "favoritesTitle": "Guardadas",
+  "favoritesAdd": "Guardar esta tarjeta",
+  "@favoritesAdd": {
+    "description": "Tooltip del botón de guardar; el gesto equivalente es deslizar hacia arriba"
+  },
+  "favoritesRemove": "Quitar de guardadas",
+  "favoritesSaved": "Tarjeta guardada",
+  "favoritesEmptyTitle": "Todavía no has guardado nada",
+  "favoritesEmptyBody": "Desliza una tarjeta hacia arriba para guardarla aquí.",
+
+  "premiumFeatureTitle": "Función premium",
+  "premiumFeatureBody": "Guardar tarjetas forma parte de «Quitar anuncios»: un único pago, sin suscripción.",
+  "premiumFeatureCta": "Ver qué incluye",
+
   "settingsTitle": "Ajustes",
   "settingsAppearance": "Apariencia",
   "settingsThemeMode": "Tema",
@@ -81,6 +95,7 @@
   "paywallTitle": "Quitar anuncios",
   "paywallHeadline": "Lee sin interrupciones",
   "paywallBenefitNoAds": "Ni tarjetas de publicidad ni anuncios a pantalla completa",
+  "paywallBenefitFavorites": "Guardas las tarjetas que quieras y las relees cuando quieras",
   "paywallBenefitSupport": "Apoyas la investigación y la redacción de cada dato",
   "paywallBenefitOneTime": "Pago único, sin suscripción",
   "paywallBuy": "Comprar por {price}",

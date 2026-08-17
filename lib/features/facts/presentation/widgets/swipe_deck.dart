@@ -6,14 +6,19 @@ import 'package:flutter/material.dart';
 
 /// Tinder-style card stack.
 ///
-/// Cards sit one behind the other; only the top one reacts to touch. The two
-/// horizontal gestures do different things on purpose:
+/// Cards sit one behind the other; only the top one reacts to touch. Each
+/// direction does something different on purpose:
 ///
 /// * **right** — flips the card over to its answer. The card springs back to
 ///   the centre, it is not dismissed.
 /// * **left** — throws the card away and brings the next one up.
+/// * **up** — saves the card to favourites. Like the flip, it springs back:
+///   saving a card is not a reason to stop reading it.
 ///
-/// The widget owns nothing but the gesture: it reports both directions upwards
+/// Down is deliberately unbound, so an imprecise upward flick that ends up
+/// going the other way does nothing instead of firing the wrong action.
+///
+/// The widget owns nothing but the gesture: it reports every direction upwards
 /// and re-reads what to paint from [items]/[index]. That is what keeps the deck
 /// state (position, flip) in the controller and testable.
 class SwipeDeck extends StatefulWidget {
@@ -23,9 +28,11 @@ class SwipeDeck extends StatefulWidget {
     required this.builder,
     required this.onSwipeLeft,
     required this.onSwipeRight,
+    required this.onSwipeUp,
     super.key,
     this.hintLeft,
     this.hintRight,
+    this.hintUp,
   });
 
   final List<DeckItem> items;
@@ -42,10 +49,14 @@ class SwipeDeck extends StatefulWidget {
   /// Flip the top card.
   final VoidCallback onSwipeRight;
 
-  /// Overlays that fade in while dragging, so the two directions are
+  /// Save the top card to favourites.
+  final VoidCallback onSwipeUp;
+
+  /// Overlays that fade in while dragging, so the three directions are
   /// discoverable without a tutorial.
   final Widget? hintLeft;
   final Widget? hintRight;
+  final Widget? hintUp;
 
   @override
   State<SwipeDeck> createState() => _SwipeDeckState();
@@ -95,29 +106,39 @@ class _SwipeDeckState extends State<SwipeDeck>
 
   void _onPanUpdate(DragUpdateDetails details) {
     if (_dismissing || _controller.isAnimating) return;
-    setState(() {
-      // Vertical movement is damped: this is a horizontal gesture, and letting
-      // the card follow the finger up and down makes the stack feel loose.
-      _drag += Offset(details.delta.dx, details.delta.dy * 0.25);
-    });
+    setState(() => _drag += details.delta);
   }
 
-  void _onPanEnd(DragEndDetails details, double width) {
+  void _onPanEnd(DragEndDetails details, Size size) {
     if (_dismissing || _controller.isAnimating) return;
 
-    final double velocity = details.velocity.pixelsPerSecond.dx;
+    final Offset velocity = details.velocity.pixelsPerSecond;
+
+    // The dominant axis decides which action the drag was: a gesture that moved
+    // 200 px up and 60 px left is an upward swipe, not a dismissal.
+    if (_drag.dy.abs() > _drag.dx.abs()) {
+      final bool up =
+          -_drag.dy > size.height * AppConfig.deckSwipeUpThreshold ||
+          -velocity.dy > AppConfig.deckSwipeVelocity;
+
+      if (up) widget.onSwipeUp();
+      // Saving does not consume the card, and downward is unbound, so either
+      // way the card returns to the centre.
+      _settleBack();
+      return;
+    }
+
     final bool committed =
-        _drag.dx.abs() > width * AppConfig.deckSwipeThreshold ||
-        velocity.abs() > AppConfig.deckSwipeVelocity;
+        _drag.dx.abs() > size.width * AppConfig.deckSwipeThreshold ||
+        velocity.dx.abs() > AppConfig.deckSwipeVelocity;
 
     if (!committed) {
       _settleBack();
       return;
     }
 
-    final bool toLeft = _drag.dx.isNegative;
-    if (toLeft) {
-      _dismiss(width);
+    if (_drag.dx.isNegative) {
+      _dismiss(size.width);
     } else {
       // Right means "turn the card over", so it comes back to the centre and
       // the flip animation takes it from there.
@@ -161,7 +182,7 @@ class _SwipeDeckState extends State<SwipeDeck>
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        final double width = constraints.maxWidth;
+        final Size size = constraints.biggest;
 
         // Painted back to front: the last child of a Stack is on top, and the
         // top card must be the one that receives the gesture.
@@ -176,7 +197,7 @@ class _SwipeDeckState extends State<SwipeDeck>
           final int depth = i - widget.index;
           cards.add(
             depth == 0
-                ? _buildTopCard(context, item, width)
+                ? _buildTopCard(context, item, size)
                 : _buildBackCard(context, item, depth),
           );
         }
@@ -186,15 +207,29 @@ class _SwipeDeckState extends State<SwipeDeck>
     );
   }
 
-  Widget _buildTopCard(BuildContext context, DeckItem item, double width) {
-    final double progress = (_drag.dx / (width * AppConfig.deckSwipeThreshold))
-        .clamp(-1.0, 1.0);
+  Widget _buildTopCard(BuildContext context, DeckItem item, Size size) {
+    final bool vertical = _drag.dy.abs() > _drag.dx.abs();
+
+    // Only the dominant axis lights a hint up, so the user never sees "next"
+    // and "save" fading in at the same time.
+    final double progress = vertical
+        ? 0
+        : (_drag.dx / (size.width * AppConfig.deckSwipeThreshold)).clamp(
+            -1.0,
+            1.0,
+          );
+    final double upProgress = vertical
+        ? (-_drag.dy / (size.height * AppConfig.deckSwipeUpThreshold)).clamp(
+            0.0,
+            1.0,
+          )
+        : 0;
 
     return GestureDetector(
       key: ValueKey<String>(item.key),
       behavior: HitTestBehavior.opaque,
       onPanUpdate: _onPanUpdate,
-      onPanEnd: (DragEndDetails details) => _onPanEnd(details, width),
+      onPanEnd: (DragEndDetails details) => _onPanEnd(details, size),
       child: Transform.translate(
         offset: _drag,
         child: Transform.rotate(
@@ -210,6 +245,8 @@ class _SwipeDeckState extends State<SwipeDeck>
                 _Hint(opacity: math.max(0, -progress), child: widget.hintLeft!),
               if (widget.hintRight != null)
                 _Hint(opacity: math.max(0, progress), child: widget.hintRight!),
+              if (widget.hintUp != null)
+                _Hint(opacity: upProgress, child: widget.hintUp!),
             ],
           ),
         ),
