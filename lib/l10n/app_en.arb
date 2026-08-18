@@ -80,6 +80,12 @@
   "premiumFeatureBody": "Saving cards is part of \"Remove ads\": one payment, no subscription.",
   "premiumFeatureCta": "See what's included",
 
+
+  "settingsNotifications": "Reminders",
+  "settingsDailyQuestion": "Question of the day",
+  "settingsDailyQuestionBody": "One curious question every evening. Tap it and it goes to the top of your deck.",
+  "settingsDailyQuestionDenied": "Turn notifications on in system settings to get the question of the day.",
+  "dailyQuestionNotificationTitle": "Question of the day",
   "settingsTitle": "Settings",
   "settingsAppearance": "Appearance",
   "settingsThemeMode": "Theme",

@@ -102,6 +102,18 @@
   "premiumFeatureBody": "Guardar tarjetas forma parte de «Quitar anuncios»: un único pago, sin suscripción.",
   "premiumFeatureCta": "Ver qué incluye",
 
+
+  "settingsNotifications": "Recordatorios",
+  "@settingsNotifications": {
+    "description": "Cabecera de la sección de notificaciones en Ajustes"
+  },
+  "settingsDailyQuestion": "Pregunta del día",
+  "settingsDailyQuestionBody": "Una pregunta curiosa cada tarde. Al tocarla, se pone la primera del mazo.",
+  "settingsDailyQuestionDenied": "Actívalas en los ajustes del sistema para recibir la pregunta del día.",
+  "dailyQuestionNotificationTitle": "Pregunta del día",
+  "@dailyQuestionNotificationTitle": {
+    "description": "Título de la notificación diaria"
+  },
   "settingsTitle": "Ajustes",
   "settingsAppearance": "Apariencia",
   "settingsThemeMode": "Tema",

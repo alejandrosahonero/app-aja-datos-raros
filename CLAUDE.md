@@ -64,6 +64,7 @@ lib/
 ├── services/
 │   ├── ads/                  # AdsService + ConsentService (UMP) + providers
 │   ├── billing/              # PremiumService + PremiumController + estado
+│   ├── notifications/        # DailyQuestionService (pregunta del día) + providers
 │   ├── review/               # ReviewService + providers
 │   └── storage/              # KeyValueStore (prefs) + SecureStore + providers
 └── l10n/                     # app_es.arb (plantilla) + app_en.arb
@@ -267,7 +268,7 @@ Si no entra ningún creativo (sin consentimiento, sin inventario, sin unidad con
 
 **El banner del mazo va arriba, nunca abajo.** El mazo es una superficie que se arrastra en cuatro direcciones, y un banner anclado al borde inferior bajo ese gesto es el ejemplo de manual del clic accidental. Colocado sobre las tarjetas el dedo no lo pisa nunca al salir de un deslizamiento. **No moverlo abajo.**
 
-Si no entra creativo, o el usuario es premium, el widget no ocupa nada (`SizedBox.shrink`): la tarjeta recupera el espacio en vez de dejar una franja gris. En pantallas pequeñas el banner y los chips comen alto que era de la tarjeta; el mazo va en un `Expanded` y cede, pero conviene revisarlo con `textScaleFactor` alto (§13).
+Si no entra creativo, o el usuario es premium, el widget no ocupa nada (`SizedBox.shrink`): la tarjeta recupera el espacio en vez de dejar una franja gris. En pantallas pequeñas el banner y los chips comen alto que era de la tarjeta; el mazo va en un `Expanded` y cede, pero conviene revisarlo con `textScaleFactor` alto (§14).
 
 **Consentimiento (UMP).** `services/ads/consent_service.dart` usa el UMP SDK que ya incluye `google_mobile_ads` (sin dependencia extra):
 `requestConsentInfoUpdate` → `loadAndShowConsentFormIfRequired` → `canRequestAds()`.
@@ -296,15 +297,45 @@ En Ajustes hay una fila **"Opciones de privacidad"** que reabre el formulario, v
 
 ## 5. Permisos
 
-**La app no pide ninguno.** El manifiesto declara solo `INTERNET`, `ACCESS_NETWORK_STATE` y `AD_ID`, todos de instalación.
+La app pide **uno solo en tiempo de ejecución**: `POST_NOTIFICATIONS`, para la pregunta del día (§6). El resto del manifiesto son permisos de instalación: `INTERNET`, `ACCESS_NETWORK_STATE`, `AD_ID` y `RECEIVE_BOOT_COMPLETED`.
 
-`permission_handler` y toda la capa de permisos (servicio, diálogos, providers) **se eliminaron**: no había nada que pidiera un permiso, y un permiso declarado sin usar es riesgo de rechazo en Play y una casilla más que justificar en el Data Safety form.
+**`POST_NOTIFICATIONS` se pide desde el interruptor de Ajustes y desde ningún otro sitio.** Android enseña ese diálogo **una vez** y recuerda la negativa para siempre: gastarlo al arrancar, antes de que el usuario sepa siquiera qué hace la app, es como se mata una función de retención antes de publicarla. El interruptor *es* el consentimiento — al tocarlo ya ha dicho que la quiere.
 
-Cuando llegue la **notificación diaria** hay que volver a añadir `POST_NOTIFICATIONS` al manifiesto y `flutter pub add permission_handler`, y pedirlo **siempre tras un toque explícito del usuario**, nunca al arrancar.
+**`RECEIVE_BOOT_COMPLETED`** existe porque Android tira todas las alarmas pendientes al reiniciar y al actualizar la app. Sin él, la cola de dos semanas se pierde en el primer reinicio.
+
+**Deliberadamente NO se declaran `SCHEDULE_EXACT_ALARM` ni `USE_EXACT_ALARM`.** Las notificaciones se programan inexactas (`AndroidScheduleMode.inexactAllowWhileIdle`), que es todo lo que necesita un recordatorio diario. Las alarmas exactas las revisa Play caso por caso y habría que justificarlas; un recordatorio que llega cinco minutos tarde sigue siendo un recordatorio. **No cambiar a exactas** sin una razón de producto nueva.
+
+`permission_handler` **sigue sin estar** y no hace falta: `flutter_local_notifications` trae su propio `requestNotificationsPermission()`. Una dependencia menos.
+
+`flutter_local_notifications` inyecta además `VIBRATE` en el manifiesto fusionado. Revisar el fusionado tras cada cambio de dependencias.
 
 ---
 
-## 6. Reseñas in-app (`in_app_review`)
+## 6. Pregunta del día (notificación diaria)
+
+El motor de retención: sin ella, una app de datos curiosos es una app de una sola sesión.
+
+**Notificaciones locales, no push.** No hay backend y esto no justifica criar uno. Cada notificación se encola en el dispositivo con su pregunta ya elegida, así que funciona sin red y no cuesta nada mantener. El precio, y hay que saberlo: la cola solo llega a `AppConfig.dailyQuestionDaysAhead` (14) días y se rellena **cada vez que se abre la app**. Un usuario que no la abra en dos semanas deja de recibir recordatorios hasta que vuelva. Es un intercambio aceptable a cambio de cero servidores; si algún día entra FCM, esto se sustituye sin tocar la UI.
+
+La pregunta se elige **al azar** entre todo el catálogo, barajado sin semilla: dos semanas seguidas no deben repartir las mismas catorce preguntas.
+
+Hora fija a las **20:00 locales** (`AppConfig.dailyQuestionHour`). Es contenido de curiosidad ociosa: por la mañana compite con el trabajo y después de cenar no compite con nada. La zona horaria se resuelve con `flutter_timezone`; sin eso todo se programaría en UTC y «las 20:00» caerían a la hora que tocase según el desfase del usuario.
+
+### Al tocar la notificación: la carta se traslada, no se salta
+
+`DeckController._hoist` es la pieza importante y la única con lógica real aquí. Saltar el índice hasta donde esté esa carta **se saltaría en silencio todo lo que hay entre la posición actual y ella**. En vez de eso, la carta se **saca** del mazo y se **suelta en la posición de lectura**, y las cartas entre las que estaba cierran el hueco. Lo que iba a salir después sigue saliendo después, un puesto más tarde.
+
+Tres casos que el código cubre y que conviene no romper:
+
+- **Carta ya leída:** sale del montón de leídas, así que `factsSeen` se **recalcula**. Si se reutilizara el contador, el montón tendría una carta menos de las que dice y el mazo arrancaría una carta por delante, saltándose justo la pregunta que el traslado pretendía proteger.
+- **Mazo ya agotado:** la carta aterriza arriba y el mazo vuelve a estar agotado justo después. Un recordatorio que toca alguien que ya se lo ha leído todo tiene que funcionar igual.
+- **Id desconocido o filtrado por los chips:** el mazo se deja exactamente como estaba, sin adivinar qué quería el usuario. Por eso `openFactFromNotification` **limpia el filtro de categoría** antes de fijar la carta: la pregunta del día sale de todo el catálogo, y un usuario parado en «Historia» tocaría una de ciencia y no vería nada.
+
+El «pin» vive en `pinnedFactProvider` y **no se persiste**: pertenece a una sesión. Uno que sobreviviera a un reinicio seguiría tirando de la misma carta días después.
+
+---
+
+## 7. Reseñas in-app (`in_app_review`)
 
 `services/review/review_service.dart`. Google limita el diálogo silenciosamente: si se gasta la cuota en un mal momento, el usuario no lo vuelve a ver en meses. Por eso hay tres guardas (`AppConfig`):
 
@@ -317,7 +348,7 @@ Para el botón explícito "Valorar la aplicación" de Ajustes se usa `openStoreL
 
 ---
 
-## 7. Tema y diseño (Material 3)
+## 8. Tema y diseño (Material 3)
 
 - Un **único seed color** (`AppColors.seed = 0xFFC026D3`) genera los esquemas claro y oscuro con `ColorScheme.fromSeed`.
 - `AppTheme.light([scheme])` / `AppTheme.dark([scheme])` aceptan un `ColorScheme` externo: si algún día se quiere Material You, se inyecta ahí sin tocar el resto del tema.
@@ -331,7 +362,7 @@ Para el botón explícito "Valorar la aplicación" de Ajustes se usa `openStoreL
 
 ---
 
-## 8. Navegación (`go_router`)
+## 9. Navegación (`go_router`)
 
 - Rutas declarativas en `core/routing/app_router.dart`, constantes en `app_routes.dart`. **Nunca escribir un path literal en una pantalla.**
 - Navegación por nombre: `context.goNamed(AppRoutes.settingsName)`.
@@ -341,7 +372,7 @@ Para el botón explícito "Valorar la aplicación" de Ajustes se usa `openStoreL
 
 ---
 
-## 9. Arranque (`bootstrap.dart`)
+## 10. Arranque (`bootstrap.dart`)
 
 Objetivo: **primer frame < 2 s en gama media**.
 
@@ -355,6 +386,7 @@ Todo lo demás arranca **después del primer frame** (`addPostFrameCallback`), e
 1. `premiumControllerProvider` — el entitlement debe conocerse **antes** de pedir anuncios.
 2. `AdsService.initialize()` (RequestConfiguration → consentimiento → `MobileAds.initialize()` → precarga).
 3. `adsInitializedProvider.markInitialized()`.
+4. `DailyQuestionService.initialize()` — engancha los toques, atiende la notificación que pueda haber arrancado la app y rellena la cola de 14 días. **No pide permiso ninguno**: eso es exclusivo del interruptor de Ajustes (§5).
 
 Todo va dentro de `runZonedGuarded`, con `FlutterError.onError` y `PlatformDispatcher.instance.onError` enrutados a `AppLogger`.
 
@@ -362,7 +394,7 @@ Todo va dentro de `runZonedGuarded`, con `FlutterError.onError` y `PlatformDispa
 
 ---
 
-## 10. Configuración Android
+## 11. Configuración Android
 
 `android/app/build.gradle.kts`:
 
@@ -376,7 +408,7 @@ Todo va dentro de `runZonedGuarded`, con `FlutterError.onError` y `PlatformDispa
 
 ---
 
-## 11. Comandos
+## 12. Comandos
 
 ```bash
 # Desarrollo
@@ -398,7 +430,7 @@ flutter build appbundle --release --analyze-size
 
 ---
 
-## 12. Pendiente antes de publicar
+## 13. Pendiente antes de publicar
 
 1. **Verificar a mano las 87 entradas de `assets/data/facts.json`** y rellenar `sourceUrl` en cada una. Es lo más importante de esta lista. El catálogo se escribió con ayuda de IA y **cada `source` es una cita en texto plano sin comprobar**: hay que abrir la fuente, confirmar el dato y pegar el enlace permanente antes de publicar.
 2. `core/config/ad_config.dart`: rellenar `_prodBanner` y `_prodInterstitial`.
@@ -412,18 +444,18 @@ flutter build appbundle --release --analyze-size
 
 ### Features del plan original todavía sin implementar
 
-- **Notificación push diaria** con la pregunta del día (el motor de retención). Requiere volver a añadir `POST_NOTIFICATIONS` — ver §5.
 - **Widget de pantalla de inicio** con la pregunta del día.
 - **Remote Config / Firestore** para ampliar el catálogo sin publicar versión.
 
 ---
 
-## 13. Definición de "hecho" para cada release
+## 14. Definición de "hecho" para cada release
 
 - [ ] `flutter analyze` sin issues y `dart format` aplicado.
 - [ ] Tests pasando.
 - [ ] Probado en dispositivo físico de gama baja en **modo release** (R8 rompe cosas que en debug funcionan).
 - [ ] El gesto del mazo probado con `textScaleFactor` alto y en pantalla pequeña.
+- [ ] Pregunta del día probada **en dispositivo físico**: permiso concedido y denegado, notificación tocada con la app cerrada y con la app abierta, y la carta apareciendo arriba sin saltarse ninguna. Comprobar también que sobrevive a un reinicio.
 - [ ] Sin IDs de prueba de AdMob ni logs de debug en el build de producción.
 - [ ] `versionCode` incrementado.
 - [ ] Símbolos de ofuscación archivados y subidos al crash reporting.
@@ -433,7 +465,7 @@ flutter build appbundle --release --analyze-size
 
 ---
 
-## 14. Rendimiento — recordatorios al escribir código
+## 15. Rendimiento — recordatorios al escribir código
 
 - Listas: `ListView.builder` / `SliverList` siempre.
 - El mazo monta como mucho `AppConfig.deckVisibleCards` (3) tarjetas; el resto no existe. No subirlo "por si acaso".

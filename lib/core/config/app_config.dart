@@ -84,4 +84,21 @@ abstract final class AppConfig {
   /// Velocity (logical px/s) that commits a swipe regardless of distance, so a
   /// quick flick works without dragging the card across the screen.
   static const double deckSwipeVelocity = 700;
+
+  // --- Daily question notification ---------------------------------------
+
+  /// When the question of the day fires, in the device's local time.
+  ///
+  /// Evening on purpose: this is idle-curiosity content, and it competes with
+  /// work in the morning and with nothing at all after dinner.
+  static const int dailyQuestionHour = 20;
+  static const int dailyQuestionMinute = 0;
+
+  /// How many days are scheduled ahead on each app open.
+  ///
+  /// There is no server, so every notification has to be queued on the device
+  /// with its question already chosen. Two weeks is the trade: long enough that
+  /// a lapsed user keeps being reminded, short enough that the queue is
+  /// refreshed with new questions often.
+  static const int dailyQuestionDaysAhead = 14;
 }

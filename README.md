@@ -42,6 +42,18 @@ La imagen compartida lleva solo la **pregunta**, nunca la respuesta: es el motiv
 
 ---
 
+## Pregunta del día
+
+Una notificación diaria a las 20:00 con una pregunta al azar del catálogo. Al tocarla, la app se abre **con esa pregunta encima del mazo**.
+
+Y encima, no en medio: saltar el índice hasta donde esté esa carta se saltaría en silencio todo lo que hay entre la posición actual y ella. En vez de eso la carta se **saca** del mazo y se **suelta en la posición de lectura**; las cartas entre las que estaba cierran el hueco. Lo que ibas a ver después lo sigues viendo después, un puesto más tarde. Funciona igual con una carta que ya habías leído y con el mazo agotado.
+
+Son **notificaciones locales, no push**: no hay backend, así que cada notificación se encola en el dispositivo con su pregunta ya elegida. Eso hace que funcione sin red y sin coste, a cambio de que la cola llegue a 14 días y se rellene cada vez que abres la app.
+
+El permiso se pide **solo** desde el interruptor de Ajustes, nunca al arrancar: Android enseña ese diálogo una vez y recuerda la negativa para siempre.
+
+---
+
 ## Empezar
 
 ```bash

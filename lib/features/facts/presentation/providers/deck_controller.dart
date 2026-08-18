@@ -90,6 +90,7 @@ class DeckController extends AsyncNotifier<DeckState> {
       isPremium: isPremium,
       seed: store.getInt(_seedKey(category)),
       factsSeen: store.getInt(_progressKey(category)),
+      pinnedFactId: ref.watch(pinnedFactProvider),
     );
   }
 
@@ -104,6 +105,7 @@ class DeckController extends AsyncNotifier<DeckState> {
     required bool isPremium,
     required int seed,
     required int factsSeen,
+    String? pinnedFactId,
   }) {
     final List<Fact> facts = category == null
         ? all
@@ -113,15 +115,57 @@ class DeckController extends AsyncNotifier<DeckState> {
         ? facts
         : (List<Fact>.of(facts)..shuffle(Random(seed)));
 
-    final List<DeckItem> items = buildDeck(ordered, withAds: !isPremium);
-    final int seen = factsSeen.clamp(0, ordered.length);
+    final _Deal deal = _hoist(
+      ordered,
+      pinnedFactId,
+      factsSeen.clamp(0, ordered.length),
+    );
+
+    final List<DeckItem> items = buildDeck(deal.facts, withAds: !isPremium);
 
     return DeckState(
       items: items,
-      index: _indexForProgress(items, seen),
-      factsSeen: seen,
+      index: _indexForProgress(items, deal.factsSeen),
+      factsSeen: deal.factsSeen,
       revealed: false,
     );
+  }
+
+  /// Moves [pinnedFactId] to the reading position, keeping everything else in
+  /// order.
+  ///
+  /// This is what makes the daily notification safe to tap. Jumping the index
+  /// to wherever that card happens to sit would silently skip everything
+  /// between here and there; instead the card is **lifted out** of the deck and
+  /// dropped in front of the user, and the cards it was sitting among close the
+  /// gap behind it. Whatever was going to come next still comes next, one place
+  /// later.
+  ///
+  /// A card the user has already seen works too: it comes out of the read pile,
+  /// which is why [factsSeen] is recomputed rather than reused — otherwise the
+  /// pile would be one card shorter than the count claimed and the deck would
+  /// start one card ahead, skipping exactly the question the pin was meant to
+  /// protect.
+  ///
+  /// Off the end of a spent deck it still works: the pinned card lands on top
+  /// and the deck is finished again right after it, which is the correct
+  /// behaviour for a reminder tapped by somebody who already read everything.
+  static _Deal _hoist(List<Fact> ordered, String? pinnedFactId, int factsSeen) {
+    if (pinnedFactId == null) return _Deal(ordered, factsSeen);
+
+    final int at = ordered.indexWhere((Fact fact) => fact.id == pinnedFactId);
+    // Unknown id, or filtered out by the category chips: the deck is left
+    // exactly as it was rather than guessing what the user meant.
+    if (at < 0) return _Deal(ordered, factsSeen);
+
+    final List<Fact> rest = List<Fact>.of(ordered)..removeAt(at);
+    final int boundary = at < factsSeen ? factsSeen - 1 : factsSeen;
+
+    return _Deal(<Fact>[
+      ...rest.take(boundary),
+      ordered[at],
+      ...rest.skip(boundary),
+    ], boundary);
   }
 
   /// Right swipe / tap: show the other side of the card.
@@ -218,4 +262,16 @@ class DeckController extends AsyncNotifier<DeckState> {
     }
     return items.length;
   }
+}
+
+/// A dealt deck plus the read-count that matches it.
+///
+/// The two travel together because hoisting a card changes both, and computing
+/// them apart is how the deck ends up pointing at the wrong card.
+@immutable
+class _Deal {
+  const _Deal(this.facts, this.factsSeen);
+
+  final List<Fact> facts;
+  final int factsSeen;
 }

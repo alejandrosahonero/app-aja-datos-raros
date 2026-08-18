@@ -17,10 +17,21 @@
          forgotten in the Data Safety form, where it MUST be reported. -->
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
 
-    <!-- Ajá browses a bundled catalogue: it needs nothing else. POST_NOTIFICATIONS
-         comes back together with the "question of the day" push, and not one
-         release earlier — an unused permission is a Play rejection risk and it
-         has to be justified in the Data Safety form. -->
+    <!-- Question of the day. Requested at runtime from the switch in Settings
+         and nowhere else: Android shows that dialog once and remembers a
+         refusal, so spending it at startup kills the feature before it ships. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- The reminders are scheduled locally, a fortnight at a time. Without
+         this the whole queue is lost on the first reboot and the user simply
+         stops hearing from the app until they open it again. -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!-- Deliberately NOT declared: SCHEDULE_EXACT_ALARM / USE_EXACT_ALARM.
+         The reminders are scheduled inexact (see DailyQuestionService), which
+         is all a daily nudge needs. Exact alarms are reviewed case by case by
+         Play and would have to be justified; a reminder that lands a few
+         minutes late is still a reminder. -->
 
     <!-- Reminder: a plugin may inject a permission you do not use. Check the
          merged manifest (build/app/intermediates/merged_manifest/...) after
@@ -29,7 +40,8 @@
                  tools:node="remove" />
          The current merge adds BILLING, WAKE_LOCK, FOREGROUND_SERVICE and the
          Privacy Sandbox ACCESS_ADSERVICES_* permissions, all legitimately
-         required by Play Billing and the AdMob SDK. -->
+         required by Play Billing and the AdMob SDK, plus VIBRATE from
+         flutter_local_notifications. -->
 
     <application
         android:label="Ajá"
@@ -106,6 +118,27 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
+        <!-- ==============================================================
+             SCHEDULED NOTIFICATIONS
+             Android drops every pending alarm on reboot and on app update.
+             These two receivers, from flutter_local_notifications, put the
+             queued questions back.
+             ============================================================== -->
+        <receiver
+            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver"
+            android:exported="false" />
+
+        <receiver
+            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
     </application>
 
     <queries>

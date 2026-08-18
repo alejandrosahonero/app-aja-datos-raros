@@ -1,11 +1,16 @@
+import 'dart:async';
+
 import 'package:aja/core/config/app_config.dart';
 import 'package:aja/core/extensions/build_context_x.dart';
 import 'package:aja/core/routing/app_routes.dart';
 import 'package:aja/core/theme/app_spacing.dart';
 import 'package:aja/core/theme/theme_controller.dart';
 import 'package:aja/core/widgets/base_screen.dart';
+import 'package:aja/features/facts/presentation/providers/facts_providers.dart';
 import 'package:aja/services/ads/ads_providers.dart';
 import 'package:aja/services/billing/premium_controller.dart';
+import 'package:aja/services/notifications/daily_question_service.dart';
+import 'package:aja/services/notifications/notification_providers.dart';
 import 'package:aja/services/review/review_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -74,6 +79,9 @@ class SettingsScreen extends ConsumerWidget {
             onTap: () => context.goNamed(AppRoutes.favoritesName),
           ),
           const Divider(),
+          _SectionHeader(title: context.l10n.settingsNotifications),
+          const _DailyQuestionSwitch(),
+          const Divider(),
           _SectionHeader(title: context.l10n.settingsMonetization),
           if (isPremium)
             ListTile(
@@ -121,6 +129,70 @@ class SettingsScreen extends ConsumerWidget {
     await ref.read(premiumControllerProvider.notifier).restorePurchases();
     if (!context.mounted) return;
     context.showSnack(context.l10n.settingsRestoreDone);
+  }
+}
+
+/// The only place in the app allowed to ask for the notification permission.
+///
+/// Android shows that dialog once and remembers a refusal, so spending it at
+/// startup — before the user knows what the app even does — is how a retention
+/// feature dies before it ships. Here the switch *is* the consent: the user has
+/// already said what they want by touching it.
+class _DailyQuestionSwitch extends ConsumerStatefulWidget {
+  const _DailyQuestionSwitch();
+
+  @override
+  ConsumerState<_DailyQuestionSwitch> createState() =>
+      _DailyQuestionSwitchState();
+}
+
+class _DailyQuestionSwitchState extends ConsumerState<_DailyQuestionSwitch> {
+  late bool _enabled = ref.read(dailyQuestionServiceProvider).isEnabled;
+  bool _busy = false;
+
+  Future<void> _toggle(bool value) async {
+    if (_busy) return;
+    setState(() => _busy = true);
+
+    final DailyQuestionService service = ref.read(dailyQuestionServiceProvider);
+
+    if (!value) {
+      await service.disable();
+      if (mounted) setState(() => _enabled = false);
+      return;
+    }
+
+    final String language = Localizations.localeOf(context).languageCode;
+    final String title = context.l10n.dailyQuestionNotificationTitle;
+    final String denied = context.l10n.settingsDailyQuestionDenied;
+
+    final bool granted = await service.enable(
+      facts: await ref.read(factsProvider.future),
+      language: language,
+      title: title,
+    );
+
+    if (!mounted) return;
+
+    // The switch follows the OS, not the tap: leaving it on after a refusal
+    // would promise a notification that is never coming.
+    setState(() {
+      _enabled = granted;
+      _busy = false;
+    });
+
+    if (!granted) context.showSnack(denied);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SwitchListTile(
+      secondary: const Icon(Icons.notifications_active_outlined),
+      title: Text(context.l10n.settingsDailyQuestion),
+      subtitle: Text(context.l10n.settingsDailyQuestionBody),
+      value: _enabled,
+      onChanged: _busy ? null : (bool value) => unawaited(_toggle(value)),
+    );
   }
 }
 

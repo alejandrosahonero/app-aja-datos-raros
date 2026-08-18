@@ -32,3 +32,21 @@ class FactCategoryFilter extends Notifier<FactCategory?> {
 
   void select(FactCategory? category) => state = category;
 }
+
+/// Fact hoisted to the top of the deck, set when the user opens the app from a
+/// daily-question notification.
+///
+/// Deliberately **not persisted** and deliberately not part of [DeckState]: it
+/// belongs to one session, and a pin that survived a restart would keep pulling
+/// the same card forward days later. It clears itself when the process dies.
+final NotifierProvider<PinnedFact, String?> pinnedFactProvider =
+    NotifierProvider<PinnedFact, String?>(PinnedFact.new);
+
+class PinnedFact extends Notifier<String?> {
+  @override
+  String? build() => null;
+
+  void pin(String factId) => state = factId;
+
+  void clear() => state = null;
+}
