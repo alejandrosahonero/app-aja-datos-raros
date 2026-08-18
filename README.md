@@ -42,6 +42,18 @@ La imagen compartida lleva solo la **pregunta**, nunca la respuesta: es el motiv
 
 ---
 
+## Catálogo remoto
+
+Las preguntas se pueden ampliar, corregir y retirar **sin publicar una versión nueva**. La app trae 87 dentro del APK y les suma un `facts.json` servido por GitHub Pages: mismo id reemplaza, los ids de `removed` desaparecen, los nuevos se añaden.
+
+Un JSON estático y no Firebase: cuesta una petición GET y cero dependencias, es gratis, y como el fichero vive en el repo cada publicación de contenido es un commit con su diff y su historial.
+
+La red **solo puede sumar**. Sin conexión, 404, cuerpo truncado o JSON corrupto acaban igual: se usa lo que ya había. Una entrada mal formada se descarta y las demás siguen; un fichero que dejaría el catálogo vacío se ignora entero. La descarga se aplica en el **siguiente arranque**, para no mover las cartas a quien está leyendo.
+
+Pasos para añadir contenido: **[`docs/README.md`](docs/README.md)**. Validador: `python3 tool/build_remote_catalog.py --check`.
+
+---
+
 ## Pregunta del día
 
 Una notificación diaria a las 20:00 con una pregunta al azar del catálogo. Al tocarla, la app se abre **con esa pregunta encima del mazo**.

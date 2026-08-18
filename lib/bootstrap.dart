@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:aja/app.dart';
 import 'package:aja/core/utils/app_logger.dart';
+import 'package:aja/features/facts/presentation/providers/facts_providers.dart';
 import 'package:aja/l10n/generated/app_localizations.dart';
 import 'package:aja/services/ads/ads_providers.dart';
 import 'package:aja/services/billing/premium_controller.dart';
@@ -108,6 +109,11 @@ Future<void> _initializeAfterFirstFrame(ProviderContainer container) async {
       stackTrace: stackTrace,
     );
   }
+
+  // Last, and never awaited by anything on screen: the download is written to
+  // disk and read on the next launch, so that new questions do not appear
+  // underneath somebody who is mid-deck.
+  unawaited(container.read(remoteCatalogServiceProvider).refresh());
 }
 
 /// Wires up the question of the day.

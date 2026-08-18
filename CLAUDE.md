@@ -56,7 +56,8 @@ lib/
 │                             # EmptyState, ErrorView, AppLoader
 ├── features/
 │   ├── facts/                # ← la app entera (mazo + favoritos)
-│   │   ├── data/             # FactRepository (lee y parsea el JSON)
+│   │   ├── data/             # FactRepository (asset + overlay remoto),
+│   │   │                     # RemoteCatalogService, FactShareService
 │   │   ├── domain/           # Fact, FactCategory, DeckItem, buildDeck()
 │   │   └── presentation/     # providers / screens / widgets
 │   ├── settings/presentation/
@@ -119,7 +120,7 @@ Una pila de tarjetas, una detrás de otra. Solo la de arriba responde al dedo.
 |---|---|
 | **Deslizar a la derecha** | La tarjeta **se voltea** y enseña la respuesta. Vuelve al centro, no se descarta. |
 | **Deslizar a la izquierda** | La tarjeta **sale volando** y sube la siguiente. |
-| **Deslizar hacia arriba** | **Guarda la tarjeta** en favoritos (premium, ver §3.6). También vuelve al centro: guardar no es motivo para dejar de leerla. |
+| **Deslizar hacia arriba** | **Guarda la tarjeta** en favoritos (premium, ver §3.7). También vuelve al centro: guardar no es motivo para dejar de leerla. |
 | **Deslizar hacia abajo** | **Comparte la pregunta** como imagen 1080x1920 (§3.4). Gratis para todos. También vuelve al centro. |
 | **Tocar la tarjeta** | Igual que deslizar a la derecha (voltear). |
 | **Botones inferiores** | "Siguiente", "Compartir la pregunta", "Guardar" y "Ver respuesta". **No son decorativos**: una interfaz solo-arrastre es inutilizable con lector de pantalla y la penaliza el escaneo de accesibilidad de Play. No borrarlos. |
@@ -198,7 +199,29 @@ Las instrucciones de montaje y el código del script están en `core/config/cont
 
 > **Antes de publicar:** activar esto obliga a declarar contenido de usuario en el formulario de Data Safety y a mencionarlo en la política de privacidad.
 
-### 3.6 Favoritos — función de pago
+### 3.6 Catálogo remoto — añadir preguntas sin publicar versión
+
+**Un JSON estático en GitHub Pages, no Firebase.** El problema es estrecho: publicar más preguntas sin pasar por revisión. Remote Config y Firestore lo resuelven, y los dos cuestan `firebase_core` más un segundo SDK, un `google-services.json`, varios MB de AAB y trabajo en cada arranque en frío. Un fichero en un CDN cuesta **una petición GET y cero dependencias**, y como vive en un repo de git cada publicación de contenido es un commit con su diff y su historial — que es justo lo que quiere un catálogo curado a mano.
+
+**Tres capas, y la red solo puede sumar:**
+
+1. `assets/data/facts.json` dentro del APK. Es el suelo: instantáneo, offline, no puede fallar.
+2. La última descarga buena, cacheada en disco (`getApplicationSupportDirectory`, no en prefs: las prefs se cargan enteras al arrancar).
+3. La descarga de fondo, después del primer frame.
+
+`mergeCatalogues` funde 1 y 2 al arrancar: **mismo id reemplaza en su sitio**, los ids de `removed` desaparecen, los ids nuevos se añaden al final.
+
+**Que se pueda borrar un dato en remoto es la razón de tener esto desde el día uno**: las 87 entradas llevan fuentes sin verificar, y cuando una resulte falsa hay que poder matarla hoy, no en la siguiente release.
+
+**La descarga nunca se espera desde la UI y se aplica en el arranque siguiente.** Cambiar el catálogo a mitad de sesión movería las cartas que el usuario está leyendo. Se descarga, se valida, se escribe en disco, y la próxima vez que abra la app está.
+
+**Ningún fallo de red puede dejar al usuario con menos preguntas de las que trae el APK.** Sin conexión, 404, cuerpo truncado o JSON corrupto acaban todos igual: se usa lo que ya había. El parser remoto es **tolerante a propósito**, al revés que el del asset: una categoría desconocida en el asset es un bug de compilación y debe reventar, pero el mismo error servido por red reventaría todas las copias instaladas a la vez, así que la entrada mala se descarta, se cuenta y el resto se conserva. Un remoto que dejara el catálogo vacío se ignora entero.
+
+`If-None-Match` con el ETag guardado: un catálogo que no ha cambiado cuesta un 304 y cero parseo. Y una versión menor que la cacheada se rechaza, para que una copia rancia del CDN no haga rollback del contenido.
+
+Configuración y pasos de publicación en `core/config/remote_catalog_config.dart`. El fichero se valida con `python3 tool/build_remote_catalog.py --check` **antes** de subirlo: comprueba las mismas reglas que aplica el parser de Dart, así que un error se ve ahí y no en cien mil móviles.
+
+### 3.7 Favoritos — función de pago
 
 Guardar tarjetas está detrás del **mismo pago único `premium_remove_ads`**. No hay un segundo producto: añadir SKUs multiplica el soporte y las combinaciones de entitlement que hay que probar.
 
@@ -220,7 +243,7 @@ Guardar tarjetas está detrás del **mismo pago único `premium_remove_ads`**. N
 - **Tarjeta de anuncio dentro del mazo = formato principal.** Se desliza igual que el contenido.
 - **Interstitial = secundario**, cada ~9 tarjetas y nunca antes de 3 min desde el anterior.
 - **Sin rewarded.** El uso es pasivo: no hay nada que desbloquear que justifique un vídeo. `AdsService` ya no tiene ese formato — **no reintroducirlo** sin una razón de producto nueva.
-- **IAP no consumible "quitar anuncios"** = conversión principal. Desbloquea además los favoritos (§3.6), así que tiene dos puntos de venta: la tarjeta de anuncio sin relleno y el intento de guardar una tarjeta.
+- **IAP no consumible "quitar anuncios"** = conversión principal. Desbloquea además los favoritos (§3.7), así que tiene dos puntos de venta: la tarjeta de anuncio sin relleno y el intento de guardar una tarjeta.
 
 ### 4.2 AdMob (`google_mobile_ads`)
 
@@ -445,7 +468,6 @@ flutter build appbundle --release --analyze-size
 ### Features del plan original todavía sin implementar
 
 - **Widget de pantalla de inicio** con la pregunta del día.
-- **Remote Config / Firestore** para ampliar el catálogo sin publicar versión.
 
 ---
 

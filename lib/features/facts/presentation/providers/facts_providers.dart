@@ -1,12 +1,34 @@
 import 'package:aja/features/facts/data/fact_repository.dart';
 import 'package:aja/features/facts/data/fact_share_service.dart';
+import 'package:aja/features/facts/data/remote_catalog_service.dart';
 import 'package:aja/features/facts/domain/fact.dart';
+import 'package:aja/services/storage/storage_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+/// Downloads and caches the catalogue published after the app shipped.
+///
+/// Kept alive: it owns an `http.Client`, and the refresh it runs after the
+/// first frame must not be cancelled by a screen going away.
+final Provider<RemoteCatalogService> remoteCatalogServiceProvider =
+    Provider<RemoteCatalogService>((Ref ref) {
+      final RemoteCatalogService service = RemoteCatalogService(
+        ref.watch(keyValueStoreProvider),
+      );
+      ref.onDispose(service.dispose);
+      return service;
+    });
 
 /// Holds the parsed catalogue for the process lifetime, so switching category
 /// or restarting the deck never re-reads the asset.
+///
+/// The repository reads the downloaded overlay **from disk**, never from the
+/// network: this is on the path to the first screen.
 final Provider<FactRepository> factRepositoryProvider =
-    Provider<FactRepository>((Ref ref) => FactRepository());
+    Provider<FactRepository>(
+      (Ref ref) => FactRepository(
+        overlay: ref.watch(remoteCatalogServiceProvider).readCache,
+      ),
+    );
 
 /// The whole catalogue, unfiltered. Read-only, so `autoDispose` is correct: the
 /// repository cache is what makes a re-subscription free.
