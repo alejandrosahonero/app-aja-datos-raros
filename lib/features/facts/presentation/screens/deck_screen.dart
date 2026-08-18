@@ -13,6 +13,7 @@ import 'package:aja/features/facts/presentation/providers/deck_controller.dart';
 import 'package:aja/features/facts/presentation/providers/facts_providers.dart';
 import 'package:aja/features/facts/presentation/providers/favorites_controller.dart';
 import 'package:aja/features/facts/presentation/widgets/ad_deck_card.dart';
+import 'package:aja/features/facts/presentation/widgets/deck_swipe_progress.dart';
 import 'package:aja/features/facts/presentation/widgets/fact_card.dart';
 import 'package:aja/features/facts/presentation/widgets/swipe_deck.dart';
 import 'package:aja/features/premium/presentation/widgets/premium_feature_dialog.dart';
@@ -63,13 +64,38 @@ class DeckScreen extends ConsumerWidget {
   }
 }
 
-class _DeckBody extends ConsumerWidget {
+/// Stateful only to own [_progress].
+///
+/// The drag notifier has to outlive the rebuilds the deck state causes, and it
+/// is deliberately *not* a provider: it changes on every frame of every drag,
+/// which is exactly the kind of traffic that does not belong in the app state.
+class _DeckBody extends ConsumerStatefulWidget {
   const _DeckBody({required this.state});
 
   final DeckState state;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<_DeckBody> createState() => _DeckBodyState();
+}
+
+class _DeckBodyState extends ConsumerState<_DeckBody> {
+  /// Live drag, written by [SwipeDeck] and read by the badges over the card and
+  /// the round buttons under it. Passing it down instead of lifting the drag
+  /// into `setState` keeps the per-frame rebuild to the few widgets that
+  /// actually animate.
+  final ValueNotifier<DeckSwipeProgress> _progress =
+      ValueNotifier<DeckSwipeProgress>(DeckSwipeProgress.idle);
+
+  @override
+  void dispose() {
+    _progress.dispose();
+    super.dispose();
+  }
+
+  DeckState get state => widget.state;
+
+  @override
+  Widget build(BuildContext context) {
     if (state.isExhausted) {
       return EmptyState(
         icon: Icons.check_circle_outline,
@@ -101,21 +127,13 @@ class _DeckBody extends ConsumerWidget {
             child: SwipeDeck(
               items: state.items,
               index: state.index,
+              progress: _progress,
               onSwipeLeft: () => unawaited(_next(ref)),
               onSwipeRight: () => _reveal(ref),
               onSwipeUp: () => unawaited(_toggleFavorite(context, ref)),
-              hintLeft: const _SwipeBadge(
-                icon: Icons.close_rounded,
-                alignment: Alignment.topLeft,
-              ),
-              hintRight: const _SwipeBadge(
-                icon: Icons.flip_to_back,
-                alignment: Alignment.topRight,
-              ),
-              hintUp: const _SwipeBadge(
-                icon: Icons.bookmark_add_outlined,
-                alignment: Alignment.bottomCenter,
-              ),
+              overlayBuilder:
+                  (BuildContext context, DeckSwipeProgress progress) =>
+                      _SwipeBadges(progress: progress),
               builder: (BuildContext context, DeckItem item, bool isTop) =>
                   switch (item) {
                     FactItem(:final Fact fact) => FactCard(
@@ -131,6 +149,7 @@ class _DeckBody extends ConsumerWidget {
           const SizedBox(height: AppSpacing.md),
           _DeckControls(
             state: state,
+            progress: _progress,
             favorited: switch (state.current) {
               FactItem(:final Fact fact) => favorites.contains(fact.id),
               _ => false,
@@ -224,10 +243,131 @@ class _Progress extends StatelessWidget {
   }
 }
 
+/// Palette of the three actions, in one place.
+///
+/// The badge over the card and the button under it have to be the same colour
+/// for the association to work, and a colour defined twice is a colour that
+/// drifts.
+extension on DeckSwipeDirection {
+  Color color(BuildContext context) => switch (this) {
+    DeckSwipeDirection.left => context.colors.onSurfaceVariant,
+    DeckSwipeDirection.right => context.colors.primary,
+    DeckSwipeDirection.up => context.colors.tertiary,
+    DeckSwipeDirection.none => context.colors.outline,
+  };
+}
+
+/// The badges that ride on top of the card while it is being dragged.
+///
+/// Each one sits on the edge that *stays* on screen as the card leaves, which
+/// is the opposite edge to the gesture: drag left and the card slides its left
+/// half out of view, so a skip badge parked there would disappear exactly when
+/// it is supposed to be confirming the action. Up is the exception — its card
+/// springs back, but the bottom edge is still the one under the thumb.
+class _SwipeBadges extends StatelessWidget {
+  const _SwipeBadges({required this.progress});
+
+  final DeckSwipeProgress progress;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      fit: StackFit.expand,
+      children: <Widget>[
+        _SwipeBadge(
+          icon: Icons.close_rounded,
+          direction: DeckSwipeDirection.left,
+          alignment: Alignment.topRight,
+          amount: progress.amountFor(DeckSwipeDirection.left),
+        ),
+        _SwipeBadge(
+          icon: Icons.flip_to_back,
+          direction: DeckSwipeDirection.right,
+          alignment: Alignment.topLeft,
+          amount: progress.amountFor(DeckSwipeDirection.right),
+        ),
+        _SwipeBadge(
+          icon: Icons.bookmark_add_outlined,
+          direction: DeckSwipeDirection.up,
+          alignment: Alignment.bottomCenter,
+          amount: progress.amountFor(DeckSwipeDirection.up),
+        ),
+      ],
+    );
+  }
+}
+
+/// One badge: a filled disc that fades and swells with the drag.
+class _SwipeBadge extends StatelessWidget {
+  const _SwipeBadge({
+    required this.icon,
+    required this.direction,
+    required this.alignment,
+    required this.amount,
+  });
+
+  final IconData icon;
+  final DeckSwipeDirection direction;
+  final AlignmentGeometry alignment;
+
+  /// 0 at rest, 1 at the commit threshold.
+  final double amount;
+
+  @override
+  Widget build(BuildContext context) {
+    if (amount <= 0) return const SizedBox.shrink();
+
+    final double t = Curves.easeOut.transform(amount.clamp(0.0, 1.0));
+    final Color color = direction.color(context);
+
+    return Align(
+      alignment: alignment,
+      child: Padding(
+        padding: const EdgeInsets.all(AppSpacing.lg),
+        child: Opacity(
+          // Faster than the scale so the badge is legible well before the
+          // threshold: the point is to tell the user what will happen while
+          // there is still time to change their mind.
+          opacity: (t * 1.6).clamp(0.0, 1.0),
+          child: Transform.scale(
+            scale: 0.65 + 0.45 * t,
+            child: Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                color: color,
+                shape: BoxShape.circle,
+                // A ring in the deck's surface colour, so the disc stays
+                // readable over either face of the card.
+                border: Border.all(
+                  color: context.colors.surfaceContainerHigh,
+                  width: 3,
+                ),
+              ),
+              child: Icon(
+                icon,
+                size: 30,
+                color:
+                    ThemeData.estimateBrightnessForColor(color) ==
+                        Brightness.dark
+                    ? Colors.white
+                    : Colors.black,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 /// The three swipes mirrored as round buttons, laid out the way a card deck
 /// trains you to expect: discard on the left, save in the middle, reveal on the
 /// right — each control on the side its gesture throws the card towards, and
 /// wearing the same icon as the badge that fades in mid-drag.
+///
+/// Each button also grows with its own gesture, so the drag names the action it
+/// is about to fire without the user having to look away from the card.
 ///
 /// Not decoration: a drag-only interface is unusable with a screen reader or
 /// switch access, and Play flags that in the accessibility scan. The tooltip is
@@ -235,6 +375,7 @@ class _Progress extends StatelessWidget {
 class _DeckControls extends StatelessWidget {
   const _DeckControls({
     required this.state,
+    required this.progress,
     required this.favorited,
     required this.onNext,
     required this.onReveal,
@@ -242,6 +383,7 @@ class _DeckControls extends StatelessWidget {
   });
 
   final DeckState state;
+  final ValueNotifier<DeckSwipeProgress> progress;
   final bool favorited;
   final VoidCallback onNext;
   final VoidCallback onReveal;
@@ -256,7 +398,8 @@ class _DeckControls extends StatelessWidget {
       children: <Widget>[
         _DeckButton(
           icon: Icons.close_rounded,
-          color: context.colors.onSurfaceVariant,
+          direction: DeckSwipeDirection.left,
+          progress: progress,
           tooltip: context.l10n.deckNext,
           onPressed: onNext,
         ),
@@ -266,7 +409,8 @@ class _DeckControls extends StatelessWidget {
         // feature exists and what unlocks it.
         _DeckButton(
           icon: favorited ? Icons.bookmark : Icons.bookmark_add_outlined,
-          color: context.colors.tertiary,
+          direction: DeckSwipeDirection.up,
+          progress: progress,
           tooltip: favorited
               ? context.l10n.favoritesRemove
               : context.l10n.favoritesAdd,
@@ -276,7 +420,8 @@ class _DeckControls extends StatelessWidget {
         const SizedBox(width: AppSpacing.lg),
         _DeckButton(
           icon: state.revealed ? Icons.flip_to_front : Icons.flip_to_back,
-          color: context.colors.primary,
+          direction: DeckSwipeDirection.right,
+          progress: progress,
           tooltip: state.revealed
               ? context.l10n.deckHideAnswer
               : context.l10n.deckShowAnswer,
@@ -289,10 +434,14 @@ class _DeckControls extends StatelessWidget {
 
 /// One round control: a tinted ring over the surface colour, with the icon in
 /// the same tint.
+///
+/// It listens to [progress] on its own instead of taking a plain number, so a
+/// drag repaints three small buttons and nothing else on the screen.
 class _DeckButton extends StatelessWidget {
   const _DeckButton({
     required this.icon,
-    required this.color,
+    required this.direction,
+    required this.progress,
     required this.tooltip,
     required this.onPressed,
     this.diameter = large,
@@ -302,8 +451,16 @@ class _DeckButton extends StatelessWidget {
   static const double large = 64;
   static const double small = 52;
 
+  /// How much bigger the button gets at the commit threshold. Enough to be
+  /// unmistakable, small enough that the three buttons never collide.
+  static const double maxZoom = 0.4;
+
   final IconData icon;
-  final Color color;
+
+  /// The gesture this button answers to.
+  final DeckSwipeDirection direction;
+
+  final ValueNotifier<DeckSwipeProgress> progress;
   final String tooltip;
 
   /// Null disables the button, which only happens while the ad card is on top.
@@ -314,51 +471,53 @@ class _DeckButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool enabled = onPressed != null;
-    // Faded rather than greyed: the button keeps its identity while it waits.
-    final Color tint = enabled ? color : color.withValues(alpha: 0.3);
+    final Color color = direction.color(context);
 
     return Tooltip(
       message: tooltip,
-      child: SizedBox.square(
-        dimension: diameter,
-        child: Material(
-          color: context.colors.surface,
-          elevation: enabled ? 2 : 0,
-          shadowColor: context.colors.shadow,
-          shape: CircleBorder(
-            side: BorderSide(color: tint.withValues(alpha: 0.4)),
-          ),
-          clipBehavior: Clip.antiAlias,
-          child: InkWell(
-            onTap: onPressed,
-            child: Center(
-              child: Icon(icon, color: tint, size: diameter * 0.42),
+      child: ValueListenableBuilder<DeckSwipeProgress>(
+        valueListenable: progress,
+        builder: (BuildContext context, DeckSwipeProgress value, Widget? _) {
+          // A disabled button belongs to a card that cannot be acted on, so it
+          // must not answer the drag either.
+          final double t = enabled
+              ? Curves.easeOut.transform(value.amountFor(direction))
+              : 0;
+
+          // Faded rather than greyed: the button keeps its identity while it
+          // waits. Under the finger it does the opposite, filling in with its
+          // own tint until it reads as pressed.
+          final Color tint = enabled ? color : color.withValues(alpha: 0.3);
+
+          return Transform.scale(
+            scale: 1 + maxZoom * t,
+            child: SizedBox.square(
+              dimension: diameter,
+              child: Material(
+                color: Color.lerp(
+                  context.colors.surface,
+                  tint.withValues(alpha: 0.2),
+                  t,
+                ),
+                elevation: enabled ? 2 + 6 * t : 0,
+                shadowColor: context.colors.shadow,
+                shape: CircleBorder(
+                  side: BorderSide(
+                    color: tint.withValues(alpha: 0.4 + 0.6 * t),
+                    width: 1 + t,
+                  ),
+                ),
+                clipBehavior: Clip.antiAlias,
+                child: InkWell(
+                  onTap: onPressed,
+                  child: Center(
+                    child: Icon(icon, color: tint, size: diameter * 0.42),
+                  ),
+                ),
+              ),
             ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-/// Badge that fades in over the card while dragging.
-class _SwipeBadge extends StatelessWidget {
-  const _SwipeBadge({required this.icon, required this.alignment});
-
-  final IconData icon;
-  final AlignmentGeometry alignment;
-
-  @override
-  Widget build(BuildContext context) {
-    return Align(
-      alignment: alignment,
-      child: Padding(
-        padding: const EdgeInsets.all(AppSpacing.lg),
-        child: CircleAvatar(
-          backgroundColor: context.colors.primary,
-          foregroundColor: context.colors.onPrimary,
-          child: Icon(icon),
-        ),
+          );
+        },
       ),
     );
   }

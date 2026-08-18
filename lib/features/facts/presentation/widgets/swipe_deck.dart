@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:aja/core/config/app_config.dart';
 import 'package:aja/features/facts/domain/deck_item.dart';
+import 'package:aja/features/facts/presentation/widgets/deck_swipe_progress.dart';
 import 'package:flutter/material.dart';
 
 /// Tinder-style card stack.
@@ -21,6 +22,10 @@ import 'package:flutter/material.dart';
 /// The widget owns nothing but the gesture: it reports every direction upwards
 /// and re-reads what to paint from [items]/[index]. That is what keeps the deck
 /// state (position, flip) in the controller and testable.
+///
+/// While a finger is down it also publishes how far the drag has got into
+/// [progress], so the controls outside the deck can react to the gesture
+/// without rebuilding the cards on every frame.
 class SwipeDeck extends StatefulWidget {
   const SwipeDeck({
     required this.items,
@@ -30,9 +35,8 @@ class SwipeDeck extends StatefulWidget {
     required this.onSwipeRight,
     required this.onSwipeUp,
     super.key,
-    this.hintLeft,
-    this.hintRight,
-    this.hintUp,
+    this.progress,
+    this.overlayBuilder,
   });
 
   final List<DeckItem> items;
@@ -52,11 +56,18 @@ class SwipeDeck extends StatefulWidget {
   /// Save the top card to favourites.
   final VoidCallback onSwipeUp;
 
-  /// Overlays that fade in while dragging, so the three directions are
-  /// discoverable without a tutorial.
-  final Widget? hintLeft;
-  final Widget? hintRight;
-  final Widget? hintUp;
+  /// Live drag state, pushed out so widgets outside the deck (the round
+  /// controls) can animate with the gesture.
+  ///
+  /// A notifier and not a callback: this changes every frame of a drag, and
+  /// only the handful of widgets that listen should rebuild — not the whole
+  /// screen.
+  final ValueNotifier<DeckSwipeProgress>? progress;
+
+  /// Overlay painted on top of the card and dragged along with it, so the
+  /// action the current gesture would fire is readable at the card's edge.
+  final Widget Function(BuildContext context, DeckSwipeProgress progress)?
+  overlayBuilder;
 
   @override
   State<SwipeDeck> createState() => _SwipeDeckState();
@@ -64,19 +75,37 @@ class SwipeDeck extends StatefulWidget {
 
 class _SwipeDeckState extends State<SwipeDeck>
     with SingleTickerProviderStateMixin {
-  late final AnimationController _controller = AnimationController(
-    vsync: this,
-    duration: const Duration(milliseconds: 240),
-  )..addListener(_onSettleTick);
+  late final AnimationController _controller;
 
   Animation<Offset>? _settle;
 
   /// Live finger offset of the top card, in logical pixels.
   Offset _drag = Offset.zero;
 
+  /// Size of the card area, cached from the layout so the gesture callbacks can
+  /// turn pixels into progress without a context lookup.
+  Size _size = Size.zero;
+
   /// True while the card is flying off screen; the gesture is ignored until it
   /// lands so a fast second swipe cannot skip two cards at once.
   bool _dismissing = false;
+
+  /// Action the released drag belonged to, held for as long as the card is
+  /// settling. See [_currentProgress].
+  DeckSwipeDirection? _settleDirection;
+
+  @override
+  void initState() {
+    super.initState();
+    // Built here and not in a `late final` initializer: a lazy field is only
+    // created the first time it is read, so a deck that was never dragged would
+    // create its ticker from inside `dispose()`, with the element already
+    // deactivated. That throws.
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 240),
+    )..addListener(_onSettleTick);
+  }
 
   @override
   void didUpdateWidget(SwipeDeck oldWidget) {
@@ -89,6 +118,7 @@ class _SwipeDeckState extends State<SwipeDeck>
         widget.items.length != oldWidget.items.length) {
       _drag = Offset.zero;
       _dismissing = false;
+      _publishAfterFrame(DeckSwipeProgress.idle);
     }
   }
 
@@ -102,11 +132,14 @@ class _SwipeDeckState extends State<SwipeDeck>
     final Animation<Offset>? settle = _settle;
     if (settle == null) return;
     setState(() => _drag = settle.value);
+    _publish();
   }
 
   void _onPanUpdate(DragUpdateDetails details) {
     if (_dismissing || _controller.isAnimating) return;
+    _settleDirection = null;
     setState(() => _drag += details.delta);
+    _publish();
   }
 
   void _onPanEnd(DragEndDetails details, Size size) {
@@ -160,22 +193,82 @@ class _SwipeDeckState extends State<SwipeDeck>
       ),
     );
     _dismissing = dismiss;
+    _settleDirection = _progressFor(_drag, _size).direction;
 
     _controller
       ..value = 0
       ..forward().whenComplete(() {
         if (!mounted) return;
         _settle = null;
+        _settleDirection = null;
 
         if (dismiss) {
           // `_drag` stays at the off screen target on purpose; didUpdateWidget
-          // resets it once the next card is on top.
+          // resets it once the next card is on top. The feedback does not: the
+          // card is gone, so the button has nothing left to announce.
+          widget.progress?.value = DeckSwipeProgress.idle;
           widget.onSwipeLeft();
           return;
         }
 
         setState(() => _drag = Offset.zero);
+        _publish();
       });
+  }
+
+  /// Turns the raw finger offset into the action the gesture is aiming at.
+  ///
+  /// Only the dominant axis counts, which is the same rule [_onPanEnd] uses to
+  /// decide what to fire. Sharing it here is what guarantees the badge and the
+  /// button that swell mid-drag belong to the action that will actually run.
+  DeckSwipeProgress _progressFor(Offset drag, Size size) {
+    if (size.isEmpty || drag == Offset.zero) return DeckSwipeProgress.idle;
+
+    if (drag.dy.abs() > drag.dx.abs()) {
+      // Downward is unbound: no feedback for a gesture that does nothing.
+      if (!drag.dy.isNegative) return DeckSwipeProgress.idle;
+      return DeckSwipeProgress(
+        direction: DeckSwipeDirection.up,
+        amount: (-drag.dy / (size.height * AppConfig.deckSwipeUpThreshold))
+            .clamp(0.0, 1.0),
+      );
+    }
+
+    return DeckSwipeProgress(
+      direction: drag.dx.isNegative
+          ? DeckSwipeDirection.left
+          : DeckSwipeDirection.right,
+      amount: (drag.dx.abs() / (size.width * AppConfig.deckSwipeThreshold))
+          .clamp(0.0, 1.0),
+    );
+  }
+
+  /// Progress as the rest of the UI should see it.
+  ///
+  /// `Curves.easeOutBack` overshoots the centre on the way back, which flips
+  /// the sign of the drag for a few frames. Reported raw, that would blink the
+  /// badge and the button of the *opposite* action at the end of every gesture,
+  /// so while a card is settling only the direction it was released towards is
+  /// allowed to show anything.
+  DeckSwipeProgress _currentProgress() {
+    final DeckSwipeProgress live = _progressFor(_drag, _size);
+    final DeckSwipeDirection? settling = _settleDirection;
+    if (settling == null || live.direction == settling) return live;
+    return DeckSwipeProgress.idle;
+  }
+
+  void _publish() => widget.progress?.value = _currentProgress();
+
+  /// Same as [_publish], but from a build-phase callback.
+  ///
+  /// Listeners of the notifier rebuild when it changes, and [didUpdateWidget]
+  /// runs while the tree is already building — writing to it there would throw.
+  void _publishAfterFrame(DeckSwipeProgress value) {
+    final ValueNotifier<DeckSwipeProgress>? progress = widget.progress;
+    if (progress == null || progress.value == value) return;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) progress.value = value;
+    });
   }
 
   @override
@@ -183,6 +276,7 @@ class _SwipeDeckState extends State<SwipeDeck>
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         final Size size = constraints.biggest;
+        _size = size;
 
         // Painted back to front: the last child of a Stack is on top, and the
         // top card must be the one that receives the gesture.
@@ -208,22 +302,7 @@ class _SwipeDeckState extends State<SwipeDeck>
   }
 
   Widget _buildTopCard(BuildContext context, DeckItem item, Size size) {
-    final bool vertical = _drag.dy.abs() > _drag.dx.abs();
-
-    // Only the dominant axis lights a hint up, so the user never sees "next"
-    // and "save" fading in at the same time.
-    final double progress = vertical
-        ? 0
-        : (_drag.dx / (size.width * AppConfig.deckSwipeThreshold)).clamp(
-            -1.0,
-            1.0,
-          );
-    final double upProgress = vertical
-        ? (-_drag.dy / (size.height * AppConfig.deckSwipeUpThreshold)).clamp(
-            0.0,
-            1.0,
-          )
-        : 0;
+    final DeckSwipeProgress progress = _currentProgress();
 
     return GestureDetector(
       key: ValueKey<String>(item.key),
@@ -236,17 +315,13 @@ class _SwipeDeckState extends State<SwipeDeck>
           // Pivot below the card so it tilts like a real card being pulled off
           // a stack instead of spinning around its middle.
           origin: const Offset(0, 320),
-          angle: progress * 0.12,
+          angle: progress.signedHorizontal * 0.12,
           child: Stack(
             fit: StackFit.expand,
             children: <Widget>[
               widget.builder(context, item, true),
-              if (widget.hintLeft != null)
-                _Hint(opacity: math.max(0, -progress), child: widget.hintLeft!),
-              if (widget.hintRight != null)
-                _Hint(opacity: math.max(0, progress), child: widget.hintRight!),
-              if (widget.hintUp != null)
-                _Hint(opacity: upProgress, child: widget.hintUp!),
+              if (widget.overlayBuilder != null)
+                IgnorePointer(child: widget.overlayBuilder!(context, progress)),
             ],
           ),
         ),
@@ -264,22 +339,6 @@ class _SwipeDeckState extends State<SwipeDeck>
         scale: 1 - depth * 0.04,
         child: IgnorePointer(child: widget.builder(context, item, false)),
       ),
-    );
-  }
-}
-
-/// Fades a hint badge in as the drag approaches the commit threshold.
-class _Hint extends StatelessWidget {
-  const _Hint({required this.opacity, required this.child});
-
-  final double opacity;
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    if (opacity <= 0) return const SizedBox.shrink();
-    return IgnorePointer(
-      child: Opacity(opacity: opacity.clamp(0.0, 1.0), child: child),
     );
   }
 }
