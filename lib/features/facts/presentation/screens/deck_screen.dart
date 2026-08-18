@@ -7,7 +7,6 @@ import 'package:aja/core/utils/app_logger.dart';
 import 'package:aja/core/widgets/adaptive_banner_ad.dart';
 import 'package:aja/core/widgets/app_loader.dart';
 import 'package:aja/core/widgets/base_screen.dart';
-import 'package:aja/core/widgets/empty_state.dart';
 import 'package:aja/core/widgets/error_view.dart';
 import 'package:aja/features/facts/data/fact_story_image.dart';
 import 'package:aja/features/facts/domain/deck_item.dart';
@@ -16,6 +15,7 @@ import 'package:aja/features/facts/presentation/providers/deck_controller.dart';
 import 'package:aja/features/facts/presentation/providers/facts_providers.dart';
 import 'package:aja/features/facts/presentation/providers/favorites_controller.dart';
 import 'package:aja/features/facts/presentation/widgets/ad_deck_card.dart';
+import 'package:aja/features/facts/presentation/widgets/deck_exhausted_view.dart';
 import 'package:aja/features/facts/presentation/widgets/deck_swipe_progress.dart';
 import 'package:aja/features/facts/presentation/widgets/fact_card.dart';
 import 'package:aja/features/facts/presentation/widgets/swipe_deck.dart';
@@ -123,23 +123,11 @@ class _DeckBodyState extends ConsumerState<_DeckBody> {
           const SizedBox(height: AppSpacing.sm),
           const _DeckBanner(),
           Expanded(
-            child: state.isExhausted ? _exhausted(context) : _deck(context),
+            child: state.isExhausted
+                ? const DeckExhaustedView()
+                : _deck(context),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _exhausted(BuildContext context) {
-    return EmptyState(
-      icon: Icons.check_circle_outline,
-      title: context.l10n.deckFinishedTitle,
-      message: context.l10n.deckFinishedBody,
-      action: FilledButton.icon(
-        onPressed: () =>
-            unawaited(ref.read(deckControllerProvider.notifier).restart()),
-        icon: const Icon(Icons.refresh),
-        label: Text(context.l10n.deckRestart),
       ),
     );
   }

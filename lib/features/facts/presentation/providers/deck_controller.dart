@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:aja/features/facts/domain/deck_item.dart';
 import 'package:aja/features/facts/domain/fact.dart';
 import 'package:aja/features/facts/presentation/providers/facts_providers.dart';
 import 'package:aja/services/billing/premium_controller.dart';
+import 'package:aja/services/storage/key_value_store.dart';
 import 'package:aja/services/storage/storage_providers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -61,6 +64,15 @@ final AsyncNotifierProvider<DeckController, DeckState> deckControllerProvider =
 /// gesture rather than a state restore.
 class DeckController extends AsyncNotifier<DeckState> {
   static const String _progressKeyPrefix = 'deck_facts_seen_';
+  static const String _seedKeyPrefix = 'deck_shuffle_seed_';
+
+  /// Seed meaning "leave the catalogue alone".
+  ///
+  /// The first run through a category is the curated order: the file is
+  /// interleaved by hand so the categories rotate, and shuffling that on a
+  /// user's very first session throws away the only editorial control there is
+  /// over which question they meet first. Only [restart] shuffles.
+  static const int _curatedOrder = 0;
 
   @override
   Future<DeckState> build() async {
@@ -70,22 +82,44 @@ class DeckController extends AsyncNotifier<DeckState> {
     // `watch`: buying premium must remove the ad slots from the deck already
     // built, not only from the next one.
     final bool isPremium = ref.watch(isPremiumProvider);
+    final KeyValueStore store = ref.read(keyValueStoreProvider);
 
+    return _deckFor(
+      all: all,
+      category: category,
+      isPremium: isPremium,
+      seed: store.getInt(_seedKey(category)),
+      factsSeen: store.getInt(_progressKey(category)),
+    );
+  }
+
+  /// Builds the deck for one (category, seed, progress) triple.
+  ///
+  /// Shared by [build] and [restart] so a restarted deck cannot drift from a
+  /// rebuilt one: the same seed must always produce the same order, otherwise
+  /// buying premium mid-deck would reshuffle the cards under the user.
+  DeckState _deckFor({
+    required List<Fact> all,
+    required FactCategory? category,
+    required bool isPremium,
+    required int seed,
+    required int factsSeen,
+  }) {
     final List<Fact> facts = category == null
         ? all
         : all.where((Fact fact) => fact.category == category).toList();
 
-    final List<DeckItem> items = buildDeck(facts, withAds: !isPremium);
+    final List<Fact> ordered = seed == _curatedOrder
+        ? facts
+        : (List<Fact>.of(facts)..shuffle(Random(seed)));
 
-    final int factsSeen = ref
-        .read(keyValueStoreProvider)
-        .getInt(_progressKey(category))
-        .clamp(0, facts.length);
+    final List<DeckItem> items = buildDeck(ordered, withAds: !isPremium);
+    final int seen = factsSeen.clamp(0, ordered.length);
 
     return DeckState(
       items: items,
-      index: _indexForProgress(items, factsSeen),
-      factsSeen: factsSeen,
+      index: _indexForProgress(items, seen),
+      factsSeen: seen,
       revealed: false,
     );
   }
@@ -123,15 +157,44 @@ class DeckController extends AsyncNotifier<DeckState> {
     return dismissed;
   }
 
-  /// Back to the first card of the current category.
+  /// Back to the first card of the current category, **in a new order**.
+  ///
+  /// A reshuffle rather than a rewind: somebody who reaches the end and presses
+  /// restart is asking for more, and handing them the same 87 cards in the same
+  /// sequence answers that with "no". The seed is persisted so the new order
+  /// survives closing the app — a deck that reshuffles itself every time the
+  /// screen rebuilds would lose the user's place instead of keeping it.
   Future<void> restart() async {
-    final DeckState? current = state.value;
-    if (current == null) return;
+    if (state.value == null) return;
+
+    final FactCategory? category = ref.read(categoryFilterProvider);
+    final KeyValueStore store = ref.read(keyValueStoreProvider);
+    final int seed = _nextSeed(store.getInt(_seedKey(category)));
+
+    await store.setInt(_seedKey(category), seed);
+    await _persist(0);
 
     state = AsyncData<DeckState>(
-      current.copyWith(index: 0, factsSeen: 0, revealed: false),
+      _deckFor(
+        // Already resolved and cached; this does not hit the asset again.
+        all: await ref.read(factsProvider.future),
+        category: category,
+        isPremium: ref.read(isPremiumProvider),
+        seed: seed,
+        factsSeen: 0,
+      ),
     );
-    await _persist(0);
+  }
+
+  /// A seed that is neither the curated order nor the one just used, so
+  /// "restart" always visibly changes something.
+  static int _nextSeed(int previous) {
+    final Random random = Random();
+    int seed = previous;
+    while (seed == previous || seed == _curatedOrder) {
+      seed = random.nextInt(0x7FFFFFFF);
+    }
+    return seed;
   }
 
   Future<void> _persist(int factsSeen) => ref
@@ -140,6 +203,9 @@ class DeckController extends AsyncNotifier<DeckState> {
 
   static String _progressKey(FactCategory? category) =>
       '$_progressKeyPrefix${category?.id ?? 'all'}';
+
+  static String _seedKey(FactCategory? category) =>
+      '$_seedKeyPrefix${category?.id ?? 'all'}';
 
   /// Translates "N fact cards already seen" into a position in a deck that also
   /// contains ad slots.

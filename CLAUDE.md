@@ -118,7 +118,7 @@ Una pila de tarjetas, una detrás de otra. Solo la de arriba responde al dedo.
 |---|---|
 | **Deslizar a la derecha** | La tarjeta **se voltea** y enseña la respuesta. Vuelve al centro, no se descarta. |
 | **Deslizar a la izquierda** | La tarjeta **sale volando** y sube la siguiente. |
-| **Deslizar hacia arriba** | **Guarda la tarjeta** en favoritos (premium, ver §3.5). También vuelve al centro: guardar no es motivo para dejar de leerla. |
+| **Deslizar hacia arriba** | **Guarda la tarjeta** en favoritos (premium, ver §3.6). También vuelve al centro: guardar no es motivo para dejar de leerla. |
 | **Deslizar hacia abajo** | **Comparte la pregunta** como imagen 1080x1920 (§3.4). Gratis para todos. También vuelve al centro. |
 | **Tocar la tarjeta** | Igual que deslizar a la derecha (voltear). |
 | **Botones inferiores** | "Siguiente", "Compartir la pregunta", "Guardar" y "Ver respuesta". **No son decorativos**: una interfaz solo-arrastre es inutilizable con lector de pantalla y la penaliza el escaneo de accesibilidad de Play. No borrarlos. |
@@ -162,6 +162,12 @@ El volteo es un `rotateY` con perspectiva (`setEntry(3, 2, 0.0012)`); a mitad de
 
 El progreso se persiste como **número de tarjetas de contenido vistas** (`deck_facts_seen_<categoría>`), no como índice: los huecos de anuncio se desplazan cuando el usuario compra premium, y un índice guardado apuntaría a otra tarjeta.
 
+**La pantalla de fin de mazo** (`DeckExhaustedView`) es la única sin nada que deslizar, y ofrece tres salidas en orden decreciente de lo que devuelven:
+
+1. **«Reiniciar deck»** — rebaraja y vuelve a empezar. Rebarajar y no rebobinar: quien llega al final y pulsa reiniciar está pidiendo más, y darle las mismas 87 cartas en el mismo orden es responderle que no. La semilla se persiste (`deck_shuffle_seed_<categoría>`) para que el orden nuevo sobreviva a cerrar la app y para que comprar premium a mitad de mazo no rebaraje las cartas bajo el usuario. La **primera** vuelta a una categoría siempre es el orden curado del fichero (semilla 0): barajar la primera sesión tira el único control editorial que hay sobre qué pregunta se encuentra primero.
+2. **«Aportar»** — formulario de pregunta + respuesta + fuente opcional (§3.5).
+3. **«Pedir más»** — ráfaga de corazones estilo Instagram y un contador. Es el único botón que no hace nada verificable para el usuario, y por eso justamente tenía que ser el que mejor sienta pulsar.
+
 **El progreso no se enseña.** No hay barra ni contador «7/23»: la promesa del producto es un mazo que no se acaba, y un indicador que avanza convierte la sesión en una tarea con final. Se guarda para saber por dónde retomar, nada más. **No reintroducir un indicador de progreso.**
 
 ### 3.4 Compartir — imagen para historias
@@ -178,7 +184,20 @@ Deslizar hacia abajo (o el botón) renderiza la pregunta como PNG de **1080x1920
 
 > **Al escribir tests:** el render pasa por el motor gráfico, así que **se cuelga bajo el reloj falso de `testWidgets`**. Hace falta un `test` normal o envolverlo en `tester.runAsync`.
 
-### 3.5 Favoritos — función de pago
+### 3.5 Aportaciones de usuarios y «pedir más»
+
+**Dónde van los datos: un web app de Google Apps Script que escribe en una hoja de cálculo.** La app no tiene backend y no va a criar uno por un buzón de sugerencias. Frente a Firestore (que significa `firebase_core` + `cloud_firestore`, un `google-services.json`, varios MB de AAB y trabajo en cada arranque en frío) esto es **una petición POST y cero SDK**; es gratis y ya está en la cuenta de Google del desarrollador; y la bandeja de entrada es una hoja de cálculo, que es justo la herramienta para ordenar, filtrar y marcar una sugerencia como «ya publicada». Si algún día entra Firestore para el catálogo (está en la hoja de ruta), mover esto es un fichero y un servicio.
+
+Las instrucciones de montaje y el código del script están en `core/config/contribution_config.dart`.
+
+- **Nada se pierde por no haber red.** Todo se escribe en disco *antes* de intentar enviarse: la red es una optimización, nunca lo que decide si la acción del usuario contó. Con `ContributionConfig.endpoint` vacío la app sigue funcionando igual y va acumulando en la bandeja local; la primera build con URL real vacía el atraso.
+- **Los toques de «pedir más» se cuentan en local y viajan agregados.** El botón está para machacarlo: veinte toques son una petición con un número, no veinte peticiones.
+- **La carga no lleva ningún identificador.** Ni ad id, ni install id, ni modelo de móvil. Es una decisión de producto: mantiene la declaración del Data Safety en «contenido de usuario, opcional, no vinculado a la identidad».
+- **El endpoint es público y sin autenticar**, que está bien para un buzón de sugerencias y mal para cualquier otra cosa. Hay límite de longitud y un mínimo de 30 s entre envíos, pero **cada fila es texto no fiable**: no pegar nunca una aportación en el catálogo sin leerla.
+
+> **Antes de publicar:** activar esto obliga a declarar contenido de usuario en el formulario de Data Safety y a mencionarlo en la política de privacidad.
+
+### 3.6 Favoritos — función de pago
 
 Guardar tarjetas está detrás del **mismo pago único `premium_remove_ads`**. No hay un segundo producto: añadir SKUs multiplica el soporte y las combinaciones de entitlement que hay que probar.
 
@@ -200,7 +219,7 @@ Guardar tarjetas está detrás del **mismo pago único `premium_remove_ads`**. N
 - **Tarjeta de anuncio dentro del mazo = formato principal.** Se desliza igual que el contenido.
 - **Interstitial = secundario**, cada ~9 tarjetas y nunca antes de 3 min desde el anterior.
 - **Sin rewarded.** El uso es pasivo: no hay nada que desbloquear que justifique un vídeo. `AdsService` ya no tiene ese formato — **no reintroducirlo** sin una razón de producto nueva.
-- **IAP no consumible "quitar anuncios"** = conversión principal. Desbloquea además los favoritos (§3.5), así que tiene dos puntos de venta: la tarjeta de anuncio sin relleno y el intento de guardar una tarjeta.
+- **IAP no consumible "quitar anuncios"** = conversión principal. Desbloquea además los favoritos (§3.6), así que tiene dos puntos de venta: la tarjeta de anuncio sin relleno y el intento de guardar una tarjeta.
 
 ### 4.2 AdMob (`google_mobile_ads`)
 

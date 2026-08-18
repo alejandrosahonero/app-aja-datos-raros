@@ -53,6 +53,11 @@ dependencies:
   # La versión la fija flutter_localizations del SDK de Flutter (pinning).
   intl: ^0.20.2
   cupertino_icons: ^1.0.8
+  # Cliente HTTP oficial de dart.dev. Se usa solo para las aportaciones de los
+  # usuarios: una petición POST a un endpoint, sin SDK propietario. Se elige
+  # frente a dart:io porque acepta un `http.Client` inyectado, y eso es lo que
+  # permite testear el envío sin red.
+  http: ^1.6.0
 
 dev_dependencies:
   flutter_test:

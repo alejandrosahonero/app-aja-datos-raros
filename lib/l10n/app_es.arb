@@ -31,8 +31,30 @@
   "deckHideAnswer": "Ocultar",
   "deckNext": "Siguiente",
   "deckFinishedTitle": "Te has quedado sin preguntas",
-  "deckFinishedBody": "Has visto todas las de esta categoría. Empieza de nuevo o prueba con otra.",
-  "deckRestart": "Volver a empezar",
+  "deckFinishedBody": "Has visto todas las de esta categoría. Rebarájalas, propón una tuya o pide más.",
+  "deckRestart": "Reiniciar deck",
+
+  "deckContribute": "Aportar",
+  "@deckContribute": {
+    "description": "Botón que abre el formulario para proponer una pregunta"
+  },
+  "deckAskForMore": "Pedir más",
+  "@deckAskForMore": {
+    "description": "Botón de corazones: el usuario pide más contenido"
+  },
+  "contributeTitle": "Aporta una pregunta",
+  "contributeIntro": "Si se te ocurre un dato raro que merezca estar aquí, escríbelo. Lo revisamos a mano antes de publicarlo.",
+  "contributeQuestionLabel": "La pregunta",
+  "contributeQuestionHint": "¿Por qué…?",
+  "contributeAnswerLabel": "La respuesta",
+  "contributeAnswerHint": "Porque…",
+  "contributeSourceLabel": "Fuente (opcional)",
+  "contributeSourceHint": "Dónde lo has leído",
+  "contributeSend": "Enviar",
+  "contributeRequired": "Escribe un poco más.",
+  "contributeThanks": "¡Gracias! La leeremos antes de publicarla.",
+  "contributeTooSoon": "Espera un momento antes de enviar otra.",
+  "contributeInvalid": "Repasa la pregunta y la respuesta.",
   "deckLoadError": "No hemos podido cargar las preguntas.",
 
   "deckShare": "Compartir la pregunta",
