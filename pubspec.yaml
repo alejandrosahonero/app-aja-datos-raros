@@ -36,6 +36,12 @@ dependencies:
   # Diálogo nativo de reseña de Google Play tras un momento de éxito.
   in_app_review: ^2.0.12
 
+  # Hoja de compartir del sistema. Es el único camino soportado para entregar
+  # una imagen a Instagram o TikTok sin integrar sus SDKs: pesa ~50 KB de Dart,
+  # no toca el arranque (se carga al primer uso) y evita cuatro dependencias
+  # propietarias. La imagen se pinta con dart:ui, sin paquetes extra.
+  share_plus: ^13.3.0
+
   # --- Persistencia -------------------------------------------------------
   # Clave-valor simple: flags, contadores, preferencias de UI.
   shared_preferences: ^2.5.5

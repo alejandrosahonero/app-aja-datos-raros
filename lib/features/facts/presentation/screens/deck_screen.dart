@@ -3,10 +3,12 @@ import 'dart:async';
 import 'package:aja/core/extensions/build_context_x.dart';
 import 'package:aja/core/routing/app_routes.dart';
 import 'package:aja/core/theme/app_spacing.dart';
+import 'package:aja/core/utils/app_logger.dart';
 import 'package:aja/core/widgets/app_loader.dart';
 import 'package:aja/core/widgets/base_screen.dart';
 import 'package:aja/core/widgets/empty_state.dart';
 import 'package:aja/core/widgets/error_view.dart';
+import 'package:aja/features/facts/data/fact_story_image.dart';
 import 'package:aja/features/facts/domain/deck_item.dart';
 import 'package:aja/features/facts/domain/fact.dart';
 import 'package:aja/features/facts/presentation/providers/deck_controller.dart';
@@ -17,6 +19,7 @@ import 'package:aja/features/facts/presentation/widgets/deck_swipe_progress.dart
 import 'package:aja/features/facts/presentation/widgets/fact_card.dart';
 import 'package:aja/features/facts/presentation/widgets/swipe_deck.dart';
 import 'package:aja/features/premium/presentation/widgets/premium_feature_dialog.dart';
+import 'package:aja/l10n/generated/app_localizations.dart';
 import 'package:aja/services/ads/ads_providers.dart';
 import 'package:aja/services/review/review_providers.dart';
 import 'package:flutter/material.dart';
@@ -86,6 +89,11 @@ class _DeckBodyState extends ConsumerState<_DeckBody> {
   final ValueNotifier<DeckSwipeProgress> _progress =
       ValueNotifier<DeckSwipeProgress>(DeckSwipeProgress.idle);
 
+  /// Rendering the image and opening the sheet takes a few hundred
+  /// milliseconds. Without this, a second swipe inside that window queues a
+  /// second share sheet behind the first one.
+  bool _sharing = false;
+
   @override
   void dispose() {
     _progress.dispose();
@@ -131,6 +139,7 @@ class _DeckBodyState extends ConsumerState<_DeckBody> {
               onSwipeLeft: () => unawaited(_next(ref)),
               onSwipeRight: () => _reveal(ref),
               onSwipeUp: () => unawaited(_toggleFavorite(context, ref)),
+              onSwipeDown: () => unawaited(_share(context, ref)),
               overlayBuilder:
                   (BuildContext context, DeckSwipeProgress progress) =>
                       _SwipeBadges(progress: progress),
@@ -157,6 +166,7 @@ class _DeckBodyState extends ConsumerState<_DeckBody> {
             onNext: () => unawaited(_next(ref)),
             onReveal: () => _reveal(ref),
             onFavorite: () => unawaited(_toggleFavorite(context, ref)),
+            onShare: () => unawaited(_share(context, ref)),
           ),
         ],
       ),
@@ -179,6 +189,52 @@ class _DeckBodyState extends ConsumerState<_DeckBody> {
     }
 
     await ref.read(favoritesProvider.notifier).toggle(current.fact.id);
+  }
+
+  /// Swipe down / share button.
+  ///
+  /// Free for everybody, unlike favourites. A shared card is the cheapest
+  /// install this app will ever get, so putting it behind the paywall would be
+  /// charging for the marketing.
+  Future<void> _share(BuildContext context, WidgetRef ref) async {
+    final DeckItem? current = state.current;
+    if (current is! FactItem || _sharing) return;
+    _sharing = true;
+
+    // Everything the image needs is resolved before the first await: the
+    // renderer runs without a context, and one looked up afterwards is one that
+    // may already be gone.
+    final Fact fact = current.fact;
+    final AppLocalizations l10n = context.l10n;
+    final String language = Localizations.localeOf(context).languageCode;
+    final FactStoryLabels labels = FactStoryLabels(
+      appName: l10n.appTitle,
+      tagline: l10n.deckShareTagline,
+      category: fact.category.label(context),
+      callToAction: l10n.deckShareCta,
+    );
+
+    try {
+      await ref
+          .read(factShareServiceProvider)
+          .shareQuestion(
+            fact: fact,
+            language: language,
+            labels: labels,
+            message: l10n.deckShareMessage(fact.question.resolve(language)),
+          );
+    } on Object catch (error, stackTrace) {
+      // Never rethrown: a share sheet that will not open is an annoyance, not
+      // a reason to take the deck down.
+      AppLogger.error(
+        'Sharing a fact failed',
+        error: error,
+        stackTrace: stackTrace,
+      );
+      if (context.mounted) context.showSnack(l10n.deckShareError);
+    } finally {
+      _sharing = false;
+    }
   }
 
   /// Flipping a card to read the answer is the value moment of this app, so it
@@ -253,6 +309,7 @@ extension on DeckSwipeDirection {
     DeckSwipeDirection.left => context.colors.onSurfaceVariant,
     DeckSwipeDirection.right => context.colors.primary,
     DeckSwipeDirection.up => context.colors.tertiary,
+    DeckSwipeDirection.down => context.colors.secondary,
     DeckSwipeDirection.none => context.colors.outline,
   };
 }
@@ -291,6 +348,12 @@ class _SwipeBadges extends StatelessWidget {
           direction: DeckSwipeDirection.up,
           alignment: Alignment.bottomCenter,
           amount: progress.amountFor(DeckSwipeDirection.up),
+        ),
+        _SwipeBadge(
+          icon: Icons.ios_share,
+          direction: DeckSwipeDirection.down,
+          alignment: Alignment.topCenter,
+          amount: progress.amountFor(DeckSwipeDirection.down),
         ),
       ],
     );
@@ -380,6 +443,7 @@ class _DeckControls extends StatelessWidget {
     required this.onNext,
     required this.onReveal,
     required this.onFavorite,
+    required this.onShare,
   });
 
   final DeckState state;
@@ -388,6 +452,7 @@ class _DeckControls extends StatelessWidget {
   final VoidCallback onNext;
   final VoidCallback onReveal;
   final VoidCallback onFavorite;
+  final VoidCallback onShare;
 
   @override
   Widget build(BuildContext context) {
@@ -403,7 +468,7 @@ class _DeckControls extends StatelessWidget {
           tooltip: context.l10n.deckNext,
           onPressed: onNext,
         ),
-        const SizedBox(width: AppSpacing.lg),
+        const SizedBox(width: AppSpacing.md),
         // Smaller and in the middle, where the upward swipe points. Never
         // disabled for a locked user: tapping it is how they find out the
         // feature exists and what unlocks it.
@@ -417,7 +482,17 @@ class _DeckControls extends StatelessWidget {
           onPressed: isFact ? onFavorite : null,
           diameter: _DeckButton.small,
         ),
-        const SizedBox(width: AppSpacing.lg),
+        const SizedBox(width: AppSpacing.md),
+        // The other vertical gesture, next to the one it shares an axis with.
+        _DeckButton(
+          icon: Icons.ios_share,
+          direction: DeckSwipeDirection.down,
+          progress: progress,
+          tooltip: context.l10n.deckShare,
+          onPressed: isFact ? onShare : null,
+          diameter: _DeckButton.small,
+        ),
+        const SizedBox(width: AppSpacing.md),
         _DeckButton(
           icon: state.revealed ? Icons.flip_to_front : Icons.flip_to_back,
           direction: DeckSwipeDirection.right,

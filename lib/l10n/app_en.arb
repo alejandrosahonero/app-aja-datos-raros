@@ -22,6 +22,29 @@
   "deckFinishedBody": "That is every card in this category. Start over or try another one.",
   "deckRestart": "Start over",
   "deckLoadError": "We could not load the questions.",
+
+  "deckShare": "Share the question",
+  "@deckShare": {
+    "description": "Button and gesture that shares the card"
+  },
+  "deckShareCta": "Do you know the answer?",
+  "@deckShareCta": {
+    "description": "Hook printed under the question on the shared image"
+  },
+  "deckShareTagline": "Weird curious facts",
+  "@deckShareTagline": {
+    "description": "Brand subtitle at the foot of the shared image"
+  },
+  "deckShareMessage": "{question}\n\nDo you know the answer? It is waiting in Ajá.",
+  "@deckShareMessage": {
+    "description": "Text that accompanies the image in the share sheet",
+    "placeholders": {
+      "question": {
+        "type": "String"
+      }
+    }
+  },
+  "deckShareError": "We could not prepare the image to share.",
   "deckCategoryTooltip": "Filter by category",
   "deckCategoryAll": "All",
 

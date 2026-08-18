@@ -1,10 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 /// Direction the top card of the deck is currently being dragged towards.
-///
-/// Down is missing on purpose: it is unbound in [SwipeDeck], so a drag that
-/// ends up going down must light nothing up.
-enum DeckSwipeDirection { none, left, right, up }
+enum DeckSwipeDirection { none, left, right, up, down }
 
 /// How far the top card has been dragged, and towards which action.
 ///

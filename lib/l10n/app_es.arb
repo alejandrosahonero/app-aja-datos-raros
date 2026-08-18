@@ -45,6 +45,29 @@
   "deckFinishedBody": "Has visto todas las de esta categoría. Empieza de nuevo o prueba con otra.",
   "deckRestart": "Volver a empezar",
   "deckLoadError": "No hemos podido cargar las preguntas.",
+
+  "deckShare": "Compartir la pregunta",
+  "@deckShare": {
+    "description": "Botón y gesto para compartir la tarjeta"
+  },
+  "deckShareCta": "¿Sabes la respuesta?",
+  "@deckShareCta": {
+    "description": "Gancho impreso bajo la pregunta en la imagen compartida"
+  },
+  "deckShareTagline": "Datos curiosos raros",
+  "@deckShareTagline": {
+    "description": "Subtítulo de marca al pie de la imagen compartida"
+  },
+  "deckShareMessage": "{question}\n\n¿Sabes la respuesta? La tienes en Ajá.",
+  "@deckShareMessage": {
+    "description": "Texto que acompaña a la imagen en la hoja de compartir",
+    "placeholders": {
+      "question": {
+        "type": "String"
+      }
+    }
+  },
+  "deckShareError": "No hemos podido preparar la imagen para compartir.",
   "deckCategoryTooltip": "Filtrar por categoría",
   "deckCategoryAll": "Todas",
 

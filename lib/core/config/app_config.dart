@@ -72,6 +72,15 @@ abstract final class AppConfig {
   /// gesture.
   static const double deckSwipeUpThreshold = 0.16;
 
+  /// Fraction of the card height a downward drag has to cover to count as
+  /// "share this question".
+  ///
+  /// Deliberately the longest of the four. Sharing opens the system sheet,
+  /// which covers the app and interrupts the reading session, and it sits on
+  /// the same axis as "save": an upward flick that lands the wrong way must not
+  /// be able to reach it by accident.
+  static const double deckSwipeDownThreshold = 0.26;
+
   /// Velocity (logical px/s) that commits a swipe regardless of distance, so a
   /// quick flick works without dragging the card across the screen.
   static const double deckSwipeVelocity = 700;

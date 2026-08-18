@@ -25,6 +25,21 @@ App Android de feed vertical swipeable con preguntas y respuestas curiosas sobre
 
 ---
 
+## Feedback de los gestos del mazo
+
+La interacción principal es *swipear* las tarjetas en cuatro direcciones. Cada gesto dispara una acción diferente, y el botón circular bajo el mazo crece mientras arrastras para confirmar visualmente qué acción se va a ejecutar:
+
+- **Izquierda** (skip): descarta la tarjeta y muestra la siguiente. El botón "Siguiente" crece hasta 1.4x y aparece un badge (`✕`) en la esquina superior derecha de la tarjeta.
+- **Derecha** (flip): voltea la tarjeta para ver la respuesta sin descartarla. El botón "Ver respuesta" crece y el badge (`↻`) aparece en la esquina superior izquierda.
+- **Arriba** (favorito): guarda la tarjeta en el apartado de Guardadas. Solo disponible para usuarios premium. El botón "Guardar esta tarjeta" crece y el badge (`🔖`) flota en el centro inferior.
+- **Abajo** (compartir): genera una imagen 1080x1920 con la pregunta y abre la hoja de compartir del sistema, lista para publicar en Instagram o TikTok sin recortes. Gratis para todo el mundo. El botón "Compartir la pregunta" crece y el badge (`⇪`) aparece en el centro superior. Pide el arrastre más largo de los cuatro (0,26 del alto frente al 0,16 de guardar): comparte el mismo eje que el gesto de guardar y abre una hoja modal encima de la app, así que un movimiento impreciso no puede alcanzarla por accidente.
+
+El badge siempre se posiciona en el lado **opuesto** al que arrastras, porque la tarjeta se desliza hacia fuera y ocultaría un badge en el lado del gesto. Solo una dirección reacciona a la vez: el eje dominante gana, así dos botones nunca crecen simultáneamente.
+
+La imagen compartida lleva solo la **pregunta**, nunca la respuesta: es el motivo para instalar la app. Se pinta directamente sobre un `Canvas` (`FactStoryImage`) en lugar de rasterizar un widget, porque tiene que medir 1080x1920 exactos independientemente del tamaño, la densidad y el tema del móvil. El texto se autoajusta para caber en la tarjeta, y todo el contenido legible queda dentro del área segura que Instagram y TikTok no tapan con su propia interfaz. Los colores salen de `AppColors.seed`, así que rebrandear la app rebrandea también lo que se comparte.
+
+---
+
 ## Empezar
 
 ```bash

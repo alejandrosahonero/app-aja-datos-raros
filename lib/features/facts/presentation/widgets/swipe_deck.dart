@@ -15,9 +15,9 @@ import 'package:flutter/material.dart';
 /// * **left** — throws the card away and brings the next one up.
 /// * **up** — saves the card to favourites. Like the flip, it springs back:
 ///   saving a card is not a reason to stop reading it.
-///
-/// Down is deliberately unbound, so an imprecise upward flick that ends up
-/// going the other way does nothing instead of firing the wrong action.
+/// * **down** — shares the question as an image. Springs back too, for the
+///   same reason, and asks for the longest drag of the four: it opens the
+///   system share sheet on top of the app.
 ///
 /// The widget owns nothing but the gesture: it reports every direction upwards
 /// and re-reads what to paint from [items]/[index]. That is what keeps the deck
@@ -34,6 +34,7 @@ class SwipeDeck extends StatefulWidget {
     required this.onSwipeLeft,
     required this.onSwipeRight,
     required this.onSwipeUp,
+    required this.onSwipeDown,
     super.key,
     this.progress,
     this.overlayBuilder,
@@ -55,6 +56,9 @@ class SwipeDeck extends StatefulWidget {
 
   /// Save the top card to favourites.
   final VoidCallback onSwipeUp;
+
+  /// Share the top card.
+  final VoidCallback onSwipeDown;
 
   /// Live drag state, pushed out so widgets outside the deck (the round
   /// controls) can animate with the gesture.
@@ -150,13 +154,24 @@ class _SwipeDeckState extends State<SwipeDeck>
     // The dominant axis decides which action the drag was: a gesture that moved
     // 200 px up and 60 px left is an upward swipe, not a dismissal.
     if (_drag.dy.abs() > _drag.dx.abs()) {
-      final bool up =
-          -_drag.dy > size.height * AppConfig.deckSwipeUpThreshold ||
-          -velocity.dy > AppConfig.deckSwipeVelocity;
+      if (_drag.dy.isNegative) {
+        final bool up =
+            -_drag.dy > size.height * AppConfig.deckSwipeUpThreshold ||
+            -velocity.dy > AppConfig.deckSwipeVelocity;
+        if (up) widget.onSwipeUp();
+      } else {
+        // A bare flick commits the other three directions. Not this one: the
+        // share sheet takes over the screen, so a fast gesture also has to have
+        // travelled as far as a deliberate save before it counts.
+        final bool down =
+            _drag.dy > size.height * AppConfig.deckSwipeDownThreshold ||
+            (velocity.dy > AppConfig.deckSwipeVelocity &&
+                _drag.dy > size.height * AppConfig.deckSwipeUpThreshold);
+        if (down) widget.onSwipeDown();
+      }
 
-      if (up) widget.onSwipeUp();
-      // Saving does not consume the card, and downward is unbound, so either
-      // way the card returns to the centre.
+      // Neither saving nor sharing consumes the card, so either way it goes
+      // back to the centre.
       _settleBack();
       return;
     }
@@ -225,11 +240,16 @@ class _SwipeDeckState extends State<SwipeDeck>
     if (size.isEmpty || drag == Offset.zero) return DeckSwipeProgress.idle;
 
     if (drag.dy.abs() > drag.dx.abs()) {
-      // Downward is unbound: no feedback for a gesture that does nothing.
-      if (!drag.dy.isNegative) return DeckSwipeProgress.idle;
+      if (drag.dy.isNegative) {
+        return DeckSwipeProgress(
+          direction: DeckSwipeDirection.up,
+          amount: (-drag.dy / (size.height * AppConfig.deckSwipeUpThreshold))
+              .clamp(0.0, 1.0),
+        );
+      }
       return DeckSwipeProgress(
-        direction: DeckSwipeDirection.up,
-        amount: (-drag.dy / (size.height * AppConfig.deckSwipeUpThreshold))
+        direction: DeckSwipeDirection.down,
+        amount: (drag.dy / (size.height * AppConfig.deckSwipeDownThreshold))
             .clamp(0.0, 1.0),
       );
     }
