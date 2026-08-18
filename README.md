@@ -27,6 +27,8 @@ App Android de feed vertical swipeable con preguntas y respuestas curiosas sobre
 
 ## Feedback de los gestos del mazo
 
+Sobre el mazo hay una fila de **chips de categoría** ("Todas" más una por categoría) y, debajo de ellos, el **banner de anuncios**. El banner va ahí y no abajo a propósito: la tarjeta se arrastra en cuatro direcciones y un banner pegado al borde inferior, bajo el dedo, es el ejemplo de manual del clic accidental. Si el usuario es premium o no entra creativo, el hueco no existe — no queda una franja gris.
+
 La interacción principal es *swipear* las tarjetas en cuatro direcciones. Cada gesto dispara una acción diferente, y el botón circular bajo el mazo crece mientras arrastras para confirmar visualmente qué acción se va a ejecutar:
 
 - **Izquierda** (skip): descarta la tarjeta y muestra la siguiente. El botón "Siguiente" crece hasta 1.4x y aparece un badge (`✕`) en la esquina superior derecha de la tarjeta.

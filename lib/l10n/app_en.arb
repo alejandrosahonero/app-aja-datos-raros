@@ -45,7 +45,6 @@
     }
   },
   "deckShareError": "We could not prepare the image to share.",
-  "deckCategoryTooltip": "Filter by category",
   "deckCategoryAll": "All",
 
   "categoryBody": "Human body",

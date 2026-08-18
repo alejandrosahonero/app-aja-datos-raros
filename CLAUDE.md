@@ -118,16 +118,27 @@ Una pila de tarjetas, una detrás de otra. Solo la de arriba responde al dedo.
 |---|---|
 | **Deslizar a la derecha** | La tarjeta **se voltea** y enseña la respuesta. Vuelve al centro, no se descarta. |
 | **Deslizar a la izquierda** | La tarjeta **sale volando** y sube la siguiente. |
-| **Deslizar hacia arriba** | **Guarda la tarjeta** en favoritos (premium, ver §3.4). También vuelve al centro: guardar no es motivo para dejar de leerla. |
-| **Deslizar hacia abajo** | Nada, a propósito. Un flick hacia arriba impreciso que acaba yendo al revés no debe disparar la acción equivocada. |
+| **Deslizar hacia arriba** | **Guarda la tarjeta** en favoritos (premium, ver §3.5). También vuelve al centro: guardar no es motivo para dejar de leerla. |
+| **Deslizar hacia abajo** | **Comparte la pregunta** como imagen 1080x1920 (§3.4). Gratis para todos. También vuelve al centro. |
 | **Tocar la tarjeta** | Igual que deslizar a la derecha (voltear). |
-| **Botones inferiores** | "Siguiente", "Ver respuesta" y el icono de guardar. **No son decorativos**: una interfaz solo-arrastre es inutilizable con lector de pantalla y la penaliza el escaneo de accesibilidad de Play. No borrarlos. |
+| **Botones inferiores** | "Siguiente", "Compartir la pregunta", "Guardar" y "Ver respuesta". **No son decorativos**: una interfaz solo-arrastre es inutilizable con lector de pantalla y la penaliza el escaneo de accesibilidad de Play. No borrarlos. |
 
 El eje dominante decide la acción: un arrastre de 200 px hacia arriba y 60 px a la izquierda es un guardado, no un descarte.
 
+**Filtro de categoría: fila de chips** (`_CategoryChips`), arriba del todo y por encima del banner. Sustituye al `PopupMenuButton` que vivía en la barra superior: los chips cuestan alto que era de la tarjeta, pero enseñan las categorías sin abrir nada y cambiar de una es un toque en vez de tres. Siguen visibles en la pantalla de "te has quedado sin preguntas", que es justo donde cambiar de categoría es lo más útil que puede hacer el usuario. Volver a tocar el chip ya seleccionado **no** limpia el filtro: en una fila de filtros un toque significa "enséñame este".
+
 `SwipeDeck` (`features/facts/presentation/widgets/swipe_deck.dart`) **solo posee el gesto**. Notifica hacia arriba y repinta a partir de `items`/`index`. El estado del mazo — posición, volteo — vive en `DeckController`, y por eso se puede testear sin animaciones.
 
-Umbrales en `AppConfig`: `deckSwipeThreshold` (28 % del ancho) **o** `deckSwipeVelocity` (700 px/s) confirman el gesto.
+Umbrales en `AppConfig`: `deckSwipeThreshold` (28 % del ancho), `deckSwipeUpThreshold` (16 % del alto) y `deckSwipeDownThreshold` (26 % del alto). `deckSwipeVelocity` (700 px/s) confirma el gesto sin recorrer la distancia — **salvo hacia abajo**, que además exige haber viajado: comparte eje con guardar y abre una hoja modal encima de la app.
+
+**Feedback en vivo del arrastre.** `SwipeDeck` publica un `DeckSwipeProgress` (dirección + 0→1) en un `ValueNotifier`. Lo leen dos cosas, y por eso no pueden contradecirse:
+
+- El **botón** correspondiente crece hasta 1,4x, se rellena con su tinte y sube de elevación. Solo uno a la vez: manda el eje dominante.
+- Una **insignia** sobre la tarjeta, en el borde **opuesto** al gesto — skip a la derecha, voltear a la izquierda, guardar abajo, compartir arriba. El borde hacia el que se va la tarjeta se sale de pantalla y escondería el icono justo cuando confirma la acción.
+
+La misma función decide qué se ilumina y qué se dispara al soltar. Durante el rebote la dirección se congela: `Curves.easeOutBack` se pasa del centro y el signo del arrastre se invierte unos frames, lo que sin eso haría parpadear el botón contrario al final de cada gesto.
+
+Un `ValueNotifier` y no `setState` a propósito: cambia en cada frame de cada arrastre y solo deben repintarse los cuatro botones, no la pantalla.
 
 El volteo es un `rotateY` con perspectiva (`setEntry(3, 2, 0.0012)`); a mitad de la animación se cambia la cara y se des-espeja la trasera con otro `rotateY(pi)`. Va dentro de un `RepaintBoundary` para no repintar las tarjetas de debajo.
 
@@ -150,7 +161,21 @@ El volteo es un `rotateY` con perspectiva (`setEntry(3, 2, 0.0012)`); a mitad de
 
 El progreso se persiste como **número de tarjetas de contenido vistas** (`deck_facts_seen_<categoría>`), no como índice: los huecos de anuncio se desplazan cuando el usuario compra premium, y un índice guardado apuntaría a otra tarjeta.
 
-### 3.4 Favoritos — función de pago
+### 3.4 Compartir — imagen para historias
+
+Deslizar hacia abajo (o el botón) renderiza la pregunta como PNG de **1080x1920** y la entrega a la hoja del sistema (`share_plus`). Es el tamaño nativo de una historia de Instagram, un Reel y un TikTok: se publica sin recorte ni recodificación.
+
+- **Solo va la pregunta, nunca la respuesta.** La respuesta es el motivo para instalar la app; un post que la regala es un post que nadie tiene por qué seguir.
+- **Gratis para todos**, a diferencia de favoritos. Una tarjeta compartida es la instalación más barata que va a tener esta app: ponerla tras el muro de pago sería cobrar por el marketing.
+- Se pinta sobre un `Canvas` (`FactStoryImage`), **no** rasterizando un widget: tiene que medir 1080x1920 exactos sea cual sea el tamaño, la densidad y el tema del móvil, y un `RepaintBoundary` te da los píxeles del dispositivo.
+- Todo lo legible vive dentro del **área segura**: las tres superficies pintan su propia interfaz sobre las franjas superior e inferior del lienzo.
+- La tarjeta es de **tamaño fijo y la pregunta se encoge** para caber, no al revés: el marco constante es lo que hace que un feed de estas se lea como una serie. Pasado el mínimo (34 pt) corta la cola en vez de desbordar.
+- La paleta sale de `AppColors.seed` y está **fijada al esquema claro**: rebrandear la app rebrandea lo compartido, y un post cuyo fondo cambia con el tema del lector parece de dos cuentas distintas.
+- Un guardia impide que dos deslizamientos seguidos encolen dos hojas.
+
+> **Al escribir tests:** el render pasa por el motor gráfico, así que **se cuelga bajo el reloj falso de `testWidgets`**. Hace falta un `test` normal o envolverlo en `tester.runAsync`.
+
+### 3.5 Favoritos — función de pago
 
 Guardar tarjetas está detrás del **mismo pago único `premium_remove_ads`**. No hay un segundo producto: añadir SKUs multiplica el soporte y las combinaciones de entitlement que hay que probar.
 
@@ -172,7 +197,7 @@ Guardar tarjetas está detrás del **mismo pago único `premium_remove_ads`**. N
 - **Tarjeta de anuncio dentro del mazo = formato principal.** Se desliza igual que el contenido.
 - **Interstitial = secundario**, cada ~9 tarjetas y nunca antes de 3 min desde el anterior.
 - **Sin rewarded.** El uso es pasivo: no hay nada que desbloquear que justifique un vídeo. `AdsService` ya no tiene ese formato — **no reintroducirlo** sin una razón de producto nueva.
-- **IAP no consumible "quitar anuncios"** = conversión principal. Desbloquea además los favoritos (§3.4), así que tiene dos puntos de venta: la tarjeta de anuncio sin relleno y el intento de guardar una tarjeta.
+- **IAP no consumible "quitar anuncios"** = conversión principal. Desbloquea además los favoritos (§3.5), así que tiene dos puntos de venta: la tarjeta de anuncio sin relleno y el intento de guardar una tarjeta.
 
 ### 4.2 AdMob (`google_mobile_ads`)
 
@@ -213,7 +238,14 @@ Si no entra ningún creativo (sin consentimiento, sin inventario, sin unidad con
 
 > **Pendiente:** el plan original pedía un *native ad* real. Requiere una `NativeAdFactory` en Kotlin más su layout XML. Lo que hay ahora es un 300x250 dentro del mismo `DeckCardShell` que el contenido — cero código nativo y misma sensación. Migrar solo si el eCPM lo justifica.
 
-**Banner anclado.** `AdaptiveBannerAd` se coloca desde `BaseScreen` **debajo** del contenido, nunca superpuesto. Hoy **ninguna pantalla lo activa**: el mazo es una superficie de arrastre a pantalla completa y un banner anclado bajo un gesto de arrastre es el ejemplo de manual del clic accidental. `SettingsScreen` y `PaywallScreen` tampoco lo llevan. Se mantiene el widget porque la política de colocación tiene que seguir viviendo en un solo sitio.
+**Banner.** `AdaptiveBannerAd` es el único sitio donde vive la política de colocación. Tiene dos modos:
+
+- `anchored: true` (por defecto): lo coloca `BaseScreen` **debajo** del contenido, nunca superpuesto. Hoy no lo activa ninguna pantalla — `SettingsScreen`, `PaywallScreen` y `FavoritesScreen` van con `showBanner: false`.
+- `anchored: false`: **en línea, dentro del layout**. Es el que usa el mazo, entre los chips de categoría y las tarjetas.
+
+**El banner del mazo va arriba, nunca abajo.** El mazo es una superficie que se arrastra en cuatro direcciones, y un banner anclado al borde inferior bajo ese gesto es el ejemplo de manual del clic accidental. Colocado sobre las tarjetas el dedo no lo pisa nunca al salir de un deslizamiento. **No moverlo abajo.**
+
+Si no entra creativo, o el usuario es premium, el widget no ocupa nada (`SizedBox.shrink`): la tarjeta recupera el espacio en vez de dejar una franja gris. En pantallas pequeñas el banner y los chips comen alto que era de la tarjeta; el mazo va en un `Expanded` y cede, pero conviene revisarlo con `textScaleFactor` alto (§13).
 
 **Consentimiento (UMP).** `services/ads/consent_service.dart` usa el UMP SDK que ya incluye `google_mobile_ads` (sin dependencia extra):
 `requestConsentInfoUpdate` → `loadAndShowConsentFormIfRequired` → `canRequestAds()`.
@@ -359,7 +391,6 @@ flutter build appbundle --release --analyze-size
 ### Features del plan original todavía sin implementar
 
 - **Notificación push diaria** con la pregunta del día (el motor de retención). Requiere volver a añadir `POST_NOTIFICATIONS` — ver §5.
-- **Compartir la tarjeta como imagen** para Instagram/TikTok. Es el canal de distribución orgánica del que depende la app, así que es la siguiente pieza en prioridad.
 - **Widget de pantalla de inicio** con la pregunta del día.
 - **Remote Config / Firestore** para ampliar el catálogo sin publicar versión.
 

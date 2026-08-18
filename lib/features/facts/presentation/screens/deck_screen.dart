@@ -4,6 +4,7 @@ import 'package:aja/core/extensions/build_context_x.dart';
 import 'package:aja/core/routing/app_routes.dart';
 import 'package:aja/core/theme/app_spacing.dart';
 import 'package:aja/core/utils/app_logger.dart';
+import 'package:aja/core/widgets/adaptive_banner_ad.dart';
 import 'package:aja/core/widgets/app_loader.dart';
 import 'package:aja/core/widgets/base_screen.dart';
 import 'package:aja/core/widgets/empty_state.dart';
@@ -28,10 +29,12 @@ import 'package:go_router/go_router.dart';
 
 /// The whole app: a stack of cards you swipe through.
 ///
-/// `showBanner: false` on purpose. The body is one big drag surface that
-/// reaches the bottom of the screen, and an anchored banner under a drag
-/// gesture is the textbook accidental-click layout. The deck monetizes through
-/// the in-deck ad card and the interstitial instead.
+/// `showBanner: false` on purpose, and yet the deck does carry a banner. What
+/// it refuses is `BaseScreen`'s *anchored* one: the body is a drag surface that
+/// reaches the bottom of the screen, and a banner under a drag gesture is the
+/// textbook accidental-click layout. The deck places its own inline instead —
+/// above the cards, where a swipe never drags the finger across it. See
+/// [_DeckBanner].
 class DeckScreen extends ConsumerWidget {
   const DeckScreen({super.key});
 
@@ -43,7 +46,6 @@ class DeckScreen extends ConsumerWidget {
       title: context.l10n.appTitle,
       showBanner: false,
       actions: <Widget>[
-        const _CategoryMenu(),
         IconButton(
           onPressed: () => context.goNamed(AppRoutes.favoritesName),
           icon: const Icon(Icons.bookmarks_outlined),
@@ -104,22 +106,6 @@ class _DeckBodyState extends ConsumerState<_DeckBody> {
 
   @override
   Widget build(BuildContext context) {
-    if (state.isExhausted) {
-      return EmptyState(
-        icon: Icons.check_circle_outline,
-        title: context.l10n.deckFinishedTitle,
-        message: context.l10n.deckFinishedBody,
-        action: FilledButton.icon(
-          onPressed: () =>
-              unawaited(ref.read(deckControllerProvider.notifier).restart()),
-          icon: const Icon(Icons.refresh),
-          label: Text(context.l10n.deckRestart),
-        ),
-      );
-    }
-
-    final Set<String> favorites = ref.watch(favoritesProvider);
-
     return Padding(
       padding: const EdgeInsets.fromLTRB(
         AppSpacing.md,
@@ -129,47 +115,80 @@ class _DeckBodyState extends ConsumerState<_DeckBody> {
       ),
       child: Column(
         children: <Widget>[
-          _Progress(state: state),
+          // Filter and banner sit above the deck and survive both states. The
+          // exhausted screen is exactly where switching category is the most
+          // useful thing the user can do, so the chips must not disappear with
+          // the cards.
+          const _CategoryChips(),
           const SizedBox(height: AppSpacing.sm),
+          const _DeckBanner(),
           Expanded(
-            child: SwipeDeck(
-              items: state.items,
-              index: state.index,
-              progress: _progress,
-              onSwipeLeft: () => unawaited(_next(ref)),
-              onSwipeRight: () => _reveal(ref),
-              onSwipeUp: () => unawaited(_toggleFavorite(context, ref)),
-              onSwipeDown: () => unawaited(_share(context, ref)),
-              overlayBuilder:
-                  (BuildContext context, DeckSwipeProgress progress) =>
-                      _SwipeBadges(progress: progress),
-              builder: (BuildContext context, DeckItem item, bool isTop) =>
-                  switch (item) {
-                    FactItem(:final Fact fact) => FactCard(
-                      fact: fact,
-                      revealed: isTop && state.revealed,
-                      favorited: favorites.contains(fact.id),
-                      onTap: isTop ? () => _reveal(ref) : null,
-                    ),
-                    AdItem() => AdDeckCard(active: isTop),
-                  },
-            ),
-          ),
-          const SizedBox(height: AppSpacing.md),
-          _DeckControls(
-            state: state,
-            progress: _progress,
-            favorited: switch (state.current) {
-              FactItem(:final Fact fact) => favorites.contains(fact.id),
-              _ => false,
-            },
-            onNext: () => unawaited(_next(ref)),
-            onReveal: () => _reveal(ref),
-            onFavorite: () => unawaited(_toggleFavorite(context, ref)),
-            onShare: () => unawaited(_share(context, ref)),
+            child: state.isExhausted ? _exhausted(context) : _deck(context),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _exhausted(BuildContext context) {
+    return EmptyState(
+      icon: Icons.check_circle_outline,
+      title: context.l10n.deckFinishedTitle,
+      message: context.l10n.deckFinishedBody,
+      action: FilledButton.icon(
+        onPressed: () =>
+            unawaited(ref.read(deckControllerProvider.notifier).restart()),
+        icon: const Icon(Icons.refresh),
+        label: Text(context.l10n.deckRestart),
+      ),
+    );
+  }
+
+  Widget _deck(BuildContext context) {
+    final Set<String> favorites = ref.watch(favoritesProvider);
+
+    return Column(
+      children: <Widget>[
+        _Progress(state: state),
+        const SizedBox(height: AppSpacing.sm),
+        Expanded(
+          child: SwipeDeck(
+            items: state.items,
+            index: state.index,
+            progress: _progress,
+            onSwipeLeft: () => unawaited(_next(ref)),
+            onSwipeRight: () => _reveal(ref),
+            onSwipeUp: () => unawaited(_toggleFavorite(context, ref)),
+            onSwipeDown: () => unawaited(_share(context, ref)),
+            overlayBuilder:
+                (BuildContext context, DeckSwipeProgress progress) =>
+                    _SwipeBadges(progress: progress),
+            builder: (BuildContext context, DeckItem item, bool isTop) =>
+                switch (item) {
+                  FactItem(:final Fact fact) => FactCard(
+                    fact: fact,
+                    revealed: isTop && state.revealed,
+                    favorited: favorites.contains(fact.id),
+                    onTap: isTop ? () => _reveal(ref) : null,
+                  ),
+                  AdItem() => AdDeckCard(active: isTop),
+                },
+          ),
+        ),
+        const SizedBox(height: AppSpacing.md),
+        _DeckControls(
+          state: state,
+          progress: _progress,
+          favorited: switch (state.current) {
+            FactItem(:final Fact fact) => favorites.contains(fact.id),
+            _ => false,
+          },
+          onNext: () => unawaited(_next(ref)),
+          onReveal: () => _reveal(ref),
+          onFavorite: () => unawaited(_toggleFavorite(context, ref)),
+          onShare: () => unawaited(_share(context, ref)),
+        ),
+      ],
     );
   }
 
@@ -424,6 +443,105 @@ class _SwipeBadge extends StatelessWidget {
   }
 }
 
+/// Category filter as a scrollable row of chips.
+///
+/// Replaces the popup menu that used to live in the app bar. Chips cost
+/// vertical space that would otherwise belong to the card, which is why the
+/// row is as short as a touch target allows and why the deck sits in an
+/// [Expanded] that simply gives way. What they buy is discoverability: the
+/// categories are now visible without opening anything, and switching one is a
+/// single tap instead of three.
+class _CategoryChips extends ConsumerWidget {
+  const _CategoryChips();
+
+  /// Comfortably over the 48dp touch target once the chip's own tap padding is
+  /// counted, and small enough that the card keeps the screen.
+  static const double _height = 40;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final FactCategory? selected = ref.watch(categoryFilterProvider);
+
+    return SizedBox(
+      height: _height,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        // "All" first, then one chip per category.
+        itemCount: FactCategory.values.length + 1,
+        separatorBuilder: (BuildContext context, int index) =>
+            const SizedBox(width: AppSpacing.sm),
+        itemBuilder: (BuildContext context, int index) {
+          final FactCategory? category = index == 0
+              ? null
+              : FactCategory.values[index - 1];
+
+          return _CategoryChip(
+            label: category?.label(context) ?? context.l10n.deckCategoryAll,
+            selected: category == selected,
+            onSelected: () =>
+                ref.read(categoryFilterProvider.notifier).select(category),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _CategoryChip extends StatelessWidget {
+  const _CategoryChip({
+    required this.label,
+    required this.selected,
+    required this.onSelected,
+  });
+
+  final String label;
+  final bool selected;
+  final VoidCallback onSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    return FilterChip(
+      label: Text(label),
+      selected: selected,
+      // The tick would push the label sideways on every tap, so selection is
+      // carried by the fill colour alone.
+      showCheckmark: false,
+      visualDensity: VisualDensity.compact,
+      labelStyle: context.texts.labelLarge?.copyWith(
+        color: selected ? context.colors.onSecondaryContainer : null,
+        fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
+      ),
+      // Re-tapping the selected chip must not clear the filter: on a filter
+      // row, a tap means "show me this one".
+      onSelected: (bool _) => onSelected(),
+    );
+  }
+}
+
+/// Banner slot between the filter and the deck.
+///
+/// Above the cards on purpose. An anchored banner under a full-screen drag
+/// surface is the textbook accidental-click layout, and this deck is dragged in
+/// four directions; here the finger never travels over the ad on its way out of
+/// a swipe. It also renders nothing at all — no reserved strip — for premium
+/// users and whenever no creative loads, so the card gets the space back
+/// instead of staring at a grey box.
+class _DeckBanner extends StatelessWidget {
+  const _DeckBanner();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: AdaptiveBannerAd(
+        anchored: false,
+        // Inside the banner, not around it: an empty slot must cost the deck
+        // nothing at all, gap included.
+        padding: EdgeInsets.only(bottom: AppSpacing.sm),
+      ),
+    );
+  }
+}
+
 /// The three swipes mirrored as round buttons, laid out the way a card deck
 /// trains you to expect: discard on the left, save in the middle, reveal on the
 /// right — each control on the side its gesture throws the card towards, and
@@ -594,34 +712,6 @@ class _DeckButton extends StatelessWidget {
           );
         },
       ),
-    );
-  }
-}
-
-/// Category filter. A menu instead of a chip row: chips would eat vertical
-/// space that belongs to the card, and the filter is a rare action.
-class _CategoryMenu extends ConsumerWidget {
-  const _CategoryMenu();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final FactCategory? selected = ref.watch(categoryFilterProvider);
-
-    return PopupMenuButton<FactCategory?>(
-      icon: const Icon(Icons.filter_list),
-      tooltip: context.l10n.deckCategoryTooltip,
-      initialValue: selected,
-      onSelected: (FactCategory? category) =>
-          ref.read(categoryFilterProvider.notifier).select(category),
-      itemBuilder: (BuildContext context) => <PopupMenuEntry<FactCategory?>>[
-        PopupMenuItem<FactCategory?>(child: Text(context.l10n.deckCategoryAll)),
-        ...FactCategory.values.map(
-          (FactCategory category) => PopupMenuItem<FactCategory?>(
-            value: category,
-            child: Text(category.label(context)),
-          ),
-        ),
-      ],
     );
   }
 }

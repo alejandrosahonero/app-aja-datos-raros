@@ -68,7 +68,6 @@
     }
   },
   "deckShareError": "No hemos podido preparar la imagen para compartir.",
-  "deckCategoryTooltip": "Filtrar por categoría",
   "deckCategoryAll": "Todas",
 
   "categoryBody": "Cuerpo humano",
