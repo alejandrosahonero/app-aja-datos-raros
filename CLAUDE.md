@@ -150,6 +150,7 @@ El volteo es un `rotateY` con perspectiva (`setEntry(3, 2, 0.0012)`); a mitad de
 - El contenido está localizado **en el asset**, no en los `.arb`, porque traducir o ampliar el catálogo no debe exigir una versión nueva — y porque ese mismo JSON vendrá luego de Firebase Remote Config o Firestore.
 - `FactCategory` es un enum cerrado: una categoría desconocida en el JSON **revienta al parsear**, no pinta un chip vacío en producción.
 - El parseo corre en un isolate aparte (`compute`) y se cachea en `FactRepository` durante toda la vida del proceso.
+- **El orden del fichero es el orden que ve el usuario**: no hay barajado en ninguna parte. Por eso el catálogo va **intercalado por categoría** (cuerpo, ciencia, historia, lenguaje, y vuelta a empezar) en vez de agrupado: con el filtro en «Todas», un bloque de veinte tarjetas seguidas de la misma categoría se lee como si la app se hubiera quedado atascada. Al añadir contenido, mantener el intercalado.
 
 ### 3.3 Composición del mazo
 
@@ -160,6 +161,8 @@ El volteo es un `rotateY` con perspectiva (`setEntry(3, 2, 0.0012)`); a mitad de
 - `withAds: false` si el usuario es premium → el mazo no reserva ni un hueco.
 
 El progreso se persiste como **número de tarjetas de contenido vistas** (`deck_facts_seen_<categoría>`), no como índice: los huecos de anuncio se desplazan cuando el usuario compra premium, y un índice guardado apuntaría a otra tarjeta.
+
+**El progreso no se enseña.** No hay barra ni contador «7/23»: la promesa del producto es un mazo que no se acaba, y un indicador que avanza convierte la sesión en una tarea con final. Se guarda para saber por dónde retomar, nada más. **No reintroducir un indicador de progreso.**
 
 ### 3.4 Compartir — imagen para historias
 
@@ -378,7 +381,7 @@ flutter build appbundle --release --analyze-size
 
 ## 12. Pendiente antes de publicar
 
-1. **Verificar a mano las 23 entradas de `assets/data/facts.json`** y rellenar `sourceUrl` en cada una. Es lo más importante de esta lista.
+1. **Verificar a mano las 87 entradas de `assets/data/facts.json`** y rellenar `sourceUrl` en cada una. Es lo más importante de esta lista. El catálogo se escribió con ayuda de IA y **cada `source` es una cita en texto plano sin comprobar**: hay que abrir la fuente, confirmar el dato y pegar el enlace permanente antes de publicar.
 2. `core/config/ad_config.dart`: rellenar `_prodBanner` y `_prodInterstitial`.
 3. `AndroidManifest.xml`: sustituir el App ID de prueba de AdMob por el de producción.
 4. Iconos adaptativos (`flutter_launcher_icons`) y splash nativo (`flutter_native_splash`) — necesitan assets reales.

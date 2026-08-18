@@ -30,17 +30,6 @@
   "deckShowAnswer": "Ver respuesta",
   "deckHideAnswer": "Ocultar",
   "deckNext": "Siguiente",
-  "deckProgress": "{current}/{total}",
-  "@deckProgress": {
-    "placeholders": {
-      "current": {
-        "type": "int"
-      },
-      "total": {
-        "type": "int"
-      }
-    }
-  },
   "deckFinishedTitle": "Te has quedado sin preguntas",
   "deckFinishedBody": "Has visto todas las de esta categoría. Empieza de nuevo o prueba con otra.",
   "deckRestart": "Volver a empezar",

@@ -17,7 +17,6 @@
   "deckShowAnswer": "Show answer",
   "deckHideAnswer": "Hide",
   "deckNext": "Next",
-  "deckProgress": "{current}/{total}",
   "deckFinishedTitle": "You ran out of questions",
   "deckFinishedBody": "That is every card in this category. Start over or try another one.",
   "deckRestart": "Start over",

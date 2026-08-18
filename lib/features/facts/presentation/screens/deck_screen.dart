@@ -149,8 +149,6 @@ class _DeckBodyState extends ConsumerState<_DeckBody> {
 
     return Column(
       children: <Widget>[
-        _Progress(state: state),
-        const SizedBox(height: AppSpacing.sm),
         Expanded(
           child: SwipeDeck(
             items: state.items,
@@ -285,40 +283,7 @@ class _DeckBodyState extends ConsumerState<_DeckBody> {
   }
 }
 
-class _Progress extends StatelessWidget {
-  const _Progress({required this.state});
-
-  final DeckState state;
-
-  @override
-  Widget build(BuildContext context) {
-    final int total = state.totalFacts;
-    final int current = (state.factsSeen + 1).clamp(1, total);
-
-    return Row(
-      children: <Widget>[
-        Expanded(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(AppRadius.pill),
-            child: LinearProgressIndicator(
-              value: total == 0 ? 0 : state.factsSeen / total,
-              minHeight: 4,
-            ),
-          ),
-        ),
-        const SizedBox(width: AppSpacing.md),
-        Text(
-          context.l10n.deckProgress(current, total),
-          style: context.texts.labelMedium?.copyWith(
-            color: context.colors.onSurfaceVariant,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-/// Palette of the three actions, in one place.
+/// Palette of the four actions, in one place.
 ///
 /// The badge over the card and the button under it have to be the same colour
 /// for the association to work, and a colour defined twice is a colour that
@@ -333,13 +298,6 @@ extension on DeckSwipeDirection {
   };
 }
 
-/// The badges that ride on top of the card while it is being dragged.
-///
-/// Each one sits on the edge that *stays* on screen as the card leaves, which
-/// is the opposite edge to the gesture: drag left and the card slides its left
-/// half out of view, so a skip badge parked there would disappear exactly when
-/// it is supposed to be confirming the action. Up is the exception — its card
-/// springs back, but the bottom edge is still the one under the thumb.
 class _SwipeBadges extends StatelessWidget {
   const _SwipeBadges({required this.progress});
 

@@ -37,10 +37,6 @@ class DeckState {
 
   DeckItem? get current => isExhausted ? null : items[index];
 
-  /// Total number of fact cards, ignoring ad slots — what the progress
-  /// indicator counts.
-  int get totalFacts => items.whereType<FactItem>().length;
-
   DeckState copyWith({
     List<DeckItem>? items,
     int? index,
