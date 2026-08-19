@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "_editorial": "Cada entrada lleva una cita textual en 'source'. 'sourceUrl' va vacio a proposito: antes de publicar hay que verificar el dato una por una y pegar el enlace permanente. Un dato falso viral se convierte en resenas de 1 estrella.",
+  "_editorial": "Cada entrada lleva 'sourceUrl': un enlace permanente que se abrio y se comprobo antes de publicar, y que la app muestra como enlace clicable bajo la respuesta. Una entrada sin enlace verificado no entra.",
   "facts": [
     {
       "id": "vomito-verde",
@@ -10,15 +10,15 @@
         "en": "Why is vomit always drawn green when it almost never is?"
       },
       "answer": {
-        "es": "Porque a veces sí lo es: cuando el estómago ya está vacío, sube bilis y la tiñe de verde.",
-        "en": "Because sometimes it really is: once the stomach empties, bile comes up and dyes it green."
+        "es": "Porque a veces sí lo es: cuando lo que sube es bilis en vez de comida, el vómito sale verde.",
+        "en": "Because sometimes it really is: when what comes up is bile rather than food, vomit turns green."
       },
       "detail": {
-        "es": "El pigmento responsable es la biliverdina. Los dibujantes cogieron el caso más llamativo (vomitar con el estómago vacío) y lo convirtieron en el color por defecto.",
-        "en": "The pigment behind it is biliverdin. Cartoonists took the most striking case — throwing up on an empty stomach — and turned it into the default colour."
+        "es": "La bilis llega desde el intestino y tiñe lo que sube. Verde mientras aún no se ha degradado, amarilla cuando ya sí, que es lo típico al vomitar con el estómago vacío. Los dibujantes cogieron el caso más llamativo y lo convirtieron en el color por defecto.",
+        "en": "Bile arrives from the intestine and dyes whatever comes up. Green while it is still undigested, yellow once it has broken down — which is what usually happens on an empty stomach. Cartoonists took the most striking case and made it the default colour."
       },
-      "source": "MedlinePlus, Enciclopedia médica: náuseas y vómitos",
-      "sourceUrl": ""
+      "source": "Cleveland Clinic — Vomit Color Chart",
+      "sourceUrl": "https://health.clevelandclinic.org/vomit-color-chart"
     },
     {
       "id": "platano-baya",
@@ -35,8 +35,8 @@
         "es": "Una baya nace de un solo ovario y lleva las semillas dentro: plátano, tomate, uva, aguacate. La parte roja de la fresa es el receptáculo hinchado, y los «puntitos» son los frutos de verdad.",
         "en": "A berry grows from a single ovary with the seeds inside: banana, tomato, grape, avocado. The red part of a strawberry is a swollen receptacle, and the \"seeds\" on it are the actual fruits."
       },
-      "source": "Judd et al., Plant Systematics, 4.ª ed.",
-      "sourceUrl": ""
+      "source": "Britannica — Berry (plant reproductive body)",
+      "sourceUrl": "https://www.britannica.com/science/berry-plant-reproductive-body"
     },
     {
       "id": "muralla-espacio",
@@ -53,8 +53,8 @@
         "es": "El primer astronauta chino, Yang Liwei, lo confirmó en 2003: no la vio. El mito es anterior a los vuelos espaciales — aparece impreso ya en 1932.",
         "en": "China's first astronaut, Yang Liwei, confirmed it in 2003: he could not see it. The myth predates spaceflight — it was already in print in 1932."
       },
-      "source": "NASA Earth Observatory; declaraciones de Yang Liwei, 2003",
-      "sourceUrl": ""
+      "source": "Al Jazeera — 'China's spaceman shatters a myth' (2003)",
+      "sourceUrl": "https://www.aljazeera.com/news/2003/10/17/chinas-spaceman-shatters-a-myth"
     },
     {
       "id": "origen-ok",
@@ -71,8 +71,8 @@
         "es": "Habría muerto como todas las bromas de moda si al año siguiente la campaña de Martin Van Buren no hubiera usado «Old Kinderhook», su apodo, con las mismas iniciales.",
         "en": "It would have died like every other passing joke if Martin Van Buren's campaign hadn't run with \"Old Kinderhook\", his nickname, the next year."
       },
-      "source": "Allen Walker Read, American Speech, 1963-1964",
-      "sourceUrl": ""
+      "source": "Merriam-Webster — The Hilarious History of 'OK'",
+      "sourceUrl": "https://www.merriam-webster.com/wordplay/the-hilarious-history-of-ok-okay"
     },
     {
       "id": "mapa-lengua",
@@ -89,8 +89,8 @@
         "es": "En 1901 el alemán David Hänig midió diferencias mínimas de sensibilidad. En 1942 Edwin Boring tradujo sus datos exagerando las diferencias, y el dibujo acabó en los libros de texto durante 60 años.",
         "en": "In 1901 David Hänig measured tiny differences in sensitivity. In 1942 Edwin Boring translated his data exaggerating them, and the diagram sat in textbooks for 60 years."
       },
-      "source": "Hänig (1901); Boring (1942); revisado en Nature, 2006",
-      "sourceUrl": ""
+      "source": "Smithsonian Magazine — The Taste Map of the Tongue You Learned in School Is All Wrong",
+      "sourceUrl": "https://www.smithsonianmag.com/science-nature/neat-and-tidy-map-tastes-tongue-you-learned-school-all-wrong-180963407/"
     },
     {
       "id": "flamencos-rosas",
@@ -104,11 +104,11 @@
         "en": "Grey. It eats its way to pink: the colour comes from carotenoids in the algae and crustaceans it feeds on."
       },
       "detail": {
-        "es": "Un flamenco al que le falten carotenoides palidece. En los zoos se les añaden a la comida, y no por estética: el rosa intenso es una señal de salud que usan para elegir pareja.",
-        "en": "A flamingo short on carotenoids fades. Zoos add them to the feed, and not for looks: intense pink is a health signal they use to choose mates."
+        "es": "El pigmento concreto es el betacaroteno, el mismo naranja de la zanahoria, y les llega de las algas, las larvas de mosca de salmuera y la artemia de las que se alimentan.",
+        "en": "The pigment is beta-carotene — the same orange as a carrot — and it reaches them through the algae, brine fly larvae and brine shrimp they feed on."
       },
-      "source": "Fox, Comparative Biochemistry and Physiology, 1962",
-      "sourceUrl": ""
+      "source": "Britannica — Why Are Flamingos Pink?",
+      "sourceUrl": "https://www.britannica.com/story/why-are-flamingos-pink"
     },
     {
       "id": "cleopatra-piramides",
@@ -125,8 +125,8 @@
         "es": "La Gran Pirámide se terminó hacia el 2560 a. C. y Cleopatra murió en el 30 a. C. Para ella, las pirámides ya eran una antigüedad turística.",
         "en": "The Great Pyramid was finished around 2560 BC and Cleopatra died in 30 BC. To her the pyramids were already a tourist antiquity."
       },
-      "source": "Cronología del Reino Antiguo, British Museum",
-      "sourceUrl": ""
+      "source": "Britannica — Cleopatra (y Great Pyramid of Giza)",
+      "sourceUrl": "https://www.britannica.com/biography/Cleopatra-queen-of-Egypt"
     },
     {
       "id": "salario-sal",
@@ -143,8 +143,8 @@
         "es": "«Salarium» era una asignación relacionada con la sal, pero ninguna fuente romana describe un pago en sacos de sal. La versión bonita de la historia se coló en los diccionarios y ya no salió.",
         "en": "\"Salarium\" was an allowance connected to salt, but no Roman source describes payment in sacks of salt. The prettier version slipped into dictionaries and never left."
       },
-      "source": "Plinio el Viejo, Naturalis Historia XXXI; revisión en Journal of Roman Studies",
-      "sourceUrl": ""
+      "source": "Etymonline — salary",
+      "sourceUrl": "https://www.etymonline.com/word/salary"
     },
     {
       "id": "brillo-humano",
@@ -161,8 +161,8 @@
         "es": "Es un subproducto del metabolismo. Con cámaras ultrasensibles se ve que el brillo sigue un ciclo diario y que la cara es la zona que más emite.",
         "en": "It is a by-product of metabolism. Ultra-sensitive cameras show the glow follows a daily cycle and that the face emits the most."
       },
-      "source": "Kobayashi et al., PLoS ONE, 2009",
-      "sourceUrl": ""
+      "source": "PLoS ONE — Kobayashi, Kikuchi & Okamura (2009), Imaging of Ultraweak Spontaneous Photon Emission from Human Body Displaying Diurnal Rhythm",
+      "sourceUrl": "https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0006256"
     },
     {
       "id": "dia-venus",
@@ -179,8 +179,8 @@
         "es": "Además gira al revés que casi todos los demás, así que allí el Sol sale por el oeste. Si pudieras ver el cielo a través de las nubes, claro.",
         "en": "It also spins backwards compared with almost every other planet, so the Sun rises in the west there — if you could see the sky through the clouds."
       },
-      "source": "NASA Planetary Fact Sheet",
-      "sourceUrl": ""
+      "source": "NASA Science — Venus Facts",
+      "sourceUrl": "https://science.nasa.gov/venus/venus-facts/"
     },
     {
       "id": "oxford-aztecas",
@@ -197,8 +197,8 @@
         "es": "Hay constancia de enseñanza en Oxford desde 1096. Tenochtitlán se fundó en 1325 y el imperio azteca como tal se formó en 1428.",
         "en": "Teaching is documented at Oxford from 1096. Tenochtitlan was founded in 1325 and the Aztec empire itself formed in 1428."
       },
-      "source": "University of Oxford, historia oficial; INAH, fundación de Tenochtitlán",
-      "sourceUrl": ""
+      "source": "Smithsonian Magazine — The University of Oxford Is Older Than the Aztec Empire",
+      "sourceUrl": "https://www.smithsonianmag.com/smart-news/university-oxford-older-than-aztec-empire-other-facts-will-change-your-perspective-history-1529607/"
     },
     {
       "id": "sandwich-conde",
@@ -215,8 +215,8 @@
         "es": "La leyenda dice que eran cartas de juego; sus biógrafos apuntan más bien a papeles de trabajo: el conde era Primer Lord del Almirantazgo y comía en el escritorio.",
         "en": "Legend says it was playing cards; his biographers point rather at paperwork — the Earl was First Lord of the Admiralty and ate at his desk."
       },
-      "source": "N. A. M. Rodger, The Insatiable Earl, 1993",
-      "sourceUrl": ""
+      "source": "Encyclopaedia Britannica — Sandwich",
+      "sourceUrl": "https://www.britannica.com/topic/sandwich"
     },
     {
       "id": "estomago-se-renueva",
@@ -233,8 +233,8 @@
         "es": "Una capa de moco con bicarbonato neutraliza el ácido en la superficie, y las células del epitelio gástrico se reemplazan constantemente. Cuando esa defensa falla aparece la úlcera.",
         "en": "A bicarbonate-rich mucus layer neutralises the acid at the surface, and the gastric lining cells are replaced constantly. When that defence fails you get an ulcer."
       },
-      "source": "Allen & Flemström, American Journal of Physiology, 2005",
-      "sourceUrl": ""
+      "source": "American Journal of Physiology-Cell Physiology — Allen & Flemström 2005",
+      "sourceUrl": "https://journals.physiology.org/doi/full/10.1152/ajpcell.00102.2004"
     },
     {
       "id": "relampago-sol",
@@ -251,8 +251,8 @@
         "es": "Ese calentamiento brutal y repentino expande el aire de golpe, y esa onda de choque es exactamente lo que oyes como trueno.",
         "en": "That sudden, brutal heating expands the air explosively, and that shock wave is exactly what you hear as thunder."
       },
-      "source": "NOAA National Severe Storms Laboratory",
-      "sourceUrl": ""
+      "source": "NOAA NESDIS — ¿Qué causa el rayo y el trueno?",
+      "sourceUrl": "https://www.nesdis.noaa.gov/about/k-12-education/severe-weather/what-causes-lightning-and-thunder"
     },
     {
       "id": "miel-tumbas",
@@ -269,8 +269,8 @@
         "es": "Tiene tan poca agua y es tan ácida que ninguna bacteria sobrevive dentro, y las abejas añaden una enzima que genera peróxido de hidrógeno. Sellada, es prácticamente eterna.",
         "en": "It holds so little water and is so acidic that no bacteria survives inside, and bees add an enzyme that generates hydrogen peroxide. Sealed, it is practically eternal."
       },
-      "source": "National Honey Board; Smithsonian Magazine, 2013",
-      "sourceUrl": ""
+      "source": "Smithsonian Magazine — The Science Behind Honey's Eternal Shelf Life",
+      "sourceUrl": "https://www.smithsonianmag.com/science-nature/the-science-behind-honeys-eternal-shelf-life-1218690/"
     },
     {
       "id": "letra-enye",
@@ -287,8 +287,8 @@
         "es": "El pergamino era caro y «annus» o «damnum» se abreviaban con una raya encima. Esa raya se estilizó hasta convertirse en la virgulilla y acabó siendo una letra propia.",
         "en": "Parchment was expensive, so \"annus\" or \"damnum\" were abbreviated with a stroke above. That stroke got stylised into the tilde and ended up as a letter of its own."
       },
-      "source": "Real Academia Española, Ortografía de la lengua española",
-      "sourceUrl": ""
+      "source": "The Conversation (autora de la U. de Castilla-La Mancha), citando la explicación de la RAE",
+      "sourceUrl": "https://theconversation.com/de-donde-viene-la-ene-breve-repaso-de-la-historia-de-una-letra-unica-204577"
     },
     {
       "id": "sangre-nunca-azul",
@@ -305,8 +305,8 @@
         "es": "La luz roja penetra más profundo en el tejido y es absorbida por la sangre; la azul rebota antes y vuelve a tu ojo. Por eso la vena se ve azulada aunque su contenido sea granate.",
         "en": "Red light travels deeper into tissue and gets absorbed by blood; blue light scatters back sooner and reaches your eye. The vein looks bluish even though its contents are dark red."
       },
-      "source": "Kienle et al., Applied Optics, 1996",
-      "sourceUrl": ""
+      "source": "Cleveland Clinic — What Color Is Blood?",
+      "sourceUrl": "https://health.clevelandclinic.org/what-color-is-blood"
     },
     {
       "id": "pulpo-corazones",
@@ -323,8 +323,8 @@
         "es": "Dos corazones bombean sangre a las branquias y el tercero al resto del cuerpo. Su sangre es azul: transporta oxígeno con hemocianina, basada en cobre, en vez de hierro.",
         "en": "Two hearts pump blood to the gills and the third to the rest of the body. Its blood is blue: it carries oxygen with copper-based haemocyanin instead of iron."
       },
-      "source": "Wells, Octopus: Physiology and Behaviour of an Advanced Invertebrate, 1978",
-      "sourceUrl": ""
+      "source": "Smithsonian Magazine — Ten Wild Facts About Octopuses",
+      "sourceUrl": "https://www.smithsonianmag.com/science-nature/ten-wild-facts-about-octopuses-they-have-three-hearts-big-brains-and-blue-blood-7625828/"
     },
     {
       "id": "fax-antes-telefono",
@@ -341,8 +341,8 @@
         "es": "El escocés Alexander Bain patentó un aparato que transmitía imágenes por telégrafo. El teléfono de Bell llegó en 1876.",
         "en": "The Scot Alexander Bain patented a device that transmitted images over telegraph wires. Bell's telephone arrived in 1876."
       },
-      "source": "Patente británica 9745 de Alexander Bain, 1843",
-      "sourceUrl": ""
+      "source": "Wikipedia — Alexander Bain (inventor)",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Alexander_Bain_(inventor)"
     },
     {
       "id": "cuarentena-cuarenta",
@@ -359,8 +359,8 @@
         "es": "Ragusa empezó con treinta días («trentino») y se amplió a cuarenta, «quaranta giorni». El número tenía tanto de observación médica como de simbolismo bíblico.",
         "en": "Ragusa started with thirty days (\"trentino\") and it was extended to forty, \"quaranta giorni\". The number was as much biblical symbolism as medical observation."
       },
-      "source": "Tognotti, Emerging Infectious Diseases (CDC), 2013",
-      "sourceUrl": ""
+      "source": "Encyclopaedia Britannica — Today in History: julio 27, primera cuarentena",
+      "sourceUrl": "https://www.britannica.com/today-in-history/July-27-When-and-Where-the-Worlds-First-Quarantine-Began"
     },
     {
       "id": "astronautas-crecen",
@@ -377,8 +377,8 @@
         "es": "Sin gravedad los discos intervertebrales se descomprimen y la columna se estira. Al volver, el peso los vuelve a comprimir; el estirón se paga con dolor de espalda.",
         "en": "Without gravity the intervertebral discs decompress and the spine stretches. Back on the ground weight compresses them again — the growth spurt is paid for in back pain."
       },
-      "source": "NASA Human Research Program",
-      "sourceUrl": ""
+      "source": "Smithsonian Magazine — Space Makes Astronauts Grow Taller, But It Also Causes Back Problems",
+      "sourceUrl": "https://www.smithsonianmag.com/smart-news/space-makes-astronauts-grow-taller-and-also-backs-180960922/"
     },
     {
       "id": "petricor",
@@ -395,8 +395,8 @@
         "es": "Detectamos la geosmina a cinco partes por billón: somos más sensibles a ella que un tiburón a la sangre. Se cree que es una herencia de cuando encontrar agua era cuestión de vida o muerte.",
         "en": "We detect geosmin at five parts per trillion — we are more sensitive to it than a shark is to blood. It is thought to be a leftover from when finding water was a matter of life or death."
       },
-      "source": "Bear & Thomas, Nature, 1964; Polak & Provasi, Chemical Senses, 1992",
-      "sourceUrl": ""
+      "source": "American Council on Science and Health — Geosmin: Why We Smell Air After a Storm",
+      "sourceUrl": "https://www.acsh.org/news/2018/07/28/geosmin-why-we-smell-air-after-storm-13240"
     },
     {
       "id": "mamuts-piramide",
@@ -413,8 +413,8 @@
         "es": "La Gran Pirámide se terminó hacia el 2560 a.C.; los últimos mamuts lanudos, aislados en la isla de Wrangel, sobrevivieron hasta cerca del 1650 a.C., unos 900 años después.",
         "en": "The Great Pyramid was finished around 2560 BCE; the last woolly mammoths, isolated on Wrangel Island, survived until about 1650 BCE — roughly 900 years later."
       },
-      "source": "Vartanyan et al., Nature, 1993; Britannica, Great Pyramid of Giza",
-      "sourceUrl": ""
+      "source": "Britannica — Great Pyramid of Giza / PMC — mammoth genome erosion",
+      "sourceUrl": "https://www.britannica.com/topic/Great-Pyramid-of-Giza"
     },
     {
       "id": "nostalgia-enfermedad",
@@ -431,8 +431,8 @@
         "es": "Unió el griego «nostos» (regreso) y «algos» (dolor): literalmente, «el dolor de no poder volver». Hasta el siglo XIX se trató como una dolencia física, con fiebre y pérdida de apetito incluidas.",
         "en": "He combined the Greek \"nostos\" (return) and \"algos\" (pain) — literally, \"the pain of not being able to go back\". Until the 19th century it was treated as a physical illness, fever and loss of appetite included."
       },
-      "source": "Oxford English Dictionary, entrada «nostalgia»",
-      "sourceUrl": ""
+      "source": "Britannica — Nostalgia",
+      "sourceUrl": "https://www.britannica.com/science/nostalgia"
     },
     {
       "id": "piel-erizada",
@@ -449,80 +449,8 @@
         "es": "El músculo erector del pelo contraía el vello para atrapar aire y abrigar, o para parecer más grande ante una amenaza. En humanos casi lampiños el reflejo sigue encendiéndose con el frío o el miedo, aunque ya no cumple ninguna función.",
         "en": "The arrector pili muscle used to fluff up fur to trap warm air or look bigger to a threat. In nearly hairless humans the reflex still fires with cold or fear, it just doesn't do anything anymore."
       },
-      "source": "Cleveland Clinic, Health Library: Goosebumps (Piloerection)",
-      "sourceUrl": ""
-    },
-    {
-      "id": "huellas-koala",
-      "category": "ciencia",
-      "question": {
-        "es": "¿Qué animal podría incriminarte en la escena de un crimen?",
-        "en": "Which animal could frame you at a crime scene?"
-      },
-      "answer": {
-        "es": "El koala. Sus huellas dactilares son tan parecidas a las humanas que confunden a un forense.",
-        "en": "The koala. Its fingerprints are so close to human ones that they can fool a forensic examiner."
-      },
-      "detail": {
-        "es": "No es parentesco: los koalas y nosotros nos separamos hace más de 100 millones de años. Es evolución convergente, provocada por agarrar ramas con precisión.",
-        "en": "It is not kinship: koalas and humans split over 100 million years ago. It is convergent evolution, driven by gripping branches precisely."
-      },
-      "source": "Henneberg et al., Naturwissenschaften, 1997",
-      "sourceUrl": ""
-    },
-    {
-      "id": "harvard-independencia",
-      "category": "historia",
-      "question": {
-        "es": "¿Qué es más antigua, Harvard o la independencia de Estados Unidos?",
-        "en": "Which is older, Harvard or American independence?"
-      },
-      "answer": {
-        "es": "Harvard, por 140 años.",
-        "en": "Harvard, by 140 years."
-      },
-      "detail": {
-        "es": "Harvard se fundó en 1636, cuando las trece colonias ni siquiera existían como tales; la independencia de Estados Unidos llegó en 1776.",
-        "en": "Harvard was founded in 1636, before the thirteen colonies existed as such; American independence came in 1776."
-      },
-      "source": "Harvard University, History & Traditions; Britannica, United States Declaration of Independence",
-      "sourceUrl": ""
-    },
-    {
-      "id": "trivial-cruce-caminos",
-      "category": "lenguaje",
-      "question": {
-        "es": "¿Por qué llamamos «trivial» a lo que no tiene importancia?",
-        "en": "Why do we call unimportant things \"trivial\"?"
-      },
-      "answer": {
-        "es": "Porque viene del latín «trivium», el cruce de tres caminos donde la gente se paraba a charlar de cualquier cosa.",
-        "en": "Because it comes from the Latin \"trivium\", the crossroads of three roads where people stopped to gossip about anything and everything."
-      },
-      "detail": {
-        "es": "Lo que se comentaba en ese cruce —cotilleos, rumores, noticias sin verificar— era «de andar por el trivium»: información sin peso, no de estudio serio. De ahí saltó al inglés como «trivia», los datos curiosos sin importancia.",
-        "en": "What got talked about at that crossroads — gossip, rumours, unverified news — was \"of the trivium\": everyday chatter, not serious scholarship. From there it jumped into English as \"trivia\", the lightweight curious facts."
-      },
-      "source": "Oxford English Dictionary, entrada «trivial»",
-      "sourceUrl": ""
-    },
-    {
-      "id": "punto-ciego",
-      "category": "cuerpo",
-      "question": {
-        "es": "Cada ojo tiene un agujero en la visión, entonces, ¿por qué nunca lo notas?",
-        "en": "Each eye has a hole in its vision, so why don't you ever notice?"
-      },
-      "answer": {
-        "es": "Porque el cerebro rellena ese hueco con lo que ve alrededor, inventándose el paisaje que falta.",
-        "en": "Because your brain fills the gap in with whatever the surrounding scene looks like, making up the missing patch."
-      },
-      "detail": {
-        "es": "El punto ciego aparece donde el nervio óptico sale del ojo y no caben fotorreceptores. Con los dos ojos abiertos, cada uno tapa el hueco del otro, así que solo se nota cerrando uno y con el truco justo.",
-        "en": "The blind spot sits where the optic nerve exits the eye, leaving no room for photoreceptors. With both eyes open each one covers the other's gap, so it only shows up if you close one eye and know the trick."
-      },
-      "source": "National Eye Institute (NIH), «Blind Spot»",
-      "sourceUrl": ""
+      "source": "Wikipedia — Arrector pili muscle",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Arrector_pili_muscle"
     },
     {
       "id": "platano-radiactivo",
@@ -539,8 +467,80 @@
         "es": "Emite tan poca radiación que harían falta unos 10 millones de plátanos para causar una intoxicación; los científicos incluso usan el «plátano equivalente» como unidad informal de dosis.",
         "en": "It gives off so little radiation that you'd need around 10 million bananas to get sick from it; scientists even use the informal \"banana equivalent dose\" to explain radiation levels to the public."
       },
-      "source": "U.S. Nuclear Regulatory Commission, Radiation Basics",
-      "sourceUrl": ""
+      "source": "Britannica — Are Bananas Radioactive?",
+      "sourceUrl": "https://www.britannica.com/science/Are-Bananas-Radioactive"
+    },
+    {
+      "id": "harvard-independencia",
+      "category": "historia",
+      "question": {
+        "es": "¿Qué es más antigua, Harvard o la independencia de Estados Unidos?",
+        "en": "Which is older, Harvard or American independence?"
+      },
+      "answer": {
+        "es": "Harvard, por 140 años.",
+        "en": "Harvard, by 140 years."
+      },
+      "detail": {
+        "es": "Harvard se fundó en 1636, cuando las trece colonias ni siquiera existían como tales; la independencia de Estados Unidos llegó en 1776.",
+        "en": "Harvard was founded in 1636, before the thirteen colonies existed as such; American independence came in 1776."
+      },
+      "source": "Harvard University — History Timeline",
+      "sourceUrl": "https://www.harvard.edu/about/history/timeline/"
+    },
+    {
+      "id": "trivial-cruce-caminos",
+      "category": "lenguaje",
+      "question": {
+        "es": "¿Por qué llamamos «trivial» a lo que no tiene importancia?",
+        "en": "Why do we call unimportant things \"trivial\"?"
+      },
+      "answer": {
+        "es": "Porque viene del latín «trivium», el cruce de tres caminos donde la gente se paraba a charlar de cualquier cosa.",
+        "en": "Because it comes from the Latin \"trivium\", the crossroads of three roads where people stopped to gossip about anything and everything."
+      },
+      "detail": {
+        "es": "Lo que se comentaba en ese cruce era «trivialis»: común, de andar por casa, no de estudio serio. El «trivia» moderno de los datos curiosos es un rodeo posterior: sale del título de un libro de 1902, lo recoge la jerga estudiantil en los sesenta y lo remata el Trivial Pursuit en 1982.",
+        "en": "What got talked about at that crossroads was \"trivialis\": common, everyday, not serious scholarship. Modern \"trivia\", the curious-facts kind, took a detour: it comes from the title of a 1902 book, was picked up as student slang in the sixties and sealed by Trivial Pursuit in 1982."
+      },
+      "source": "Etymonline — trivia / trivial",
+      "sourceUrl": "https://www.etymonline.com/word/trivia"
+    },
+    {
+      "id": "punto-ciego",
+      "category": "cuerpo",
+      "question": {
+        "es": "Cada ojo tiene un agujero en la visión, entonces, ¿por qué nunca lo notas?",
+        "en": "Each eye has a hole in its vision, so why don't you ever notice?"
+      },
+      "answer": {
+        "es": "Porque el cerebro rellena ese hueco con lo que ve alrededor, inventándose el paisaje que falta.",
+        "en": "Because your brain fills the gap in with whatever the surrounding scene looks like, making up the missing patch."
+      },
+      "detail": {
+        "es": "El punto ciego aparece donde el nervio óptico sale del ojo y no caben fotorreceptores. Con los dos ojos abiertos, cada uno tapa el hueco del otro, así que solo se nota cerrando uno y con el truco justo.",
+        "en": "The blind spot sits where the optic nerve exits the eye, leaving no room for photoreceptors. With both eyes open each one covers the other's gap, so it only shows up if you close one eye and know the trick."
+      },
+      "source": "Britannica — Blind spot",
+      "sourceUrl": "https://www.britannica.com/science/blind-spot"
+    },
+    {
+      "id": "estornudo-velocidad",
+      "category": "ciencia",
+      "question": {
+        "es": "¿A qué velocidad viaja de verdad un estornudo?",
+        "en": "How fast does a sneeze actually travel?"
+      },
+      "answer": {
+        "es": "Bastante más despacio de lo que se suele decir: unos 60 km/h de media, no los 160 km/h del mito.",
+        "en": "Quite a bit slower than the usual claim: around 60 km/h on average, not the 160 km/h of the myth."
+      },
+      "detail": {
+        "es": "Los 160 km/h salen de una estimación de los años cuarenta que las mediciones modernas han desmontado. Con cámaras rápidas, la velocidad máxima media de las gotitas es de 16,5 m/s —unos 59 km/h— y ni el estornudo más veloz del estudio pasó de 79 km/h.",
+        "en": "The 160 km/h figure comes from a 1940s estimate that modern measurements have taken apart. With high-speed cameras the mean peak droplet speed is 16.5 m/s — about 59 km/h — and not even the fastest sneeze in the study got past 79 km/h."
+      },
+      "source": "Physics of Fluids (Bahl et al., 2021) — dinámica de gotitas del estornudo",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8597717/"
     },
     {
       "id": "guillotina-star-wars",
@@ -557,8 +557,8 @@
         "es": "Hamida Djandoubi fue decapitado en Marsella en septiembre de 1977, meses después del estreno de la primera película de Star Wars; Francia no abolió la pena de muerte hasta 1981.",
         "en": "Hamida Djandoubi was beheaded in Marseille in September 1977, months after the first Star Wars film opened; France didn't abolish the death penalty until 1981."
       },
-      "source": "Encyclopædia Britannica, capital punishment in France; Le Monde archives",
-      "sourceUrl": ""
+      "source": "History.com — The guillotine falls silent",
+      "sourceUrl": "https://www.history.com/this-day-in-history/september-10/the-guillotine-falls-silent"
     },
     {
       "id": "musculo-raton",
@@ -575,8 +575,8 @@
         "es": "«Musculus» es el diminutivo de «mus» (ratón): «ratoncito». La palabra se quedó casi igual en español, en inglés («muscle») y en la mayoría de lenguas que la tomaron prestada del latín.",
         "en": "\"Musculus\" is the diminutive of \"mus\" (mouse): \"little mouse\". The word stuck, almost unchanged, in Spanish, in English (\"muscle\") and in most other languages that borrowed it from Latin."
       },
-      "source": "Joan Corominas, Diccionario crítico etimológico",
-      "sourceUrl": ""
+      "source": "Etymonline — muscle",
+      "sourceUrl": "https://www.etymonline.com/word/muscle"
     },
     {
       "id": "hueso-vs-acero",
@@ -593,80 +593,8 @@
         "es": "El tejido óseo compacto es mucho menos denso que el acero pero casi igual de resistente a la tracción, así que la relación resistencia-peso sale a su favor. Es la misma lógica que usan los ingenieros para diseñar estructuras ligeras.",
         "en": "Compact bone is far less dense than steel but nearly as strong under tension, so its strength-to-weight ratio wins. Engineers borrow the same logic when designing lightweight structures."
       },
-      "source": "Currey, J.D., «Bones: Structure and Mechanics», Princeton University Press, 2002",
-      "sourceUrl": ""
-    },
-    {
-      "id": "estornudo-velocidad",
-      "category": "ciencia",
-      "question": {
-        "es": "¿A qué velocidad viaja de verdad un estornudo?",
-        "en": "How fast does a sneeze actually travel?"
-      },
-      "answer": {
-        "es": "Mucho más despacio de lo que se suele decir: por debajo de los 50 km/h, no los 160 km/h del mito.",
-        "en": "Much slower than the myth claims: under 50 km/h (30 mph), not the often-quoted 160 km/h (100 mph)."
-      },
-      "detail": {
-        "es": "La cifra de 160 km/h viene de estimaciones antiguas y poco fiables; los estudios modernos con cámaras de alta velocidad miden la nube de gotitas muy por debajo de esa marca.",
-        "en": "The 160 km/h figure comes from old, unreliable estimates; modern high-speed camera studies clock the droplet cloud well below that."
-      },
-      "source": "Bourouiba et al., JAMA, 2016",
-      "sourceUrl": ""
-    },
-    {
-      "id": "bigote-obligatorio",
-      "category": "historia",
-      "question": {
-        "es": "¿Era obligatorio el bigote en el ejército británico?",
-        "en": "Was a mustache mandatory in the British Army?"
-      },
-      "answer": {
-        "es": "Sí, por reglamento, hasta 1916.",
-        "en": "Yes, by regulation, until 1916."
-      },
-      "detail": {
-        "es": "El reglamento militar prohibía a los oficiales afeitarse el labio superior; la norma se derogó en plena Primera Guerra Mundial porque el vello estorbaba al ajustar las máscaras antigás.",
-        "en": "Military regulations forbade officers from shaving their upper lip; the rule was scrapped in the middle of World War I because facial hair got in the way of fitting gas masks."
-      },
-      "source": "Imperial War Museums; National Army Museum (UK)",
-      "sourceUrl": ""
-    },
-    {
-      "id": "malaria-mal-aire",
-      "category": "lenguaje",
-      "question": {
-        "es": "¿Por qué la malaria se llama así si la causa un mosquito?",
-        "en": "Why is malaria named for \"bad air\" if a mosquito causes it?"
-      },
-      "answer": {
-        "es": "Porque durante siglos se creyó que la enfermedad venía del aire podrido de los pantanos, no de ningún bicho.",
-        "en": "Because for centuries people believed the disease came from the foul air of swamps, not from any insect."
-      },
-      "detail": {
-        "es": "«Malaria» es el italiano «mala aria», «mal aire». El mosquito Anopheles como culpable real no se identificó hasta 1897, casi dos siglos después de que la palabra ya estuviera fijada.",
-        "en": "\"Malaria\" is the Italian \"mala aria\", \"bad air\". The real culprit, the Anopheles mosquito, wasn't identified until 1897 — almost two centuries after the word was already fixed in use."
-      },
-      "source": "Oxford English Dictionary, entrada «malaria»",
-      "sourceUrl": ""
-    },
-    {
-      "id": "pulmon-izquierdo",
-      "category": "cuerpo",
-      "question": {
-        "es": "¿Por qué tu pulmón izquierdo es más pequeño que el derecho?",
-        "en": "Why is your left lung smaller than your right one?"
-      },
-      "answer": {
-        "es": "Porque le deja sitio al corazón, que se inclina hacia ese lado del pecho.",
-        "en": "Because it makes room for the heart, which leans into that side of the chest."
-      },
-      "detail": {
-        "es": "El pulmón izquierdo tiene solo dos lóbulos, uno menos que el derecho, y una muesca llamada escotadura cardíaca moldeada justo para el corazón. Aun así, ambos pulmones respiran al mismo ritmo sin que notes la diferencia de tamaño.",
-        "en": "The left lung has only two lobes, one fewer than the right, with a notch called the cardiac notch shaped around the heart. Both lungs still breathe in step, so you never feel the size difference."
-      },
-      "source": "Cleveland Clinic, Health Library: «Lungs»",
-      "sourceUrl": ""
+      "source": "CK-12 Foundation — Are bones more robust than steel?",
+      "sourceUrl": "https://www.ck12.org/flexi/life-science/skeletal-system/are-bones-of-the-skeletal-system-more-robust-than-steel/"
     },
     {
       "id": "caca-cubo-wombat",
@@ -683,62 +611,62 @@
         "es": "No los moldea con el ano, sino que su intestino tiene tramos de distinta elasticidad que le dan forma al excremento; así los cubos no ruedan cuando los usa para marcar territorio.",
         "en": "It doesn't shape them with its anus — sections of its intestine stretch differently, molding the waste into corners as it passes through; the cubes then stay put, which is handy for marking territory."
       },
-      "source": "Yang et al., Soft Matter, 2021",
-      "sourceUrl": ""
+      "source": "Smithsonian Magazine — cómo el wombat hace caca cúbica (investigación de Patricia Yang, Soft Matter)",
+      "sourceUrl": "https://www.smithsonianmag.com/smart-news/scientists-have-solved-mystery-how-wombats-poop-cubes-180976898/"
     },
     {
-      "id": "tutankamon-sultanato",
+      "id": "bigote-obligatorio",
       "category": "historia",
       "question": {
-        "es": "¿Qué tienen en común la tumba de Tutankamón y el fin del Imperio otomano?",
-        "en": "What do Tutankhamun's tomb and the end of the Ottoman Empire have in common?"
+        "es": "¿Era obligatorio el bigote en el ejército británico?",
+        "en": "Was a mustache mandatory in the British Army?"
       },
       "answer": {
-        "es": "Pasaron el mismo mes: noviembre de 1922.",
-        "en": "They happened the same month: November 1922."
+        "es": "Sí, por reglamento, hasta 1916.",
+        "en": "Yes, by regulation, until 1916."
       },
       "detail": {
-        "es": "Howard Carter halló la entrada a la tumba el 4 de noviembre; días antes, la Asamblea de Turquía había abolido el sultanato otomano tras más de 600 años de historia.",
-        "en": "Howard Carter found the tomb's entrance on November 4; days earlier, Turkey's assembly had abolished the Ottoman sultanate after more than 600 years."
+        "es": "El reglamento militar prohibía a los oficiales afeitarse el labio superior; la norma se derogó en plena Primera Guerra Mundial porque el vello estorbaba al ajustar las máscaras antigás.",
+        "en": "Military regulations forbade officers from shaving their upper lip; the rule was scrapped in the middle of World War I because facial hair got in the way of fitting gas masks."
       },
-      "source": "Britannica, Tutankhamun; Britannica, Ottoman Empire",
-      "sourceUrl": ""
+      "source": "Historic UK — Moustaches Throughout History",
+      "sourceUrl": "https://www.historic-uk.com/HistoryUK/HistoryofBritain/The-Moustache-to-Rule-Them-All/"
     },
     {
-      "id": "desastre-mala-estrella",
+      "id": "malaria-mal-aire",
       "category": "lenguaje",
       "question": {
-        "es": "¿Qué tienen que ver las estrellas con un «desastre»?",
-        "en": "What do stars have to do with a \"disaster\"?"
+        "es": "¿Por qué la malaria se llama así si la causa un mosquito?",
+        "en": "Why is malaria named for \"bad air\" if a mosquito causes it?"
       },
       "answer": {
-        "es": "Que la palabra nació de la astrología: un desastre era, literalmente, tener una mala estrella encima.",
-        "en": "The word was born in astrology: a disaster literally meant having a bad star hanging over you."
+        "es": "Porque durante siglos se creyó que la enfermedad venía del aire podrido de los pantanos, no de ningún bicho.",
+        "en": "Because for centuries people believed the disease came from the foul air of swamps, not from any insect."
       },
       "detail": {
-        "es": "Viene del italiano «disastro», de «dis-» (mal) y «astro» (estrella). Cuando algo salía terriblemente mal, se asumía que los astros no se habían alineado a tu favor.",
-        "en": "It comes from the Italian \"disastro\", from \"dis-\" (bad) and \"astro\" (star). When something went terribly wrong, people assumed the stars simply hadn't aligned in your favour."
+        "es": "«Malaria» es el italiano «mala aria», «mal aire». La palabra se documenta desde 1740; el mosquito Anopheles como culpable real no se identificó hasta 1897, siglo y medio largo después.",
+        "en": "\"Malaria\" is the Italian \"mala aria\", \"bad air\". The word is documented from 1740; the real culprit, the Anopheles mosquito, was not identified until 1897 — a good century and a half later."
       },
-      "source": "Oxford English Dictionary, entrada «disaster»",
-      "sourceUrl": ""
+      "source": "Etymonline (basado en OED) — entrada 'malaria'",
+      "sourceUrl": "https://www.etymonline.com/word/malaria"
     },
     {
-      "id": "bebes-lagrimas-tardias",
+      "id": "pulmon-izquierdo",
       "category": "cuerpo",
       "question": {
-        "es": "Un recién nacido llora a gritos, entonces, ¿por qué no moja ni una lágrima?",
-        "en": "A newborn screams the house down, so why doesn't a single tear fall?"
+        "es": "¿Por qué tu pulmón izquierdo es más pequeño que el derecho?",
+        "en": "Why is your left lung smaller than your right one?"
       },
       "answer": {
-        "es": "Porque sus glándulas lagrimales tardan varias semanas en producir lágrimas de verdad.",
-        "en": "Because their tear glands take several weeks to start producing actual tears."
+        "es": "Porque le deja sitio al corazón, que se inclina hacia ese lado del pecho.",
+        "en": "Because it makes room for the heart, which leans into that side of the chest."
       },
       "detail": {
-        "es": "Los bebés nacen con el llanto y el gesto ya listos, pero el sistema que fabrica lágrimas líquidas madura después, normalmente entre la segunda semana y los primeros meses de vida. Hasta entonces, lloran «en seco».",
-        "en": "Babies arrive with the crying face and sound fully wired, but the system that makes liquid tears matures later, typically somewhere between two weeks and a few months old. Until then, they cry dry."
+        "es": "El pulmón izquierdo tiene solo dos lóbulos, uno menos que el derecho, y una muesca llamada escotadura cardíaca moldeada justo para el corazón. Aun así, ambos pulmones respiran al mismo ritmo sin que notes la diferencia de tamaño.",
+        "en": "The left lung has only two lobes, one fewer than the right, with a notch called the cardiac notch shaped around the heart. Both lungs still breathe in step, so you never feel the size difference."
       },
-      "source": "American Academy of Pediatrics, HealthyChildren.org",
-      "sourceUrl": ""
+      "source": "Cleveland Clinic — Every Breath You Take: Your Lungs and How They Work",
+      "sourceUrl": "https://my.clevelandclinic.org/health/body/8960-lungs"
     },
     {
       "id": "tardigrado-vacio",
@@ -755,62 +683,62 @@
         "es": "En 2007 la ESA los mandó fuera de la cápsula en órbita baja; algunos incluso pusieron huevos viables después del experimento.",
         "en": "In 2007 the European Space Agency sent them outside the capsule in low Earth orbit; some even laid viable eggs afterward."
       },
-      "source": "Jönsson et al., Current Biology, 2008",
-      "sourceUrl": ""
+      "source": "PMC — Tardigrades in Space Research: Past and Future (cita Jönsson et al. 2008, Current Biology)",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5705745/"
     },
     {
-      "id": "chiste-mas-antiguo",
+      "id": "tutankamon-sultanato",
       "category": "historia",
       "question": {
-        "es": "¿Cuántos años tiene el libro de chistes más antiguo que se conserva?",
-        "en": "How old is the oldest joke book that still survives?"
+        "es": "¿Qué tienen en común la tumba de Tutankamón y el fin del Imperio otomano?",
+        "en": "What do Tutankhamun's tomb and the end of the Ottoman Empire have in common?"
       },
       "answer": {
-        "es": "Unos 1600 años.",
-        "en": "About 1,600 years."
+        "es": "Pasaron el mismo mes: noviembre de 1922.",
+        "en": "They happened the same month: November 1922."
       },
       "detail": {
-        "es": "Se llama Philogelos («El amante de la risa»), se recopiló en griego hacia el siglo IV o V, y varios de sus chistes sobre despistados siguen sonando reconocibles hoy.",
-        "en": "It's called the Philogelos (\"The Laughter-Lover\"), compiled in Greek around the 4th or 5th century, and several of its jokes about absent-minded fools still land today."
+        "es": "Howard Carter halló la entrada a la tumba el 4 de noviembre; días antes, la Asamblea de Turquía había abolido el sultanato otomano tras más de 600 años de historia.",
+        "en": "Howard Carter found the tomb's entrance on November 4; days earlier, Turkey's assembly had abolished the Ottoman sultanate after more than 600 years."
       },
-      "source": "Barry Baldwin, The Philogelos or Laughter-Lover, 1983",
-      "sourceUrl": ""
+      "source": "Wikipedia (con History.com para Tutankamón) — abolición del sultanato otomano",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Abolition_of_the_Ottoman_sultanate"
     },
     {
-      "id": "influenza-astros",
+      "id": "desastre-mala-estrella",
       "category": "lenguaje",
       "question": {
-        "es": "¿Qué tiene que ver la «influencia» de los astros con la gripe?",
-        "en": "What do the stars' \"influence\" have to do with the flu?"
+        "es": "¿Qué tienen que ver las estrellas con un «desastre»?",
+        "en": "What do stars have to do with a \"disaster\"?"
       },
       "answer": {
-        "es": "Que «influenza» es italiano para «influencia»: se creía que las epidemias las provocaban los astros o el frío, «influyendo» sobre el cuerpo.",
-        "en": "\"Influenza\" is Italian for \"influence\": epidemics were believed to be caused by the stars or the cold, \"influencing\" the body."
+        "es": "Que la palabra nació de la astrología: un desastre era, literalmente, tener una mala estrella encima.",
+        "en": "The word was born in astrology: a disaster literally meant having a bad star hanging over you."
       },
       "detail": {
-        "es": "El nombre se fijó durante una epidemia italiana del siglo XVIII y pasó tal cual al inglés. El español, en cambio, tomó otro camino: «gripe» viene del francés «grippe».",
-        "en": "The name was fixed during an 18th-century Italian epidemic and passed straight into English. Spanish went a different route: \"gripe\" comes from the French \"grippe\" instead."
+        "es": "Viene del italiano «disastro», de «dis-» (mal) y «astro» (estrella). Cuando algo salía terriblemente mal, se asumía que los astros no se habían alineado a tu favor.",
+        "en": "It comes from the Italian \"disastro\", from \"dis-\" (bad) and \"astro\" (star). When something went terribly wrong, people assumed the stars simply hadn't aligned in your favour."
       },
-      "source": "Oxford English Dictionary, entrada «influenza»",
-      "sourceUrl": ""
+      "source": "Etymonline — entrada 'disaster'",
+      "sourceUrl": "https://www.etymonline.com/word/disaster"
     },
     {
-      "id": "pelusa-ombligo",
+      "id": "bebes-lagrimas-tardias",
       "category": "cuerpo",
       "question": {
-        "es": "¿De qué está hecha en realidad la pelusa que se acumula en tu ombligo?",
-        "en": "What is the fluff that collects in your belly button actually made of?"
+        "es": "Un recién nacido llora a gritos, entonces, ¿por qué no moja ni una lágrima?",
+        "en": "A newborn screams the house down, so why doesn't a single tear fall?"
       },
       "answer": {
-        "es": "Casi siempre es algodón: fibras de tu ropa que el vello del abdomen arrastra hacia dentro.",
-        "en": "Almost always cotton: fibres from your clothes that the hair on your belly drags inward."
+        "es": "Porque sus glándulas lagrimales tardan varias semanas en producir lágrimas de verdad.",
+        "en": "Because their tear glands take several weeks to start producing actual tears."
       },
       "detail": {
-        "es": "Un estudio que ganó un premio Ig Nobel analizó miles de muestras de pelusa y descubrió que el vello actúa como una cinta transportadora de un solo sentido, empujando fibras sueltas de la camiseta hacia el ombligo junto con piel muerta y sudor.",
-        "en": "A study that won an Ig Nobel Prize examined thousands of lint samples and found abdominal hair works like a one-way conveyor belt, sweeping loose shirt fibres into the navel along with dead skin and sweat."
+        "es": "Los bebés nacen con el llanto y el gesto ya listos, pero el sistema que fabrica lágrimas líquidas madura después, normalmente entre la segunda semana y los primeros meses de vida. Hasta entonces, lloran «en seco».",
+        "en": "Babies arrive with the crying face and sound fully wired, but the system that makes liquid tears matures later, typically somewhere between two weeks and a few months old. Until then, they cry dry."
       },
-      "source": "Steinhauser, G., «The nature of navel fluff», Medical Hypotheses, 2009",
-      "sourceUrl": ""
+      "source": "Stanford Medicine Children's Health — Newborn Crying",
+      "sourceUrl": "https://www.stanfordchildrens.org/en/topic/default?id=newborn-crying-90-P02648"
     },
     {
       "id": "tiburones-antes-arboles",
@@ -827,62 +755,62 @@
         "es": "Los primeros tiburones aparecen en el registro fósil hace unos 400 millones de años; los primeros árboles con tronco leñoso, hace unos 350.",
         "en": "The earliest sharks show up in the fossil record around 400 million years ago; the first trees with woody trunks appear roughly 350 million years ago."
       },
-      "source": "American Museum of Natural History",
-      "sourceUrl": ""
+      "source": "Encyclopaedia Britannica — Shark",
+      "sourceUrl": "https://www.britannica.com/animal/shark"
     },
     {
-      "id": "duelo-diputados-francia",
+      "id": "chiste-mas-antiguo",
       "category": "historia",
       "question": {
-        "es": "¿Se batieron en duelo dos políticos franceses en pleno siglo XX?",
-        "en": "Did two French politicians actually duel in the 20th century?"
+        "es": "¿Cuántos años tiene el libro de chistes más antiguo que se conserva?",
+        "en": "How old is the oldest joke book that still survives?"
       },
       "answer": {
-        "es": "Sí, con espadas, en 1967.",
-        "en": "Yes, with swords, in 1967."
+        "es": "Unos 1600 años.",
+        "en": "About 1,600 years."
       },
       "detail": {
-        "es": "Gaston Defferre retó a René Ribière tras llamarle «idiota» en la Asamblea Nacional; se batieron a espada, Defferre lo hirió dos veces y ahí acabó todo, sin cargos.",
-        "en": "Gaston Defferre challenged René Ribière after calling him an \"idiot\" in the National Assembly; they fought with swords, Defferre wounded him twice, and that was that — no charges filed."
+        "es": "Se llama Philogelos («El amante de la risa»), se recopiló en griego hacia el siglo IV o V, y varios de sus chistes sobre despistados siguen sonando reconocibles hoy.",
+        "en": "It's called the Philogelos (\"The Laughter-Lover\"), compiled in Greek around the 4th or 5th century, and several of its jokes about absent-minded fools still land today."
       },
-      "source": "TIME, 1967; Le Monde archives",
-      "sourceUrl": ""
+      "source": "Wikipedia — Philogelos",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Philogelos"
     },
     {
-      "id": "clue-ovillo-ariadna",
+      "id": "influenza-astros",
       "category": "lenguaje",
       "question": {
-        "es": "¿Por qué una «pista» en inglés se llama «clue», como un ovillo?",
-        "en": "Why is a clue named after a ball of yarn?"
+        "es": "¿Qué tiene que ver la «influencia» de los astros con la gripe?",
+        "en": "What do the stars' \"influence\" have to do with the flu?"
       },
       "answer": {
-        "es": "Porque «clue» viene de «clew», el ovillo de hilo que Ariadna le dio a Teseo para no perderse en el laberinto.",
-        "en": "Because \"clue\" comes from \"clew\", the ball of thread Ariadne gave Theseus so he wouldn't get lost in the labyrinth."
+        "es": "Que «influenza» es italiano para «influencia»: se creía que las epidemias las provocaban los astros o el frío, «influyendo» sobre el cuerpo.",
+        "en": "\"Influenza\" is Italian for \"influence\": epidemics were believed to be caused by the stars or the cold, \"influencing\" the body."
       },
       "detail": {
-        "es": "Seguir el hilo hasta la salida se convirtió en metáfora de seguir cualquier indicio hasta la solución, y el ovillo terminó siendo, sin más, la pista misma.",
-        "en": "Following the thread to the exit became a metaphor for following any lead to a solution, and the ball of yarn itself simply turned into the word for the clue."
+        "es": "El nombre se fijó durante una epidemia italiana del siglo XVIII y pasó tal cual al inglés. El español, en cambio, tomó otro camino: «gripe» viene del francés «grippe».",
+        "en": "The name was fixed during an 18th-century Italian epidemic and passed straight into English. Spanish went a different route: \"gripe\" comes from the French \"grippe\" instead."
       },
-      "source": "Oxford English Dictionary, entrada «clue»",
-      "sourceUrl": ""
+      "source": "Etymonline — entrada 'influenza'",
+      "sourceUrl": "https://www.etymonline.com/word/influenza"
     },
     {
-      "id": "huesos-recien-nacido",
+      "id": "pelusa-ombligo",
       "category": "cuerpo",
       "question": {
-        "es": "Naces con unos 270 huesos, entonces, ¿por qué un adulto solo tiene 206?",
-        "en": "You're born with about 270 bones, so why does an adult only have 206?"
+        "es": "¿De qué está hecha en realidad la pelusa que se acumula en tu ombligo?",
+        "en": "What is the fluff that collects in your belly button actually made of?"
       },
       "answer": {
-        "es": "Porque muchos se sueldan entre sí mientras creces, sobre todo en el cráneo y la columna.",
-        "en": "Because many of them fuse together as you grow, especially in the skull and spine."
+        "es": "Casi siempre es algodón: fibras de tu ropa que el vello del abdomen arrastra hacia dentro.",
+        "en": "Almost always cotton: fibres from your clothes that the hair on your belly drags inward."
       },
       "detail": {
-        "es": "Al nacer, buena parte del esqueleto es cartílago blando que facilita el paso por el canal del parto. Con los años, esas piezas se osifican y se fusionan por pares, hasta dejar los 206 huesos fijos del adulto.",
-        "en": "At birth, much of the skeleton is soft cartilage that makes it easier to pass through the birth canal. Over the years those pieces ossify and fuse in pairs, settling into the adult's fixed 206 bones."
+        "es": "Un químico austríaco analizó 503 muestras de su propio ombligo durante tres años y concluyó que el vello del abdomen funciona como una cinta transportadora de un solo sentido: arrastra fibras sueltas de la camiseta hacia dentro, junto con piel muerta y sudor.",
+        "en": "An Austrian chemist analysed 503 samples from his own navel over three years and concluded that abdominal hair works like a one-way conveyor belt, dragging loose shirt fibres inward along with dead skin and sweat."
       },
-      "source": "KidsHealth from Nemours, «Your Bones»",
-      "sourceUrl": ""
+      "source": "reposiTUm (TU Wien) — Steinhauser, «The nature of navel fluff», Medical Hypotheses 2009",
+      "sourceUrl": "https://repositum.tuwien.at/handle/20.500.12708/166310"
     },
     {
       "id": "desierto-mas-grande",
@@ -899,62 +827,62 @@
         "es": "Gran parte del continente recibe menos de 200 mm de precipitación al año, así que técnicamente es más árido que el Sahara.",
         "en": "Much of the continent gets less than 200 mm of precipitation a year, which technically makes it drier than the Sahara."
       },
-      "source": "NOAA; National Geographic",
-      "sourceUrl": ""
+      "source": "Encyclopaedia Britannica — Why Is Antarctica a Desert?",
+      "sourceUrl": "https://www.britannica.com/topic/Why-Is-Antarctica-a-Desert"
     },
     {
-      "id": "guerra-38-minutos",
+      "id": "duelo-diputados-francia",
       "category": "historia",
       "question": {
-        "es": "¿Cuánto duró la guerra más corta de la historia?",
-        "en": "How long did the shortest war in history last?"
+        "es": "¿Se batieron en duelo dos políticos franceses en pleno siglo XX?",
+        "en": "Did two French politicians actually duel in the 20th century?"
       },
       "answer": {
-        "es": "Unos 38 minutos.",
-        "en": "About 38 minutes."
+        "es": "Sí, con espadas, en 1967.",
+        "en": "Yes, with swords, in 1967."
       },
       "detail": {
-        "es": "El 27 de agosto de 1896, el Reino Unido bombardeó el palacio del sultán de Zanzíbar hasta su rendición; la guerra anglo-zanzibar quedó registrada como la más breve conocida.",
-        "en": "On August 27, 1896, Britain shelled the Sultan of Zanzibar's palace until he surrendered; the Anglo-Zanzibar War is recorded as the shortest known war."
+        "es": "Gaston Defferre retó a René Ribière tras llamarle «idiota» en la Asamblea Nacional; se batieron a espada, Defferre lo hirió dos veces y ahí acabó todo, sin cargos.",
+        "en": "Gaston Defferre challenged René Ribière after calling him an \"idiot\" in the National Assembly; they fought with swords, Defferre wounded him twice, and that was that — no charges filed."
       },
-      "source": "Guinness World Records; Britannica, Anglo-Zanzibar War",
-      "sourceUrl": ""
+      "source": "Wikipedia — Gaston Defferre",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Gaston_Defferre"
     },
     {
-      "id": "ojala-ala-quiera",
+      "id": "clue-ovillo-ariadna",
       "category": "lenguaje",
       "question": {
-        "es": "¿Por qué «ojalá» significa literalmente «Alá quiera»?",
-        "en": "Why does the Spanish word for \"hopefully\" literally mean \"God willing\"?"
+        "es": "¿Por qué una «pista» en inglés se llama «clue», como un ovillo?",
+        "en": "Why is a clue named after a ball of yarn?"
       },
       "answer": {
-        "es": "Porque la palabra entera es un préstamo directo del árabe «law šā llāh», «si Dios quiere».",
-        "en": "Because \"ojalá\" is a direct loan from the Arabic \"law šā llāh\", \"if God wills it\"."
+        "es": "Porque «clue» viene de «clew», el ovillo de hilo que Ariadna le dio a Teseo para no perderse en el laberinto.",
+        "en": "Because \"clue\" comes from \"clew\", the ball of thread Ariadne gave Theseus so he wouldn't get lost in the labyrinth."
       },
       "detail": {
-        "es": "Entró en el castellano durante los siglos de al-Ándalus y sobrevivió intacta al paso del árabe hablado en la Península al español, aunque hoy ya nadie piense en Alá al decirla.",
-        "en": "It entered Spanish during the centuries of Muslim al-Andalus and survived intact long after Arabic stopped being spoken on the peninsula, even though nobody thinks of Allah when they say it today."
+        "es": "Seguir el hilo hasta la salida se convirtió en metáfora de seguir cualquier indicio hasta la solución, y el ovillo terminó siendo, sin más, la pista misma.",
+        "en": "Following the thread to the exit became a metaphor for following any lead to a solution, and the ball of yarn itself simply turned into the word for the clue."
       },
-      "source": "Real Academia Española, Diccionario de la lengua española",
-      "sourceUrl": ""
+      "source": "Etymonline — clue",
+      "sourceUrl": "https://www.etymonline.com/word/clue"
     },
     {
-      "id": "venas-vuelta-tierra",
+      "id": "huesos-recien-nacido",
       "category": "cuerpo",
       "question": {
-        "es": "Si estirases todos tus vasos sanguíneos en fila, ¿cuánto darían de sí?",
-        "en": "If you laid out every blood vessel in your body end to end, how far would it reach?"
+        "es": "Naces con unos 270 huesos, entonces, ¿por qué un adulto solo tiene 206?",
+        "en": "You're born with about 270 bones, so why does an adult only have 206?"
       },
       "answer": {
-        "es": "Unos 100.000 kilómetros: suficiente para rodear la Tierra más de dos veces.",
-        "en": "About 100,000 kilometres, enough to circle the Earth more than twice."
+        "es": "Porque muchos se sueldan entre sí mientras creces, sobre todo en el cráneo y la columna.",
+        "en": "Because many of them fuse together as you grow, especially in the skull and spine."
       },
       "detail": {
-        "es": "La cifra suma arterias, venas y, sobre todo, los capilares microscópicos, que son con diferencia los más numerosos. Todo ese tendido cabe dentro de un solo cuerpo humano.",
-        "en": "The figure adds up arteries, veins and, above all, microscopic capillaries, which vastly outnumber the rest. All of that tubing fits inside a single human body."
+        "es": "Al nacer, buena parte del esqueleto es cartílago blando que facilita el paso por el canal del parto. Con los años, esas piezas se osifican y se fusionan por pares, hasta dejar los 206 huesos fijos del adulto.",
+        "en": "At birth, much of the skeleton is soft cartilage that makes it easier to pass through the birth canal. Over the years those pieces ossify and fuse in pairs, settling into the adult's fixed 206 bones."
       },
-      "source": "The Franklin Institute, «The Human Heart: Blood Vessels»",
-      "sourceUrl": ""
+      "source": "Cleveland Clinic — How Many Bones Does a Baby Have?",
+      "sourceUrl": "https://health.clevelandclinic.org/how-many-bones-does-a-baby-have"
     },
     {
       "id": "huevo-altura-hervir",
@@ -971,44 +899,44 @@
         "es": "En la cima del Everest, casi a 8850 metros, el agua hierve en torno a los 70 °C en vez de 100 °C: hay mucha menos presión atmosférica empujando el líquido.",
         "en": "At the summit of Everest, nearly 8,850 meters up, water boils at around 70°C instead of 100°C, because there's far less air pressure pushing down on it."
       },
-      "source": "National Institute of Standards and Technology (NIST)",
-      "sourceUrl": ""
+      "source": "NIST Chemistry WebBook — propiedades de saturación del agua",
+      "sourceUrl": "https://webbook.nist.gov/cgi/fluid.cgi?Action=Load&ID=C7732185&Type=SatP&Digits=5&PLow=0.2&PHigh=0.4&PInc=0.05&RefState=DEF&TUnit=C&PUnit=atm&DUnit=kg%2Fm3&HUnit=kJ%2Fkg&WUnit=m%2Fs&VisUnit=uPa*s&STUnit=N%2Fm"
     },
     {
-      "id": "cien-anos-116",
+      "id": "guerra-38-minutos",
       "category": "historia",
       "question": {
-        "es": "¿Cuánto duró realmente la Guerra de los Cien Años?",
-        "en": "How long did the Hundred Years' War actually last?"
+        "es": "¿Cuánto duró la guerra más corta de la historia?",
+        "en": "How long did the shortest war in history last?"
       },
       "answer": {
-        "es": "116 años.",
-        "en": "116 years."
+        "es": "Unos 40 minutos.",
+        "en": "About 40 minutes."
       },
       "detail": {
-        "es": "El conflicto entre Francia e Inglaterra se libró, con treguas incluidas, entre 1337 y 1453; el nombre se puso siglos después y nunca encajó con el calendario real.",
-        "en": "The conflict between France and England ran, truces included, from 1337 to 1453; the name was coined centuries later and never matched the actual calendar."
+        "es": "El 27 de agosto de 1896, el Reino Unido bombardeó el palacio del sultán de Zanzíbar hasta su rendición. La guerra anglo-zanzibariana quedó registrada como la más breve conocida: se citan entre 38 y 40 minutos según la fuente.",
+        "en": "On 27 August 1896 Britain shelled the Sultan of Zanzibar's palace until he surrendered. The Anglo-Zanzibar War is recorded as the shortest known: sources give it between 38 and 40 minutes."
       },
-      "source": "Britannica, Hundred Years' War",
-      "sourceUrl": ""
+      "source": "Encyclopaedia Britannica — Anglo-Zanzibar War",
+      "sourceUrl": "https://www.britannica.com/event/Anglo-Zanzibar-War"
     },
     {
-      "id": "adios-goodbye-dios",
+      "id": "ojala-ala-quiera",
       "category": "lenguaje",
       "question": {
-        "es": "¿Por qué «adiós» y «goodbye» quieren decir lo mismo sin traducirse?",
-        "en": "Why do \"adiós\" and \"goodbye\" mean the same thing without being translations?"
+        "es": "¿Por qué «ojalá» significa literalmente «Alá quiera»?",
+        "en": "Why does the Spanish word for \"hopefully\" literally mean \"God willing\"?"
       },
       "answer": {
-        "es": "Porque las dos son, en el fondo, una despedida religiosa comprimida: «a Dios [te encomiendo]» y «God be with ye».",
-        "en": "Because both are, underneath, a compressed religious farewell: \"[I commend you] to God\" and \"God be with ye\"."
+        "es": "Porque la palabra entera es un préstamo directo del árabe «law šā llāh», «si Dios quiere».",
+        "en": "Because \"ojalá\" is a direct loan from the Arabic \"law šā llāh\", \"if God wills it\"."
       },
       "detail": {
-        "es": "«Goodbye» es una contracción medieval de esa frase inglesa completa; con el tiempo «God» sonó como «good», arrastrado por saludos como «good day». En español, «a Dios» se fundió directamente en una sola palabra.",
-        "en": "\"Goodbye\" is a medieval contraction of that full English phrase; over time \"God\" started sounding like \"good\", pulled along by greetings like \"good day\". In Spanish, \"a Dios\" simply fused into one word."
+        "es": "Entró en el castellano durante los siglos de al-Ándalus y sobrevivió intacta al paso del árabe hablado en la Península al español, aunque hoy ya nadie piense en Alá al decirla.",
+        "en": "It entered Spanish during the centuries of Muslim al-Andalus and survived intact long after Arabic stopped being spoken on the peninsula, even though nobody thinks of Allah when they say it today."
       },
-      "source": "Oxford English Dictionary, entrada «goodbye»",
-      "sourceUrl": ""
+      "source": "RAE — Diccionario de la lengua española, «ojalá»",
+      "sourceUrl": "https://dle.rae.es/ojal%C3%A1"
     },
     {
       "id": "sonrojo-solo-humano",
@@ -1025,8 +953,8 @@
         "es": "Darwin ya lo señaló en el siglo XIX: llamó al sonrojo «la más peculiar y más humana de todas las expresiones». Depende de un reflejo social —vergüenza, culpa, halago— que no se ha documentado en ninguna otra especie.",
         "en": "Darwin already noted it in the 19th century, calling blushing 'the most peculiar and most human of all expressions.' It runs on a social reflex — shame, guilt, flattery — that hasn't been documented in any other species."
       },
-      "source": "Darwin, C., «The Expression of the Emotions in Man and Animals», 1872",
-      "sourceUrl": ""
+      "source": "CARTA (UC San Diego) — Blushing and Flushing",
+      "sourceUrl": "https://carta.anthropogeny.org/moca/topics/blushing-and-flushing"
     },
     {
       "id": "torre-eiffel-crece",
@@ -1043,44 +971,44 @@
         "es": "El metal se dilata con la temperatura, así que la torre es más alta en un día de julio que en uno de enero; incluso se inclina un poco hacia el lado que queda a la sombra.",
         "en": "Metal expands with heat, so the tower stands taller on a July afternoon than on a January one; it even leans slightly toward whichever side is in the shade."
       },
-      "source": "Société d'Exploitation de la Tour Eiffel",
-      "sourceUrl": ""
+      "source": "The Conversation — The Eiffel Tower gets bigger every summer",
+      "sourceUrl": "https://theconversation.com/the-eiffel-tower-gets-bigger-every-summer-heres-why-261904"
     },
     {
-      "id": "eiffel-provisional",
+      "id": "cien-anos-116",
       "category": "historia",
       "question": {
-        "es": "¿Iba a ser derribada la Torre Eiffel?",
-        "en": "Was the Eiffel Tower meant to be torn down?"
+        "es": "¿Cuánto duró realmente la Guerra de los Cien Años?",
+        "en": "How long did the Hundred Years' War actually last?"
       },
       "answer": {
-        "es": "Sí, veinte años después de construirse.",
-        "en": "Yes, twenty years after it was built."
+        "es": "116 años.",
+        "en": "116 years."
       },
       "detail": {
-        "es": "El permiso de 1889 la daba por caduca en 1909; se salvó porque el ejército francés empezó a usarla como antena de radiotelegrafía justo antes de esa fecha.",
-        "en": "The 1889 permit set its expiration for 1909; it was saved because the French army started using it as a radiotelegraphy antenna right before that date."
+        "es": "El conflicto entre Francia e Inglaterra se libró, con treguas incluidas, entre 1337 y 1453; el nombre se puso siglos después y nunca encajó con el calendario real.",
+        "en": "The conflict between France and England ran, truces included, from 1337 to 1453; the name was coined centuries later and never matched the actual calendar."
       },
-      "source": "Britannica, Eiffel Tower; official Tour Eiffel history",
-      "sourceUrl": ""
+      "source": "Encyclopaedia Britannica — Hundred Years' War (summary)",
+      "sourceUrl": "https://www.britannica.com/summary/Hundred-Years-War"
     },
     {
-      "id": "ketchup-salsa-pescado",
+      "id": "adios-goodbye-dios",
       "category": "lenguaje",
       "question": {
-        "es": "¿Por qué el «ketchup» no nació con tomate?",
-        "en": "Why didn't ketchup start out with tomatoes?"
+        "es": "¿Por qué «adiós» y «goodbye» quieren decir lo mismo sin traducirse?",
+        "en": "Why do \"adiós\" and \"goodbye\" mean the same thing without being translations?"
       },
       "answer": {
-        "es": "Porque la palabra viene de una salsa china de pescado fermentado, sin un tomate a la vista.",
-        "en": "Because the word comes from a fermented Chinese fish sauce, with not a tomato in sight."
+        "es": "Porque las dos son, en el fondo, una despedida religiosa comprimida: «a Dios [te encomiendo]» y «God be with ye».",
+        "en": "Because both are, underneath, a compressed religious farewell: \"[I commend you] to God\" and \"God be with ye\"."
       },
       "detail": {
-        "es": "Los comerciantes ingleses adaptaron el nombre chino («kôe-chiap») a través del malayo, y la receta fue mutando —con setas, nueces, ostras— hasta que los estadounidenses le metieron tomate ya en el siglo XIX.",
-        "en": "English traders adapted the Chinese name (\"kôe-chiap\") by way of Malay, and the recipe kept mutating — mushrooms, walnuts, oysters — until Americans finally added tomato in the 19th century."
+        "es": "«Goodbye» es una contracción medieval de esa frase inglesa completa; con el tiempo «God» sonó como «good», arrastrado por saludos como «good day». En español, «a Dios» se fundió directamente en una sola palabra.",
+        "en": "\"Goodbye\" is a medieval contraction of that full English phrase; over time \"God\" started sounding like \"good\", pulled along by greetings like \"good day\". In Spanish, \"a Dios\" simply fused into one word."
       },
-      "source": "Oxford English Dictionary, entrada «ketchup»",
-      "sourceUrl": ""
+      "source": "Etymonline — good-bye",
+      "sourceUrl": "https://www.etymonline.com/word/good-bye"
     },
     {
       "id": "corazon-late-fuera",
@@ -1097,8 +1025,8 @@
         "es": "Un grupo de células del nodo sinoauricular dispara señales eléctricas propias, sin esperar órdenes del cerebro. Es lo que permite trasplantar un corazón: el órgano puede empezar a latir solo en cuanto se reconecta a la sangre.",
         "en": "A cluster of cells in the sinoatrial node fires its own electrical signals without waiting for orders from the brain. That's what makes heart transplants possible: the organ can start beating on its own the moment it's reconnected to blood."
       },
-      "source": "American Heart Association, «How the Heart Works»",
-      "sourceUrl": ""
+      "source": "Cleveland Clinic — Heart Conduction System",
+      "sourceUrl": "https://my.clevelandclinic.org/health/body/21648-heart-conduction-system"
     },
     {
       "id": "dias-mas-cortos",
@@ -1115,44 +1043,44 @@
         "es": "Un estudio con conchas fósiles de bivalvos mostró que ese año tenía 372 días más cortos; la Luna frena la rotación terrestre poco a poco por fricción de mareas, y los días se van alargando.",
         "en": "A study of fossil bivalve shells found that year had 372 shorter days; the Moon gradually slows Earth's spin through tidal friction, so days keep getting longer over geological time."
       },
-      "source": "Winter et al., AGU Advances, 2020",
-      "sourceUrl": ""
+      "source": "AGU press release — Ancient shell shows days were half-hour shorter 70 million years ago",
+      "sourceUrl": "https://news.agu.org/press-release/ancient-shell-shows-days-were-half-hour-shorter-70-million-years-ago/"
     },
     {
-      "id": "lovelace-sin-ordenador",
+      "id": "eiffel-provisional",
       "category": "historia",
       "question": {
-        "es": "¿Cuánto esperó el primer programa informático a tener un ordenador donde correr?",
-        "en": "How long did the first computer program have to wait for a computer to run on?"
+        "es": "¿Iba a ser derribada la Torre Eiffel?",
+        "en": "Was the Eiffel Tower meant to be torn down?"
       },
       "answer": {
-        "es": "Casi cien años.",
-        "en": "Almost a hundred years."
+        "es": "Sí, veinte años después de construirse.",
+        "en": "Yes, twenty years after it was built."
       },
       "detail": {
-        "es": "Ada Lovelace escribió en 1843 el algoritmo para la Máquina Analítica de Babbage, que nunca llegó a construirse; el primer ordenador electrónico funcional no existió hasta la década de 1940.",
-        "en": "Ada Lovelace wrote the algorithm for Babbage's Analytical Engine in 1843, a machine that was never actually built; the first working electronic computer didn't exist until the 1940s."
+        "es": "El permiso de 1889 la daba por caduca en 1909; se salvó porque el ejército francés empezó a usarla como antena de radiotelegrafía justo antes de esa fecha.",
+        "en": "The 1889 permit set its expiration for 1909; it was saved because the French army started using it as a radiotelegraphy antenna right before that date."
       },
-      "source": "Britannica, Ada Lovelace; Computer History Museum",
-      "sourceUrl": ""
+      "source": "Official Eiffel Tower site — Why was the Eiffel Tower kept?",
+      "sourceUrl": "https://www.toureiffel.paris/en/news/130-years/why-was-eiffel-tower-kept"
     },
     {
-      "id": "aguacate-testiculo",
+      "id": "ketchup-salsa-pescado",
       "category": "lenguaje",
       "question": {
-        "es": "¿Qué tiene que ver el aguacate con... eso?",
-        "en": "What does an avocado have to do with... that?"
+        "es": "¿Por qué el «ketchup» no nació con tomate?",
+        "en": "Why didn't ketchup start out with tomatoes?"
       },
       "answer": {
-        "es": "Que su nombre náhuatl, «āhuacatl», significaba también «testículo», por la forma en que la fruta cuelga del árbol en pares.",
-        "en": "Its Nahuatl name, \"āhuacatl\", also meant \"testicle\", after the way the fruit hangs from the tree in pairs."
+        "es": "Porque la palabra viene de una salsa china de pescado fermentado, sin un tomate a la vista.",
+        "en": "Because the word comes from a fermented Chinese fish sauce, with not a tomato in sight."
       },
       "detail": {
-        "es": "El español lo adaptó como «aguacate»; el inglés, en cambio, lo confundió con «abogado» y acabó llamándolo «avocado». Dos palabras distintas para el mismo origen incómodo.",
-        "en": "Spanish adapted it as \"aguacate\"; English instead mixed it up with \"abogado\" (lawyer) and landed on \"avocado\". Two different words for the same awkward origin."
+        "es": "Los comerciantes ingleses adaptaron el nombre chino («kôe-chiap») a través del malayo, y la receta fue mutando —con setas, nueces, ostras— hasta que los estadounidenses le metieron tomate ya en el siglo XIX.",
+        "en": "English traders adapted the Chinese name (\"kôe-chiap\") by way of Malay, and the recipe kept mutating — mushrooms, walnuts, oysters — until Americans finally added tomato in the 19th century."
       },
-      "source": "Frances Karttunen, An Analytical Dictionary of Nahuatl, 1983",
-      "sourceUrl": ""
+      "source": "Etymonline — ketchup",
+      "sourceUrl": "https://www.etymonline.com/word/ketchup"
     },
     {
       "id": "apendice-refugio-bacterias",
@@ -1169,8 +1097,8 @@
         "es": "Durante décadas se consideró un resto evolutivo sin función. Investigadores de la Universidad Duke propusieron en 2007 que su forma de bolsa protege una reserva de microbiota que ayuda a recolonizar el intestino después de una diarrea grave.",
         "en": "For decades it was written off as an evolutionary leftover with no job. Duke University researchers proposed in 2007 that its pouch shape protects a reserve of microbiota that helps recolonize the gut after severe diarrhea."
       },
-      "source": "Bollinger, R.R. et al., «Biofilms in the large bowel suggest an apparent function of the human vermiform appendix», Journal of Theoretical Biology, 2007",
-      "sourceUrl": ""
+      "source": "ScienceDaily — Appendix Isn't Useless At All (Duke study, 2007)",
+      "sourceUrl": "https://www.sciencedaily.com/releases/2007/10/071008102334.htm"
     },
     {
       "id": "olor-espacio",
@@ -1187,44 +1115,44 @@
         "es": "El vacío en sí no huele a nada, pero al volver a presurizar la esclusa, el traje y el equipo arrastran ese olor, probablemente por compuestos que se forman al chocar átomos de oxígeno contra las superficies expuestas.",
         "en": "The vacuum itself has no smell, but once the airlock repressurizes, the suit and gear carry that odor back in — likely from compounds formed when oxygen atoms strike exposed surfaces outside."
       },
-      "source": "NASA, Ask an Astrobiologist",
-      "sourceUrl": ""
+      "source": "NASA (Ames) — Interesting Fact of the Month, December 2021: What does space smell like?",
+      "sourceUrl": "https://www.nasa.gov/space-science-and-astrobiology-at-ames/interesting-fact-of-the-month-current/interesting-fact-of-the-month-2021/"
     },
     {
-      "id": "fiesta-desenvolver-momias",
+      "id": "lovelace-sin-ordenador",
       "category": "historia",
       "question": {
-        "es": "¿Qué hacían los victorianos ricos con las momias egipcias en sus fiestas?",
-        "en": "What did wealthy Victorians do with Egyptian mummies at their parties?"
+        "es": "¿Cuánto esperó el primer programa informático a tener un ordenador donde correr?",
+        "en": "How long did the first computer program have to wait for a computer to run on?"
       },
       "answer": {
-        "es": "Las desenvolvían en directo, como espectáculo.",
-        "en": "They unwrapped them live, as entertainment."
+        "es": "Casi cien años.",
+        "en": "Almost a hundred years."
       },
       "detail": {
-        "es": "Durante el siglo XIX, cirujanos como Thomas Pettigrew compraban momias importadas de Egipto y las desenrollaban ante invitados en salones privados de Londres.",
-        "en": "During the 19th century, surgeons like Thomas Pettigrew bought mummies imported from Egypt and unwrapped them in front of guests in private London parlors."
+        "es": "Ada Lovelace escribió en 1843 el algoritmo para la Máquina Analítica de Babbage, que nunca llegó a construirse; el primer ordenador electrónico funcional no existió hasta la década de 1940.",
+        "en": "Ada Lovelace wrote the algorithm for Babbage's Analytical Engine in 1843, a machine that was never actually built; the first working electronic computer didn't exist until the 1940s."
       },
-      "source": "British Museum blog; Smithsonian Magazine",
-      "sourceUrl": ""
+      "source": "Computer History Museum — Ada Lovelace",
+      "sourceUrl": "https://www.computerhistory.org/babbage/adalovelace/"
     },
     {
-      "id": "azar-dados-arabes",
+      "id": "aguacate-testiculo",
       "category": "lenguaje",
       "question": {
-        "es": "¿Por qué «azar» y «hazard» vienen de un juego de dados árabe?",
-        "en": "Why do \"azar\" and \"hazard\" come from an Arabic dice game?"
+        "es": "¿Qué tiene que ver el aguacate con... eso?",
+        "en": "What does an avocado have to do with... that?"
       },
       "answer": {
-        "es": "Porque las dos palabras heredan el árabe «az-zahr», «el dado», a través de un juego medieval de suerte que llevaba ese nombre.",
-        "en": "Both words descend from the Arabic \"az-zahr\", \"the die\", by way of a medieval game of chance that carried that name."
+        "es": "Que su nombre náhuatl, «āhuacatl», significaba también «testículo», por la forma en que la fruta cuelga del árbol en pares.",
+        "en": "Its Nahuatl name, \"āhuacatl\", also meant \"testicle\", after the way the fruit hangs from the tree in pairs."
       },
       "detail": {
-        "es": "El español lo tomó casi tal cual como «azar»; el francés y el inglés lo deformaron en «hasard»/«hazard», que con el tiempo pasó de significar «suerte en el juego» a «peligro».",
-        "en": "Spanish kept it almost unchanged as \"azar\"; French and English twisted it into \"hasard\"/\"hazard\", which over time shifted from meaning \"luck at play\" to meaning \"danger\"."
+        "es": "El español lo adaptó como «aguacate»; el inglés, en cambio, lo confundió con «abogado» y acabó llamándolo «avocado». Dos palabras distintas para el mismo origen incómodo.",
+        "en": "Spanish adapted it as \"aguacate\"; English instead mixed it up with \"abogado\" (lawyer) and landed on \"avocado\". Two different words for the same awkward origin."
       },
-      "source": "Oxford English Dictionary, entrada «hazard»",
-      "sourceUrl": ""
+      "source": "Etymonline — avocado",
+      "sourceUrl": "https://www.etymonline.com/word/avocado"
     },
     {
       "id": "orejas-crecen-vida",
@@ -1238,11 +1166,11 @@
         "en": "Because ear cartilage never stops growing, very slowly, through all of adult life."
       },
       "detail": {
-        "es": "Un estudio británico midió orejas de cientos de personas y calculó que crecen alrededor de dos milímetros por década. La nariz, hecha también de cartílago, sigue el mismo patrón.",
-        "en": "A British study measured hundreds of people's ears and calculated they grow about two millimetres per decade. The nose, also made of cartilage, follows the same pattern."
+        "es": "Un médico británico midió las orejas de 206 pacientes de entre 30 y 93 años y le salió una recta: unos 0,22 milímetros al año, algo más de dos por década. Por qué siguen creciendo cuando el resto del cuerpo ha parado, el estudio no lo responde.",
+        "en": "A British GP measured the ears of 206 patients aged 30 to 93 and got a straight line: about 0.22 millimetres a year, a little over two per decade. Why they keep growing once the rest of the body has stopped, the study does not answer."
       },
-      "source": "Heathcote, J.A., «Why do old men have big ears?», BMJ, 1995",
-      "sourceUrl": ""
+      "source": "Heathcote, «Why do old men have big ears?», BMJ 1995 (archivo del NIH)",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2539087/"
     },
     {
       "id": "gatos-sin-dulce",
@@ -1259,44 +1187,44 @@
         "es": "A diferencia de casi todos los mamíferos, los felinos tienen inutilizado el gen Tas1r2, así que su lengua es incapaz de detectar el azúcar.",
         "en": "Unlike almost every other mammal, felines have a broken Tas1r2 gene, so their tongues simply can't detect sugar."
       },
-      "source": "Li et al., PLOS Genetics, 2005",
-      "sourceUrl": ""
+      "source": "PLOS Genetics (PMC) — Li et al. 2005, pseudogenización de Tas1r2 en gatos",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1183522/"
     },
     {
-      "id": "ola-melaza-boston",
+      "id": "fiesta-desenvolver-momias",
       "category": "historia",
       "question": {
-        "es": "¿Puede una ola de melaza matar a alguien?",
-        "en": "Can a wave of molasses actually kill someone?"
+        "es": "¿Qué hacían los victorianos ricos con las momias egipcias en sus fiestas?",
+        "en": "What did wealthy Victorians do with Egyptian mummies at their parties?"
       },
       "answer": {
-        "es": "Sí, mató a 21 personas de golpe.",
-        "en": "Yes — it killed 21 people at once."
+        "es": "Las desenvolvían en directo, como espectáculo.",
+        "en": "They unwrapped them live, as entertainment."
       },
       "detail": {
-        "es": "En enero de 1919, un depósito reventó en Boston y soltó una ola de melaza de más de siete metros que arrasó el barrio a unos 55 km/h.",
-        "en": "In January 1919, a storage tank burst in Boston and unleashed a molasses wave over seven meters high that swept through the neighborhood at roughly 35 mph."
+        "es": "Durante el siglo XIX, cirujanos como Thomas Pettigrew compraban momias importadas de Egipto y las desenrollaban ante invitados en salones privados de Londres.",
+        "en": "During the 19th century, surgeons like Thomas Pettigrew bought mummies imported from Egypt and unwrapped them in front of guests in private London parlors."
       },
-      "source": "Smithsonian Magazine, The Great Molasses Flood of 1919",
-      "sourceUrl": ""
+      "source": "History.com — Victorian mummy-unwrapping parties",
+      "sourceUrl": "https://www.history.com/articles/mummy-unwrapping-parties-egyptomania"
     },
     {
-      "id": "ajedrez-sanscrito",
+      "id": "azar-dados-arabes",
       "category": "lenguaje",
       "question": {
-        "es": "¿Por qué el ajedrez recorrió media Eurasia antes de llegar a España?",
-        "en": "Why did chess cross half of Eurasia before reaching Spain?"
+        "es": "¿Por qué «azar» y «hazard» vienen de un juego de dados árabe?",
+        "en": "Why do \"azar\" and \"hazard\" come from an Arabic dice game?"
       },
       "answer": {
-        "es": "Porque su nombre viene del sánscrito «chaturanga» («las cuatro divisiones del ejército»), pasó al persa, luego al árabe, y de ahí al español como «ajedrez».",
-        "en": "Its Spanish name comes from the Sanskrit \"chaturanga\" (\"the four divisions [of an army]\"), passed through Persian, then Arabic, and arrived in Spanish as \"ajedrez\"."
+        "es": "Porque se cree que las dos heredan el árabe «az-zahr», «el dado», a través de un juego medieval de suerte que llevaba ese nombre.",
+        "en": "Because both are thought to descend from the Arabic \"az-zahr\", \"the die\", by way of a medieval game of chance that carried the name."
       },
       "detail": {
-        "es": "El inglés «chess» tomó otro camino: viene del persa «shah» (rey), la pieza que hay que acorralar para ganar. Dos palabras para el mismo juego, cada una nombrando algo distinto del tablero.",
-        "en": "English \"chess\" took a different route: it comes from the Persian \"shah\" (king), the piece you must corner to win. Two words for the same game, each naming a different thing on the board."
+        "es": "El español lo tomó casi tal cual como «azar»; el francés y el inglés lo deformaron en «hasard»/«hazard», que con el tiempo pasó de «suerte en el juego» a «peligro». Es la explicación más repetida, pero no la única: «zahr» no aparece en los diccionarios árabes clásicos, así que los etimólogos la dan por probable, no por segura.",
+        "en": "Spanish kept it almost unchanged as \"azar\"; French and English twisted it into \"hasard\"/\"hazard\", which drifted from \"luck at play\" to \"danger\". It is the most repeated account but not the only one: \"zahr\" does not appear in classical Arabic dictionaries, so etymologists call it likely rather than settled."
       },
-      "source": "Oxford English Dictionary, entrada «chess»",
-      "sourceUrl": ""
+      "source": "Etymonline — hazard",
+      "sourceUrl": "https://www.etymonline.com/word/hazard"
     },
     {
       "id": "paralisis-sueno-rem",
@@ -1313,8 +1241,8 @@
         "es": "Neuronas del tronco encefálico inhiben las motoneuronas y dejan el cuerpo inmóvil, salvo ojos y diafragma. Si ese freno falla, la persona puede llegar a mover los brazos o hablar mientras sueña.",
         "en": "Brainstem neurons inhibit motor neurons and leave the body still, except for the eyes and diaphragm. When that brake fails, a person can end up moving their arms or talking while still dreaming."
       },
-      "source": "National Institute of Neurological Disorders and Stroke (NIH), «Brain Basics: Understanding Sleep»",
-      "sourceUrl": ""
+      "source": "PMC — Brainstem and Spinal Cord Circuitry Regulating REM Sleep and Muscle Atonia",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3197189/"
     },
     {
       "id": "regla-cinco-segundos",
@@ -1328,47 +1256,47 @@
         "en": "No: bacteria latch onto food almost instantly, with no five-second grace period involved."
       },
       "detail": {
-        "es": "Un estudio con superficies contaminadas midió transferencia de bacterias en menos de un segundo de contacto; lo que sí influye es cuánto tiempo lleva sucia la superficie y la humedad del alimento.",
-        "en": "A study on contaminated surfaces measured bacterial transfer in under a second of contact; what actually matters is how long the surface has been dirty and how moist the food is."
+        "es": "Un estudio de Rutgers midió transferencia de bacterias en menos de un segundo de contacto. Lo que sí cambia el resultado es la humedad: cuanto más mojado está el alimento, más bacterias se lleva.",
+        "en": "A Rutgers study measured bacterial transfer in under a second of contact. What does change the outcome is moisture: the wetter the food, the more bacteria it picks up."
       },
-      "source": "Dawson et al., Applied and Environmental Microbiology, 2016",
-      "sourceUrl": ""
+      "source": "Rutgers University — estudio de Miranda y Schaffner (2016)",
+      "sourceUrl": "https://www.rutgers.edu/news/rutgers-researchers-debunk-five-second-rule-eating-food-floor-isnt-safe"
     },
     {
-      "id": "juicio-al-cerdo",
+      "id": "ola-melaza-boston",
       "category": "historia",
       "question": {
-        "es": "¿Se ha juzgado alguna vez a un cerdo por asesinato?",
-        "en": "Has a pig ever been put on trial for murder?"
+        "es": "¿Puede una ola de melaza matar a alguien?",
+        "en": "Can a wave of molasses actually kill someone?"
       },
       "answer": {
-        "es": "Sí, con juicio formal y abogado defensor.",
-        "en": "Yes, with a formal trial and a defense lawyer."
+        "es": "Sí, mató a 21 personas de golpe.",
+        "en": "Yes — it killed 21 people at once."
       },
       "detail": {
-        "es": "En la Europa medieval y moderna, sobre todo en Francia, se celebraron procesos contra animales, en especial cerdos acusados de matar a niños; algunos acabaron ejecutados por sentencia judicial.",
-        "en": "In medieval and early modern Europe, especially France, formal trials were held against animals — pigs accused of killing children above all — and some were executed by court order."
+        "es": "En enero de 1919, un depósito reventó en Boston y soltó una ola de melaza de más de siete metros que arrasó el barrio a unos 55 km/h.",
+        "en": "In January 1919, a storage tank burst in Boston and unleashed a molasses wave over seven meters high that swept through the neighborhood at roughly 35 mph."
       },
-      "source": "E.P. Evans, The Criminal Prosecution and Capital Punishment of Animals, 1906",
-      "sourceUrl": ""
+      "source": "Britannica — Great Molasses Flood",
+      "sourceUrl": "https://www.britannica.com/topic/Great-Molasses-Flood"
     },
     {
-      "id": "tarantula-baile-veneno",
+      "id": "ajedrez-sanscrito",
       "category": "lenguaje",
       "question": {
-        "es": "¿Por qué hay un baile que se supone que cura una picadura de araña?",
-        "en": "Why is there a dance supposedly meant to cure a spider bite?"
+        "es": "¿Por qué el ajedrez recorrió media Eurasia antes de llegar a España?",
+        "en": "Why did chess cross half of Eurasia before reaching Spain?"
       },
       "answer": {
-        "es": "Porque en la Italia del sur medieval se creía que bailar la tarantela frenéticamente sudaba fuera el veneno de la tarántula.",
-        "en": "Because in medieval southern Italy, people believed dancing the tarantella frantically would sweat the tarantula's venom out of your body."
+        "es": "Porque su nombre viene del sánscrito «chaturanga» («las cuatro divisiones del ejército»), pasó al persa, luego al árabe, y de ahí al español como «ajedrez».",
+        "en": "Its Spanish name comes from the Sanskrit \"chaturanga\" (\"the four divisions [of an army]\"), passed through Persian, then Arabic, and arrived in Spanish as \"ajedrez\"."
       },
       "detail": {
-        "es": "Ambas palabras vienen de Tarento, la ciudad que les da nombre. El baile probablemente aliviaba más la histeria colectiva que ninguna picadura real.",
-        "en": "Both words come from Taranto, the city that lends them its name. The dance likely soothed collective hysteria more than it ever cured an actual bite."
+        "es": "El inglés «chess» tomó otro camino: viene del persa «shah» (rey), la pieza que hay que acorralar para ganar. Dos palabras para el mismo juego, cada una nombrando algo distinto del tablero.",
+        "en": "English \"chess\" took a different route: it comes from the Persian \"shah\" (king), the piece you must corner to win. Two words for the same game, each naming a different thing on the board."
       },
-      "source": "Ernesto de Martino, La terra del rimorso, 1961",
-      "sourceUrl": ""
+      "source": "Etymonline — chess",
+      "sourceUrl": "https://www.etymonline.com/word/chess"
     },
     {
       "id": "pelirrojos-mas-anestesia",
@@ -1385,8 +1313,8 @@
         "es": "La variante del gen MC1R que da el pelo rojo también actúa en receptores relacionados con el dolor, y estudios en Estados Unidos han medido hasta un 20% más de anestésico necesario en pelirrojos frente al resto.",
         "en": "The MC1R gene variant behind red hair also acts on pain-related receptors, and US studies have measured up to 20% more anesthetic needed in redheads compared to everyone else."
       },
-      "source": "Liem, E.B. et al., «Anesthetic Requirement Is Increased in Redheads», Anesthesiology, 2004",
-      "sourceUrl": ""
+      "source": "Anesthesiology (PMC) — Liem et al. 2004, requerimiento anestésico en pelirrojas",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1362956/"
     },
     {
       "id": "lluvia-diamantes",
@@ -1403,44 +1331,44 @@
         "es": "El metano de sus atmósferas se comprimiría tanto que el carbono se separaría del hidrógeno y cristalizaría en diamantes que caerían lentamente hacia el núcleo.",
         "en": "The methane in their atmospheres would be squeezed so hard that carbon splits off from hydrogen and crystallizes into diamonds that slowly sink toward the core."
       },
-      "source": "Kraus et al., Nature Astronomy, 2017",
-      "sourceUrl": ""
+      "source": "Lawrence Livermore National Laboratory — Diamond rain on icy giant planets",
+      "sourceUrl": "https://www.llnl.gov/article/43621/scientists-create-diamond-rain-forms-interior-icy-giant-planets-neptune"
     },
     {
-      "id": "libertad-para-egipto",
+      "id": "juicio-al-cerdo",
       "category": "historia",
       "question": {
-        "es": "¿Iba a levantarse la Estatua de la Libertad en Egipto?",
-        "en": "Was the Statue of Liberty originally meant to stand in Egypt?"
+        "es": "¿Se ha juzgado alguna vez a un cerdo por asesinato?",
+        "en": "Has a pig ever been put on trial for murder?"
       },
       "answer": {
-        "es": "Casi: la idea nació para el canal de Suez.",
-        "en": "Almost: the idea was born for the Suez Canal."
+        "es": "Sí, con juicio formal y abogado defensor.",
+        "en": "Yes, with a formal trial and a defense lawyer."
       },
       "detail": {
-        "es": "El escultor Bartholdi propuso primero un faro gigante, «Egipto llevando la luz a Asia», para la entrada del canal; el jedive lo rechazó por el coste y la idea acabó reconvertida en la estatua de Nueva York.",
-        "en": "Sculptor Bartholdi first pitched a giant lighthouse, \"Egypt Carrying the Light to Asia,\" for the canal's entrance; the khedive turned it down over cost, and the idea was reworked into the statue in New York."
+        "es": "En la Europa medieval y moderna, sobre todo en Francia, se celebraron procesos contra animales, en especial cerdos acusados de matar a niños; algunos acabaron ejecutados por sentencia judicial.",
+        "en": "In medieval and early modern Europe, especially France, formal trials were held against animals — pigs accused of killing children above all — and some were executed by court order."
       },
-      "source": "Smithsonian Magazine; National Park Service, Statue of Liberty",
-      "sourceUrl": ""
+      "source": "JSTOR Daily — juicios a animales en la Europa medieval",
+      "sourceUrl": "https://daily.jstor.org/when-societies-put-animals-on-trial"
     },
     {
-      "id": "panico-dios-pan",
+      "id": "tarantula-baile-veneno",
       "category": "lenguaje",
       "question": {
-        "es": "¿Por qué «pánico» lleva el nombre de un dios griego?",
-        "en": "Why is \"panic\" named after a Greek god?"
+        "es": "¿Por qué hay un baile que se supone que cura una picadura de araña?",
+        "en": "Why is there a dance supposedly meant to cure a spider bite?"
       },
       "answer": {
-        "es": "Por Pan, el dios con patas de cabra que vivía en bosques y montes y asustaba a viajeros y rebaños con gritos repentinos.",
-        "en": "After Pan, the goat-legged god who lived in woods and mountains and startled travellers and flocks with sudden shrieks."
+        "es": "Porque en el sur de Italia, entre los siglos XV y XVII, se creía que bailar la tarantela frenéticamente sudaba fuera el veneno de la tarántula.",
+        "en": "Because in southern Italy, between the 15th and 17th centuries, people believed that dancing the tarantella frantically sweated the tarantula's venom out of you."
       },
       "detail": {
-        "es": "El miedo repentino e irracional que provocaba, sin enemigo visible, se quedó como «pánico»: terror «de Pan», sin más explicación necesaria.",
-        "en": "The sudden, irrational fear he caused, with no visible enemy in sight, stuck as \"panic\": terror \"of Pan\", no further explanation needed."
+        "es": "Tarantela, tarántula y tarantismo salen las tres de Tarento, la ciudad que les da nombre. Hoy el episodio se lee como un caso de histeria colectiva, no como el efecto de ninguna picadura.",
+        "en": "Tarantella, tarantula and tarantism all come from Taranto, the town that lends them its name. Today the episode reads as a case of mass hysteria rather than the effect of any bite."
       },
-      "source": "Oxford English Dictionary, entrada «panic»",
-      "sourceUrl": ""
+      "source": "Britannica — Tarantella (y tarantismo)",
+      "sourceUrl": "https://www.britannica.com/art/tarantella"
     },
     {
       "id": "huellas-gemelos-distintas",
@@ -1457,8 +1385,8 @@
         "es": "El patrón general de crestas lo marca la genética, pero su trazado exacto depende de cómo se mueve el feto y de pequeñas variaciones al crecer dentro del útero. Por eso la huella sigue siendo la prueba de identidad definitiva, incluso entre gemelos.",
         "en": "Genetics sets the general ridge pattern, but the exact layout depends on how the fetus moves and on tiny variations while growing inside the womb. That's why fingerprints remain the definitive identity check, even between twins."
       },
-      "source": "FBI, «The Science of Fingerprints»",
-      "sourceUrl": ""
+      "source": "PMC (NIH) — Fingerprint Recognition with Identical Twin Fingerprints",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3338710/"
     },
     {
       "id": "camaron-mantis-golpe",
@@ -1475,8 +1403,62 @@
         "es": "Sus patas raptoriales alcanzan aceleraciones enormes; al cerrarse el agua de golpe, la burbuja resultante suelta un destello de luz y un chasquido más fuerte que el propio impacto.",
         "en": "Its raptorial claws reach enormous accelerations; when the water snaps shut behind them, the resulting bubble releases a flash of light and a crack louder than the strike itself."
       },
-      "source": "Patek & Caldwell, Journal of Experimental Biology, 2005",
-      "sourceUrl": ""
+      "source": "Journal of Experimental Biology — Patek & Caldwell (2005), fuerzas de impacto y cavitación del camarón mantis",
+      "sourceUrl": "https://journals.biologists.com/jeb/article/208/19/3655/15838/Extreme-impact-and-cavitation-forces-of-a"
+    },
+    {
+      "id": "libertad-para-egipto",
+      "category": "historia",
+      "question": {
+        "es": "¿Iba a levantarse la Estatua de la Libertad en Egipto?",
+        "en": "Was the Statue of Liberty originally meant to stand in Egypt?"
+      },
+      "answer": {
+        "es": "Casi: la idea nació para el canal de Suez.",
+        "en": "Almost: the idea was born for the Suez Canal."
+      },
+      "detail": {
+        "es": "El escultor Bartholdi propuso primero un faro gigante, «Egipto llevando la luz a Asia», para la entrada del canal; el jedive lo rechazó por el coste y la idea acabó reconvertida en la estatua de Nueva York.",
+        "en": "Sculptor Bartholdi first pitched a giant lighthouse, \"Egypt Carrying the Light to Asia,\" for the canal's entrance; the khedive turned it down over cost, and the idea was reworked into the statue in New York."
+      },
+      "source": "Smithsonian Magazine — The Statue of Liberty Was Originally a Muslim Woman",
+      "sourceUrl": "https://www.smithsonianmag.com/smart-news/statue-liberty-was-originally-muslim-woman-180957377/"
+    },
+    {
+      "id": "panico-dios-pan",
+      "category": "lenguaje",
+      "question": {
+        "es": "¿Por qué «pánico» lleva el nombre de un dios griego?",
+        "en": "Why is \"panic\" named after a Greek god?"
+      },
+      "answer": {
+        "es": "Por Pan, el dios con patas de cabra que vivía en bosques y montes y asustaba a viajeros y rebaños con gritos repentinos.",
+        "en": "After Pan, the goat-legged god who lived in woods and mountains and startled travellers and flocks with sudden shrieks."
+      },
+      "detail": {
+        "es": "El miedo repentino e irracional que provocaba, sin enemigo visible, se quedó como «pánico»: terror «de Pan», sin más explicación necesaria.",
+        "en": "The sudden, irrational fear he caused, with no visible enemy in sight, stuck as \"panic\": terror \"of Pan\", no further explanation needed."
+      },
+      "source": "Etymonline — panic",
+      "sourceUrl": "https://www.etymonline.com/word/panic"
+    },
+    {
+      "id": "grillos-termometro",
+      "category": "ciencia",
+      "question": {
+        "es": "¿Se puede saber la temperatura contando el canto de un grillo?",
+        "en": "Can you tell the temperature just by counting cricket chirps?"
+      },
+      "answer": {
+        "es": "Sí: cuantos más chirridos por minuto, más calor hace.",
+        "en": "Yes: the more chirps per minute, the warmer it is."
+      },
+      "detail": {
+        "es": "Los grillos son de sangre fría, así que su metabolismo y su ritmo de canto se aceleran con el calor; contando los chirridos en 15 segundos y sumando 40 se obtiene una temperatura bastante cercana en grados Fahrenheit.",
+        "en": "Crickets are cold-blooded, so their metabolism — and their chirping rate — speeds up with heat; count the chirps in 15 seconds and add 40, and you get a temperature in Fahrenheit that's surprisingly close."
+      },
+      "source": "Wikipedia — Dolbear's law",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Dolbear%27s_law"
     },
     {
       "id": "guerra-de-los-emus",
@@ -1493,8 +1475,8 @@
         "es": "Con ametralladoras y todo, los soldados no lograron frenar una plaga de emús en el oeste de Australia; se retiraron sin cumplir el objetivo y la prensa lo llamó la Gran Guerra de los Emús.",
         "en": "Machine guns and all, soldiers failed to curb an emu population explosion in Western Australia; they withdrew without meeting their goal, and the press dubbed it the Great Emu War."
       },
-      "source": "Australian War Memorial",
-      "sourceUrl": ""
+      "source": "Encyclopaedia Britannica — Emu War",
+      "sourceUrl": "https://www.britannica.com/topic/Emu-War"
     },
     {
       "id": "robot-trabajo-forzado",
@@ -1511,26 +1493,8 @@
         "es": "Karel Čapek necesitaba un nombre para sus obreros artificiales sin alma en la obra «R.U.R.»; su hermano Josef le sugirió «robot», y la palabra se quedó para siempre en todos los idiomas.",
         "en": "Karel Čapek needed a name for the soulless artificial workers in his play \"R.U.R.\"; his brother Josef suggested \"robot\", and the word stuck for good, in every language."
       },
-      "source": "Oxford English Dictionary, entrada «robot»",
-      "sourceUrl": ""
-    },
-    {
-      "id": "grillos-termometro",
-      "category": "ciencia",
-      "question": {
-        "es": "¿Se puede saber la temperatura contando el canto de un grillo?",
-        "en": "Can you tell the temperature just by counting cricket chirps?"
-      },
-      "answer": {
-        "es": "Sí: cuantos más chirridos por minuto, más calor hace.",
-        "en": "Yes: the more chirps per minute, the warmer it is."
-      },
-      "detail": {
-        "es": "Los grillos son de sangre fría, así que su metabolismo y su ritmo de canto se aceleran con el calor; contando los chirridos en 14 segundos y sumando 40 se obtiene una temperatura bastante cercana en grados Fahrenheit.",
-        "en": "Crickets are cold-blooded, so their metabolism — and their chirping rate — speeds up with heat; count the chirps in 14 seconds and add 40, and you get a temperature in Fahrenheit that's surprisingly close."
-      },
-      "source": "Dolbear, The American Naturalist, 1897 (ley de Dolbear)",
-      "sourceUrl": ""
+      "source": "Etymonline — robot",
+      "sourceUrl": "https://www.etymonline.com/word/robot"
     },
     {
       "id": "saturno-flota",
@@ -1547,8 +1511,8 @@
         "es": "Su densidad media es de unos 0,69 g/cm³, casi un 30 % menos que el agua, porque está formado casi por completo de hidrógeno y helio.",
         "en": "Its average density is about 0.69 g/cm3, nearly 30% less than water's, because it's made almost entirely of hydrogen and helium."
       },
-      "source": "NASA, Saturn Fact Sheet",
-      "sourceUrl": ""
+      "source": "NASA Science — Saturn Facts",
+      "sourceUrl": "https://science.nasa.gov/saturn/facts/"
     },
     {
       "id": "medusa-inmortal",
@@ -1565,8 +1529,8 @@
         "es": "Turritopsis dohrnii puede transformar sus células adultas de vuelta a la fase de pólipo mediante transdiferenciación, reiniciando su ciclo de vida en vez de morir; no es indestructible, pero puede esquivar la muerte por vejez.",
         "en": "Turritopsis dohrnii can transform its adult cells back into the polyp stage through transdifferentiation, restarting its life cycle instead of dying; it isn't indestructible, but it can dodge death by old age."
       },
-      "source": "Piraino et al., Biological Bulletin, 1996",
-      "sourceUrl": ""
+      "source": "Wikipedia — Turritopsis dohrnii",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Turritopsis_dohrnii"
     }
   ]
 }

@@ -151,7 +151,8 @@ El volteo es un `rotateY` con perspectiva (`setEntry(3, 2, 0.0012)`); a mitad de
 
 `assets/data/facts.json`: una entrada por tarjeta con `question` / `answer` / `detail` en `es` y `en`, más `category` y `source`.
 
-- **Cada dato lleva fuente.** Un "dato curioso" falso viral se convierte en reseñas de 1 estrella y en burla pública. `sourceUrl` va vacío a propósito: **antes de publicar hay que verificar cada entrada a mano y pegar el enlace permanente.** Si generas contenido con IA, verificación manual obligatoria.
+- **Cada dato lleva fuente, y la fuente es un enlace que se abrió.** Las 85 entradas se verificaron una a una contra una página real: `sourceUrl` es ese enlace permanente y la app lo pinta como enlace clicable bajo la respuesta (`FactSourceLink`). Un "dato curioso" falso viral se convierte en reseñas de 1 estrella y en burla pública, así que la regla es dura: **una entrada sin URL comprobada no entra**, y hay un test (`fact_repository_test.dart`) que lo impide.
+- **La cita de texto plano no vale como verificación.** El catálogo se escribió con ayuda de IA y varias de aquellas citas resultaron ser inventadas o no decir lo que se afirmaba: existía el organismo, existía la revista, pero la página no hablaba del tema. Si añades contenido con IA, la cita que produzca es una **pista**, no una fuente: hay que abrir la página.
 - El contenido está localizado **en el asset**, no en los `.arb`, porque traducir o ampliar el catálogo no debe exigir una versión nueva — y porque ese mismo JSON vendrá luego de Firebase Remote Config o Firestore.
 - `FactCategory` es un enum cerrado: una categoría desconocida en el JSON **revienta al parsear**, no pinta un chip vacío en producción.
 - El parseo corre en un isolate aparte (`compute`) y se cachea en `FactRepository` durante toda la vida del proceso.
@@ -169,7 +170,7 @@ El progreso se persiste como **número de tarjetas de contenido vistas** (`deck_
 
 **La pantalla de fin de mazo** (`DeckExhaustedView`) es la única sin nada que deslizar, y ofrece tres salidas en orden decreciente de lo que devuelven:
 
-1. **«Reiniciar deck»** — rebaraja y vuelve a empezar. Rebarajar y no rebobinar: quien llega al final y pulsa reiniciar está pidiendo más, y darle las mismas 87 cartas en el mismo orden es responderle que no. La semilla se persiste (`deck_shuffle_seed_<categoría>`) para que el orden nuevo sobreviva a cerrar la app y para que comprar premium a mitad de mazo no rebaraje las cartas bajo el usuario. La **primera** vuelta a una categoría siempre es el orden curado del fichero (semilla 0): barajar la primera sesión tira el único control editorial que hay sobre qué pregunta se encuentra primero.
+1. **«Reiniciar deck»** — rebaraja y vuelve a empezar. Rebarajar y no rebobinar: quien llega al final y pulsa reiniciar está pidiendo más, y darle las mismas 85 cartas en el mismo orden es responderle que no. La semilla se persiste (`deck_shuffle_seed_<categoría>`) para que el orden nuevo sobreviva a cerrar la app y para que comprar premium a mitad de mazo no rebaraje las cartas bajo el usuario. La **primera** vuelta a una categoría siempre es el orden curado del fichero (semilla 0): barajar la primera sesión tira el único control editorial que hay sobre qué pregunta se encuentra primero.
 2. **«Aportar»** — formulario de pregunta + respuesta + fuente opcional (§3.5).
 3. **«Pedir más»** — ráfaga de corazones estilo Instagram y un contador. Es el único botón que no hace nada verificable para el usuario, y por eso justamente tenía que ser el que mejor sienta pulsar.
 
@@ -216,7 +217,7 @@ Las instrucciones de montaje y el código del script están en `core/config/cont
 
 `mergeCatalogues` funde 1 y 2 al arrancar: **mismo id reemplaza en su sitio**, los ids de `removed` desaparecen, los ids nuevos se añaden al final.
 
-**Que se pueda borrar un dato en remoto es la razón de tener esto desde el día uno**: las 87 entradas llevan fuentes sin verificar, y cuando una resulte falsa hay que poder matarla hoy, no en la siguiente release.
+**Que se pueda borrar un dato en remoto es la razón de tener esto desde el día uno**: el catálogo está verificado (§3.2), pero una fuente puede caerse, corregirse o resultar peor de lo que parecía, y entonces hay que poder matar la entrada hoy, no en la siguiente release.
 
 **La descarga nunca se espera desde la UI y se aplica en el arranque siguiente.** Cambiar el catálogo a mitad de sesión movería las cartas que el usuario está leyendo. Se descarga, se valida, se escribe en disco, y la próxima vez que abra la app está.
 
@@ -493,7 +494,7 @@ flutter build appbundle --release --analyze-size
 
 ## 13. Pendiente antes de publicar
 
-1. **Verificar a mano las 87 entradas de `assets/data/facts.json`** y rellenar `sourceUrl` en cada una. Es lo más importante de esta lista. El catálogo se escribió con ayuda de IA y **cada `source` es una cita en texto plano sin comprobar**: hay que abrir la fuente, confirmar el dato y pegar el enlace permanente antes de publicar.
+1. ~~Verificar a mano las entradas de `assets/data/facts.json` y rellenar `sourceUrl`.~~ **Hecho.** Las 87 se comprobaron una a una contra una página abierta; se retiraron 2 (una refutada, otra sin fuente aceptable) y se corrigió la redacción de 12 que decían más de lo que su fuente sostenía. Quedan **85**, todas con enlace. Lo que sí queda pendiente: repasar las que se apoyan en fuentes de segunda fila (Wikipedia, `historic-uk.com`, `ck12.org`) y subirlas a una primaria si aparece.
 2. `core/config/ad_config.dart`: rellenar `_prodBanner` y `_prodInterstitial`.
 3. `AndroidManifest.xml`: sustituir el App ID de prueba de AdMob por el de producción.
 4. Iconos adaptativos (`flutter_launcher_icons`) y splash nativo (`flutter_native_splash`) — necesitan assets reales.

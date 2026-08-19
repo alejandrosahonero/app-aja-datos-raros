@@ -39,6 +39,36 @@ void main() {
     }
   });
 
+  test('every fact links to a source the reader can open', () {
+    // The whole catalogue was checked against a real page before shipping, and
+    // the card turns that citation into a tappable link. An entry without one
+    // is an entry nobody can check, which is the thing this app cannot afford
+    // to be caught doing.
+    for (final Fact fact in facts) {
+      expect(
+        fact.sourceUrl,
+        startsWith('https://'),
+        reason: 'Missing or non-https sourceUrl: ${fact.id}',
+      );
+    }
+  });
+
+  test('the catalogue stays interleaved by category', () {
+    // Nothing shuffles the file, so its order is the order the user meets. A
+    // run of same-category cards reads like the app got stuck. One pair is
+    // tolerated at the tail, where the longest category runs out alone.
+    int runs = 0;
+    for (int i = 1; i < facts.length; i++) {
+      if (facts[i].category == facts[i - 1].category) runs++;
+    }
+
+    expect(
+      runs,
+      lessThanOrEqualTo(1),
+      reason: 'Catalogue is bunched by category; re-interleave it',
+    );
+  });
+
   test('no fact ships with empty text in either language', () {
     for (final Fact fact in facts) {
       for (final LocalizedText text in <LocalizedText>[

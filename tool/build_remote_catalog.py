@@ -89,6 +89,15 @@ def check(remote: dict, bundled: dict) -> list[str]:
         if not str(fact["source"]).strip():
             problems.append(f"{where}: empty source — no fact ships unsourced")
 
+        # Editorial gate, stricter than the app's parser on purpose. The parser
+        # tolerates a missing link because a bad remote file must not brick the
+        # installed copies; this script is where a human publishes, and here an
+        # unverifiable claim simply does not go out.
+        if not str(fact["sourceUrl"]).startswith("https://"):
+            problems.append(
+                f"{where}: sourceUrl must be an https link you actually opened"
+            )
+
     removed = remote.get("removed", [])
     if not isinstance(removed, list):
         problems.append('"removed" must be a list of ids')

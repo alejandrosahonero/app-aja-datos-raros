@@ -15,7 +15,7 @@ App Android de feed vertical swipeable con preguntas y respuestas curiosas sobre
 | Anuncios | `AdsService`: banner adaptativo, interstitial con pacing |
 | Consentimiento | UMP SDK (incluido en `google_mobile_ads`) + "Opciones de privacidad" en Ajustes |
 | Compras | `in_app_purchase`: producto no consumible `premium_remove_ads` + restaurar compras |
-| Contenido | Catálogo empaquetado en `assets/data/facts.json`, sin backend en el MVP |
+| Contenido | Catálogo empaquetado en `assets/data/facts.json`: 85 datos, cada uno con enlace a la fuente verificada |
 | Favoritos | Guardado local en `shared_preferences`, detrás del gate premium |
 | Permisos | Ninguno en runtime. `POST_NOTIFICATIONS` volverá con la pregunta del día |
 | Objetivos | Objetivo diario derivado de la fecha + escalera de 6 rangos por puntos |
@@ -45,7 +45,7 @@ La imagen compartida lleva solo la **pregunta**, nunca la respuesta: es el motiv
 
 ## Catálogo remoto
 
-Las preguntas se pueden ampliar, corregir y retirar **sin publicar una versión nueva**. La app trae 87 dentro del APK y les suma un `facts.json` servido por GitHub Pages: mismo id reemplaza, los ids de `removed` desaparecen, los nuevos se añaden.
+Las preguntas se pueden ampliar, corregir y retirar **sin publicar una versión nueva**. La app trae 85 dentro del APK y les suma un `facts.json` servido por GitHub Pages: mismo id reemplaza, los ids de `removed` desaparecen, los nuevos se añaden.
 
 Un JSON estático y no Firebase: cuesta una petición GET y cero dependencias, es gratis, y como el fichero vive en el repo cada publicación de contenido es un commit con su diff y su historial.
 

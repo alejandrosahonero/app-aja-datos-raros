@@ -69,7 +69,7 @@ APK sin moverla de sitio.
 ## Retirar un dato falso
 
 Añade su `id` a `"removed"` y sube la versión. Es lo más urgente que sabe hacer
-este sistema: las 87 preguntas del APK llevan fuentes **sin verificar**, y cuando
+este sistema: las 85 preguntas del APK llevan fuente verificada, pero una fuente puede caerse o corregirse, y cuando
 una resulte falsa hay que poder matarla hoy.
 
 ```json
