@@ -8,6 +8,7 @@ import 'package:aja/core/widgets/error_view.dart';
 import 'package:aja/features/facts/domain/fact.dart';
 import 'package:aja/features/facts/presentation/providers/favorites_controller.dart';
 import 'package:aja/features/facts/presentation/widgets/fact_card.dart';
+import 'package:aja/features/facts/presentation/widgets/fact_source_link.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -133,12 +134,7 @@ class _FavoriteTile extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: AppSpacing.sm),
-            Text(
-              context.l10n.deckSource(fact.source),
-              style: context.texts.labelSmall?.copyWith(
-                color: context.colors.onSurfaceVariant,
-              ),
-            ),
+            FactSourceLink(source: fact.source, url: fact.sourceUrl),
             const SizedBox(height: AppSpacing.xs),
             Text(
               fact.category.label(context),

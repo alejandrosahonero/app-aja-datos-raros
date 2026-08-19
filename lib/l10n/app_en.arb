@@ -14,6 +14,7 @@
   "deckHintNext": "Swipe left for the next one",
   "deckAnswerLabel": "The answer",
   "deckSource": "Source: {source}",
+  "deckSourceOpenError": "We couldn't open the source.",
   "deckShowAnswer": "Show answer",
   "deckHideAnswer": "Hide",
   "deckNext": "Next",

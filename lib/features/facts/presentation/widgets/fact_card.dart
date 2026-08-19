@@ -4,6 +4,7 @@ import 'package:aja/core/extensions/build_context_x.dart';
 import 'package:aja/core/theme/app_spacing.dart';
 import 'package:aja/features/facts/domain/fact.dart';
 import 'package:aja/features/facts/presentation/widgets/deck_card_shell.dart';
+import 'package:aja/features/facts/presentation/widgets/fact_source_link.dart';
 import 'package:flutter/material.dart';
 
 /// Localized name of a category, for the chip on the front of the card.
@@ -225,11 +226,10 @@ class _CardBack extends StatelessWidget {
             ),
           ),
           const SizedBox(height: AppSpacing.md),
-          Text(
-            context.l10n.deckSource(fact.source),
-            style: context.texts.labelSmall?.copyWith(
-              color: context.colors.onPrimaryContainer.withValues(alpha: 0.7),
-            ),
+          FactSourceLink(
+            source: fact.source,
+            url: fact.sourceUrl,
+            color: context.colors.onPrimaryContainer.withValues(alpha: 0.7),
           ),
           const SizedBox(height: AppSpacing.sm),
           _SwipeLegend(

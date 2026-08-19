@@ -27,6 +27,10 @@
       }
     }
   },
+  "deckSourceOpenError": "No hemos podido abrir la fuente.",
+  "@deckSourceOpenError": {
+    "description": "Aviso cuando el enlace de la fuente no abre ningún navegador"
+  },
   "deckShowAnswer": "Ver respuesta",
   "deckHideAnswer": "Ocultar",
   "deckNext": "Siguiente",

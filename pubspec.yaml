@@ -65,6 +65,7 @@ dependencies:
   # No va en shared_preferences a propósito: las prefs se cargan enteras en
   # memoria al arrancar, y medio mega de JSON ahí es coste en cada arranque.
   path_provider: ^2.1.6
+  url_launcher: ^6.3.2
 
 dev_dependencies:
   flutter_test:
