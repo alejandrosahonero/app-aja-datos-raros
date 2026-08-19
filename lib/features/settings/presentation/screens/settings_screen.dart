@@ -78,6 +78,12 @@ class SettingsScreen extends ConsumerWidget {
             trailing: const Icon(Icons.chevron_right),
             onTap: () => context.goNamed(AppRoutes.favoritesName),
           ),
+          ListTile(
+            leading: const Icon(Icons.military_tech_outlined),
+            title: Text(context.l10n.goalsTitle),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => context.goNamed(AppRoutes.progressName),
+          ),
           const Divider(),
           _SectionHeader(title: context.l10n.settingsNotifications),
           const _DailyQuestionSwitch(),

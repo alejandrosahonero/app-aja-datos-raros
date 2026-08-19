@@ -18,6 +18,7 @@ App Android de feed vertical swipeable con preguntas y respuestas curiosas sobre
 | Contenido | Catálogo empaquetado en `assets/data/facts.json`, sin backend en el MVP |
 | Favoritos | Guardado local en `shared_preferences`, detrás del gate premium |
 | Permisos | Ninguno en runtime. `POST_NOTIFICATIONS` volverá con la pregunta del día |
+| Objetivos | Objetivo diario derivado de la fecha + escalera de 6 rangos por puntos |
 | Reseñas | `in_app_review` con guardas (5 acciones, 3 días de antigüedad, 120 días entre solicitudes) |
 | Tema | Material 3 desde un único seed color, claro/oscuro/sistema persistido |
 | Almacenamiento | `shared_preferences` (flags) + `flutter_secure_storage` (entitlement) |
@@ -63,6 +64,20 @@ Y encima, no en medio: saltar el índice hasta donde esté esa carta se saltarí
 Son **notificaciones locales, no push**: no hay backend, así que cada notificación se encola en el dispositivo con su pregunta ya elegida. Eso hace que funcione sin red y sin coste, a cambio de que la cola llegue a 14 días y se rellene cada vez que abres la app.
 
 El permiso se pide **solo** desde el interruptor de Ajustes, nunca al arrancar: Android enseña ese diálogo una vez y recuerda la negativa para siempre.
+
+---
+
+## Objetivo diario y rangos
+
+Cada día pide un número distinto de datos — 8, 10, 12 o 15 — y cumplirlo suma tantos puntos como datos pedía. Los puntos suben de rango: **Curioso → Preguntón → Sabelotodo → Erudito → Enciclopedia → Oráculo**, en 0 / 60 / 180 / 400 / 800 / 1400.
+
+Un dato cuenta cuando **volteas la tarjeta y lees la respuesta**, no cuando la descartas, y el mismo dato solo cuenta una vez al día.
+
+El objetivo sale de la fecha y de nada más, así que cerrar la app no lo vuelve a tirar. Los tamaños se reparten en bloques de cuatro días barajados: cada tamaño sale exactamente una vez cada cuatro días y nunca se repite dos días seguidos. El día de la instalación siempre es el más corto, para que la primera sesión pueda acabar en objetivo cumplido.
+
+Se ve en el **anillo de la barra superior** del mazo, que abre la pantalla `/progress` con la escalera completa. Cumplir el objetivo saca un `SnackBar`; subir de rango, un diálogo — pasa seis veces en toda la vida de la app.
+
+Todo es gratis: ni el objetivo ni los rangos miran el estado premium.
 
 ---
 

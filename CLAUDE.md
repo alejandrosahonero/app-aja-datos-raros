@@ -60,6 +60,9 @@ lib/
 │   │   │                     # RemoteCatalogService, FactShareService
 │   │   ├── domain/           # Fact, FactCategory, DeckItem, buildDeck()
 │   │   └── presentation/     # providers / screens / widgets
+│   ├── goals/                # objetivo diario + rangos
+│   │   ├── domain/           # DailyGoal, Rank, GoalsState, GoalEvent
+│   │   └── presentation/     # GoalsController, anillo, pantalla, diálogo
 │   ├── settings/presentation/
 │   └── premium/presentation/ # paywall + diálogo de función bloqueada
 ├── services/
@@ -72,7 +75,7 @@ lib/
 ```
 
 **Regla de dependencia:** `presentation` → `domain` → `data`. `domain` no conoce a nadie.
-`facts/` es la única feature con `domain/`, porque es la única con lógica de negocio real (composición del mazo, progreso). `settings/` y `premium/` son triviales y solo tienen `presentation/`. **No crear carpetas vacías.**
+`facts/` y `goals/` son las únicas features con `domain/`, porque son las únicas con lógica de negocio real (composición del mazo y progreso; derivación del objetivo del día y umbrales de rango). `settings/` y `premium/` son triviales y solo tienen `presentation/`. **No crear carpetas vacías.**
 
 **Cada feature es autocontenida y borrable.** Si un helper solo lo usa una feature, vive dentro de esa feature, nunca en `core/utils/`.
 
@@ -170,7 +173,9 @@ El progreso se persiste como **número de tarjetas de contenido vistas** (`deck_
 2. **«Aportar»** — formulario de pregunta + respuesta + fuente opcional (§3.5).
 3. **«Pedir más»** — ráfaga de corazones estilo Instagram y un contador. Es el único botón que no hace nada verificable para el usuario, y por eso justamente tenía que ser el que mejor sienta pulsar.
 
-**El progreso no se enseña.** No hay barra ni contador «7/23»: la promesa del producto es un mazo que no se acaba, y un indicador que avanza convierte la sesión en una tarea con final. Se guarda para saber por dónde retomar, nada más. **No reintroducir un indicador de progreso.**
+**El avance dentro del mazo no se enseña.** No hay barra ni contador «7/23»: la promesa del producto es un mazo que no se acaba, y un indicador que va vaciándose convierte la sesión en una tarea con final. El progreso se guarda para saber por dónde retomar, nada más. **No reintroducir un indicador de cuánto queda.**
+
+> El anillo del objetivo diario (§3.8) **no es esto**, y conviene no confundirlos al leer código ajeno. Aquel cuenta hacia **arriba**, hacia un número que se reinicia mañana, y no dice absolutamente nada sobre cuántas cartas quedan en el catálogo. Lo que está prohibido es la cuenta atrás, no la idea de mostrar un número.
 
 ### 3.4 Compartir — imagen para historias
 
@@ -232,6 +237,39 @@ Guardar tarjetas está detrás del **mismo pago único `premium_remove_ads`**. N
 - Los ids guardados **no se borran nunca** al perder el entitlement. Un reembolso o una reinstalación no deben destruir la lista; la pantalla se bloquea, los datos siguen ahí.
 
 > **Ojo en Play Console:** la ficha del producto `premium_remove_ads` tiene que mencionar los favoritos. Vender "quitar anuncios" y usarlo además para desbloquear una función es motivo de reembolso y de reseña negativa si el usuario no lo sabía al pagar.
+
+### 3.8 Objetivo diario y rangos
+
+Dos sistemas encadenados: **cada día pide un número de datos**, y **cumplirlo da puntos que suben de rango**. Es lo único de la app que da una razón para volver mañana en concreto, en vez de "algún día".
+
+**«Aprender» un dato es voltear la tarjeta y leer la respuesta.** No descartarla. Contar descartes llenaría el objetivo con todo lo que un usuario impaciente pasó sin mirar, y el anillo le diría que ha aprendido quince cosas que no ha leído. Es el mismo momento del que cuelga la petición de reseña (§7), por la misma razón: es lo único que el usuario viene a hacer aquí.
+
+**El mismo dato solo cuenta una vez al día.** Voltear una tarjeta adelante y atrás no rellena nada. Pero un dato que vuelve a salir mañana **sí** cuenta otra vez: si no, un usuario veterano que ha rebarajado el mazo se quedaría con un objetivo imposible.
+
+**El objetivo es función de la fecha y de nada más** (`DailyGoal.targetFor`). No hay servidor, así que lo único que impide re-tirar el dado de un objetivo incómodo es que cerrar y abrir la app no pueda cambiar la respuesta. De ahí que no se guarde: se recalcula.
+
+- Los tamaños salen de `DailyGoal.sizes` (8, 10, 12, 15) y se reparten **en bloques de cuatro días barajados**, así que cada tamaño sale exactamente una vez cada cuatro días en lugar de "a menudo". Dos días seguidos nunca repiten número, y eso se garantiza mirando solo el bloque anterior — el arreglo intercambia las posiciones 0 y 1 y **nunca toca la última**, que es lo que impide que resolver un bloque exija resolver toda la historia hacia atrás.
+- El **día de la instalación siempre es el más corto**. Una primera sesión que acaba en objetivo cumplido es lo que vende el sistema entero; abrir una instalación recién hecha con un 15 es jugarse a cara o cruz que eso ocurra.
+- `epochDayOf` convierte la fecha **local** a UTC antes de numerarla. Usar la marca de tiempo local directamente hace que el índice avance algo distinto de uno al cambiar la hora en una zona UTC±0, y eso reparte el mismo día dos veces o se salta uno.
+
+**El día paga lo que pidió**: cumplir un objetivo de 15 son 15 puntos; uno de 8, ocho. Es justo sin necesidad de inventarse una constante. Y **paga una sola vez**: seguir leyendo después suma datos al contador pero no más puntos.
+
+**Rangos** (`Rank`): Curioso · Preguntón · Sabelotodo · Erudito · Enciclopedia · Oráculo, en 0 / 60 / 180 / 400 / 800 / 1400 puntos. Con una media de ~11 puntos por día perfecto, el segundo cae dentro de la primera semana — pronto para demostrar que el sistema funciona — y el último más allá de cien días cumplidos, que es donde debe estar un rango final. La barra de la pantalla de progreso mide **desde el suelo del rango actual**, no desde cero: una barra única para toda la escalera se pasaría semanas sin moverse.
+
+**Dónde se ve.** Un anillo en la **barra superior** del mazo, con el icono del rango dentro. Ahí y no sobre las tarjetas: el mazo ya cede alto a los chips y al banner, y esto sería lo tercero en pedirle una franja. Al tocarlo se abre `/progress`, que es donde vive la explicación completa, la escalera entera y el estado del día.
+
+**El aviso está graduado por lo que vale interrumpir:**
+
+| Qué pasa | Qué sale |
+|---|---|
+| Se cumple el objetivo | Un `SnackBar`. Pasa todos los días y un modal acabaría siendo lo que el usuario aprende a cerrar. |
+| Se sube de rango | Un diálogo. Pasa seis veces en la vida de la app, y es el único premio que tienen los puntos. |
+
+**El día se cierra desde el reloj, no desde memoria.** `registerLearned` relee el día guardado en cada escritura, así que una app abierta desde antes de medianoche se pone al día con la primera tarjeta que se voltee; `refresh()` existe para el caso de volver del segundo plano sin haber tocado nada todavía. Los contadores de ayer no se borran hasta la siguiente escritura, pero **nunca se leen**: la comparación con el reloj los enmascara, y por eso un `awarded` viejo no puede pagar el objetivo de hoy.
+
+**Es gratis y no toca la monetización.** Ni el objetivo ni los rangos miran `isPremiumProvider`. Poner detrás del muro de pago la única mecánica de retención que tiene la app sería cobrar por el motivo de volver.
+
+> Lo obvio que falta y que **no** está implementado: la **racha** (días consecutivos cumpliendo). Es la pieza que multiplicaría esto y la notificación diaria, y encaja sin tocar nada de lo de arriba — un contador más y una condición en `registerLearned`. No se ha metido porque no se pidió.
 
 ---
 
@@ -477,6 +515,7 @@ flutter build appbundle --release --analyze-size
 - [ ] Tests pasando.
 - [ ] Probado en dispositivo físico de gama baja en **modo release** (R8 rompe cosas que en debug funcionan).
 - [ ] El gesto del mazo probado con `textScaleFactor` alto y en pantalla pequeña.
+- [ ] Objetivo diario probado **cruzando la medianoche** con la app abierta: el contador se reinicia con la primera tarjeta del día nuevo y los puntos de ayer siguen ahí.
 - [ ] Pregunta del día probada **en dispositivo físico**: permiso concedido y denegado, notificación tocada con la app cerrada y con la app abierta, y la carta apareciendo arriba sin saltarse ninguna. Comprobar también que sobrevive a un reinicio.
 - [ ] Sin IDs de prueba de AdMob ni logs de debug en el build de producción.
 - [ ] `versionCode` incrementado.

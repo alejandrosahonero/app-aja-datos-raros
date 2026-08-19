@@ -19,6 +19,10 @@ import 'package:aja/features/facts/presentation/widgets/deck_exhausted_view.dart
 import 'package:aja/features/facts/presentation/widgets/deck_swipe_progress.dart';
 import 'package:aja/features/facts/presentation/widgets/fact_card.dart';
 import 'package:aja/features/facts/presentation/widgets/swipe_deck.dart';
+import 'package:aja/features/goals/domain/goals_state.dart';
+import 'package:aja/features/goals/presentation/providers/goals_controller.dart';
+import 'package:aja/features/goals/presentation/widgets/goal_celebration.dart';
+import 'package:aja/features/goals/presentation/widgets/goal_ring_button.dart';
 import 'package:aja/features/premium/presentation/widgets/premium_feature_dialog.dart';
 import 'package:aja/l10n/generated/app_localizations.dart';
 import 'package:aja/services/ads/ads_providers.dart';
@@ -46,6 +50,7 @@ class DeckScreen extends ConsumerWidget {
       title: context.l10n.appTitle,
       showBanner: false,
       actions: <Widget>[
+        const GoalRingButton(),
         IconButton(
           onPressed: () => context.goNamed(AppRoutes.favoritesName),
           icon: const Icon(Icons.bookmarks_outlined),
@@ -143,7 +148,7 @@ class _DeckBodyState extends ConsumerState<_DeckBody> {
             index: state.index,
             progress: _progress,
             onSwipeLeft: () => unawaited(_next(ref)),
-            onSwipeRight: () => _reveal(ref),
+            onSwipeRight: () => unawaited(_reveal(context, ref)),
             onSwipeUp: () => unawaited(_toggleFavorite(context, ref)),
             onSwipeDown: () => unawaited(_share(context, ref)),
             overlayBuilder:
@@ -155,7 +160,9 @@ class _DeckBodyState extends ConsumerState<_DeckBody> {
                     fact: fact,
                     revealed: isTop && state.revealed,
                     favorited: favorites.contains(fact.id),
-                    onTap: isTop ? () => _reveal(ref) : null,
+                    onTap: isTop
+                        ? () => unawaited(_reveal(context, ref))
+                        : null,
                   ),
                   AdItem() => AdDeckCard(active: isTop),
                 },
@@ -170,7 +177,7 @@ class _DeckBodyState extends ConsumerState<_DeckBody> {
             _ => false,
           },
           onNext: () => unawaited(_next(ref)),
-          onReveal: () => _reveal(ref),
+          onReveal: () => unawaited(_reveal(context, ref)),
           onFavorite: () => unawaited(_toggleFavorite(context, ref)),
           onShare: () => unawaited(_share(context, ref)),
         ),
@@ -243,16 +250,30 @@ class _DeckBodyState extends ConsumerState<_DeckBody> {
   }
 
   /// Flipping a card to read the answer is the value moment of this app, so it
-  /// is the only place the review prompt is allowed to be counted from. The
-  /// service's own guards (5 successes, 3 days, 120 days) decide whether
-  /// anything is actually shown.
-  void _reveal(WidgetRef ref) {
+  /// is the only place two things are counted from.
+  ///
+  /// The review prompt: the service's own guards (5 successes, 3 days, 120
+  /// days) decide whether anything is actually shown.
+  ///
+  /// The daily goal: this — not swiping the card away — is what "learning a
+  /// fact" means. Counting dismissals instead would fill the goal with
+  /// everything a fast scroller skipped past without reading.
+  Future<void> _reveal(BuildContext context, WidgetRef ref) async {
     final bool wasHidden = !state.revealed;
     ref.read(deckControllerProvider.notifier).toggleReveal();
 
-    if (wasHidden && state.current is FactItem) {
-      unawaited(ref.read(reviewServiceProvider).requestReviewAfterSuccess());
-    }
+    // Hiding the answer again is not a second success.
+    final DeckItem? current = state.current;
+    if (!wasHidden || current is! FactItem) return;
+
+    unawaited(ref.read(reviewServiceProvider).requestReviewAfterSuccess());
+
+    final GoalEvent event = await ref
+        .read(goalsControllerProvider.notifier)
+        .registerLearned(current.fact.id);
+
+    if (!context.mounted) return;
+    await showGoalEvent(context, event);
   }
 
   /// One swiped card = one "value action" for the interstitial pacing. The

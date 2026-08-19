@@ -2,6 +2,7 @@ import 'package:aja/core/routing/app_routes.dart';
 import 'package:aja/core/widgets/error_view.dart';
 import 'package:aja/features/facts/presentation/screens/deck_screen.dart';
 import 'package:aja/features/facts/presentation/screens/favorites_screen.dart';
+import 'package:aja/features/goals/presentation/screens/progress_screen.dart';
 import 'package:aja/features/premium/presentation/screens/paywall_screen.dart';
 import 'package:aja/features/settings/presentation/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +45,12 @@ final Provider<GoRouter> routerProvider = Provider<GoRouter>((Ref ref) {
             name: AppRoutes.favoritesName,
             builder: (BuildContext context, GoRouterState state) =>
                 const FavoritesScreen(),
+          ),
+          GoRoute(
+            path: 'progress',
+            name: AppRoutes.progressName,
+            builder: (BuildContext context, GoRouterState state) =>
+                const ProgressScreen(),
           ),
           GoRoute(
             path: 'premium',

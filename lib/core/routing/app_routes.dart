@@ -16,6 +16,11 @@ abstract final class AppRoutes {
   static const String favoritesPath = '/favorites';
   static const String favoritesName = 'favorites';
 
+  /// Daily goal, points and ranks. Reached from the ring in the deck's app bar
+  /// and from a row in Settings.
+  static const String progressPath = '/progress';
+  static const String progressName = 'progress';
+
   /// Paywall. Reachable by deep link so a campaign can land directly on it.
   static const String paywallPath = '/premium';
   static const String paywallName = 'premium';

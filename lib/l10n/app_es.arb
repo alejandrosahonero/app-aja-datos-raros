@@ -103,6 +103,86 @@
   "premiumFeatureCta": "Ver qué incluye",
 
 
+  "goalsTitle": "Progreso",
+  "@goalsTitle": {
+    "description": "Título de la pantalla de objetivos y rangos"
+  },
+  "goalsRingTooltip": "Objetivo de hoy: {learned} de {target}",
+  "@goalsRingTooltip": {
+    "description": "Tooltip del anillo de la barra superior; es lo que lee el lector de pantalla",
+    "placeholders": {
+      "learned": { "type": "int" },
+      "target": { "type": "int" }
+    }
+  },
+  "goalsTodayTitle": "Objetivo de hoy",
+  "goalsTodayProgress": "{learned} de {target} datos",
+  "@goalsTodayProgress": {
+    "placeholders": {
+      "learned": { "type": "int" },
+      "target": { "type": "int" }
+    }
+  },
+  "goalsTodayDone": "Objetivo cumplido: +{points} puntos",
+  "@goalsTodayDone": {
+    "placeholders": {
+      "points": { "type": "int" }
+    }
+  },
+  "goalsTodayPending": "{remaining, plural, =1{Te falta 1} other{Te faltan {remaining}}}",
+  "@goalsTodayPending": {
+    "placeholders": {
+      "remaining": { "type": "num" }
+    }
+  },
+  "goalsPoints": "{points, plural, =1{1 punto} other{{points} puntos}}",
+  "@goalsPoints": {
+    "placeholders": {
+      "points": { "type": "num" }
+    }
+  },
+  "goalsNextRank": "{points, plural, =1{1 punto para {rank}} other{{points} puntos para {rank}}}",
+  "@goalsNextRank": {
+    "description": "Cuánto falta para el siguiente rango",
+    "placeholders": {
+      "points": { "type": "num" },
+      "rank": { "type": "String" }
+    }
+  },
+  "goalsMaxRank": "Has llegado al último rango. A partir de aquí solo queda mantenerlo.",
+  "goalsRankLadder": "Rangos",
+  "goalsRankPointsShort": "{points} pts",
+  "@goalsRankPointsShort": {
+    "placeholders": {
+      "points": { "type": "int" }
+    }
+  },
+  "goalsHowItWorks": "Cada día trae un objetivo distinto. Un dato cuenta cuando le das la vuelta a la tarjeta y lees la respuesta, y el mismo dato solo cuenta una vez al día. Al cumplir el objetivo sumas tantos puntos como datos pedía ese día, y los puntos son los que suben de rango.",
+  "goalsReachedSnack": "¡Objetivo del día cumplido! +{points} puntos",
+  "@goalsReachedSnack": {
+    "placeholders": {
+      "points": { "type": "int" }
+    }
+  },
+  "goalsRankUpTitle": "Rango nuevo",
+  "goalsRankUpBody": "Has cumplido el objetivo del día (+{points} puntos) y con eso subes de rango.",
+  "@goalsRankUpBody": {
+    "placeholders": {
+      "points": { "type": "int" }
+    }
+  },
+  "goalsSeeProgress": "Ver progreso",
+
+  "rankCurious": "Curioso",
+  "@rankCurious": {
+    "description": "Rango 1 de 6"
+  },
+  "rankInquisitive": "Preguntón",
+  "rankKnowItAll": "Sabelotodo",
+  "rankScholar": "Erudito",
+  "rankEncyclopedia": "Enciclopedia",
+  "rankOracle": "Oráculo",
+
   "settingsNotifications": "Recordatorios",
   "@settingsNotifications": {
     "description": "Cabecera de la sección de notificaciones en Ajustes"
