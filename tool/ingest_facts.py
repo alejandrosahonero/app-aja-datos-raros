@@ -42,7 +42,10 @@ REQUIRED = {"id", "category", "question", "answer", "detail", "source", "sourceU
 LOCALIZED = ("question", "answer", "detail")
 
 # The card and the 1080x1920 story image both shrink text to fit, but only down
-# to a floor. Past these lengths the question gets clipped instead.
+# to a floor (34pt); past it the question is clipped instead. These ceilings sit
+# a little above the longest entry in the hand-written catalogue — question 84,
+# answer 164, detail 328 — so a batch that blows past them is writing essays,
+# not cards.
 MAX_QUESTION = 110
 MAX_ANSWER = 170
 MAX_DETAIL = 460
@@ -114,8 +117,12 @@ def check_entry(fact, where: str, known_ids: set[str]) -> list[str]:
                     f"{where}: question.{lang} is {len(text)} chars "
                     f"(max {MAX_QUESTION}) — it will clip on the story image"
                 )
-        if isinstance(question.get("es"), str) and not question["es"].startswith("¿"):
-            problems.append(f"{where}: question.es must open with '¿'")
+        # Spanish opens the interrogative clause, not necessarily the sentence:
+        # "Si el hielo es sólido, ¿por qué resbala?" is correct punctuation.
+        if isinstance(question.get("es"), str) and not (
+            "¿" in question["es"] and question["es"].rstrip().endswith("?")
+        ):
+            problems.append(f"{where}: question.es must contain '¿' and end in '?'")
         if isinstance(question.get("en"), str) and not question["en"].endswith("?"):
             problems.append(f"{where}: question.en must be interrogative")
 
