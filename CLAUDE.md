@@ -166,7 +166,13 @@ El volteo es un `rotateY` con perspectiva (`setEntry(3, 2, 0.0012)`); a mitad de
 - **El mazo jamás termina en un anuncio**: cerrar la sesión con una tarjeta de publicidad se lee como un muro de pago.
 - `withAds: false` si el usuario es premium → el mazo no reserva ni un hueco.
 
-El progreso se persiste como **número de tarjetas de contenido vistas** (`deck_facts_seen_<categoría>`), no como índice: los huecos de anuncio se desplazan cuando el usuario compra premium, y un índice guardado apuntaría a otra tarjeta.
+El progreso se persiste como **el conjunto de ids ya leídos** (`deck_seen_ids`), uno solo para toda la app, y el mazo contiene **únicamente cartas sin leer**: la de arriba es siempre el índice 0.
+
+Guardar ids y no un índice resuelve dos cosas a la vez. Los huecos de anuncio se desplazan al comprar premium, y un índice guardado apuntaría a otra tarjeta. Y sobre todo: **los chips son cuatro vistas de un mismo catálogo, no cuatro mazos**. Un contador solo significa algo contra un orden concreto, así que con uno por filtro (`deck_facts_seen_<categoría>`, como estaba antes) terminarte «Ciencia» y pasar a «Todas» te repartía esas mismas cartas otra vez. Repartir una carta que el usuario acaba de leer es lo único que este mazo no puede hacer.
+
+La lista viaja en `shared_preferences`, que se carga entera al arrancar (§10): con 533 entradas son unos diez kilobytes. Los ids de datos que un catálogo remoto haya retirado dejan de coincidir con nada y son inofensivos.
+
+**«Reiniciar deck» solo revive las cartas del filtro activo.** Pulsarlo bajo el chip de «Ciencia» es pedir más ciencia, no ofrecerse a releer la historia que se terminó la semana pasada.
 
 **La pantalla de fin de mazo** (`DeckExhaustedView`) es la única sin nada que deslizar, y ofrece tres salidas en orden decreciente de lo que devuelven:
 
@@ -389,7 +395,7 @@ Hora fija a las **20:00 locales** (`AppConfig.dailyQuestionHour`). Es contenido 
 
 Tres casos que el código cubre y que conviene no romper:
 
-- **Carta ya leída:** sale del montón de leídas, así que `factsSeen` se **recalcula**. Si se reutilizara el contador, el montón tendría una carta menos de las que dice y el mazo arrancaría una carta por delante, saltándose justo la pregunta que el traslado pretendía proteger.
+- **Carta ya leída:** no está en el mazo, porque el mazo solo lleva cartas sin leer. Se saca del catálogo filtrado y se pone arriba para esta sesión; descartarla vuelve a marcarla leída, que no cambia nada.
 - **Mazo ya agotado:** la carta aterriza arriba y el mazo vuelve a estar agotado justo después. Un recordatorio que toca alguien que ya se lo ha leído todo tiene que funcionar igual.
 - **Id desconocido o filtrado por los chips:** el mazo se deja exactamente como estaba, sin adivinar qué quería el usuario. Por eso `openFactFromNotification` **limpia el filtro de categoría** antes de fijar la carta: la pregunta del día sale de todo el catálogo, y un usuario parado en «Historia» tocaría una de ciencia y no vería nada.
 

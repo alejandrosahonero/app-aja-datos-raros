@@ -69,6 +69,13 @@ final List<Fact> _facts = <Fact>[..._bodyFacts, _scienceFact];
 List<String> _idsOf(List<DeckItem> items) =>
     items.whereType<FactItem>().map((FactItem item) => item.fact.id).toList();
 
+/// Every id in the catalogue minus the ones already swiped away.
+///
+/// The deck holds only unread cards, so this is what a rebuilt deck is expected
+/// to contain — plus whatever a pin lifts back out of the read pile.
+Set<String> _unreadIds(Set<String> read) =>
+    _facts.map((Fact fact) => fact.id).toSet().difference(read);
+
 void main() {
   group('DeckController pinned fact', () {
     late ProviderContainer container;
@@ -103,11 +110,6 @@ void main() {
         await controller.next();
         await controller.next();
 
-        final DeckState before = container
-            .read(deckControllerProvider)
-            .requireValue;
-        final List<String> idsBefore = _idsOf(before.items);
-
         container.read(pinnedFactProvider.notifier).pin('8');
         final DeckState after = await container.read(
           deckControllerProvider.future,
@@ -123,15 +125,15 @@ void main() {
           equals(<String>['3', '4', '5', '6', '7']),
         );
 
-        expect(idsAfter.toSet(), equals(idsBefore.toSet()));
+        // Everything still unread is still in the deck, exactly once.
+        expect(idsAfter.toSet(), equals(_unreadIds(<String>{'0', '1', '2'})));
         expect(idsAfter.length, equals(idsAfter.toSet().length));
       },
     );
 
-    /// This is the case `_hoist`'s doc comment warns about: pulling an
-    /// already-read card back out of the read pile shrinks it by one, so
-    /// `factsSeen` has to be recomputed or the deck starts one card ahead and
-    /// skips exactly the question the pin was meant to protect.
+    /// The case `_hoist`'s doc comment covers: the pinned card is not in the
+    /// unread pile at all, so it has to be fetched out of the read pile and put
+    /// back on top — without displacing the card that was about to come up.
     test('pinning a card the user already read puts it back on top', () async {
       await container.read(deckControllerProvider.future);
       final DeckController controller = container.read(
@@ -146,8 +148,7 @@ void main() {
       final DeckState before = container
           .read(deckControllerProvider)
           .requireValue;
-      final List<String> idsBefore = _idsOf(before.items);
-      final String upcomingId = idsBefore[before.index];
+      final String upcomingId = _idsOf(before.items)[before.index];
 
       container.read(pinnedFactProvider.notifier).pin('2');
       final DeckState after = await container.read(
@@ -157,10 +158,14 @@ void main() {
 
       expect(idsAfter[after.index], equals('2'));
       // The card that was about to come up next must still be next, right
-      // behind the pinned one — the read pile shrinking must not swallow it.
+      // behind the pinned one — reviving a read card must not swallow it.
       expect(idsAfter[after.index + 1], equals(upcomingId));
 
-      expect(idsAfter.toSet(), equals(idsBefore.toSet()));
+      // The unread pile, plus the one card the pin brought back.
+      expect(
+        idsAfter.toSet(),
+        equals(_unreadIds(<String>{'0', '1', '2', '3', '4'})..add('2')),
+      );
       expect(idsAfter.length, equals(idsAfter.toSet().length));
     });
 
@@ -205,11 +210,14 @@ void main() {
       await controller.next();
       await controller.next();
 
-      final DeckState before = container
-          .read(deckControllerProvider)
-          .requireValue;
+      // Compared against a rebuild rather than the in-memory state: a rebuild
+      // is exactly what pinning triggers, so this isolates the pin from the
+      // deck simply being redealt without the two swiped cards.
+      container.invalidate(deckControllerProvider);
+      final DeckState before = await container.read(
+        deckControllerProvider.future,
+      );
       final List<String> idsBefore = _idsOf(before.items);
-      final int indexBefore = before.index;
 
       container.read(pinnedFactProvider.notifier).pin('does-not-exist');
       final DeckState after = await container.read(
@@ -217,7 +225,7 @@ void main() {
       );
 
       expect(_idsOf(after.items), equals(idsBefore));
-      expect(after.index, equals(indexBefore));
+      expect(after.index, equals(before.index));
     });
 
     /// A pin for a card the category chips currently hide is not on the
@@ -249,15 +257,14 @@ void main() {
     /// stack's widget state, so whatever gets pinned, the deck must hold
     /// exactly the same set of ids it started with.
     test('the id set never changes, whatever is pinned', () async {
-      final DeckState initial = await container.read(
-        deckControllerProvider.future,
-      );
-      final Set<String> expectedIds = _idsOf(initial.items).toSet();
+      await container.read(deckControllerProvider.future);
       final DeckController controller = container.read(
         deckControllerProvider.notifier,
       );
       await controller.next();
       await controller.next();
+
+      const Set<String> read = <String>{'0', '1'};
 
       for (final String id in <String>['5', '0', '19', '2', '8']) {
         container.read(pinnedFactProvider.notifier).pin(id);
@@ -266,7 +273,9 @@ void main() {
         );
         final List<String> ids = _idsOf(state.items);
 
-        expect(ids.toSet(), equals(expectedIds));
+        // Always the unread pile, plus the pinned card whether or not it had
+        // already been read. Never the same id twice.
+        expect(ids.toSet(), equals(_unreadIds(read)..add(id)));
         expect(ids.length, equals(ids.toSet().length));
       }
     });

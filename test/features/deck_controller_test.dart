@@ -28,11 +28,15 @@ class _FakePremiumController extends PremiumController {
       const PremiumStatus(isPremium: true, storeAvailable: false);
 }
 
+/// Fact ids in deck order, skipping any ad slots `buildDeck` interleaves.
+List<String> _idsOf(List<DeckItem> items) =>
+    items.whereType<FactItem>().map((FactItem item) => item.fact.id).toList();
+
 /// Helper to build a test fact with the given ID.
-Fact _buildFact(String id) {
+Fact _buildFact(String id, {FactCategory category = FactCategory.body}) {
   return Fact(
     id: id,
-    category: FactCategory.body,
+    category: category,
     question: LocalizedText(es: 'Pregunta $id', en: 'Question $id'),
     answer: LocalizedText(es: 'Respuesta $id', en: 'Answer $id'),
     detail: LocalizedText(es: 'Detalle $id', en: 'Detail $id'),
@@ -67,7 +71,7 @@ void main() {
     tearDown(() => container.dispose());
 
     test(
-      'initial state has index 0, factsSeen 0, revealed false, not exhausted',
+      'initial state has index 0, nothing seen, revealed false, not exhausted',
       () async {
         await container.read(deckControllerProvider.future);
         final DeckState state = container
@@ -75,7 +79,7 @@ void main() {
             .requireValue;
 
         expect(state.index, equals(0));
-        expect(state.factsSeen, equals(0));
+        expect(state.seenIds, isEmpty);
         expect(state.revealed, isFalse);
         expect(state.isExhausted, isFalse);
       },
@@ -99,26 +103,34 @@ void main() {
       expect(state.revealed, isFalse);
     });
 
-    test('next() advances index and factsSeen, and resets revealed', () async {
-      await container.read(deckControllerProvider.future);
-      final DeckController controller = container.read(
-        deckControllerProvider.notifier,
-      );
+    test(
+      'next() advances index, records the id, and resets revealed',
+      () async {
+        await container.read(deckControllerProvider.future);
+        final DeckController controller = container.read(
+          deckControllerProvider.notifier,
+        );
 
-      // Reveal the card
-      controller.toggleReveal();
-      DeckState state = container.read(deckControllerProvider).requireValue;
-      expect(state.revealed, isTrue);
+        // Reveal the card
+        controller.toggleReveal();
+        DeckState state = container.read(deckControllerProvider).requireValue;
+        expect(state.revealed, isTrue);
 
-      // Call next()
-      final DeckItem? dismissed = await controller.next();
-      state = container.read(deckControllerProvider).requireValue;
+        // Call next()
+        final DeckItem? dismissed = await controller.next();
+        state = container.read(deckControllerProvider).requireValue;
 
-      expect(state.index, equals(1));
-      expect(state.factsSeen, equals(1));
-      expect(state.revealed, isFalse);
-      expect(dismissed, isA<FactItem>());
-    });
+        expect(state.seenIds, equals(<String>{'1'}));
+        expect(state.revealed, isFalse);
+        expect(dismissed, isA<FactItem>());
+
+        // The card just swiped is behind the user either way: still in `items`
+        // with the index moved past it, or dropped from `items` entirely if the
+        // deck rebuilt in between (premium settling does exactly that). Both
+        // are correct, so the assertion is on what the user sees.
+        expect((state.current! as FactItem).fact.id, equals('2'));
+      },
+    );
 
     test('next() returns the dismissed deck item', () async {
       await container.read(deckControllerProvider.future);
@@ -170,7 +182,7 @@ void main() {
       await controller.next();
 
       DeckState state = container.read(deckControllerProvider).requireValue;
-      expect(state.factsSeen, equals(2));
+      expect(state.seenIds, equals(<String>{'1', '2'}));
 
       // Get the SharedPreferences instance
       final SharedPreferences prefs = container.read(sharedPreferencesProvider);
@@ -193,13 +205,15 @@ void main() {
         ],
       );
 
-      // The new deck should start at factsSeen == 2
+      // The new deck holds only the card that was never swiped.
       await container.read(deckControllerProvider.future);
       state = container.read(deckControllerProvider).requireValue;
-      expect(state.factsSeen, equals(2));
+      expect(state.seenIds, equals(<String>{'1', '2'}));
+      expect(_idsOf(state.items), equals(<String>['3']));
+      expect(state.index, equals(0));
     });
 
-    test('restart() resets index and factsSeen to 0', () async {
+    test('restart() deals every card of the filter again', () async {
       await container.read(deckControllerProvider.future);
       final DeckController controller = container.read(
         deckControllerProvider.notifier,
@@ -209,15 +223,125 @@ void main() {
       await controller.next();
       await controller.next();
       DeckState state = container.read(deckControllerProvider).requireValue;
-      expect(state.factsSeen, equals(2));
+      expect(state.seenIds, equals(<String>{'1', '2'}));
 
       // Restart
       await controller.restart();
       state = container.read(deckControllerProvider).requireValue;
 
       expect(state.index, equals(0));
-      expect(state.factsSeen, equals(0));
+      expect(state.seenIds, isEmpty);
+      expect(_idsOf(state.items).toSet(), equals(<String>{'1', '2', '3'}));
       expect(state.revealed, isFalse);
+    });
+  });
+
+  /// The category chips are four views of one catalogue, not four decks. What
+  /// the user read under one chip has to stay read under every other one —
+  /// finishing "Ciencia" and switching to "Todas" used to deal those same cards
+  /// straight back, because progress was a counter per filter and a count only
+  /// means something against one fixed ordering.
+  group('DeckController progress across category filters', () {
+    late ProviderContainer container;
+
+    final List<Fact> facts = <Fact>[
+      _buildFact('sci-1', category: FactCategory.science),
+      _buildFact('sci-2', category: FactCategory.science),
+      _buildFact('body-1'),
+      _buildFact('body-2'),
+    ];
+
+    setUp(() async {
+      SharedPreferences.setMockInitialValues(<String, Object>{});
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      container = ProviderContainer(
+        overrides: [
+          sharedPreferencesProvider.overrideWithValue(prefs),
+          premiumControllerProvider.overrideWith(_FakePremiumController.new),
+          factsProvider.overrideWith((Ref ref) async => facts),
+        ],
+      );
+    });
+
+    tearDown(() => container.dispose());
+
+    test('a category read to the end does not come back unfiltered', () async {
+      container
+          .read(categoryFilterProvider.notifier)
+          .select(FactCategory.science);
+      DeckState state = await container.read(deckControllerProvider.future);
+      final DeckController controller = container.read(
+        deckControllerProvider.notifier,
+      );
+
+      while (!state.isExhausted) {
+        await controller.next();
+        state = container.read(deckControllerProvider).requireValue;
+      }
+
+      container.read(categoryFilterProvider.notifier).select(null);
+      final DeckState all = await container.read(deckControllerProvider.future);
+
+      expect(_idsOf(all.items), equals(<String>['body-1', 'body-2']));
+    });
+
+    test('reading under "all" also counts under the category chip', () async {
+      await container.read(deckControllerProvider.future);
+      final DeckController controller = container.read(
+        deckControllerProvider.notifier,
+      );
+
+      // 'sci-1' is the first card of the unfiltered deck.
+      await controller.next();
+
+      container
+          .read(categoryFilterProvider.notifier)
+          .select(FactCategory.science);
+      final DeckState science = await container.read(
+        deckControllerProvider.future,
+      );
+
+      expect(_idsOf(science.items), equals(<String>['sci-2']));
+    });
+
+    test('restart under a chip leaves the other categories read', () async {
+      container
+          .read(categoryFilterProvider.notifier)
+          .select(FactCategory.science);
+      DeckState state = await container.read(deckControllerProvider.future);
+      final DeckController controller = container.read(
+        deckControllerProvider.notifier,
+      );
+
+      while (!state.isExhausted) {
+        await controller.next();
+        state = container.read(deckControllerProvider).requireValue;
+      }
+      await controller.restart();
+
+      // Science is dealable again; body was never touched either way.
+      expect(
+        container.read(deckControllerProvider).requireValue.seenIds,
+        isEmpty,
+      );
+
+      // Now read a body card under "all", then restart science again: the body
+      // card must stay read.
+      container.read(categoryFilterProvider.notifier).select(FactCategory.body);
+      await container.read(deckControllerProvider.future);
+      await container.read(deckControllerProvider.notifier).next();
+
+      container
+          .read(categoryFilterProvider.notifier)
+          .select(FactCategory.science);
+      await container.read(deckControllerProvider.future);
+      await container.read(deckControllerProvider.notifier).restart();
+
+      expect(
+        container.read(deckControllerProvider).requireValue.seenIds,
+        equals(<String>{'body-1'}),
+      );
     });
   });
 }

@@ -110,7 +110,7 @@ void main() {
       await tester.pumpAndSettle();
     }
 
-    expect(container.read(deckControllerProvider).value!.factsSeen, 4);
+    expect(container.read(deckControllerProvider).value!.seenIds, hasLength(4));
     expect(
       container.read(goalsControllerProvider).learned,
       0,

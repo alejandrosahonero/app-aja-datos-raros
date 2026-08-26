@@ -125,7 +125,7 @@ void main() {
           .requireValue;
 
       expect(state.index, equals(0));
-      expect(state.factsSeen, equals(0));
+      expect(state.seenIds, isEmpty);
     });
 
     test('the shuffled order survives a rebuild', () async {
