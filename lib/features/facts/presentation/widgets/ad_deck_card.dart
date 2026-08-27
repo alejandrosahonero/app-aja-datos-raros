@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:aja/core/config/app_config.dart';
 import 'package:aja/core/extensions/build_context_x.dart';
 import 'package:aja/core/routing/app_routes.dart';
 import 'package:aja/core/theme/app_spacing.dart';
@@ -14,23 +15,29 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 /// The ad slot of the deck, shaped like any other card.
 ///
-/// Two rules are baked in and must not be relaxed:
+/// Fetching a creative and putting it on screen are two different things, and
+/// only the second one is an impression. This widget keeps them apart:
 ///
-/// * The creative is only requested once the card is actually **on top**
-///   ([active]). Cards waiting behind the top one are 95 % covered, and
-///   rendering an ad nobody can see is exactly what AdMob counts as an invalid
-///   impression.
+/// * The creative is **requested** while the card is still one place down the
+///   stack ([AppConfig.deckAdPreloadDepth]), so it is already in memory by the
+///   time the card arrives. Asking the network only once the card is on top is
+///   what made the ad show up visibly late, after a flash of the fallback.
+/// * The `AdWidget` is **mounted only at depth 0**. Cards waiting behind the
+///   top one are 95 % covered, and rendering an ad nobody can see is exactly
+///   what AdMob counts as an invalid impression. This rule does not relax.
 /// * The "Ad" label is always painted. A native-looking ad without a label is a
 ///   deceptive-ads rejection.
 ///
-/// When nothing fills — no consent, no inventory, no configured unit — the card
-/// falls back to a quiet "remove ads" pitch instead of a blank rectangle. That
-/// keeps the deck rhythm intact and puts the paywall right after a value
-/// moment, which is where the guide wants it.
+/// While the request is in flight the card holds the creative's space empty
+/// rather than showing the "remove ads" pitch. The pitch means "nothing filled"
+/// — no consent, no inventory, no configured unit — and showing it during a
+/// load that is about to succeed is how the card ends up visibly changing its
+/// mind in front of the user.
 class AdDeckCard extends ConsumerStatefulWidget {
-  const AdDeckCard({required this.active, super.key});
+  const AdDeckCard({required this.depth, super.key});
 
-  final bool active;
+  /// 0 when this card is the one being dragged, 1 for the one behind it.
+  final int depth;
 
   @override
   ConsumerState<AdDeckCard> createState() => _AdDeckCardState();
@@ -44,16 +51,25 @@ class _AdDeckCardState extends ConsumerState<AdDeckCard> {
   BannerAd? _banner;
   bool _loading = false;
 
+  /// Set once a request comes back empty, so the card can tell "still waiting"
+  /// apart from "nothing is coming" and only fall back to the pitch for the
+  /// second one.
+  bool _failed = false;
+
+  bool get _shouldFetch => widget.depth <= AppConfig.deckAdPreloadDepth;
+
   @override
   void initState() {
     super.initState();
-    if (widget.active) unawaited(_load());
+    if (_shouldFetch) unawaited(_load());
   }
 
   @override
   void didUpdateWidget(AdDeckCard oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.active && !oldWidget.active) unawaited(_load());
+    // Depth only ever decreases as the deck advances, but a rebuild can hand
+    // this card a new depth at any time; `_load` is idempotent either way.
+    if (_shouldFetch) unawaited(_load());
   }
 
   @override
@@ -64,9 +80,18 @@ class _AdDeckCardState extends ConsumerState<AdDeckCard> {
 
   Future<void> _load() async {
     final AdsService ads = ref.read(adsServiceProvider);
-    if (_loading || _banner != null || !ads.canShowBanner) return;
+    if (_loading || _banner != null) return;
+
+    if (!ads.canShowBanner) {
+      // No consent, no configured unit, or the SDK is still starting up. The
+      // listener on `adsInitializedProvider` retries in the last case; until
+      // something changes there is nothing coming, so the pitch takes over.
+      if (mounted && !_failed) setState(() => _failed = true);
+      return;
+    }
 
     _loading = true;
+    _failed = false;
     final BannerAd banner = BannerAd(
       size: _size,
       adUnitId: ads.bannerAdUnitId,
@@ -86,6 +111,9 @@ class _AdDeckCardState extends ConsumerState<AdDeckCard> {
           AppLogger.debug('Deck ad load failed: $error', name: 'ads');
           ad.dispose();
           _loading = false;
+          if (!mounted) return;
+          // Only now does the pitch earn the space: nothing is coming.
+          setState(() => _failed = true);
         },
       ),
     );
@@ -93,14 +121,37 @@ class _AdDeckCardState extends ConsumerState<AdDeckCard> {
     await banner.load();
   }
 
+  /// What sits in the middle of the card.
+  ///
+  /// The creative is only handed to an `AdWidget` at depth 0. A loaded ad
+  /// waiting behind the top card keeps its space reserved with an empty box of
+  /// the same size, so arriving on top is a repaint and not a relayout — and so
+  /// AdMob never sees an impression for a card the user cannot look at.
+  Widget _slot() {
+    final BannerAd? banner = _banner;
+
+    if (banner == null) {
+      return _failed
+          ? const _RemoveAdsPitch()
+          : SizedBox(
+              width: _size.width.toDouble(),
+              height: _size.height.toDouble(),
+            );
+    }
+
+    return SizedBox(
+      width: _size.width.toDouble(),
+      height: _size.height.toDouble(),
+      child: widget.depth == 0 ? AdWidget(ad: banner) : null,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // The SDK may still have been initializing when this card was built.
     ref.listen<bool>(adsInitializedProvider, (bool? previous, bool next) {
-      if (next && widget.active) unawaited(_load());
+      if (next && _shouldFetch) unawaited(_load());
     });
-
-    final BannerAd? banner = _banner;
 
     return DeckCardShell(
       child: Column(
@@ -108,15 +159,7 @@ class _AdDeckCardState extends ConsumerState<AdDeckCard> {
         children: <Widget>[
           const _AdLabel(),
           const Spacer(),
-          Center(
-            child: banner == null
-                ? const _RemoveAdsPitch()
-                : SizedBox(
-                    width: _size.width.toDouble(),
-                    height: _size.height.toDouble(),
-                    child: AdWidget(ad: banner),
-                  ),
-          ),
+          Center(child: _slot()),
           const Spacer(flex: 2),
           Row(
             children: <Widget>[

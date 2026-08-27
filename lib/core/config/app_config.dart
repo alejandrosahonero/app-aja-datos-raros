@@ -62,6 +62,18 @@ abstract final class AppConfig {
   /// behind it). Anything beyond this is built lazily on demand.
   static const int deckVisibleCards = 3;
 
+  /// How deep in the stack an ad card starts **fetching** its creative.
+  ///
+  /// Requesting the creative and putting it on screen are two different things,
+  /// and only the second one is an impression. Waiting for the card to reach
+  /// the top before asking the network is what makes the ad arrive visibly
+  /// late; fetching one card early means the creative is already in memory when
+  /// the card comes up, so the swap is a repaint rather than a round trip.
+  ///
+  /// The `AdWidget` itself is still mounted only at depth 0 — see [AdDeckCard].
+  /// Keep this small: every preloaded card is a request that may never be seen.
+  static const int deckAdPreloadDepth = 1;
+
   /// Fraction of the card width a horizontal drag has to cover before it counts
   /// as a swipe instead of a hesitation.
   static const double deckSwipeThreshold = 0.28;

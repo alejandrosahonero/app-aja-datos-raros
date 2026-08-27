@@ -154,18 +154,20 @@ class _DeckBodyState extends ConsumerState<_DeckBody> {
             overlayBuilder:
                 (BuildContext context, DeckSwipeProgress progress) =>
                     _SwipeBadges(progress: progress),
-            builder: (BuildContext context, DeckItem item, bool isTop) =>
-                switch (item) {
-                  FactItem(:final Fact fact) => FactCard(
-                    fact: fact,
-                    revealed: isTop && state.revealed,
-                    favorited: favorites.contains(fact.id),
-                    onTap: isTop
-                        ? () => unawaited(_reveal(context, ref))
-                        : null,
-                  ),
-                  AdItem() => AdDeckCard(active: isTop),
-                },
+            builder: (BuildContext context, DeckItem item, int depth) {
+              final bool isTop = depth == 0;
+              return switch (item) {
+                FactItem(:final Fact fact) => FactCard(
+                  fact: fact,
+                  revealed: isTop && state.revealed,
+                  favorited: favorites.contains(fact.id),
+                  onTap: isTop ? () => unawaited(_reveal(context, ref)) : null,
+                ),
+                // Depth and not `isTop`: the ad card fetches its creative one
+                // place early so it is not still loading when it arrives.
+                AdItem() => AdDeckCard(depth: depth),
+              };
+            },
           ),
         ),
         const SizedBox(height: AppSpacing.md),

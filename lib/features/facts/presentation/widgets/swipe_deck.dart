@@ -45,8 +45,14 @@ class SwipeDeck extends StatefulWidget {
   /// Position of the top card inside [items].
   final int index;
 
-  final Widget Function(BuildContext context, DeckItem item, bool isTop)
-  builder;
+  /// Builds one card. [depth] is 0 for the card being dragged, 1 for the one
+  /// directly behind it, and so on.
+  ///
+  /// Depth rather than a plain "is this the top one" flag: a card can need to
+  /// start work before it is reachable — an ad slot fetches its creative one
+  /// place early so it is not still loading when it arrives — and that is not
+  /// expressible with a boolean.
+  final Widget Function(BuildContext context, DeckItem item, int depth) builder;
 
   /// Dismiss the top card.
   final VoidCallback onSwipeLeft;
@@ -339,7 +345,7 @@ class _SwipeDeckState extends State<SwipeDeck>
           child: Stack(
             fit: StackFit.expand,
             children: <Widget>[
-              widget.builder(context, item, true),
+              widget.builder(context, item, 0),
               if (widget.overlayBuilder != null)
                 IgnorePointer(child: widget.overlayBuilder!(context, progress)),
             ],
@@ -357,7 +363,7 @@ class _SwipeDeckState extends State<SwipeDeck>
       offset: Offset(0, depth * 12.0),
       child: Transform.scale(
         scale: 1 - depth * 0.04,
-        child: IgnorePointer(child: widget.builder(context, item, false)),
+        child: IgnorePointer(child: widget.builder(context, item, depth)),
       ),
     );
   }

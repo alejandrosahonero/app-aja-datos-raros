@@ -322,8 +322,12 @@ Una "acción de valor" aquí es **una tarjeta descartada**. Como las tarjetas se
 
 **Tarjeta de anuncio (`AdDeckCard`).** Dos reglas que no se relajan:
 
-1. El creativo **solo se pide cuando la tarjeta está arriba del todo** (`active`). Las que esperan detrás están tapadas al 95 %, y pintar un anuncio que nadie puede ver es justo lo que AdMob cuenta como impresión inválida.
-2. La etiqueta **"Publicidad" siempre visible**. Un anuncio mimetizado sin etiqueta es un rechazo por *deceptive ads*.
+1. **Pedir el creativo y pintarlo son dos cosas distintas, y solo la segunda es una impresión.** El `AdWidget` se monta **únicamente en `depth == 0`**: las tarjetas que esperan detrás están tapadas al 95 %, y pintar un anuncio que nadie puede ver es justo lo que AdMob cuenta como impresión inválida. Esta regla no se relaja.
+2. **La petición sale una tarjeta antes** (`AppConfig.deckAdPreloadDepth`, hoy 1). Pedirla solo al llegar arriba es lo que hacía que el anuncio apareciera tarde, después de un parpadeo del argumento de "quitar anuncios". Precargando, llegar arriba es un repintado y no una ida y vuelta a la red. Subir esa profundidad es pedir creativos que quizá nadie vea, así que se queda en 1.
+3. Mientras la petición está en vuelo la tarjeta **reserva el hueco vacío**, no enseña el argumento de pago. Ese argumento significa "no entró nada" —sin consentimiento, sin inventario, sin unidad configurada— y sacarlo durante una carga que va a funcionar es como la tarjeta acaba cambiando de opinión delante del usuario.
+4. La etiqueta **"Publicidad" siempre visible**. Un anuncio mimetizado sin etiqueta es un rechazo por *deceptive ads*.
+
+`SwipeDeck` pasa al `builder` la **profundidad** de cada tarjeta, no un booleano "es la de arriba": una tarjeta puede necesitar empezar a trabajar antes de ser alcanzable, y eso no cabe en un `bool`.
 
 Si no entra ningún creativo (sin consentimiento, sin inventario, sin unidad configurada) la tarjeta cae a un argumento discreto de "quitar anuncios" en vez de un rectángulo en blanco: mantiene el ritmo del mazo y coloca el paywall justo detrás de un momento de valor.
 
