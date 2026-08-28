@@ -273,8 +273,8 @@
       "en": "On Venus, which direction does the sun rise from?"
     },
     "answer": {
-      "es": "Por el oeste, porque Venus es el único planeta grande que gira al revés que casi todos los demás.",
-      "en": "From the west — Venus is one of only two planets that spin the opposite way from most of the rest."
+      "es": "Por el oeste: Venus gira al revés que casi todos los demás planetas.",
+      "en": "In the west: Venus spins the opposite way from almost every other planet."
     },
     "detail": {
       "es": "A esa rotación al contrario se le llama retrógrada, y nadie tiene la respuesta cerrada de por qué: la hipótesis más aceptada es un choque colosal —o varios— durante la formación del planeta que le dio la vuelta al giro entero. Además Venus rota tan despacio que su día dura más que su año.",
@@ -301,7 +301,7 @@
     },
     "source": "Wikipedia — Birthday problem",
     "sourceUrl": "https://en.wikipedia.org/wiki/Birthday_problem",
-    "_evidence": "The birthday paradox is the counterintuitive fact that only 23 people are needed for that probability to exceed 50%."
+    "_evidence": "With 23 individuals, there are 23 × 22 / 2 = 253 pairs to consider."
   },
   {
     "id": "monty-hall-cambiar-puerta",
@@ -391,12 +391,12 @@
       "en": "Because quenching it in water leaves the surface compressed and the interior in tension, and the tail is the only crack that can reach that tension."
     },
     "detail": {
-      "es": "Esa compresión superficial blinda la cabeza contra los golpes, igual que el vidrio templado de un coche. Pero romper la cola libera de golpe la tensión interna, y una grieta recorre toda la gota a más de 1500 metros por segundo, pulverizándola en microsegundos.",
-      "en": "That surface compression armors the head against blows, the same way tempered car glass works. But snapping the tail suddenly releases the internal tension, and a crack races through the whole drop at over 1,500 meters per second, pulverizing it within microseconds."
+      "es": "Esa compresión superficial blinda la cabeza contra los golpes, igual que el vidrio templado de un coche. Pero romper la cola libera de golpe la tensión interna, y una grieta recorre toda la gota a más de 6.000 kilómetros por hora, pulverizándola en microsegundos.",
+      "en": "That surface compression armors the head against blows, the same way tempered car glass works. But snapping the tail suddenly releases the internal tension, and a crack races through the whole drop at over 4,000 mph, pulverizing it within microseconds."
     },
     "source": "Purdue University — Research solves centuries-old riddle of Prince Rupert's drops",
     "sourceUrl": "https://www.purdue.edu/newsroom/archive/releases/2017/Q2/research-solves-centuries-old-riddle-of-prince-ruperts-drops.html",
-    "_evidence": "if you could change the tensile stress to a compressive stress, then it becomes difficult for cracks to grow, and this is what happens in the head portion of the Prince Rupert's drops."
+    "_evidence": "individual cracks accelerating from the drop's tail toward the head at more than 4,000 mph."
   },
   {
     "id": "papel-a4-raiz-de-dos",
@@ -453,7 +453,7 @@
     },
     "source": "National Weather Service (NOAA) — Lightning Myths",
     "sourceUrl": "https://www.weather.gov/safety/lightning-myths",
-    "_evidence": "Lightning often strikes the same place repeatedly, especially if it's a tall, pointy, isolated object."
+    "_evidence": "The Empire State Building is hit an average of 23 times a year"
   },
   {
     "id": "arcoiris-siempre-arco",
@@ -472,7 +472,7 @@
     },
     "source": "Physics Van — University of Illinois",
     "sourceUrl": "https://van.physics.illinois.edu/ask/listing/2195",
-    "_evidence": "The rainbow is curved because the set of all the raindrops that have the right angle between you, the drop, and the sun lie on a cone pointing at the sun with you at one tip."
+    "_evidence": "only those water droplets that have the same angle formed by you, the drop, and the sun (this angle happens to be approximately 42 degrees) will contribute to the rainbow."
   },
   {
     "id": "nieve-blanca-hielo-transparente",
@@ -681,7 +681,7 @@
     },
     "source": "Scientific American — Explore the \"POP\" in Popcorn",
     "sourceUrl": "https://www.scientificamerican.com/article/explore-the-pop-in-popcorn/",
-    "_evidence": "Once the pressure gets high enough and the temperature reaches about 180 degrees Celsius (355 degrees Fahrenheit), the kernel hull bursts and the popcorn is turned inside out."
+    "_evidence": "Ideal popcorn kernels contain about 14 percent water."
   },
   {
     "id": "pan-duro-no-es-solo-secarse",
