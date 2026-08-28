@@ -153,6 +153,14 @@ def check_entry(fact, where: str, known_ids: set[str]) -> list[str]:
     return problems
 
 
+# Answers that mean "this checker is not welcome", not "this page is gone".
+# Britannica, the CDC, Mayo Clinic and etymonline all serve real pages to a
+# browser and a 403 (or a redirect loop) to a script. Failing an entry over that
+# would throw away the best sources in the catalogue, so these are reported for a
+# human to open and do not reject the entry.
+BOT_WALL_STATUSES = (401, 403, 429)
+
+
 def check_link(url: str) -> tuple[str, str | None]:
     """Returns (url, problem) — a 404 here means the entry cannot ship."""
     request = urllib.request.Request(
@@ -165,35 +173,44 @@ def check_link(url: str) -> tuple[str, str | None]:
             response.read(1024)
             return url, None
     except urllib.error.HTTPError as exc:
-        # 403 is usually a bot wall, not a dead page; flag it as needing eyes
-        # rather than failing it outright.
-        kind = "blocks bots, open it by hand" if exc.code in (403, 429) else "dead"
-        return url, f"HTTP {exc.code} ({kind})"
+        if exc.code in BOT_WALL_STATUSES:
+            return url, f"warn: HTTP {exc.code}, blocks bots — open it by hand"
+        return url, f"HTTP {exc.code} (dead)"
+    except urllib.error.URLError as exc:
+        # A redirect loop is the other shape a bot wall takes.
+        if "redirect" in str(exc.reason).lower():
+            return url, "warn: redirect loop, blocks bots — open it by hand"
+        return url, f"unreachable: {type(exc).__name__}"
     except Exception as exc:  # noqa: BLE001 - any failure is a link to look at
         return url, f"unreachable: {type(exc).__name__}"
 
 
 def interleave(existing: list[dict], new: list[dict]) -> list[dict]:
-    """Appends `new` to `existing`, keeping the category rotation going."""
+    """Appends `new` to `existing`, keeping the category rotation going.
+
+    Always takes from whichever category has the most cards left, never the one
+    just placed. A fixed round-robin looks right until the smallest category runs
+    dry, and then every remaining card of the biggest one lands in a single block
+    at the end — with these batch sizes that was a run of fourteen. Draining the
+    largest bucket first keeps them finishing together, so the longest run stays
+    at the two the hand-written catalogue already has.
+    """
     buckets: dict[str, list[dict]] = defaultdict(list)
     for fact in new:
         buckets[fact["category"]].append(fact)
 
     merged = list(existing)
-    # Resume the rotation where the current file leaves off, so the seam between
-    # the old catalogue and the new batch is not itself a repeated category.
-    start = 0
-    if existing:
-        last = existing[-1]["category"]
-        if last in ROTATION:
-            start = (ROTATION.index(last) + 1) % len(ROTATION)
+    previous = existing[-1]["category"] if existing else None
 
-    step = 0
     while any(buckets.values()):
-        category = ROTATION[(start + step) % len(ROTATION)]
-        if buckets[category]:
-            merged.append(buckets[category].pop(0))
-        step += 1
+        options = [c for c in ROTATION if buckets[c] and c != previous]
+        # Only the just-placed category still has cards: unavoidable from here on.
+        if not options:
+            options = [c for c in ROTATION if buckets[c]]
+        category = max(options, key=lambda c: len(buckets[c]))
+        merged.append(buckets[category].pop(0))
+        previous = category
+
     return merged
 
 
@@ -217,6 +234,7 @@ def main() -> None:
 
     accepted: list[dict] = []
     rejected: list[str] = []
+    warnings: list[str] = []
     seen: set[str] = set()
 
     for path in batches:
@@ -240,10 +258,15 @@ def main() -> None:
         still_good = []
         for fact in accepted:
             problem = results.get(fact["sourceUrl"])
-            if problem:
-                rejected.append(f"{fact['id']}: {fact['sourceUrl']} — {problem}")
-            else:
+            if problem is None:
                 still_good.append(fact)
+            elif problem.startswith("warn:"):
+                # The page is there, the checker just is not allowed in. Keep the
+                # entry and print the URL so a human can open it once.
+                warnings.append(f"{fact['id']}: {fact['sourceUrl']} — {problem[6:]}")
+                still_good.append(fact)
+            else:
+                rejected.append(f"{fact['id']}: {fact['sourceUrl']} — {problem}")
         accepted = still_good
 
     by_category = Counter(f["category"] for f in accepted)
@@ -254,6 +277,11 @@ def main() -> None:
         print(f"  - {problem}")
     if len(rejected) > 60:
         print(f"  ... and {len(rejected) - 60} more")
+
+    if warnings:
+        print(f"\nkept, but unverifiable by machine: {len(warnings)}")
+        for warning in warnings:
+            print(f"  ! {warning}")
 
     if not args.apply:
         return

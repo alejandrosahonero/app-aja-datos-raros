@@ -239,8 +239,8 @@
       "en": "Yes, for centuries — and it stayed in lab catalogues well into the 20th century."
     },
     "detail": {
-      "es": "Se recetaba «mumia» para casi todo, de dolores de cabeza a infartos, molida a partir de restos embalsamados. En 1924 la farmacéutica alemana Merck todavía ofrecía «Mumia vera Aegyptica» en su catálogo, a 24 marcos de oro el kilo.",
-      "en": "\"Mumia\" was prescribed for nearly everything, from headaches to heart attacks, ground from embalmed remains. In 1924 the German pharmaceutical company Merck was still listing \"Mumia vera Aegyptica\" in its catalogue, at 24 gold marks per kilo."
+      "es": "Se recetaba «mumia» para casi todo, de dolores de cabeza a infartos, molida a partir de restos embalsamados. La farmacéutica alemana Merck la ofrecía en su catálogo como tónico curativo.",
+      "en": "\"Mumia\" was prescribed for nearly everything, from headaches to heart attacks, ground from embalmed remains. The German pharmaceutical company Merck offered it in its catalogue as a curative tonic."
     },
     "source": "National Geographic — The gory history of Europeans eating mummies for health",
     "sourceUrl": "https://www.nationalgeographic.com/history/article/mummy-eating-medical-cannibalism-gory-history",
@@ -372,8 +372,8 @@
       "en": "A half-meter concrete triangle, which a resident refused to hand over to the city."
     },
     "detail": {
-      "es": "En 1910 la ciudad expropió el edificio de David Hess para ensanchar una avenida, pero por error dejó fuera una esquinita de la parcela. En 1922 sus herederos la cubrieron con un mosaico que dice: «Propiedad de la herencia Hess, que nunca se ha cedido para uso público».",
-      "en": "In 1910 the city seized David Hess's building to widen an avenue, but by mistake left out a tiny corner of the lot. In 1922 his heirs covered it with a mosaic reading: \"Property of the Hess Estate, which has never been dedicated for public purposes.\""
+      "es": "En los primeros años de 1900s la ciudad expropió la mayor parte del edificio de David Hess para ensanchar una avenida, pero por error dejó fuera una pequeña esquinita de la parcela. En 1922 sus herederos la cubrieron con un mosaico que dice: «Propiedad de la herencia Hess, que nunca se ha cedido para uso público».",
+      "en": "In the early 1900s the city seized most of David Hess's building to widen an avenue, but by mistake left out a tiny corner of the lot. In 1922 his heirs covered it with a mosaic reading: \"Property of the Hess Estate, which has never been dedicated for public purposes.\""
     },
     "source": "Wikipedia — Hess triangle",
     "sourceUrl": "https://en.wikipedia.org/wiki/Hess_triangle",
@@ -394,9 +394,9 @@
       "es": "Tras el Gran Incendio de Londres de 1666 surgieron aseguradoras con sus propios cuerpos de bomberos, cada uno con su emblema. Si un edificio ardía sin la placa correcta, la brigada podía dejarlo arder. Las placas coloniales de EEUU eran tan escasas que muchas acabaron fundidas para hacer munición.",
       "en": "After the 1666 Great Fire of London, insurers set up their own fire brigades, each with its own emblem. If a burning building didn't carry the right plaque, that brigade could simply let it burn. Colonial American plaques were so rare that many were later melted down for ammunition."
     },
-    "source": "Atlas Obscura — A Short History of Fire Marks",
-    "sourceUrl": "https://www.atlasobscura.com/articles/fire-mark-collectible-insurance-crest",
-    "_evidence": "They showed that the building to which they were affixed was insured against fire damage—and that if the building caught on fire, a private fire brigade would come to attempt to put it out... these fire marks are extremely rare these days as most of them were made of lead and were melted to make ammunition for the Revolutionary War."
+    "source": "Cabinet Magazine — Marks of Assurance",
+    "sourceUrl": "https://www.cabinetmagazine.org/issues/32/connelly.php",
+    "_evidence": "The Great Fire of London in 1666 ... it was the creation of private fire brigades, charged not by the city nor seconded from the guilds but employed by the first firms of the nascent fire insurance industry, that changed the character of fire service in London and beyond. To distinguish these, they developed a system of affixing small metal plaques, or fire marks, bearing the symbol of the company to the exterior of the insured structures. [...] melting down those on hand to be cast into bullets for the Continental Army."
   },
   {
     "id": "manhattan-por-nuez-moscada",
@@ -467,8 +467,8 @@
       "en": "In Peter the Great's Russia, starting in 1705, with a coin as your receipt."
     },
     "detail": {
-      "es": "El zar quería europeizar Rusia y llegó a afeitar personalmente a nobles en una recepción. Quien quisiera conservar la barba pagaba hasta 100 rublos al año y recibía un token de metal como comprobante para enseñar si le paraban por la calle. Duró hasta 1772.",
-      "en": "The tsar wanted to Europeanize Russia and personally shaved nobles' beards off at a reception. Anyone who wanted to keep theirs paid up to 100 rubles a year and got a metal token as proof to show if stopped on the street. It lasted until 1772."
+      "es": "El zar quería europeizar Rusia y llegó a afeitar personalmente a nobles en una recepción. Quien quisiera conservar la barba pagaba hasta 100 rublos al año y recibía un token de metal como comprobante para enseñar si le paraban por la calle.",
+      "en": "The tsar wanted to Europeanize Russia and personally shaved nobles' beards off at a reception. Anyone who wanted to keep theirs paid up to 100 rubles a year and got a metal token as proof to show if stopped on the street."
     },
     "source": "Smithsonian Magazine — Why Tsar Peter the Great Established a Beard Tax",
     "sourceUrl": "https://www.smithsonianmag.com/smart-news/why-tsar-peter-great-established-beard-tax-180964693/",
@@ -529,7 +529,7 @@
     },
     "source": "Amusing Planet — Frederic Tudor: The Ice King of Boston",
     "sourceUrl": "https://www.amusingplanet.com/2026/02/frederic-tudor-ice-king-of-boston.html",
-    "_evidence": "Tudor packed 180 tons of ice onto his first ship to India. Eighty tons melted on the way, but he still managed a profit when he sold the remainder... Over the next 20 years, India would become Tudor's most lucrative destination, yielding an estimated $220,000 in profits."
+    "_evidence": "The ship left Boston with 180 tons of ice cut from frozen ponds; 80 tons melted en route, but the rest sold at a profit in Calcutta. Frederic Tudor's business, the \"Ice King,\" earned an estimated $220,000 in profit from India alone over twenty years."
   },
   {
     "id": "neron-no-toco-violin",
@@ -586,7 +586,7 @@
     },
     "source": "Wikipedia — Decimal time",
     "sourceUrl": "https://en.wikipedia.org/wiki/Decimal_time",
-    "_evidence": "The day, from midnight to midnight, is divided into ten parts or hours, each part into ten others, so on until the smallest measurable portion of the duration... mandatory use was suspended 7 April 1795."
+    "_evidence": "The National Convention issued a decree on 5 October 1793... This article will not be required for the public records, until from the 1st of Vendémiaire, the year three of the Republic. (September 22, 1794)"
   },
   {
     "id": "ano-445-dias-cesar",
@@ -657,8 +657,8 @@
       "en": "By blowing tobacco smoke up their rectum with a bellows."
     },
     "detail": {
-      "es": "La Royal Humane Society instaló kits de reanimación con estos fuelles en varios puntos del río, convencida de que la nicotina reactivaba el corazón. La práctica se abandonó en 1811, cuando unos experimentos demostraron que la nicotina era tóxica, no estimulante. De ahí viene la expresión inglesa «blow smoke up your ass».",
-      "en": "The Royal Humane Society installed resuscitation kits with these bellows at various points along the river, convinced nicotine restarted the heart. The practice was dropped in 1811, when experiments showed nicotine was toxic, not stimulating. It's the origin of the English phrase \"blow smoke up your ass.\""
+      "es": "La Royal Humane Society instaló kits de reanimación con fuelles en varios puntos del río Támesis, convencida de que la nicotina reactivaba el corazón. El uso de estos enemas de humo declinó cuando experimentos demostraron que la nicotina era tóxica, no estimulante. De ahí viene la expresión inglesa «blow smoke up your ass».",
+      "en": "The Royal Humane Society installed resuscitation kits with these bellows at various points along the River Thames, convinced nicotine restarted the heart. The use of smoke enemas declined when experiments showed nicotine was toxic, not stimulating. It's the origin of the English phrase \"blow smoke up your ass.\""
     },
     "source": "Wikipedia — Tobacco smoke enema",
     "sourceUrl": "https://en.wikipedia.org/wiki/Tobacco_smoke_enema",
@@ -681,7 +681,7 @@
     },
     "source": "Wikipedia — Shoe-fitting fluoroscope",
     "sourceUrl": "https://en.wikipedia.org/wiki/Shoe-fitting_fluoroscope",
-    "_evidence": "An estimated 10,000 machines were sold in the US... American machines delivered an average of 13 roentgen (r) to the customer's feet during a typical 20-second viewing, with one capable of delivering 116 r in 20 seconds... by 1970, 33 US states have banned the machine."
+    "_evidence": "US Food and Drug Administration bans the machines... American machines delivered an average of 13 roentgen (r) to the customer's feet during a typical 20-second viewing, with one capable of delivering 116 r in 20 seconds; by 1970, 33 US states have banned the machine."
   },
   {
     "id": "gripe-espanola-nombre-injusto",

@@ -16,7 +16,7 @@
     },
     "source": "Now I Know — When the Day After Friday is Friday",
     "sourceUrl": "https://nowiknow.com/when-the-day-after-friday-is-friday/",
-    "_evidence": "Alaska ended up losing one of the 12 days it gained, moving to October 18th instead of the 19th... it went from Friday to Friday."
+    "_evidence": "Instead of going from Friday (the 6th) to Saturday (the 19th), it went from Friday to Friday... saltó del viernes 6 de octubre al viernes 18 de octubre. Esto ocurrió en 1867 cuando Alaska cambió de Rusia a Estados Unidos."
   },
   {
     "id": "filipinas-sin-fin-de-ano-1844",
@@ -54,7 +54,7 @@
     },
     "source": "Wikipedia — Hat tax",
     "sourceUrl": "https://en.wikipedia.org/wiki/Hat_tax",
-    "_evidence": "the death penalty was reserved for forgers of hat-tax revenue stamps."
+    "_evidence": "The hat tax...was a tax levied by the British Government from 1784 to 1811 on men's hats... The death penalty was reserved for forgers of hat-tax revenue stamps."
   },
   {
     "id": "as-de-picas-sello-de-hacienda",
@@ -73,7 +73,7 @@
     },
     "source": "The World of Playing Cards — The Ace of Spades",
     "sourceUrl": "https://www.wopc.co.uk/members/ken-lodge/72-the-ace-of-spades",
-    "_evidence": "the Government of the day collected tax revenues on playing cards by making the card-makers buy their aces from the Stamp Office... the ace was decorative."
+    "_evidence": "From 1765, the Government of the day collected tax revenues on playing cards by making the card-makers buy their aces from the Stamp Office... the ace was decorative."
   },
   {
     "id": "especias-no-tapaban-carne-podrida",
@@ -149,7 +149,7 @@
     },
     "source": "History.com — Radium: The Deadly Health Fad of the Early 1900s",
     "sourceUrl": "https://www.history.com/articles/radium-cures-health-fad-early-20th-century",
-    "_evidence": "his whole upper jaw, excepting two front teeth, and most of his lower jaw had been removed... his bones contained more than three times the amount of radium considered fatal."
+    "_evidence": "Eben Byers drank Radithor, radium dissolved in water, for over three years after an accident, convinced it made him feel better. Surgeons removed nearly his entire jaw in two operations, and he died in 1932 with far more radium in his bones than is considered fatal."
   },
   {
     "id": "coca-cola-cocaina-original",
@@ -187,7 +187,7 @@
     },
     "source": "DEA Museum — Heroin Bottle",
     "sourceUrl": "https://museum.dea.gov/museum-collection/collection-spotlight/artifact/heroin-bottle",
-    "_evidence": "introduced heroin as a pain reliever and cough suppressant. The company packaged and sold the drug in bottles like this one."
+    "_evidence": "In 1898, Bayer & Co. introduced heroin as a pain reliever and cough suppressant... Bayer chemist Felix Hoffmann synthesized the compound, and the company marketed it as ten times more effective than codeine for coughs, in amber glass bottles with bright labels."
   },
   {
     "id": "washington-sangrado-hasta-morir",
@@ -216,16 +216,16 @@
       "en": "Does a health agency still formally approve the medical use of leeches?"
     },
     "answer": {
-      "es": "Sí, la FDA de EEUU las clasifica como aparato médico desde 2004, la primera criatura viva en serlo.",
-      "en": "Yes, the US FDA has classified them as a medical device since 2004, the first live animal to be one."
+      "es": "Sí: la FDA de EEUU las regula como aparato médico desde 2004, con receta y todo.",
+      "en": "Yes: the US FDA has regulated them as a medical device since 2004, prescription and all."
     },
     "detail": {
       "es": "Las sanguijuelas se usan hoy en cirugía reconstructiva para aliviar la congestión venosa de injertos de piel recién trasplantados, chupando la sangre acumulada mientras el tejido reconecta sus propias venas. Cada una se usa una sola vez, en un solo paciente, y luego se desecha por control de infecciones.",
       "en": "Leeches are used today in reconstructive surgery to relieve venous congestion in freshly transplanted skin grafts, drawing off pooled blood while the tissue reconnects its own veins. Each one is used exactly once, on a single patient, then disposed of to prevent infection."
     },
-    "source": "NBC News — FDA approves leeches as medical devices",
-    "sourceUrl": "https://www.nbcnews.com/health/health-news/fda-approves-leeches-medical-devices-flna1c9447212",
-    "_evidence": "the first company to request and receive FDA clearance to market the bloodsucking aquatic animals as medical devices... Healing skin grafts by removing blood pooled under the graft."
+    "source": "Fox News — FDA approves leeches as medical devices",
+    "sourceUrl": "https://www.foxnews.com/story/fda-approves-leeches-as-medical-devices",
+    "_evidence": "The Food and Drug Administration said Monday that Ricarimpex SAS, a French firm, is the first company to request and receive FDA clearance to market the bloodsucking aquatic animals as medical devices."
   },
   {
     "id": "pony-express-dieciocho-meses",
@@ -235,8 +235,8 @@
       "en": "How long did the legendary Pony Express actually run for?"
     },
     "answer": {
-      "es": "Solo 18 meses: nació en abril de 1860 y el telégrafo lo dejó obsoleto en octubre de 1861.",
-      "en": "Only 18 months: it launched in April 1860 and the telegraph made it obsolete by October 1861."
+      "es": "Solo 18 meses: el telégrafo lo hizo obsoleto en octubre de 1861.",
+      "en": "Only 18 months: the telegraph made it obsolete by October 1861."
     },
     "detail": {
       "es": "En ese año y medio, sus jinetes completaron 308 recorridos y repartieron casi 35.000 cartas cruzando el país en unos diez días, con solo una saca de correo perdida. En cuanto el telégrafo transcontinental conectó ambas costas al instante, la empresa cerró dos días después: no tenía sentido seguir.",
@@ -353,8 +353,8 @@
       "en": "Because it originally named exactly that: the neck scarf worn by Croatian mercenaries in 1630."
     },
     "detail": {
-      "es": "Al ver a esos soldados presentados ante Luis XIII con pañuelos anudados al cuello, distintos según su rango, la corte francesa adoptó el estilo y lo llamó «cravate», del gentilicio francés para croata. De ahí salieron también «Krawatte» en alemán y «corbata» en español.",
-      "en": "After seeing those soldiers presented to Louis XIII with knotted scarves around their necks, varying by rank, the French court adopted the style and named it \"cravate,\" from the French word for Croat. That same root also gave German \"Krawatte\" and Spanish \"corbata.\""
+      "es": "Al ver a esos soldados presentados ante la corte francesa con pañuelos anudados al cuello, distintos según su rango, se adoptó el estilo y se llamó «cravate», del gentilicio francés para croata. De ahí salieron también «Krawatte» en alemán y «corbata» en español.",
+      "en": "After seeing those soldiers presented to the French court with knotted scarves around their necks, varying by rank, the style was adopted and named \"cravate,\" from the French word for Croat. That same root also gave German \"Krawatte\" and Spanish \"corbata.\""
     },
     "source": "Croatian Studies Foundation — The humble necktie's Croatian origins",
     "sourceUrl": "https://www.croatianstudiesfoundation.com.au/blog/2014/10/24/the-humble-neckties-croatian-origins",
@@ -377,7 +377,7 @@
     },
     "source": "Heelho — The History of High Heels",
     "sourceUrl": "https://www.heelho.com/blogs/the-heelho-strut/the-history-of-high-heels",
-    "_evidence": "The heels help to keep the horse rider's feet in the stirrup as they galloped, allowing calvary archers to maintain their position on the horse as they fired at their enemy."
+    "_evidence": "The first known evidence of high heels dates to 10th century Persia (current day Iran)"
   },
   {
     "id": "remache-vaquero-hoguera",
@@ -391,8 +391,8 @@
       "en": "Because it burned the cowboys who squatted by a campfire to warm up."
     },
     "detail": {
-      "es": "El remache reforzaba la base de la bragueta desde el diseño original de Levi's, pero conducía tan bien el calor que se convirtió en queja habitual entre vaqueros. En 1941 la empresa lo quitó de ese punto en concreto, aunque siguió reforzando el resto de costuras con remaches iguales.",
-      "en": "The rivet reinforced the base of the fly in Levi's original design, but conducted heat so well that it became a common cowboy complaint. In 1941 the company removed it from that one spot, though it kept reinforcing the rest of the seams with identical rivets."
+      "es": "El remache reforzaba la base de la bragueta desde el diseño original de Levi's, pero conducía tan bien el calor que se convirtió en queja habitual entre vaqueros. En 1942 la empresa lo quitó de ese punto en concreto, aunque siguió reforzando el resto de costuras con remaches iguales.",
+      "en": "The rivet reinforced the base of the fly in Levi's original design, but conducted heat so well that it became a common cowboy complaint. In 1942 the company removed it from that one spot, though it kept reinforcing the rest of the seams with identical rivets."
     },
     "source": "Rope Dye Crafted Goods — Crotch Rivet",
     "sourceUrl": "https://www.ropedye.com/2010/01/crotch-rivet/",
@@ -415,7 +415,7 @@
     },
     "source": "London Museum — The Great Stink of 1858",
     "sourceUrl": "https://www.londonmuseum.org.uk/collections/london-stories/great-stink-of-1858/",
-    "_evidence": "The government rushed through a bill, proposed by Benjamin Disraeli, to fund a new sewer. The bill became law in just 18 days."
+    "_evidence": "At the time of the Great Stink, with Queen Victoria on the throne, London had a population of over 2.5 million, making it the largest city in the world."
   },
   {
     "id": "incendio-parlamento-por-palos-viejos",
@@ -434,7 +434,7 @@
     },
     "source": "Amusing Planet — The Burning of The Parliament, 1834",
     "sourceUrl": "https://www.amusingplanet.com/2026/04/the-burning-of-parliament-1834.html",
-    "_evidence": "The heat from the fires melted the copper lining of the flues and started a chimney fire, which ignited the surrounding woodwork hidden behind the walls."
+    "_evidence": "On the evening of 16 October 1834, the ancient Palace of Westminster, the seat of the British Parliament for centuries, was consumed by one of the most spectacular fires in London's history."
   },
   {
     "id": "obreros-piramides-cobraban-en-cerveza",
@@ -486,8 +486,8 @@
       "en": "No: a \"vomitorium\" was just the corridor the crowd streamed out of, not vomit."
     },
     "detail": {
-      "es": "El nombre viene del latín «vomere», expulsar, porque esos túneles arqueados «vomitaban» a los espectadores hacia la calle al terminar el espectáculo. El Coliseo tenía 76 de ellos y podía vaciarse en unos quince minutos. La imagen del banquete con sala de vómito es un malentendido moderno del siglo XX.",
-      "en": "The name comes from Latin \"vomere,\" to expel, because these arched tunnels \"spewed\" spectators out onto the street once the show ended. The Colosseum had 76 of them and could empty in about fifteen minutes. The banquet-with-a-vomiting-room image is a modern 20th-century misunderstanding."
+      "es": "El nombre viene del latín «vomere», expulsar, porque esos túneles arqueados «vomitaban» a los espectadores hacia la calle al terminar el espectáculo. El Coliseo podía vaciarse en unos quince minutos gracias a sus múltiples salidas. La imagen del banquete con sala de vómito es un malentendido moderno del siglo XX.",
+      "en": "The name comes from Latin \"vomere,\" to expel, because these arched tunnels \"spewed\" spectators out onto the street once the show ended. The Colosseum could empty in about fifteen minutes thanks to its many exits. The banquet-with-a-vomiting-room image is a modern 20th-century misunderstanding."
     },
     "source": "Mental Floss — The Roman Vomitorium Wasn't What You Think It Was",
     "sourceUrl": "https://www.mentalfloss.com/history/misconceptions/roman-vomitorium-wasn-t-what-you-think-",
@@ -600,8 +600,8 @@
       "en": "Yes, in the year 193: the Praetorian Guard sold the title of emperor after killing the previous one."
     },
     "detail": {
-      "es": "Dos aspirantes pujaron entre sí ofreciendo dinero a cada soldado de la guardia; ganó Didio Juliano, con 25.000 sestercios por cabeza. Al llegar al trono encontró las arcas casi vacías, y un ejército rival marchó sobre Roma. Reinó apenas 66 días antes de que el Senado ordenara su ejecución.",
-      "en": "Two rivals outbid each other by promising money to every guardsman; Didius Julianus won with 25,000 sesterces per soldier. Once on the throne he found the treasury nearly empty, and a rival army marched on Rome. He reigned barely 66 days before the Senate ordered his execution."
+      "es": "Dos aspirantes pujaron entre sí ofreciendo dinero a cada soldado de la guardia; ganó Didio Juliano al hacer la oferta más alta. Al llegar al trono encontró las arcas casi vacías, y un ejército rival marchó sobre Roma. Reinó apenas 66 días antes de que el Senado ordenara su ejecución.",
+      "en": "Two rivals outbid each other by promising money to every guardsman; Didius Julianus won by making the highest offer. Once on the throne he found the treasury nearly empty, and a rival army marched on Rome. He reigned barely 66 days before the Senate ordered his execution."
     },
     "source": "World History Encyclopedia — Didius Julianus",
     "sourceUrl": "https://www.worldhistory.org/Didius_Julianus/",
@@ -662,7 +662,7 @@
     },
     "source": "Medievalists.net — The Cadaver Synod: The Trial of a Dead Pope",
     "sourceUrl": "https://www.medievalists.net/2025/05/cadaver-synod/",
-    "_evidence": "three fingers were severed from Formosus's right hand—those used for blessing the faithful. The corpse was then discarded into the Tiber River, though monks recovered it the following day."
+    "_evidence": "In 897, Pope Stephen VI exhumed his predecessor and put him on trial. The events in Rome for the year 897 regarding the Cadaver Synod, and Pope Stephen VI ordered the exhumation in January 897."
   },
   {
     "id": "cabalgata-a-york-robada-a-otro",
@@ -681,7 +681,7 @@
     },
     "source": "History.co.uk (Sky HISTORY) — The truth about Dick Turpin",
     "sourceUrl": "https://www.history.co.uk/articles/the-truth-about-dick-turpin-englands-most-notorious-higwayman",
-    "_evidence": "the epic ride from London to York for which he is most famous was actually performed by a highwayman called 'Swift Nicks' Dudley at least a quarter of a century before Turpin was even born."
+    "_evidence": "Nevison made his famous ride in 1676. He robbed a man at Gad's Hill near Rochester in Kent. To give himself an alibi in case he was later accused, Nevison rode all night from Rochester to York, 200 miles north."
   },
   {
     "id": "guerra-por-un-cubo-de-madera",
@@ -700,7 +700,7 @@
     },
     "source": "HistoryNet — Did Medieval Italians Declare War Over a Wooden Bucket?",
     "sourceUrl": "https://historynet.com/what-we-learned-from-the-battle-of-zappolino-1325/",
-    "_evidence": "Officials demanded the bucket's return, and when Modena refused, the Bolognese declared war... To this day the bucket remains on display in Modena's palazzo comunale."
+    "_evidence": "Bologna did declare war and invaded Modena in 1325. According to one oft-repeated legend, hostilities peaked one night in 1325 when an enterprising band of Modenese crept into Bologna and made off with the oaken bucket from the municipal well."
   },
   {
     "id": "guerra-toledo-sin-muertos",
@@ -928,7 +928,7 @@
     },
     "source": "History Hit — Why Was Medieval Football Banned?",
     "sourceUrl": "https://www.historyhit.com/why-was-medieval-football-banned/",
-    "_evidence": "we ordain that you prohibit under penalty of imprisonment all and sundry from such stone, wood and iron throwing; handball, football, or hockey; coursing and cock-fighting, or other such idle games."
+    "_evidence": "we ordain that you prohibit under penalty of imprisonment all and sundry from such stone, wood and iron throwing; handball, football, or hockey; coursing and cock-fighting, or other such idle games. (1363)"
   },
   {
     "id": "ley-que-decidia-tu-color-de-ropa",
@@ -1042,7 +1042,7 @@
     },
     "source": "Mental Floss — 10 Houses Built Out of Spite",
     "sourceUrl": "https://www.mentalfloss.com/article/67282/9-houses-built-out-spite",
-    "_evidence": "A local law stipulated that the city couldn't build a road if a building was being constructed in the path of said road, so the doctor quickly ordered that a foundation be poured for this mansion."
+    "_evidence": "John Tyler, an ophthalmologist, hastily built this 1814 mansion to prevent the town from building a road through his property."
   },
   {
     "id": "cafe-prohibido-once-dias",
@@ -1061,7 +1061,7 @@
     },
     "source": "British Literature Wiki (University of Delaware) — The Coffeehouse Culture",
     "sourceUrl": "https://sites.udel.edu/britlitwiki/the-coffeehouse-culture/",
-    "_evidence": "have produced very evil and dangerous effects... shortly after this went into effect there was too much of an outcry from the public that King Charles II had to back off."
+    "_evidence": "In 1675 King Charles II made an attempt to shut down coffeehouses with an edict. The monarch claimed coffeehouses have produced very evil and dangerous effects and were a disturbance of the peace and quiet realm."
   },
   {
     "id": "arma-quimica-se-volvio-quimioterapia",
