@@ -327,6 +327,24 @@
       "sourceUrl": "https://www.smithsonianmag.com/science-nature/ten-wild-facts-about-octopuses-they-have-three-hearts-big-brains-and-blue-blood-7625828/"
     },
     {
+      "id": "tetracromatas-cuarto-color",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Puede el ojo humano tener un cuarto tipo de célula para ver colores que tú no ves?",
+        "en": "Can a human eye carry a fourth type of color receptor that shows colors you can't see?"
+      },
+      "answer": {
+        "es": "Sí: se llama tetracromacia y da un cuarto tipo de cono, capaz de distinguir cientos de millones de colores más.",
+        "en": "Yes: it's called tetrachromacy, a fourth cone type able to tell apart hundreds of millions more colors."
+      },
+      "detail": {
+        "es": "Con tres conos distinguimos varios millones de colores; con cuatro, cientos de millones. El gen que lo permite vive en el cromosoma X, así que casi siempre aparece en mujeres, y solo unas pocas superan además las pruebas de comportamiento que confirman que su cerebro realmente usa ese cuarto canal.",
+        "en": "Three cones let us tell apart several million colors; four cones, hundreds of millions. The gene lives on the X chromosome, so it shows up almost only in women, and only a handful pass the behavioral tests that confirm the brain actually uses that fourth channel."
+      },
+      "source": "Cleveland Clinic — Tetrachromacy",
+      "sourceUrl": "https://my.clevelandclinic.org/health/articles/tetrachromacy"
+    },
+    {
       "id": "fax-antes-telefono",
       "category": "historia",
       "question": {
@@ -541,6 +559,24 @@
       },
       "source": "Physics of Fluids (Bahl et al., 2021) — dinámica de gotitas del estornudo",
       "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8597717/"
+    },
+    {
+      "id": "supercatadores-lengua-rosa",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Por qué a una de cada cuatro personas les sabe insufrible lo que a otras apenas les sabe a nada?",
+        "en": "Why does one in four people find some foods unbearably bitter while others barely notice a taste?"
+      },
+      "answer": {
+        "es": "Porque son «supercatadores»: tienen hasta diez veces más papilas gustativas que el resto.",
+        "en": "Because they're \"supertasters\": they carry up to ten times more taste papillae than everyone else."
+      },
+      "detail": {
+        "es": "La bióloga Linda Bartoshuk descubrió que uno de cada cuatro adultos cualifica como supercatador. Se les puede detectar tiñendo la lengua: sus papilas fungiformes, donde viven las papilas gustativas, quedan como puntitos rosas apretados unos contra otros en vez de dispersos.",
+        "en": "Biologist Linda Bartoshuk found that about one in four adults qualifies as a supertaster. They can be spotted by staining the tongue: their fungiform papillae, which hold the taste buds, show up as pink dots packed tightly together instead of scattered."
+      },
+      "source": "Smithsonian Magazine — A Matter of Taste",
+      "sourceUrl": "https://www.smithsonianmag.com/science-nature/a-matter-of-taste-180940699/"
     },
     {
       "id": "guillotina-star-wars",
@@ -759,6 +795,24 @@
       "sourceUrl": "https://www.britannica.com/animal/shark"
     },
     {
+      "id": "palabra-en-la-punta-de-la-lengua",
+      "category": "cuerpo",
+      "question": {
+        "es": "Sabes exactamente la palabra que quieres decir, entonces, ¿por qué se queda atascada justo antes de salir?",
+        "en": "You know exactly which word you want, so why does it get stuck right before coming out?"
+      },
+      "answer": {
+        "es": "Porque una parte del cerebro detecta el atasco y sigue insistiendo mientras otra palabra parecida bloquea el paso.",
+        "en": "Because one brain region flags the jam and keeps pushing while a similar-sounding word blocks the way."
+      },
+      "detail": {
+        "es": "La corteza cingulada anterior actúa como supervisora: nota el conflicto de «lo sé, pero no me sale» y sigue buscando. El fallo suele estar en el último paso, el que traduce el significado en sonidos concretos, y se vuelve más frecuente con la edad porque esas zonas se van reduciendo.",
+        "en": "The anterior cingulate cortex acts as a supervisor, flagging the \"I know this but can't get it out\" conflict and keeps searching. The breakdown usually happens at the last step, the one that turns meaning into actual sounds, and it grows more frequent with age as those brain areas shrink."
+      },
+      "source": "The Conversation — What happens in the brain when there's a word on the tip of the tongue?",
+      "sourceUrl": "https://theconversation.com/what-happens-in-the-brain-when-theres-a-word-on-the-tip-of-the-tongue-246091"
+    },
+    {
       "id": "chiste-mas-antiguo",
       "category": "historia",
       "question": {
@@ -973,6 +1027,24 @@
       },
       "source": "The Conversation — The Eiffel Tower gets bigger every summer",
       "sourceUrl": "https://theconversation.com/the-eiffel-tower-gets-bigger-every-summer-heres-why-261904"
+    },
+    {
+      "id": "misofonia-masticar-enfada",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Por qué el sonido de alguien masticando puede desatarte una rabia que no logras controlar?",
+        "en": "Why can the sound of someone chewing set off a rage you can't seem to control?"
+      },
+      "answer": {
+        "es": "Porque en algunas personas ese sonido concreto dispara una zona del cerebro ligada al peligro, no a la simple molestia.",
+        "en": "Because in some people that specific sound triggers a brain region tied to danger, not mere annoyance."
+      },
+      "detail": {
+        "es": "Se llama misofonia y afecta, según las estimaciones, entre un 10 % y un 20 % de la gente, algo más a las mujeres. En un escáner, oír masticar o respirar dispara la corteza insular anterior mucho más que en quien no la tiene, y con ella llega sudor, tensión muscular y el pulso acelerado.",
+        "en": "It's called misophonia and, by some estimates, affects between 10% and 20% of people, somewhat more women than men. On a scan, hearing chewing or breathing spikes the anterior insular cortex far more than in someone without it, bringing sweating, muscle tension and a racing heartbeat along with it."
+      },
+      "source": "UCLA Health — Misophonia is somewhat common, not widely known",
+      "sourceUrl": "https://www.uclahealth.org/news/article/misophonia-somewhat-common-not-widely-known"
     },
     {
       "id": "cien-anos-116",
@@ -1191,6 +1263,24 @@
       "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1183522/"
     },
     {
+      "id": "tartamudez-desaparece-cantando",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Por qué alguien que tartamudea al hablar puede cantar una canción entera sin trabarse ni una vez?",
+        "en": "Why can someone who stutters while speaking sing an entire song without stumbling once?"
+      },
+      "answer": {
+        "es": "Porque cantar activa el habla de otra manera: sin la presión de encontrar palabras ni de mantener el ritmo de una conversación.",
+        "en": "Because singing engages speech differently: without the pressure of finding words or keeping conversational timing."
+      },
+      "detail": {
+        "es": "Al cantar ya conocemos la letra de memoria, así que desaparece la búsqueda de palabras que puede disparar el bloqueo, y el ritmo fijo de la música marca por sí solo cuándo llega la siguiente sílaba. La evidencia muestra además que el cerebro funciona de forma distinta cuando canta que cuando habla.",
+        "en": "When singing, the lyrics are already known by heart, so the word-searching that can trigger a block disappears, and the music's fixed rhythm alone cues when the next syllable lands. Evidence also shows the brain functions differently while singing than while talking."
+      },
+      "source": "Stuttering Foundation — Singing and Stuttering: What We Know",
+      "sourceUrl": "https://www.stutteringhelp.org/content/singing-and-stuttering-what-we-know-0"
+    },
+    {
       "id": "fiesta-desenvolver-momias",
       "category": "historia",
       "question": {
@@ -1407,6 +1497,24 @@
       "sourceUrl": "https://journals.biologists.com/jeb/article/208/19/3655/15838/Extreme-impact-and-cavitation-forces-of-a"
     },
     {
+      "id": "espalda-menos-tacto-que-dedo",
+      "category": "cuerpo",
+      "question": {
+        "es": "Dos alfileres a milímetros en el dedo se notan como dos, ¿por qué en la espalda hacen falta centímetros?",
+        "en": "Two pins millimeters apart feel like two on your finger — why would your back need centimeters?"
+      },
+      "answer": {
+        "es": "Porque la piel no tiene la misma resolución en todo el cuerpo: los campos receptores del dedo son mucho más pequeños que los de la espalda.",
+        "en": "Because skin doesn't have the same resolution everywhere: the finger's receptive fields are far smaller than the back's."
+      },
+      "detail": {
+        "es": "La diferencia viene de la cantidad de receptores por centímetro cuadrado, muchísimo mayor en la piel sin pelo de dedos, labios y lengua. Por eso una zona tan pequeña como la yema del dedo puede leer braille y la espalda entera apenas distingue un roce de dos.",
+        "en": "The difference comes down to receptor density per square centimeter, far higher in the hairless skin of fingers, lips and tongue. That's why an area as small as a fingertip can read braille while the entire back barely tells one touch from two."
+      },
+      "source": "Medicine LibreTexts (Introduction to Neuroscience) — Touch: The Skin",
+      "sourceUrl": "https://med.libretexts.org/Sandboxes/admin/Introduction_to_Neuroscience_(Hedges)/05:_Sensory_Systems/5.10:_Touch-_The_Skin"
+    },
+    {
       "id": "libertad-para-egipto",
       "category": "historia",
       "question": {
@@ -1513,6 +1621,24 @@
       },
       "source": "NASA Science — Saturn Facts",
       "sourceUrl": "https://science.nasa.gov/saturn/facts/"
+    },
+    {
+      "id": "ojos-tardan-en-ver-de-noche",
+      "category": "cuerpo",
+      "question": {
+        "es": "Apagas la luz y no ves nada, ¿cuánto tarda tu ojo en adaptarse de verdad a la oscuridad?",
+        "en": "You switch off the light and see nothing, so how long does your eye really take to adapt to darkness?"
+      },
+      "answer": {
+        "es": "Los conos, que ven color, se adaptan en unos 10 minutos; los bastones, que ven en penumbra, tardan varias horas en terminar.",
+        "en": "The color-seeing cones adapt in about 10 minutes; the rods that see in dim light take several hours to fully finish."
+      },
+      "detail": {
+        "es": "Las pupilas se dilatan en segundos, pero eso solo deja pasar más luz, no aumenta la sensibilidad de la retina. Esa sensibilidad depende de que un pigmento llamado rodopsina se regenere dentro de los bastones, un proceso lento que explica por qué a los cinco minutos ya ves algo y a la media hora ves mucho más.",
+        "en": "Pupils dilate within seconds, but that only lets in more light, not more retinal sensitivity. That sensitivity depends on a pigment called rhodopsin regenerating inside the rods, a slow process that explains why five minutes in you can already see something, and by half an hour you see far more."
+      },
+      "source": "WTAMU — How long does it take our eyes to fully adapt to darkness?",
+      "sourceUrl": "https://www.wtamu.edu/~cbaird/sq/2013/08/09/how-long-does-it-take-our-eyes-to-fully-adapt-to-darkness/"
     },
     {
       "id": "medusa-inmortal",
@@ -1623,6 +1749,24 @@
       "sourceUrl": "https://www.etymonline.com/word/silly"
     },
     {
+      "id": "tinnitus-nace-en-el-cerebro",
+      "category": "cuerpo",
+      "question": {
+        "es": "Ese pitido que oyes sin que suene nada, ¿nace de verdad en tu oído o en otro sitio?",
+        "en": "That ringing you hear when nothing is actually sounding — does it really start in your ear, or somewhere else?"
+      },
+      "answer": {
+        "es": "Nace en el cerebro: cuando el oído pierde células sensibles, ciertas neuronas auditivas se vuelven hiperactivas para rellenar el silencio.",
+        "en": "It starts in the brain: when the ear loses sensory cells, certain auditory neurons turn overactive to fill in the silence."
+      },
+      "detail": {
+        "es": "Se llama tinnitus, y algunos expertos lo explican como una adaptación de los circuitos cerebrales al daño del oído interno, no como un fallo del oído en sí. Es la razón de que se le compare con el dolor de un miembro fantasma: el órgano ya no manda esa señal, pero el cerebro sigue generándola.",
+        "en": "It's called tinnitus, and some experts explain it as the brain's circuits adapting to inner-ear damage, rather than a fault of the ear itself. That's why it gets compared to phantom-limb pain: the organ no longer sends that signal, but the brain keeps generating it anyway."
+      },
+      "source": "Hearing Loss Association of America — Tinnitus",
+      "sourceUrl": "https://www.hearingloss.org/understanding-hearing-loss/types-causes-and-treatments/tinnitus/"
+    },
+    {
       "id": "pliegues-papel-limite",
       "category": "ciencia",
       "question": {
@@ -1731,6 +1875,24 @@
       "sourceUrl": "https://www.etymonline.com/word/sinister"
     },
     {
+      "id": "cerebro-bilingue-doble-freno",
+      "category": "cuerpo",
+      "question": {
+        "es": "Cuando hablas dos idiomas, ¿qué hace tu cerebro con el idioma que en ese momento no estás usando?",
+        "en": "When you speak two languages, what does your brain do with the one you're not using right now?"
+      },
+      "answer": {
+        "es": "No lo apaga: lo mantiene activo de fondo y tiene que inhibirlo activamente cada vez que hablas en el otro.",
+        "en": "It doesn't switch it off: it keeps it active in the background and has to actively inhibit it every time you speak the other one."
+      },
+      "detail": {
+        "es": "Cambiar de idioma pone en marcha una red de zonas frontales y parietales que seleccionan la palabra correcta mientras frenan la del idioma que no toca. Ese ejercicio constante de selección e inhibición es justo lo que entrena, y refuerza, el control cognitivo general del cerebro bilingüe.",
+        "en": "Switching languages engages a network of frontal and parietal regions that select the right word while holding back the one from the language not in use. That constant exercise of selecting and inhibiting is exactly what trains, and strengthens, the bilingual brain's general cognitive control."
+      },
+      "source": "PMC — Bilingual Cognitive Control in Language Switching",
+      "sourceUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4152243/"
+    },
+    {
       "id": "hueco-fondo-botella-vino",
       "category": "ciencia",
       "question": {
@@ -1837,6 +1999,24 @@
       },
       "source": "etymonline — glamour",
       "sourceUrl": "https://www.etymonline.com/word/glamour"
+    },
+    {
+      "id": "cueva-sin-reloj-siffre",
+      "category": "cuerpo",
+      "question": {
+        "es": "Sin luz ni reloj, ¿cuánto puede desviarse tu sentido del tiempo del calendario real?",
+        "en": "With no light, no clock and no one to talk to, how far can your sense of time drift from the real calendar?"
+      },
+      "answer": {
+        "es": "En un experimento real, mucho: el sujeto solo contó internamente 42 días vividos mientras arriba habían pasado 58 ciclos de día y noche.",
+        "en": "In a real experiment, plenty: the subject only counted 42 lived days internally while 58 day-night cycles had actually passed on the surface."
+      },
+      "detail": {
+        "es": "El geólogo Michel Siffre pasó sesenta y tres días en una cueva de los Alpes sin ninguna referencia externa de hora ni de fecha. Su cuerpo entró en un ritmo «libre»: percibió internamente 42 «días fisiológicos» mientras arriba transcurrían 58 ciclos de día y noche.",
+        "en": "Geologist Michel Siffre spent sixty-three days in an Alpine cave with no external cue of time or date whatsoever. His body slipped into a \"free-running\" rhythm: he internally counted 42 \"physiological days\" while 58 day-night cycles passed on the surface."
+      },
+      "source": "Journal of History and Philosophy of the Life Sciences (PMC) — Timeless Spaces: Field Experiments in the Physiological Study of Circadian Rhythms, 1938–1963",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10115684/"
     },
     {
       "id": "bulo-bañera-fillmore",
@@ -2595,6 +2775,24 @@
       "sourceUrl": "https://www.tastesofhistory.co.uk/post/dispelling-some-myths-romans-railways-and-nasa-rockets"
     },
     {
+      "id": "ceguera-de-caras-prosopagnosia",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Puedes ver perfectamente una cara y aun así no tener ni idea de quién es?",
+        "en": "Can you see a face perfectly clearly and still have no idea whose face it is?"
+      },
+      "answer": {
+        "es": "Sí, se llama prosopagnosia: el cerebro no reconoce caras aunque la vista funcione con normalidad.",
+        "en": "Yes, it's called prosopagnosia: the brain fails to recognize faces even though eyesight works normally."
+      },
+      "detail": {
+        "es": "Puede aparecer de nacimiento o tras un daño cerebral, y varía en grado: algunos solo dudan ante caras poco familiares, otros no distinguen ni a su pareja por la calle. Algunas estimaciones la sitúan en hasta un 2,5 % de la población, con un origen genético identificable en los casos de nacimiento.",
+        "en": "It can be present from birth or follow brain damage, and its severity varies: some people only struggle with unfamiliar faces, others can't recognize their own partner on the street. Some estimates put it as high as 2.5% of the population, with an identifiable genetic origin in the congenital cases."
+      },
+      "source": "Cleveland Clinic — Prosopagnosia (Face Blindness)",
+      "sourceUrl": "https://my.clevelandclinic.org/health/diseases/23412-prosopagnosia-face-blindness"
+    },
+    {
       "id": "mesmerizar-magnetismo-animal",
       "category": "lenguaje",
       "question": {
@@ -2809,6 +3007,24 @@
       },
       "source": "Science History Institute — The Problem of Piltdown Man",
       "sourceUrl": "https://www.sciencehistory.org/stories/magazine/the-problem-of-piltdown-man/"
+    },
+    {
+      "id": "numeros-con-color-sinestesia",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Puede un número en blanco y negro tener, para ti, un color fijo desde siempre?",
+        "en": "Can a plain black-and-white number carry, for you, a fixed color it has always had?"
+      },
+      "answer": {
+        "es": "Para algunas personas sí: es la sinestesia grafema-color, y les afecta a cerca del 4 % de la población.",
+        "en": "For some people it does: it's grapheme-color synesthesia, and it affects close to 4% of the population."
+      },
+      "detail": {
+        "es": "Al mirar un número o una letra, se activa a la vez la zona cerebral que procesa esa forma y el área V4, encargada del color, como si estuvieran conectadas de más. No hay una única explicación aceptada, pero la teoría dominante habla de un exceso de conexiones entre esas dos regiones vecinas del cerebro.",
+        "en": "Looking at a number or letter fires the brain region that processes its shape at the same time as area V4, which handles color, as if the two were over-connected. There's no single accepted explanation, but the leading theory points to an excess of connections between those two neighboring brain regions."
+      },
+      "source": "PMC — Grapheme-Color Synesthesia and Its Connection to Memory",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11416151/"
     },
     {
       "id": "maverick-ganado-sin-marcar",
@@ -3027,6 +3243,24 @@
       "sourceUrl": "https://en.wikipedia.org/wiki/Pecunia_non_olet"
     },
     {
+      "id": "tocarte-la-nariz-a-ciegas",
+      "category": "cuerpo",
+      "question": {
+        "es": "Con los ojos cerrados, ¿cómo sabe tu mano exactamente dónde está tu nariz para tocarla sin fallar?",
+        "en": "With your eyes closed, how does your hand know exactly where your nose is well enough to touch it?"
+      },
+      "answer": {
+        "es": "Gracias a la propiocepción: un sentido aparte de la vista que informa en todo momento de la posición de cada articulación.",
+        "en": "Thanks to proprioception: a sense separate from sight that constantly reports where every joint is."
+      },
+      "detail": {
+        "es": "Receptores repartidos por músculos, tendones y articulaciones miden el ángulo y el estiramiento de cada parte del cuerpo y lo envían al cerebro sin parar. Es justo lo que comprueba un médico al pedirte que, con los ojos cerrados, toques tu nariz con el dedo repetidas veces.",
+        "en": "Receptors scattered through muscles, tendons and joints constantly measure the angle and stretch of every body part and send it to the brain. That's exactly what a doctor checks by asking you to close your eyes and touch your nose with a fingertip, over and over."
+      },
+      "source": "Cleveland Clinic — Proprioception",
+      "sourceUrl": "https://my.clevelandclinic.org/health/articles/proprioception"
+    },
+    {
       "id": "almohadilla-libra-abreviada",
       "category": "lenguaje",
       "question": {
@@ -3241,6 +3475,24 @@
       },
       "source": "Wikipedia — Hess triangle",
       "sourceUrl": "https://en.wikipedia.org/wiki/Hess_triangle"
+    },
+    {
+      "id": "oidos-explotan-en-el-avion",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Por qué te «explotan» los oídos al aterrizar y no, por ejemplo, al subir una escalera igual de rápido?",
+        "en": "Why do your ears \"pop\" when a plane lands, but not when you climb stairs just as fast?"
+      },
+      "answer": {
+        "es": "Porque el cambio de presión del vuelo es demasiado rápido para que la trompa de Eustaquio lo compense a tiempo.",
+        "en": "Because the pressure change during flight is too fast for the eustachian tube to compensate in time."
+      },
+      "detail": {
+        "es": "Esa trompa conecta el oído medio con la garganta y normalmente igual la presión de los dos lados del tímpano dejando pasar aire. En el despegue y el aterrizaje la presión cambia más rápido de lo que el tubo puede reaccionar, y de ahí el taponamiento hasta que un bostezo o un trago la fuerzan a abrirse.",
+        "en": "That tube connects the middle ear to the throat and normally equalizes pressure on both sides of the eardrum by letting air through. During takeoff and landing the pressure shifts faster than the tube can react, hence the stuffed feeling until a yawn or a swallow forces it open."
+      },
+      "source": "Cleveland Clinic — Airplane Ear",
+      "sourceUrl": "https://my.clevelandclinic.org/health/diseases/17929-airplane-ear"
     },
     {
       "id": "isla-ese-mentirosa",
@@ -3459,6 +3711,24 @@
       "sourceUrl": "https://www.scientificamerican.com/blog/thoughtful-animal/once-upon-a-time-the-catholic-church-decided-that-beavers-were-fish/"
     },
     {
+      "id": "parpadeo-antes-de-pensar",
+      "category": "cuerpo",
+      "question": {
+        "es": "Un portazo te hace parpadear antes de que te dé tiempo a asustarte, entonces, ¿quién decide cerrar tus ojos?",
+        "en": "A slammed door makes you blink before you even have time to feel scared — so who decides to shut your eyes?"
+      },
+      "answer": {
+        "es": "Nadie que puedas controlar: la señal va directa del tronco cerebral al párpado, sin pasar por la parte consciente del cerebro.",
+        "en": "No one you can control: the signal goes straight from the brainstem to the eyelid, skipping the conscious part of the brain entirely."
+      },
+      "detail": {
+        "es": "Es el reflejo de sobresalto acústico, y ese atajo por el tronco encefálico —sin pasar por la corteza— es lo que lo hace tan rápido: ocurre en aproximadamente una centésima de segundo. Sirve para proteger un órgano tan delicado como el ojo antes de que algo pueda golpearlo.",
+        "en": "It's the acoustic startle-blink reflex, and that shortcut through the brainstem, bypassing the cortex, is what makes it so fast: it happens in about a hundredth of a second. Its job is to protect an organ as delicate as the eye before anything can strike it."
+      },
+      "source": "The Conversation — Curious Kids: Why do you blink when there is a sudden loud noise close by?",
+      "sourceUrl": "https://theconversation.com/curious-kids-why-do-you-blink-when-there-is-a-sudden-loud-noise-close-by-99437"
+    },
+    {
       "id": "regla-del-pulgar-mito",
       "category": "lenguaje",
       "question": {
@@ -3673,6 +3943,24 @@
       },
       "source": "Wikipedia — Brick tax",
       "sourceUrl": "https://en.wikipedia.org/wiki/Brick_tax"
+    },
+    {
+      "id": "eco-del-sonido-en-la-mente",
+      "category": "cuerpo",
+      "question": {
+        "es": "Una frase ya terminó de sonar, entonces, ¿por qué todavía puedes «oírla» un instante después?",
+        "en": "A sentence has already stopped sounding, so why can you still \"hear\" it for a moment afterward?"
+      },
+      "answer": {
+        "es": "Porque el sonido se queda unos segundos en una memoria de brevísima duración antes de desaparecer.",
+        "en": "Because sound lingers for a few seconds in an extremely short-lived memory before it fades away."
+      },
+      "detail": {
+        "es": "Se llama memoria ecoica, y retiene la información auditiva entre 2 y 3 segundos, más tiempo que su equivalente visual. Ese margen es el que permite entender una frase larga: el cerebro guarda el principio en espera de que llegue el final para darle sentido junto.",
+        "en": "It's called echoic memory, and it holds auditory information for about 2 to 3 seconds, longer than its visual counterpart. That window is what lets you understand a long sentence: the brain holds onto the beginning while it waits for the end, so it can make sense of both together."
+      },
+      "source": "American Psychological Association — APA Dictionary of Psychology, \"echoic memory\"",
+      "sourceUrl": "https://dictionary.apa.org/echoic-memory"
     },
     {
       "id": "loco-como-sombrerero-mercurio",
@@ -3891,6 +4179,24 @@
       "sourceUrl": "https://www.history.com/articles/did-nero-really-fiddle-while-rome-burned"
     },
     {
+      "id": "piernas-inquietas-de-noche",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Por qué la necesidad incontrolable de mover las piernas casi siempre llega de noche y nunca de día?",
+        "en": "Why does the urge to move your legs almost always strike at night and almost never by day?"
+      },
+      "answer": {
+        "es": "Porque el mensajero químico que lo frena, la dopamina, tiene un ritmo diario y toca fondo justo por la noche.",
+        "en": "Because the chemical messenger that keeps it in check, dopamine, follows a daily rhythm that bottoms out at night."
+      },
+      "detail": {
+        "es": "En el síndrome de piernas inquietas, la dopamina llega a su punto más bajo hacia las tres de la madrugada, y la melatonina, que sube al anochecer, frena aún más su liberación. Ese doble bajón coincide justo con el momento en que los síntomas empeoran.",
+        "en": "In restless legs syndrome, dopamine hits its lowest point around 3 a.m., and melatonin, which rises at nightfall, further suppresses its release. That double dip lines up exactly with when symptoms get worse."
+      },
+      "source": "PMC — Circadian rhythm in restless legs syndrome",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9995399/"
+    },
+    {
       "id": "enterrar-el-hacha-ritual",
       "category": "lenguaje",
       "question": {
@@ -4105,6 +4411,24 @@
       },
       "source": "IFLScience — Julius Caesar's Year Of Confusion In 46 BCE Was The Longest Year In History With 445 Days",
       "sourceUrl": "https://www.iflscience.com/46-bce-julius-caesars-year-of-confusion-was-80-days-longer-than-normal-78838"
+    },
+    {
+      "id": "acento-extranjero-de-repente",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Puedes despertarte un día hablando tu propio idioma con un acento que nunca tuviste?",
+        "en": "Can you wake up one day speaking your own language with an accent you never had before?"
+      },
+      "answer": {
+        "es": "Sí, ocurre de verdad: se llama síndrome del acento extranjero y suele seguir a un daño en el cerebro.",
+        "en": "Yes, it really happens: it's called foreign accent syndrome, and it usually follows brain damage."
+      },
+      "detail": {
+        "es": "Un ictus, un golpe en la cabeza o una lesión cerebral pueden alterar la zona que produce el habla y dejar un acento que ni el propio hablante reconoce como suyo. Es tan raro que, desde el primer caso documentado en 1907, apenas un centenar de personas lo han sufrido en todo el mundo.",
+        "en": "A stroke, a head injury or a brain lesion can disrupt the region that produces speech and leave behind an accent the speaker doesn't even recognize as their own. It's so rare that, since the first documented case in 1907, only about a hundred people worldwide have been diagnosed with it."
+      },
+      "source": "Cleveland Clinic — Foreign Accent Syndrome (FAS)",
+      "sourceUrl": "https://my.clevelandclinic.org/health/diseases/25242-foreign-accent-syndrome-fas"
     },
     {
       "id": "billon-cambia-de-tamano",
@@ -4323,6 +4647,24 @@
       "sourceUrl": "https://en.wikipedia.org/wiki/Tobacco_smoke_enema"
     },
     {
+      "id": "esparragos-nariz-que-no-huele",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Por qué algunas narices son incapaces de detectar el olor tan característico de los espárragos en la orina?",
+        "en": "Why are some noses simply unable to detect that distinctive smell asparagus gives urine?"
+      },
+      "answer": {
+        "es": "Porque una variación genética concreta les impide oler ese compuesto en particular, sin que falle nada más de su olfato.",
+        "en": "Because a specific genetic variant blocks that particular compound alone, without any other flaw in their sense of smell."
+      },
+      "detail": {
+        "es": "Se llama anosmia específica: quien la tiene huele con normalidad cualquier otra cosa, pero es ciego a un olor muy concreto. En un estudio, poco más de un 6 % de los participantes no detectó el olor de los espárragos en la orina, ligado a una variante cerca del gen del receptor olfativo OR2M7.",
+        "en": "It's called specific anosmia: people who have it smell everything else normally but are blind to one particular odor. In one study, just over 6% of participants failed to detect the asparagus smell in urine, linked to a variant near the OR2M7 olfactory receptor gene."
+      },
+      "source": "Chemical Senses — Excretion and Perception of a Characteristic Odor in Urine after Asparagus Ingestion",
+      "sourceUrl": "https://academic.oup.com/chemse/article/36/1/9/442551"
+    },
+    {
       "id": "moises-cuernos-luz",
       "category": "lenguaje",
       "question": {
@@ -4537,6 +4879,24 @@
       },
       "source": "Wikipedia — Ems dispatch",
       "sourceUrl": "https://en.wikipedia.org/wiki/Ems_dispatch"
+    },
+    {
+      "id": "olor-que-a-un-tercio-no-existe",
+      "category": "cuerpo",
+      "question": {
+        "es": "El mismo olor de sudor, ¿por qué para algunas narices ni siquiera está ahí?",
+        "en": "That same sweaty smell — why isn't it even there for some noses?"
+      },
+      "answer": {
+        "es": "Porque cerca de un tercio de la gente no puede olerlo en absoluto, y quienes sí lo huelen ni siquiera coinciden en cómo describirlo.",
+        "en": "Because roughly a third of people can't smell it at all, and those who can don't even agree on how to describe it."
+      },
+      "detail": {
+        "es": "El compuesto se llama androstenona, y en un estudio un 30,75 % de los participantes resultó anósmico a él. De los que sí lo perciben, muchos lo describen como algo desagradable, «sudoroso» o «áspero», mientras que otros lo describen como «dulce» o «floral»: la misma molécula, entrando por la misma nariz, puede olerse de formas opuestas.",
+        "en": "The compound is called androstenone, and in one study 30.75% of participants turned out unable to smell it at all. Among those who can, many describe it as unpleasant, \"sweaty\" or \"harsh\", while others call the very same molecule \"sweet\" or \"floral\": the same compound, hitting the same nose, can register as opposite smells."
+      },
+      "source": "PMC — Olfactory training in specific anosmia to androstenone",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12273440/"
     },
     {
       "id": "terrific-daba-miedo",
@@ -4755,6 +5115,24 @@
       "sourceUrl": "https://en.wikipedia.org/wiki/Hat_tax"
     },
     {
+      "id": "mirar-de-reojo-para-ver-mejor",
+      "category": "cuerpo",
+      "question": {
+        "es": "Para ver una estrella débil, ¿por qué los astrónomos aconsejan mirar a su lado y no a ella?",
+        "en": "To spot a faint star at night, why do astronomers say to look beside it instead of straight at it?"
+      },
+      "answer": {
+        "es": "Porque el centro del ojo está lleno de células que necesitan luz intensa, y los bordes están llenos de las que funcionan a oscuras.",
+        "en": "Because the center of the eye is packed with cells that need bright light, and the edges are packed with the ones that work in the dark."
+      },
+      "detail": {
+        "es": "Esa técnica se llama visión periférica o «desviada», y aprovecha que la zona de la retina fuera del centro, cargada de bastones, es unas 4 magnitudes más sensible a la luz débil que el centro, cargado de conos —una diferencia enorme en la escala con la que se mide el brillo de una estrella—. Es también la razón de que un objeto tenue casi desaparezca en cuanto lo miras fijamente.",
+        "en": "The technique is called averted vision, and it works because the retina's outer region, packed with rods, is about 4 magnitudes more sensitive to dim light than the rod-poor center, packed with cones — a huge gap on the scale used to measure a star's brightness. It's also why a faint object nearly vanishes the moment you stare straight at it."
+      },
+      "source": "NASA Night Sky Network / Astronomical Society of the Pacific — The Eye and How It Works when Viewing Faint Astronomical Objects",
+      "sourceUrl": "https://nightsky.jpl.nasa.gov/documents/837/TTKReadyObserve1.pdf"
+    },
+    {
       "id": "buxom-obediente-no-curvas",
       "category": "lenguaje",
       "question": {
@@ -4969,6 +5347,24 @@
       },
       "source": "History.com — Why the Fork Was Once Considered Scandalous",
       "sourceUrl": "https://www.history.com/articles/fork-history-controversy"
+    },
+    {
+      "id": "picor-que-viene-del-higado",
+      "category": "cuerpo",
+      "question": {
+        "es": "Un picor por todo el cuerpo sin ronchas ni marcas en la piel, ¿de dónde puede venir si no es de la piel?",
+        "en": "An all-over itch with not a single rash or mark on the skin — where can it come from if not the skin?"
+      },
+      "answer": {
+        "es": "Puede venir del hígado: algunas enfermedades hepáticas producen un picor intenso sin ninguna lesión visible.",
+        "en": "It can come from the liver: certain liver diseases cause intense itching with no visible skin lesion at all."
+      },
+      "detail": {
+        "es": "En la colestasis, la piel de quien lo sufre está libre de lesiones propias del picor, aunque puedan aparecer arañazos por rascarse. No está del todo resuelto qué lo desencadena exactamente —las sales biliares acumuladas eran la sospechosa obvia, pero el picor a veces desaparece justo cuando esas sales están más altas—, y una de las hipótesis con más peso apunta a un exceso de opioides propios del cuerpo.",
+        "en": "In cholestasis, the skin of someone suffering it carries none of the lesions itching usually leaves behind, though scratch marks can still appear. What exactly triggers it isn't fully settled — built-up bile salts were the obvious suspect, but the itch sometimes fades right when those salts peak — and one leading hypothesis points instead to a surplus of the body's own opioids."
+      },
+      "source": "NCBI Bookshelf — Pruritus of Cholestasis",
+      "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK200923/"
     },
     {
       "id": "guillotina-medico-humanitario",
@@ -5187,6 +5583,24 @@
       "sourceUrl": "https://www.jhunewsletter.com/article/2016/04/did-you-know-it-was-made-with-cocaine"
     },
     {
+      "id": "torpe-nada-mas-despertar",
+      "category": "cuerpo",
+      "question": {
+        "es": "Ya estás despierto, ¿por qué tu cabeza sigue funcionando los primeros minutos como si siguiera dormida?",
+        "en": "You're already awake, so why does your head keep working as if it were still asleep for the first few minutes?"
+      },
+      "answer": {
+        "es": "Porque no todo el cerebro se despierta a la vez: partes clave para pensar con claridad tardan más en ponerse en marcha.",
+        "en": "Because the brain doesn't wake up all at once: the parts key to clear thinking take longer to come back online."
+      },
+      "detail": {
+        "es": "Se llama inercia del sueño y suele durar entre 15 y 60 minutos, más si venías muy falto de sueño. Es peor cuanto más brusco es el despertar desde el sueño profundo, esa fase en la que el cuerpo baja de temperatura y el cerebro produce ondas lentas que aún no ha terminado de apagar.",
+        "en": "It's called sleep inertia and usually lasts 15 to 60 minutes, longer if you were badly sleep-deprived. It's worse the more abruptly you're woken from deep sleep, the stage where body temperature drops and the brain produces slow waves it hasn't finished switching off yet."
+      },
+      "source": "Cleveland Clinic — Sleep Inertia",
+      "sourceUrl": "https://health.clevelandclinic.org/sleep-inertia"
+    },
+    {
       "id": "martinete-general-disciplina",
       "category": "lenguaje",
       "question": {
@@ -5401,6 +5815,24 @@
       },
       "source": "Fox News — FDA approves leeches as medical devices",
       "sourceUrl": "https://www.foxnews.com/story/fda-approves-leeches-as-medical-devices"
+    },
+    {
+      "id": "higado-dos-tercios",
+      "category": "cuerpo",
+      "question": {
+        "es": "Si te quitaran dos tercios del hígado, ¿qué le pasaría al trozo que queda?",
+        "en": "If two-thirds of your liver were removed, what would happen to what's left?"
+      },
+      "answer": {
+        "es": "Vuelve a crecer hasta recuperar el tamaño original entero.",
+        "en": "It grows back until it reaches the original full size again."
+      },
+      "detail": {
+        "es": "Es la única víscera humana capaz de esto: tras extirpar dos tercios en una operación, las células que quedan se multiplican y restauran la masa perdida en pocas semanas. Es la base de los trasplantes de donante vivo, donde a ambas partes les vuelve a crecer un hígado completo.",
+        "en": "It's the only human organ capable of this: after two-thirds is removed in surgery, the remaining cells multiply and restore the lost mass within weeks. It's the basis of living-donor transplants, where both the donor and recipient end up with a full liver again."
+      },
+      "source": "PMC — Cellular and Molecular Basis of Liver Regeneration",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7108750/"
     },
     {
       "id": "aspirina-marca-que-se-perdio",
@@ -5619,6 +6051,24 @@
       "sourceUrl": "https://collections.vam.ac.uk/item/O107966/pocket-haines-hannah"
     },
     {
+      "id": "rinones-media-taza",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Cuánta sangre pasan tus riñones por su filtro en un solo minuto?",
+        "en": "How much blood do your kidneys filter in a single minute?"
+      },
+      "answer": {
+        "es": "Alrededor de media taza, sin descanso, minuto tras minuto durante toda tu vida.",
+        "en": "About half a cup, without a break, minute after minute for your entire life."
+      },
+      "detail": {
+        "es": "Ese ritmo constante es lo que permite retirar los desechos de la sangre antes de que se acumulen. Los riñones no tienen turno de descanso: si se paran unos minutos, las toxinas empiezan a subir de inmediato.",
+        "en": "That constant pace is what keeps waste from building up in the blood. Kidneys don't get a shift off: if they stop for a few minutes, toxins start rising right away."
+      },
+      "source": "NIDDK — Your Kidneys & How They Work",
+      "sourceUrl": "https://www.niddk.nih.gov/health-information/kidney-disease/kidneys-how-they-work"
+    },
+    {
       "id": "cremallera-nombre-onomatopeya",
       "category": "lenguaje",
       "question": {
@@ -5833,6 +6283,24 @@
       },
       "source": "Bonjour Paris — When Paris Sent its Mail Down the Tubes",
       "sourceUrl": "https://bonjourparis.com/history/when-paris-sent-its-mail-down-the-tubes/"
+    },
+    {
+      "id": "globulos-rojos-120-dias",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Cuánto tiempo vive un glóbulo rojo antes de que tu cuerpo lo destruya?",
+        "en": "How long does a red blood cell live before your body destroys it?"
+      },
+      "answer": {
+        "es": "Unos 120 días, y luego el bazo y el hígado se encargan de eliminarlo.",
+        "en": "About 120 days, and then the spleen and liver take care of eliminating it."
+      },
+      "detail": {
+        "es": "Células especializadas llamadas macrófagos reconocen a los glóbulos rojos ya envejecidos al pasar por esos dos órganos y los engullen. El hierro que liberan no se desperdicia: vuelve a la médula ósea para fabricar glóbulos rojos nuevos.",
+        "en": "Specialized cells called macrophages recognize aged red blood cells as they pass through those two organs and engulf them. The iron they release isn't wasted: it goes back to the bone marrow to make new red blood cells."
+      },
+      "source": "PMC — How do red blood cells know when to die?",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5414242/"
     },
     {
       "id": "parrafo-signo-corrupcion-de-cangrejo",
@@ -6051,6 +6519,24 @@
       "sourceUrl": "https://www.ropedye.com/2010/01/crotch-rivet/"
     },
     {
+      "id": "pulmones-nunca-vacios",
+      "category": "cuerpo",
+      "question": {
+        "es": "Aunque expulses todo el aire que puedas de un soplido, ¿se quedan tus pulmones vacíos?",
+        "en": "Even if you blow out all the air you can, do your lungs end up empty?"
+      },
+      "answer": {
+        "es": "No, siempre queda alrededor de un litro atrapado dentro y no hay forma de sacarlo.",
+        "en": "No, about a liter always stays trapped inside, and there's no way to force it out."
+      },
+      "detail": {
+        "es": "Ese resto se llama volumen residual y no es un fallo: mantiene los diminutos sacos de aire de los pulmones ligeramente inflados entre respiración y respiración. Si se vaciaran del todo, se pegarían entre sí y volver a inflarlos costaría un esfuerzo enorme.",
+        "en": "That leftover air is called residual volume, and it's not a malfunction: it keeps the lungs' tiny air sacs slightly inflated between breaths. If they emptied completely, they'd stick together, and reinflating them would take enormous effort."
+      },
+      "source": "StatPearls (NCBI) — Physiology, Residual Volume",
+      "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK493170/"
+    },
+    {
       "id": "dolar-simbolo-pesos-ese-sobre-pe",
       "category": "lenguaje",
       "question": {
@@ -6265,6 +6751,24 @@
       },
       "source": "Ancient Egypt Research Associates — Feeding Pyramid Workers",
       "sourceUrl": "https://aeraweb.org/feeding-pyramid-workers/"
+    },
+    {
+      "id": "grasa-parda-recien-nacidos",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Por qué un bebé recién nacido tiene un tipo de grasa que un adulto casi no tiene?",
+        "en": "Why does a newborn baby have a type of fat that an adult barely has?"
+      },
+      "answer": {
+        "es": "Porque esa grasa, la parda, genera calor quemándose directamente, sin necesidad de tiritar.",
+        "en": "Because that fat, brown fat, generates heat by burning directly, with no need to shiver."
+      },
+      "detail": {
+        "es": "En los recién nacidos supone entre el 2 % y el 5 % de todo su peso corporal, porque aún no saben tiritar para entrar en calor. Los adultos conservan pequeños depósitos alrededor del cuello y el pecho, que se activan solo con el frío.",
+        "en": "In newborns it makes up between 2% and 5% of their entire body weight, because they can't yet shiver to warm themselves up. Adults keep small deposits around the neck and chest, which switch on only in the cold."
+      },
+      "source": "Cleveland Clinic — Brown Fat",
+      "sourceUrl": "https://my.clevelandclinic.org/health/body/24015-brown-fat"
     },
     {
       "id": "salmon-ele-restaurada-siglo-xvi",
@@ -6483,6 +6987,24 @@
       "sourceUrl": "https://www.britannica.com/event/War-of-Jenkins-Ear"
     },
     {
+      "id": "cerebro-veinte-por-ciento",
+      "category": "cuerpo",
+      "question": {
+        "es": "Sin mover un dedo, solo por existir, ¿qué parte de tu energía diaria gasta tu cerebro?",
+        "en": "Without moving a finger, just by existing, how much of your daily energy does your brain use?"
+      },
+      "answer": {
+        "es": "En reposo, alrededor de una quinta parte de toda la energía de tu cuerpo.",
+        "en": "At rest, about a fifth of your body's entire energy budget."
+      },
+      "detail": {
+        "es": "Un órgano que pesa poco más de kilo y medio se lleva ese porcentaje solo para mantener encendidas sus neuronas y mover señales eléctricas entre ellas. En niños pequeños esa proporción es todavía mayor, porque el cerebro sigue construyéndose.",
+        "en": "An organ that weighs a little over three pounds takes up that share just to keep its neurons running and moving electrical signals between them. In young children the proportion is even higher, because the brain is still under construction."
+      },
+      "source": "BrainFacts.org — How Much Energy Does the Brain Use?",
+      "sourceUrl": "https://www.brainfacts.org/brain-anatomy-and-function/anatomy/2019/how-much-energy-does-the-brain-use-020119"
+    },
+    {
       "id": "carter-polonia-traductor-desastroso",
       "category": "lenguaje",
       "question": {
@@ -6697,6 +7219,24 @@
       },
       "source": "JayArr Chocolate — Aztec Cacao Currency: How Beans Worked as Money",
       "sourceUrl": "https://jayarrchocolate.com/blog/aztec-cacao-currency-history/"
+    },
+    {
+      "id": "medula-osea-fabrica-sangre",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Dónde se fabrica de verdad tu sangre, y no es donde corre?",
+        "en": "Where is your blood actually manufactured, and it isn't where it flows?"
+      },
+      "answer": {
+        "es": "Dentro de tus huesos, en la médula, que produce miles de millones de células nuevas cada día.",
+        "en": "Inside your bones, in the marrow, which produces billions of new cells every day."
+      },
+      "detail": {
+        "es": "Esa fábrica funciona sin parar durante toda la vida, reponiendo glóbulos rojos, blancos y plaquetas al mismo ritmo en que se van gastando. Está protegida dentro del hueso, uno de los rincones más resguardados del cuerpo, lejos de cualquier golpe externo.",
+        "en": "That factory runs nonstop for a lifetime, replacing red cells, white cells and platelets at the same rate they wear out. It sits protected inside bone, one of the most shielded corners of the body, safe from outside knocks."
+      },
+      "source": "Cleveland Clinic — Bone Marrow",
+      "sourceUrl": "https://my.clevelandclinic.org/health/body/22818-bone-marrow"
     },
     {
       "id": "purpura-caracol-fenicio",
@@ -6915,6 +7455,24 @@
       "sourceUrl": "https://www.history.com/articles/what-was-the-dancing-plague-of-1518"
     },
     {
+      "id": "esqueleto-siete-anos",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Sigues teniendo el mismo esqueleto que tenías hace diez años?",
+        "en": "Do you still have the same skeleton you had ten years ago?"
+      },
+      "answer": {
+        "es": "No del todo: tus huesos se renuevan por completo cada siete años más o menos.",
+        "en": "Not quite: your bones fully renew themselves about every seven years."
+      },
+      "detail": {
+        "es": "Unas células destruyen hueso viejo mientras otras construyen hueso nuevo en su lugar, un proceso constante llamado remodelación ósea. Va tan rápido que, pieza a pieza, el esqueleto entero termina siendo distinto del que tenías antes.",
+        "en": "Some cells break down old bone while others build new bone in its place, a constant process called bone remodeling. It moves fast enough that, piece by piece, the entire skeleton ends up being different from the one you had before."
+      },
+      "source": "Cleveland Clinic — 15 Facts About Your Bones and Skeletal System",
+      "sourceUrl": "https://health.clevelandclinic.org/facts-about-the-skeletal-system"
+    },
+    {
       "id": "jaguar-cualquier-fiera-tupi",
       "category": "lenguaje",
       "question": {
@@ -7129,6 +7687,24 @@
       },
       "source": "History.co.uk (Sky HISTORY) — The truth about Dick Turpin",
       "sourceUrl": "https://www.history.co.uk/articles/the-truth-about-dick-turpin-englands-most-notorious-higwayman"
+    },
+    {
+      "id": "adn-bebe-cerebro-materno",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Puede quedarse ADN de tu hijo dentro de tu propio cerebro para siempre?",
+        "en": "Can your child's DNA stay inside your own brain forever?"
+      },
+      "answer": {
+        "es": "Puede: células del feto cruzan a la madre durante el embarazo y algunas se instalan en su cerebro y se quedan décadas.",
+        "en": "It can: fetal cells cross into the mother during pregnancy, and some settle into her brain and stay there for decades."
+      },
+      "detail": {
+        "es": "En un estudio, el 63 % de los cerebros femeninos examinados llevaba ADN masculino de un embarazo pasado. Las mujeres con menos de ese ADN infantil en el cerebro tenían más probabilidad de haber sufrido alzhéimer, así que puede que ese rastro ajeno esté ayudando a protegerlas.",
+        "en": "In one study, 63% of the female brains examined carried male DNA left over from a past pregnancy. Women with less of that child-derived DNA in their brains were more likely to have had Alzheimer's, so that borrowed trace may be helping protect them."
+      },
+      "source": "PMC — Male Microchimerism in the Human Female Brain",
+      "sourceUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3458919/"
     },
     {
       "id": "quilate-semilla-de-algarrobo",
@@ -7347,6 +7923,24 @@
       "sourceUrl": "https://strangeago.com/2020/09/24/clergy-used-the-neck-verse-to-escape-the-gallows/"
     },
     {
+      "id": "bebe-nace-cerebro-medias",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Por qué naces con el cerebro todavía a medio terminar, y no ya completo?",
+        "en": "Why are you born with your brain still half-finished, instead of already complete?"
+      },
+      "answer": {
+        "es": "Porque un cerebro de tamaño adulto no cabría por el canal del parto, así que sales con menos del 30 % de ese tamaño.",
+        "en": "Because an adult-sized brain wouldn't fit through the birth canal, so you come out at less than 30% of that size."
+      },
+      "detail": {
+        "es": "Nace con el cerebro a menos del 30 % del tamaño adulto, porque más no cabría por el canal del parto. El precio es toda esa indefensión inicial; el premio es que gran parte de la construcción ocurre ya fuera, moldeada por lo que el bebé ve y oye.",
+        "en": "It is born with its brain at less than 30 percent of adult size, because more would not fit through the birth canal. The price is all that early helplessness; the prize is that most of the building happens outside, shaped by what the baby sees and hears."
+      },
+      "source": "Scientific American — Why Humans Give Birth to Helpless Babies",
+      "sourceUrl": "https://www.scientificamerican.com/blog/observations/why-humans-give-birth-to-helpless-babies/"
+    },
+    {
       "id": "algebra-hueso-soldado",
       "category": "lenguaje",
       "question": {
@@ -7561,6 +8155,24 @@
       },
       "source": "Monochrome Watches — Why Do Clocks and Watches Use the Roman Numeral IIII Instead of IV?",
       "sourceUrl": "https://monochrome-watches.com/why-do-clocks-and-watches-use-roman-numeral-iiii-instead-of-iv/"
+    },
+    {
+      "id": "ghrelina-hormona-del-hambre",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Quién manda de verdad la señal de «tengo hambre», el estómago o el cerebro?",
+        "en": "Who actually sends the \"I'm hungry\" signal, your stomach or your brain?"
+      },
+      "answer": {
+        "es": "Empieza en el estómago: cuando está vacío libera una hormona que avisa al cerebro de que toca comer.",
+        "en": "It starts in the stomach: when it's empty it releases a hormone that tells the brain it's time to eat."
+      },
+      "detail": {
+        "es": "Esa hormona se llama grelina y en cuanto empiezas a comer sus niveles caen otra vez. Es una vía de una sola dirección: el estómago decide cuándo avisar, y el cerebro solo recibe el mensaje.",
+        "en": "That hormone is called ghrelin, and as soon as you start eating its levels drop again. It's a one-way channel: the stomach decides when to send the alert, and the brain only receives the message."
+      },
+      "source": "Cleveland Clinic — Ghrelin",
+      "sourceUrl": "https://my.clevelandclinic.org/health/body/22804-ghrelin"
     },
     {
       "id": "orangutan-hombre-del-bosque",
@@ -7779,6 +8391,24 @@
       "sourceUrl": "https://www.smithsonianmag.com/history/when-street-light-first-came-london-disaster-ensued-180970965/"
     },
     {
+      "id": "cortisol-antes-alarma",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Por qué te cuesta menos espabilarte media hora después de despertar que en el primer minuto?",
+        "en": "Why is it easier to feel awake half an hour after waking up than in the first minute?"
+      },
+      "answer": {
+        "es": "Porque tu nivel de cortisol no está más alto al despertar: llega a su pico entre 30 y 60 minutos después.",
+        "en": "Because cortisol isn't at its highest the moment you wake up: it peaks somewhere between 30 and 60 minutes later."
+      },
+      "detail": {
+        "es": "Ese repunte se llama respuesta de cortisol al despertar y es distinta del ritmo circadiano de fondo que ya venía subiendo desde antes del amanecer. Es la hormona que te empuja a ponerte en marcha, y tarda su rato en llegar al máximo aunque ya estés de pie.",
+        "en": "That spike is called the cortisol awakening response, and it's separate from the underlying circadian rhythm that was already rising before dawn. It's the hormone that pushes you into gear, and it takes a while to peak even once you're already up."
+      },
+      "source": "PMC — The circadian system modulates the cortisol awakening response in humans",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9669756/"
+    },
+    {
       "id": "gung-ho-lema-chino-marines",
       "category": "lenguaje",
       "question": {
@@ -7993,6 +8623,24 @@
       },
       "source": "History.com — Why Building the Panama Canal Was So Difficult—and Deadly",
       "sourceUrl": "https://www.history.com/articles/panama-canal-construction-dangers"
+    },
+    {
+      "id": "leche-solo-de-bebe",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Por qué tantos adultos pierden poco a poco la capacidad de digerir bien la leche?",
+        "en": "Why do so many adults gradually lose the ability to properly digest milk?"
+      },
+      "answer": {
+        "es": "Porque la enzima que la digiere está pensada para la infancia y, en la mayoría de la especie, se apaga después.",
+        "en": "Because the enzyme that digests it is built for infancy and, in most of the species, switches off afterward."
+      },
+      "detail": {
+        "es": "Esa enzima, la lactasa, baja su actividad tras el destete en la mayor parte de la población mundial, aunque el grado varía mucho según el origen. Solo algunos grupos, sobre todo del norte de Europa, conservaron por herencia genética la capacidad de seguir digiriendo leche toda la vida.",
+        "en": "That enzyme, lactase, drops in activity after weaning in most of the world's population, though the degree varies a lot by ancestry. Only some groups, especially from northern Europe, kept the genetic ability to keep digesting milk for life."
+      },
+      "source": "PMC — Lactose malabsorption and intolerance",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4040760/"
     },
     {
       "id": "tifon-tres-idiomas-a-la-vez",
@@ -8211,6 +8859,24 @@
       "sourceUrl": "https://www.pointtopointsurvey.com/2016/07/englands-domesday-book/"
     },
     {
+      "id": "grupo-o-contra-malaria",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Puede el grupo sanguíneo que heredaste protegerte de una enfermedad que ni conoces?",
+        "en": "Could the blood type you inherited protect you from a disease you've never even had?"
+      },
+      "answer": {
+        "es": "Sí: tener sangre del grupo O se asocia a menos riesgo de sufrir malaria grave.",
+        "en": "Yes: having type O blood is linked to a lower risk of severe malaria."
+      },
+      "detail": {
+        "es": "Los glóbulos rojos infectados de tipo O se agrupan menos entre sí, y esos grumos son justo lo que taponaría vasos pequeños y dañaría órganos. Es una de las pistas de por qué siguen existiendo varios grupos sanguíneos: cada uno pudo ofrecer ventaja distinta frente a una infección distinta a lo largo de la historia.",
+        "en": "Infected type O red blood cells clump together less, and those clumps are exactly what would clog small vessels and damage organs. It's one clue as to why several blood types still exist: each one may have offered a different edge against a different infection over history."
+      },
+      "source": "PMC — Association of ABO blood group with severe falciparum malaria in adults",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3215225/"
+    },
+    {
       "id": "delantal-perdio-su-ene-inicial",
       "category": "lenguaje",
       "question": {
@@ -8425,6 +9091,24 @@
       },
       "source": "6sqft — The history behind NYC's water towers",
       "sourceUrl": "https://www.6sqft.com/nyc-water-towers-history-use-and-infrastructure/"
+    },
+    {
+      "id": "adrenalina-no-entra-cerebro",
+      "category": "cuerpo",
+      "question": {
+        "es": "El subidón de adrenalina de un susto, ¿entra realmente en tu cerebro?",
+        "en": "Does the adrenaline rush from a scare actually get into your brain?"
+      },
+      "answer": {
+        "es": "No: esa hormona circula por la sangre pero no logra atravesar la barrera que protege el cerebro.",
+        "en": "No: that hormone circulates through the blood but can't cross the barrier that protects the brain."
+      },
+      "detail": {
+        "es": "La misma familia de hormonas, la noradrenalina, sí cruza la placenta de una embarazada hacia el feto, pero se queda fuera del cerebro adulto. Así que todo lo que sientes en la cabeza durante el subidón —alerta, foco, miedo— llega por otras vías nerviosas, no porque la hormona haya entrado ahí.",
+        "en": "The related hormone norepinephrine does cross the placenta from a pregnant woman to her fetus, but it stays outside the adult brain. So everything you feel in your head during the rush — alertness, focus, fear — arrives through other nerve pathways, not because the hormone got in there."
+      },
+      "source": "StatPearls (NCBI) — Norepinephrine",
+      "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK537259/"
     },
     {
       "id": "cursiva-nombre-de-italia",
@@ -8643,6 +9327,24 @@
       "sourceUrl": "https://news.cancerresearchuk.org/2014/08/27/mustard-gas-from-the-great-war-to-frontline-chemotherapy/"
     },
     {
+      "id": "insulina-perros-personas",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Cómo se descubrió la hormona que hoy mantiene con vida a millones de diabéticos?",
+        "en": "How was the hormone that today keeps millions of diabetics alive discovered?"
+      },
+      "answer": {
+        "es": "Atando el conducto del páncreas de varios perros y extrayendo lo que quedaba intacto dentro.",
+        "en": "By tying off the pancreatic duct in several dogs and extracting what stayed intact inside."
+      },
+      "detail": {
+        "es": "El páncreas del perro se encogía, pero unas zonas llamadas islotes de Langerhans sobrevivían, y de ahí salió el primer extracto de insulina. Inyectado en perros diabéticos, les devolvió la salud casi de inmediato; antes de eso, la diabetes tipo 1 era una condena de muerte sin remedio.",
+        "en": "The dog's pancreas shriveled, but regions called the islets of Langerhans survived, and that's where the first insulin extract came from. Injected into diabetic dogs, it restored their health almost immediately; before that, type 1 diabetes had been an inescapable death sentence."
+      },
+      "source": "Mayo Clinic Proceedings — Frederick Banting, Nobel Laureate for Discovery of Insulin",
+      "sourceUrl": "https://www.mayoclinicproceedings.org/article/S0025-6196(11)63086-3/fulltext"
+    },
+    {
       "id": "groenlandia-nombre-de-venta",
       "category": "lenguaje",
       "question": {
@@ -8857,6 +9559,24 @@
       },
       "source": "Ripley's Believe It or Not! — The Straw Hat Riot of 1922",
       "sourceUrl": "https://www.ripleys.com/stories/straw-hat-riot"
+    },
+    {
+      "id": "placenta-organo-desechable",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Existe un órgano entero que tu cuerpo fabrica solo para tirarlo después?",
+        "en": "Is there an entire organ your body builds only to throw it away afterward?"
+      },
+      "answer": {
+        "es": "Sí, la placenta: hace de pulmón, riñón e hígado del feto y luego se desecha.",
+        "en": "Yes, the placenta: it acts as the fetus's lungs, kidneys and liver, and is then thrown away."
+      },
+      "detail": {
+        "es": "Se expulsa poco después del parto, normalmente dentro de la media hora siguiente, cuando esas funciones ya han pasado a los órganos propios del recién nacido. Es el único órgano humano diseñado desde el principio para tener fecha de caducidad.",
+        "en": "It's delivered shortly after birth, usually within the following half hour, once those functions have already passed to the newborn's own organs. It's the only human organ designed from the start to have an expiration date."
+      },
+      "source": "Cleveland Clinic — Placenta",
+      "sourceUrl": "https://my.clevelandclinic.org/health/body/22337-placenta"
     },
     {
       "id": "welsh-significaba-extranjero",
@@ -9075,6 +9795,24 @@
       "sourceUrl": "https://en.wikipedia.org/wiki/Duty_on_Hair_Powder_Act_1795"
     },
     {
+      "id": "telomeros-cuentan-tus-divisiones",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Tienen tus células una forma de contar cuántas veces se han dividido ya?",
+        "en": "Do your cells have a way of counting how many times they've already divided?"
+      },
+      "answer": {
+        "es": "Sí: unos capuchones al final de los cromosomas se acortan un poco en cada división.",
+        "en": "Yes: caps at the end of the chromosomes get a little shorter with every division."
+      },
+      "detail": {
+        "es": "Se llaman telómeros, y cuando se quedan demasiado cortos la célula deja de dividirse para siempre o se autodestruye. Es un reloj biológico literal: cuenta divisiones, no años, y por eso unos tejidos envejecen mucho más rápido que otros según cuánto se hayan estado renovando.",
+        "en": "They're called telomeres, and once they get too short the cell either stops dividing forever or self-destructs. It's a literal biological clock: it counts divisions, not years, which is why some tissues age much faster than others depending on how much they've had to renew themselves."
+      },
+      "source": "PMC — Telomere Biology and Human Phenotype",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6356320/"
+    },
+    {
       "id": "libra-abreviatura-latina-lb",
       "category": "lenguaje",
       "question": {
@@ -9289,6 +10027,24 @@
       },
       "source": "Tasting Table — The Medieval History Behind A Baker's Dozen",
       "sourceUrl": "https://www.tastingtable.com/1332008/medieval-history-bakers-dozen/"
+    },
+    {
+      "id": "respirar-boca-cambia-cara",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Puede la forma de respirar de un niño cambiarle la forma de la cara para siempre?",
+        "en": "Can the way a child breathes permanently change the shape of their face?"
+      },
+      "answer": {
+        "es": "Sí: respirar por la boca en vez de por la nariz durante años puede reorientar el crecimiento de la mandíbula.",
+        "en": "Yes: breathing through the mouth instead of the nose for years can redirect how the jaw grows."
+      },
+      "detail": {
+        "es": "En estudios con niños que respiran así de forma habitual, la mandíbula y el maxilar giran hacia atrás y hacia abajo en vez de crecer hacia delante. Es un efecto lento, ladrillo a ladrillo durante la infancia, no algo que se note de un día para otro.",
+        "en": "In studies of children who habitually breathe this way, the jaw and upper jaw rotate backward and downward instead of growing forward. It's a slow effect, built brick by brick through childhood, not something that shows up overnight."
+      },
+      "source": "PMC — Effects of mouth breathing on facial skeletal development in children",
+      "sourceUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7944632/"
     },
     {
       "id": "interrogacion-de-apertura-1754",
@@ -9507,6 +10263,24 @@
       "sourceUrl": "https://historyfacts.com/world-history/fact/shortest-reign-monarch-20-minutes/"
     },
     {
+      "id": "feto-bosteza-utero",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Puede un feto bostezar dentro del útero si ahí nunca ha respirado aire?",
+        "en": "Can a fetus yawn inside the womb if it has never breathed air in there?"
+      },
+      "answer": {
+        "es": "Sí, se ve por ecografía desde el final del primer trimestre, aunque no entre ni salga aire.",
+        "en": "Yes, it shows up on ultrasound from the end of the first trimester, even though no air goes in or out."
+      },
+      "detail": {
+        "es": "La boca se abre y se cierra despacio, imitando el gesto entero de una inhalación y una exhalación, sin ningún propósito respiratorio. Cuanto más avanza el embarazo, menos bosteza el feto, así que parece tener más que ver con que el cerebro se esté terminando de formar que con el sueño o el cansancio.",
+        "en": "The mouth opens and closes slowly, mimicking the whole gesture of an inhale and exhale, with no respiratory purpose at all. The further the pregnancy goes, the less the fetus yawns, so it seems tied more to the brain finishing its wiring than to sleepiness or fatigue."
+      },
+      "source": "PMC — Development of Fetal Yawn Compared with Non-Yawn Mouth Openings",
+      "sourceUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3503956/"
+    },
+    {
       "id": "caramelo-viaje-desde-el-sanscrito",
       "category": "lenguaje",
       "question": {
@@ -9595,6 +10369,654 @@
       },
       "source": "Online Etymology Dictionary — slogan",
       "sourceUrl": "https://www.etymonline.com/word/slogan"
+    },
+    {
+      "id": "bacterias-fabrican-vitamina-k",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Quién fabrica buena parte de una vitamina que tu cuerpo necesita y no está en tu dieta?",
+        "en": "Who makes a good share of a vitamin your body needs that isn't fully covered by your diet?"
+      },
+      "answer": {
+        "es": "Las bacterias que viven en tu intestino, que producen su propia versión de la vitamina K ahí dentro.",
+        "en": "The bacteria living in your gut, which produce their own version of vitamin K right there inside you."
+      },
+      "detail": {
+        "es": "Esa forma se llama menaquinona y se genera sobre todo en una parte concreta del intestino delgado, el íleon. Es un ejemplo claro de que ese ecosistema de bacterias no es solo un pasajero: le devuelve algo al cuerpo que lo hospeda.",
+        "en": "That form is called menaquinone, and it's generated mainly in one specific stretch of the small intestine, the ileum. It's a clear example that this bacterial ecosystem isn't just a passenger: it gives something back to the body that hosts it."
+      },
+      "source": "PMC — Role of Vitamin K in Intestinal Health",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8769504/"
+    },
+    {
+      "id": "hormona-crecimiento-de-noche",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Cuándo trabaja más la hormona que hace crecer tu cuerpo, de día o mientras duermes?",
+        "en": "When does the hormone that makes your body grow work hardest, during the day or while you sleep?"
+      },
+      "answer": {
+        "es": "Casi toda su producción diaria ocurre justo al principio de la noche, nada más entrar en sueño profundo.",
+        "en": "Almost all of its daily output happens right at the start of the night, the moment you slip into deep sleep."
+      },
+      "detail": {
+        "es": "En los hombres, alrededor del 70 % de toda la hormona de crecimiento que se libera en un día sale durante esas primeras horas de sueño profundo. Es una de las razones por las que dormir mal en la infancia y la adolescencia puede notarse después en el desarrollo.",
+        "en": "In men, about 70% of all the growth hormone released in a day comes out during those first hours of deep sleep. It's one of the reasons poor sleep in childhood and adolescence can show up later in development."
+      },
+      "source": "SLEEP journal — Interrelations Between Sleep and the Somatotropic Axis",
+      "sourceUrl": "https://academic.oup.com/sleep/article-pdf/21/6/553/8564987/sleep-21-6-553.pdf"
+    },
+    {
+      "id": "tiroides-ritmo-celular",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Puede una glándula del tamaño de una mariposa decidir la velocidad de cada célula de tu cuerpo?",
+        "en": "Can a butterfly-sized gland decide the speed of every single cell in your body?"
+      },
+      "answer": {
+        "es": "Sí, es justo lo que hace la tiroides con la hormona que produce.",
+        "en": "Yes, that's exactly what the thyroid does through the hormone it produces."
+      },
+      "detail": {
+        "es": "Esa hormona afecta a todas las células y órganos del cuerpo, acelerando o frenando cuánta energía consumen a partir de la comida. Si la tiroides produce de más o de menos, el metabolismo entero cambia de marcha aunque no hayas cambiado ni de dieta ni de actividad.",
+        "en": "That hormone affects every cell and organ in the body, speeding up or slowing down how much energy they draw from food. If the thyroid produces too much or too little, the entire metabolism shifts gear even if diet and activity haven't changed at all."
+      },
+      "source": "Cleveland Clinic — Thyroid Hormone",
+      "sourceUrl": "https://my.clevelandclinic.org/health/articles/22391-thyroid-hormone"
+    },
+    {
+      "id": "reloj-maestro-cerebro",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Tiene tu cuerpo un único reloj que manda sobre todos los demás?",
+        "en": "Does your body have a single clock that bosses around all the others?"
+      },
+      "answer": {
+        "es": "Sí, un grupo diminuto de neuronas en el cerebro que se pone en hora con la luz que entra por los ojos.",
+        "en": "Yes, a tiny cluster of neurons in the brain that sets itself by the light coming in through the eyes."
+      },
+      "detail": {
+        "es": "Ese reloj maestro coordina relojes más pequeños repartidos por el pulmón, el hígado, el riñón, el corazón y el músculo, cada uno con su propio ritmo diario de genes. Sin la luz de la mañana que lo reajusta, el reloj se va desviando del día real por su cuenta.",
+        "en": "That master clock coordinates smaller clocks spread through the lung, liver, kidney, heart and muscle, each running its own daily rhythm of genes. Without the morning light that resets it, the clock drifts away from the real day on its own."
+      },
+      "source": "PMC — Molecular analysis of mammalian circadian rhythms (review)",
+      "sourceUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC555564/"
+    },
+    {
+      "id": "oxitocina-hormona-del-amor",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Es la misma hormona la que hace que salga la leche y la que se llama «hormona del amor»?",
+        "en": "Is it the same hormone that makes milk flow and the one nicknamed the \"love hormone\"?"
+      },
+      "answer": {
+        "es": "Sí: la oxitocina provoca las contracciones del parto, hace salir la leche, y encima influye en el apego afectivo.",
+        "en": "Yes: oxytocin triggers labor contractions, makes milk flow, and on top of that influences emotional bonding."
+      },
+      "detail": {
+        "es": "La fabrica el hipotálamo, pero se guarda y se libera desde una glándula distinta, la hipófisis posterior. Cuando el bebé succiona el pecho, esa misma hormona hace que la leche se libere de inmediato, y también parece intensificar el vínculo entre madre e hijo y entre parejas.",
+        "en": "It's made by the hypothalamus, but it's stored and released from a different gland, the posterior pituitary. When a baby sucks at the breast, that same hormone makes the milk let down right away, and it also appears to deepen the bond between mother and child and between partners."
+      },
+      "source": "Cleveland Clinic — Oxytocin",
+      "sourceUrl": "https://my.clevelandclinic.org/health/articles/22618-oxytocin"
+    },
+    {
+      "id": "intestino-repara-cada-dia",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Por qué el revestimiento de tu intestino no se desgasta como el resto de tejidos?",
+        "en": "Why doesn't the lining of your intestine wear out like other tissues?"
+      },
+      "answer": {
+        "es": "Porque se regenera cada día entero, en vez de ir aguantando el roce hasta que se estropea.",
+        "en": "Because it regenerates completely every single day, instead of enduring the friction until it wears out."
+      },
+      "detail": {
+        "es": "Células madre alojadas en la base de sus pliegues fabrican reemplazos constantes para una superficie que aguanta ácido, enzimas y el roce continuo de la comida al pasar. Es de los tejidos que más rápido se renueva en todo el cuerpo, precisamente porque su trabajo lo desgasta más rápido que a ningún otro.",
+        "en": "Stem cells tucked at the base of its folds keep churning out replacements for a surface that takes a beating from acid, enzymes and the constant friction of food passing through. It's one of the fastest-renewing tissues in the entire body, precisely because its job wears it out faster than anything else."
+      },
+      "source": "The Rockefeller University — How the intestine replaces and repairs itself",
+      "sourceUrl": "https://www.rockefeller.edu/news/32474-how-the-intestine-replaces-and-repairs-itself-2/"
+    },
+    {
+      "id": "bazo-se-encoge-buceando",
+      "category": "cuerpo",
+      "question": {
+        "es": "Al aguantar la respiración bajo el agua, ¿hace algo tu bazo aparte de esperar?",
+        "en": "While you're holding your breath underwater, does your spleen do anything besides wait?"
+      },
+      "answer": {
+        "es": "Se contrae y vacía en la sangre una reserva de glóbulos rojos para estirar el oxígeno disponible.",
+        "en": "It contracts and empties a reserve of red blood cells into the blood to stretch out the available oxygen."
+      },
+      "detail": {
+        "es": "Ese chorro extra de glóbulos rojos eleva de golpe la capacidad de la sangre para transportar oxígeno justo cuando más falta hace. Los apneistas entrenados aprovechan este efecto de forma más marcada que alguien que nunca practica la inmersión.",
+        "en": "That extra burst of red blood cells suddenly raises the blood's capacity to carry oxygen right when it's needed most. Trained breath-hold divers tap into this effect more strongly than someone who never practices diving."
+      },
+      "source": "PMC — Effects of hyperventilation on... spleen contraction during serial static apneas",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10363065/"
+    },
+    {
+      "id": "humanos-mamiferos-mas-sudan",
+      "category": "cuerpo",
+      "question": {
+        "es": "De todos los mamíferos, ¿por qué eres tú el que más glándulas de sudor tiene por centímetro de piel?",
+        "en": "Of all mammals, why are you the one with the most sweat glands per square centimeter of skin?"
+      },
+      "answer": {
+        "es": "Porque tu piel tiene, de media, diez veces más glándulas de sudor que la de un chimpancé.",
+        "en": "Because your skin has, on average, ten times more sweat glands than a chimpanzee's."
+      },
+      "detail": {
+        "es": "Esa densidad tan alta, sumada a tener mucho menos pelo que el resto de primates, convirtió al sudor en el sistema de refrigeración más eficaz entre todos los mamíferos. Es una de las razones por las que un humano puede correr largas distancias bajo el sol sin sobrecalentarse, algo que la mayoría de animales no soporta.",
+        "en": "That high density, combined with having far less body hair than other primates, turned sweating into the most efficient cooling system among all mammals. It's one of the reasons a human can run long distances under the sun without overheating, something most animals can't handle."
+      },
+      "source": "PMC — En1 sweat we trust: How the evolution of an Engrailed 1 enhancer made humans the sweatiest ape",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9629119/"
+    },
+    {
+      "id": "corazon-bombea-tu-sangre",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Cuánta sangre mueve tu corazón en el minuto que tardas en leer esta pregunta?",
+        "en": "How much blood does your heart move in the minute it takes you to read this question?"
+      },
+      "answer": {
+        "es": "Casi seis litros, más sangre de la que hay en todo tu cuerpo junto.",
+        "en": "Almost six liters, more blood than your entire body holds at once."
+      },
+      "detail": {
+        "es": "Como el volumen total de sangre de una persona adulta ronda los cinco litros, en poco más de un minuto el corazón ya ha reciclado toda esa sangre entera al menos una vez. Y lo repite, minuto tras minuto, sin pararse a pensarlo nunca.",
+        "en": "Since an adult's total blood volume is around five liters, in just over a minute the heart has already recycled that entire supply at least once. And it does it again, minute after minute, without ever stopping to think about it."
+      },
+      "source": "Cleveland Clinic — Fun Facts About Your Heart",
+      "sourceUrl": "https://health.clevelandclinic.org/fun-facts-about-your-heart"
+    },
+    {
+      "id": "piel-se-renueva-mes",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Cada cuánto tiempo tienes, en sentido literal, una piel completamente nueva?",
+        "en": "How literally new is the skin covering your body right now?"
+      },
+      "answer": {
+        "es": "La epidermis entera se sustituye por células nuevas en aproximadamente un mes.",
+        "en": "Your entire epidermis is replaced by new cells in about a month."
+      },
+      "detail": {
+        "es": "Las células nacen en la capa más profunda y suben empujándose hasta la superficie, donde se desprenden. Con la edad el proceso se frena: en alguien de sesenta o setenta años puede tardar el doble.",
+        "en": "Cells are born in the deepest layer and get pushed upward until they reach the surface and flake off. The process slows with age, taking up to twice as long in someone in their sixties or seventies."
+      },
+      "source": "Skin Cancer Foundation — 10 Surprising Things About Your Skin",
+      "sourceUrl": "https://www.skincancer.org/blog/10-surprising-things-about-your-skin/"
+    },
+    {
+      "id": "callo-por-keratina",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Por qué se te forma un callo duro justo donde el zapato roza siempre?",
+        "en": "Why does a hard callus form exactly where your shoe keeps rubbing?"
+      },
+      "answer": {
+        "es": "Porque la piel produce keratina de más ahí para blindarse contra ese roce concreto.",
+        "en": "Because your skin produces extra keratin right there to shield itself against that specific friction."
+      },
+      "detail": {
+        "es": "La hiperqueratosis por presión es tu piel construyendo su propia armadura en el punto exacto que detecta como amenaza repetida. Quitar la causa —cambiar de calzado— basta para que el callo desaparezca solo.",
+        "en": "Pressure-related hyperkeratosis is your skin building its own armor at the exact spot it flags as a repeated threat. Removing the cause, like changing shoes, is often enough for the callus to disappear on its own."
+      },
+      "source": "Cleveland Clinic — Hyperkeratosis",
+      "sourceUrl": "https://my.clevelandclinic.org/health/diseases/hyperkeratosis"
+    },
+    {
+      "id": "tatuaje-macrofagos-relevo",
+      "category": "cuerpo",
+      "question": {
+        "es": "Las células que atrapan la tinta de un tatuaje mueren en semanas, ¿por qué el dibujo no se borra con ellas?",
+        "en": "The cells that trap tattoo ink die within weeks, so why doesn't the design fade away with them?"
+      },
+      "answer": {
+        "es": "Porque al morir sueltan la tinta y otra célula nueva la recoge de inmediato, en un relevo que no termina nunca.",
+        "en": "Because when they die they release the ink and a fresh cell picks it up immediately, in a relay that never ends."
+      },
+      "detail": {
+        "es": "Unos macrófagos de la dermis engullen la tinta, pero sus enzimas no pueden descomponerla, así que se quedan atascados con ella dentro. Cuando ese macrófago muere, monocitos jóvenes de la sangre entran, recapturan los pigmentos liberados y se instalan en su lugar.",
+        "en": "Macrophages in the dermis swallow the ink, but their enzymes cannot break it down, so they get stuck holding it. When that macrophage dies, young monocytes from the blood rush in, recapture the released pigment, and settle in its place."
+      },
+      "source": "UCSF Synapse — Why Tattoos Stay Put",
+      "sourceUrl": "https://synapse.ucsf.edu/articles/2024/05/28/why-tattoos-stay-put"
+    },
+    {
+      "id": "queloide-genes-colageno",
+      "category": "cuerpo",
+      "question": {
+        "es": "Dos personas se hacen el mismo corte, ¿por qué a una le queda un bulto que sigue creciendo?",
+        "en": "Two people get the exact same cut, so why does one end up with a flat scar and the other with a growing lump?"
+      },
+      "answer": {
+        "es": "Porque la segunda tiene un rasgo genético que hace que su piel fabrique más colágeno del necesario al cerrar la herida.",
+        "en": "Because the second person carries a genetic trait that makes their skin produce more collagen than the wound actually needs."
+      },
+      "detail": {
+        "es": "Es lo que se llama piel propensa a queloides: se hereda, corre en ciertas familias y es más común en tonos de piel oscuros y entre los 10 y los 30 años. El gen exacto responsable todavía no se conoce.",
+        "en": "It is called keloid-prone skin: it runs in families and is more common in darker skin tones and between ages 10 and 30. The exact gene responsible is still unknown."
+      },
+      "source": "Cleveland Clinic — Keloid Scar",
+      "sourceUrl": "https://my.clevelandclinic.org/health/diseases/keloid-scar"
+    },
+    {
+      "id": "unas-manos-mas-rapido-golpes",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Por qué las uñas de tus manos crecen más del doble de rápido que las de tus pies?",
+        "en": "Why do your fingernails grow more than twice as fast as your toenails?"
+      },
+      "answer": {
+        "es": "Porque los pequeños golpes que reciben los dedos de la mano cada día riegan la matriz de la uña con más sangre.",
+        "en": "Because the small daily knocks your fingers take flood the nail matrix with more blood."
+      },
+      "detail": {
+        "es": "Las uñas de las manos crecen 3,47 mm al mes frente a los 1,62 mm de las de los pies. Cada golpecito es un microtrauma que la matriz interpreta como señal para acelerar la producción, algo que a un dedo del pie, mucho más protegido, casi nunca le pasa.",
+        "en": "Fingernails grow 3.47 mm a month versus 1.62 mm for toenails. Each small knock is a micro-trauma the matrix reads as a cue to speed up production, something a well-protected toe almost never experiences."
+      },
+      "source": "Clinical Correlations (NYU Grossman School of Medicine) — Why Do Toenails Grow More Slowly Than Fingernails?",
+      "sourceUrl": "https://www.clinicalcorrelations.org/2014/11/14/why-do-toenails-grow-more-slowly-than-fingernails/"
+    },
+    {
+      "id": "esmalte-sin-celulas-vivas",
+      "category": "cuerpo",
+      "question": {
+        "es": "Si te rompes un hueso, se suelda. Si te rompes el esmalte de un diente, ¿por qué nunca se suelda?",
+        "en": "A broken bone can heal itself. So why can a chipped tooth's enamel never do the same?"
+      },
+      "answer": {
+        "es": "Porque las células que fabrican el esmalte se suicidan en cuanto termina el diente, y sin ellas nadie puede repararlo.",
+        "en": "Because the cells that build enamel kill themselves off the moment the tooth is finished, leaving no one behind to repair it."
+      },
+      "detail": {
+        "es": "Esos fabricantes se llaman ameloblastos, y desaparecen por apoptosis cuando el diente sale a la boca, dejando el esmalte sin una sola célula viva. Por eso es el tejido más mineralizado del cuerpo humano y, a la vez, el único que no puede regenerarse.",
+        "en": "Those builder cells are called ameloblasts, and they die off by apoptosis once the tooth erupts, leaving enamel without a single living cell. That makes it the most mineralized tissue in the human body, and also the one that can never regenerate."
+      },
+      "source": "PMC — Tooth Formation: Are the Hardest Tissues of the Human Body Hard to Regenerate?",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7312198/"
+    },
+    {
+      "id": "dientes-veinte-y-treintaydos",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Por qué de niño te bastan 20 dientes y de adulto necesitas 32?",
+        "en": "Why do 20 teeth cover a child's mouth but an adult's needs 32?"
+      },
+      "answer": {
+        "es": "Porque los 12 que se añaden después son molares nuevos, no reemplazos de ninguno de leche.",
+        "en": "Because the 12 that show up later are brand-new molars, not replacements for any baby tooth."
+      },
+      "detail": {
+        "es": "Los 20 dientes de leche erupcionan entre los 4 meses y los 6 años y se van cambiando uno a uno. Pero la boca adulta suma además tres molares por cuadrante que jamás tuvieron una versión infantil, incluidas las muelas del juicio.",
+        "en": "The 20 baby teeth erupt between 4 months and 6 years of age and get swapped out one by one. But the adult mouth also gains three molars per quadrant that never had a baby-tooth counterpart, wisdom teeth included."
+      },
+      "source": "Cleveland Clinic — Teeth: Anatomy, Types, Function & Care",
+      "sourceUrl": "https://my.clevelandclinic.org/health/body/24655-teeth"
+    },
+    {
+      "id": "canas-celulas-madre-atascadas",
+      "category": "cuerpo",
+      "question": {
+        "es": "El pelo blanco no está vacío por dentro, ¿qué es exactamente lo que le falta?",
+        "en": "White hair hasn't run out of substance. So what, exactly, has it stopped receiving?"
+      },
+      "answer": {
+        "es": "Le falta el pigmento, porque las células que debían fabricarlo se quedaron atascadas antes de llegar a su puesto.",
+        "en": "It lacks pigment, because the cells meant to make it got stuck before ever reaching their post."
+      },
+      "detail": {
+        "es": "Cada vez que un folículo se renueva, algunas células madre del pigmento se quedan atrapadas en un compartimento del folículo y ya no maduran ni viajan a la zona donde deberían regenerar melanocitos. El pelo sigue creciendo con normalidad, solo que ya sin color.",
+        "en": "Every time a follicle renews itself, some pigment stem cells get trapped in a compartment of the follicle and never mature or travel to the zone where they should regenerate melanocytes. The hair keeps growing normally, just without any color."
+      },
+      "source": "NYU Langone News — Study Links 'Stuck' Stem Cells to Hair Turning Gray",
+      "sourceUrl": "https://nyulangone.org/news/study-links-stuck-stem-cells-hair-turning-gray"
+    },
+    {
+      "id": "rigor-mortis-calcio-atp",
+      "category": "cuerpo",
+      "question": {
+        "es": "Tras morir, ¿por qué el cuerpo se pone rígido en vez de simplemente quedarse flácido?",
+        "en": "After death, why does the body turn rigid instead of just staying limp?"
+      },
+      "answer": {
+        "es": "Porque sin energía para soltar el músculo, las fibras se quedan trabadas en la misma contracción para siempre.",
+        "en": "Because with no energy left to release the muscle, the fibers stay locked in whatever contraction they were in."
+      },
+      "detail": {
+        "es": "Al morir, el calcio se filtra dentro de las fibras musculares y engancha la actina con la miosina, lo que produce la contracción. En vida, el ATP separa ese enganche para relajar el músculo, pero sin ATP la unión no se puede romper: el cuerpo se endurece en horas y tarda entre uno y dos días en volver a soltarse.",
+        "en": "After death, calcium leaks into muscle fibers and locks actin onto myosin, producing contraction. In life, ATP breaks that bond to relax the muscle, but without ATP the bond cannot release: the body stiffens within hours and takes one to two days to loosen again."
+      },
+      "source": "NCBI StatPearls — Postmortem Changes",
+      "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK539741/"
+    },
+    {
+      "id": "cartilago-sin-sangre-cicatriza-lento",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Por qué una lesión de cartílago tarda tanto más en curarse que un corte en la piel?",
+        "en": "Why does a cartilage injury take so much longer to heal than a cut on your skin?"
+      },
+      "answer": {
+        "es": "Porque el cartílago no tiene vasos sanguíneos propios, así que le llega el alimento por goteo lento en vez de por reparto directo.",
+        "en": "Because cartilage has no blood vessels of its own, so nutrients reach it by slow seepage instead of direct delivery."
+      },
+      "detail": {
+        "es": "Sin sangre que traiga oxígeno ni células reparadoras al instante, el tejido depende de la difusión desde estructuras vecinas, un proceso mucho más lento. Es la misma razón por la que algunas lesiones de cartílago solo se arreglan con cirugía y no con el simple paso del tiempo.",
+        "en": "With no blood to deliver oxygen or repair cells on the spot, the tissue depends on diffusion from nearby structures, a much slower process. That is also why some cartilage injuries only get fixed with surgery rather than simply healing over time."
+      },
+      "source": "Cleveland Clinic — Cartilage",
+      "sourceUrl": "https://my.clevelandclinic.org/health/body/23173-cartilage"
+    },
+    {
+      "id": "memoria-inmunitaria-mas-rapida",
+      "category": "cuerpo",
+      "question": {
+        "es": "La primera vez que te vacunas tardas dos semanas en tener anticuerpos, ¿por qué el refuerzo los da en días?",
+        "en": "Antibodies take two weeks to show up after your first vaccine, so why does a booster deliver them in days?"
+      },
+      "answer": {
+        "es": "Porque quedan células de memoria de la primera vez y ya no hay que fabricar la defensa desde cero.",
+        "en": "Because memory cells from the first exposure stick around, so the defense no longer needs to be built from scratch."
+      },
+      "detail": {
+        "es": "En la primera infección hacen falta dos semanas para que haya anticuerpos detectables. En una respuesta de memoria, esas mismas cantidades se producen en solo dos a cuatro días, porque las células que mejor funcionaron la vez anterior ya están esperando, listas para multiplicarse.",
+        "en": "During the first infection, it takes two weeks for detectable antibodies to appear. During a memory response, the same amounts show up in just two to four days, because the cells that worked best the first time are already waiting, ready to multiply."
+      },
+      "source": "ASM.org — Understanding Immunological Memory",
+      "sourceUrl": "https://asm.org/articles/2023/may/understanding-immunological-memory"
+    },
+    {
+      "id": "alergia-identifica-mal-inofensivo",
+      "category": "cuerpo",
+      "question": {
+        "es": "El polen no es peligroso, entonces, ¿por qué tu cuerpo te hace estornudar como si lo fuera?",
+        "en": "Pollen isn't dangerous, so why does your body make you sneeze as if it were?"
+      },
+      "answer": {
+        "es": "Porque tu sistema inmune confunde esa proteína inofensiva con un virus o una bacteria y monta la misma defensa que usaría contra ellos.",
+        "en": "Because your immune system mistakes that harmless protein for a virus or bacteria and launches the same defense it would use against one."
+      },
+      "detail": {
+        "es": "Una alergia es, literalmente, un error de identificación: el sistema inmune trata proteínas de polen, comida o pelo de mascota como si fueran un patógeno peligroso. Los síntomas —estornudos, hinchazón, picor— no son daño del alérgeno, sino la propia reacción de defensa disparada por error.",
+        "en": "An allergy is literally a case of mistaken identity: the immune system treats proteins from pollen, food, or pet fur as if they were a dangerous pathogen. The symptoms — sneezing, swelling, itching — aren't damage from the allergen itself, but the defense reaction firing off by mistake."
+      },
+      "source": "Cleveland Clinic — Allergies",
+      "sourceUrl": "https://my.clevelandclinic.org/health/diseases/8610-allergies"
+    },
+    {
+      "id": "tolerancia-oral-intestino-no-ataca",
+      "category": "cuerpo",
+      "question": {
+        "es": "Tu intestino está lleno de bacterias extrañas, ¿por qué tu sistema inmune no las ataca a todas?",
+        "en": "Your gut is packed with foreign bacteria, so why doesn't your immune system attack all of it?"
+      },
+      "answer": {
+        "es": "Porque el sistema inmune del intestino aprende activamente a no responder frente a lo que reconoce como comida o bacterias normales.",
+        "en": "Because the gut's immune system actively learns not to respond to what it recognizes as normal food or bacteria."
+      },
+      "detail": {
+        "es": "Ese aprendizaje se llama tolerancia oral, y no es simple pasividad: son bacterias «buenas» las que entrenan a las células inmunes locales para no dispararse contra los antígenos de la dieta ni contra los propios microbios comensales. Cuando ese entrenamiento falla, aparecen alergias alimentarias.",
+        "en": "That learning is called oral tolerance, and it's not mere passivity: certain 'good' bacteria train local immune cells not to fire against dietary antigens or against the resident microbes themselves. When that training fails, food allergies can appear."
+      },
+      "source": "PMC — Regulation of Oral Immune Tolerance by the Microbiome in Food Allergy",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6800633/"
+    },
+    {
+      "id": "autoinmune-cuerpo-se-ataca",
+      "category": "cuerpo",
+      "question": {
+        "es": "Tu sistema inmune existe para defenderte, ¿puede volverse contra ti mismo?",
+        "en": "Your immune system exists to defend you, so can it turn against you instead?"
+      },
+      "answer": {
+        "es": "Sí: en una enfermedad autoinmune, ese mismo sistema ataca tu propio cuerpo en vez de protegerlo.",
+        "en": "Yes: in an autoimmune disease, that same system attacks your own body instead of protecting it."
+      },
+      "detail": {
+        "es": "El sistema inmune funciona como una vigilancia que detecta virus, bacterias o toxinas y envía glóbulos blancos a eliminarlos. Cuando falla, esa vigilancia confunde tejido propio con una amenaza, y el resultado es la inflamación crónica de enfermedades como el lupus o la artritis reumatoide.",
+        "en": "The immune system normally works like a security patrol, detecting viruses, bacteria, or toxins and sending white blood cells to eliminate them. When it malfunctions, that patrol mistakes the body's own tissue for a threat, producing the chronic inflammation seen in diseases like lupus or rheumatoid arthritis."
+      },
+      "source": "Cleveland Clinic — Autoimmune Diseases",
+      "sourceUrl": "https://my.clevelandclinic.org/health/diseases/21624-autoimmune-diseases"
+    },
+    {
+      "id": "tapon-plaquetario-temporal",
+      "category": "cuerpo",
+      "question": {
+        "es": "Cuando te cortas, la sangre deja de salir casi al momento, ¿pero eso ya es la herida cerrada?",
+        "en": "When you cut yourself, the bleeding stops almost instantly, but is the wound already sealed at that point?"
+      },
+      "answer": {
+        "es": "No: lo primero que se forma es solo un tapón provisional de plaquetas, un parche de emergencia mientras llega el cierre de verdad.",
+        "en": "No: what forms first is only a temporary platelet plug, an emergency patch while the real seal gets built."
+      },
+      "detail": {
+        "es": "Ese tapón de plaquetas frena la hemorragia en segundos, pero es débil y provisional. Solo cuando se activa la cascada de coagulación y se forma una malla de fibrina entrecruzada queda el coágulo definitivo que de verdad cierra la herida.",
+        "en": "That platelet plug slows the bleeding within seconds, but it's weak and provisional. Only once the coagulation cascade kicks in and a cross-linked fibrin mesh forms does the definitive clot that actually seals the wound take shape."
+      },
+      "source": "NCBI StatPearls — Physiology, Hemostasis",
+      "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK545263/"
+    },
+    {
+      "id": "higado-se-regenera-dos-tercios",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Se puede extirpar dos tercios de un órgano y que vuelva a crecer hasta su tamaño de siempre?",
+        "en": "Can you remove two-thirds of an organ and have it grow back to its original size?"
+      },
+      "answer": {
+        "es": "Con el hígado, sí: aunque se quiten dos tercios, el tejido que queda vuelve a crecer hasta el 100% de su tamaño original.",
+        "en": "With the liver, yes: even after two-thirds of it is removed, the remaining tissue grows back to essentially 100 percent of its original size."
+      },
+      "detail": {
+        "es": "Este proceso, llamado hepatectomía parcial en su versión quirúrgica, es lo que permite los trasplantes de donante vivo: la porción donada y la que queda en el donante se regeneran cada una por su lado. Ningún otro órgano sólido del cuerpo tiene una capacidad de recuperación parecida.",
+        "en": "This process, called partial hepatectomy in its surgical form, is exactly what makes living-donor liver transplants possible: both the donated portion and the piece left behind regenerate on their own. No other solid organ in the body has a comparable capacity to bounce back."
+      },
+      "source": "PMC — Cellular and Molecular Basis of Liver Regeneration",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7108750/"
+    },
+    {
+      "id": "nervio-periferico-regenera-central-no",
+      "category": "cuerpo",
+      "question": {
+        "es": "Un nervio del brazo cortado puede volver a crecer, ¿por qué uno de la médula espinal casi nunca lo hace?",
+        "en": "A severed nerve in your arm can grow back, so why does one in your spinal cord almost never do the same?"
+      },
+      "answer": {
+        "es": "Porque los nervios del cuerpo tienen unas células de apoyo que fabrican un camino de regreso, y los del cerebro y la médula no.",
+        "en": "Because nerves in your limbs have support cells that build a path back, and the ones in your brain and spinal cord don't."
+      },
+      "detail": {
+        "es": "Esas células de apoyo, las de Schwann, crean un entorno que favorece el crecimiento del axón, que avanza a un ritmo de entre 1 y 3 milímetros al día. En el sistema nervioso central falta ese andamiaje, así que una lesión ahí casi nunca se repara con regeneración real.",
+        "en": "Those support cells, called Schwann cells, create an environment that favors axon growth, which advances at a rate of about 1 to 3 millimeters a day. The central nervous system lacks that scaffolding, so an injury there almost never heals through true regeneration."
+      },
+      "source": "PMC — Neurobiology of Peripheral Nerve Injury, Regeneration, and Functional Recovery",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3603172/"
+    },
+    {
+      "id": "musculo-palmar-largo-ausente",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Es posible que te falte un músculo entero del brazo y ni siquiera lo hayas notado?",
+        "en": "Is it possible for you to be missing an entire forearm muscle and never have noticed?"
+      },
+      "answer": {
+        "es": "Sí: el palmar largo, un músculo que ya casi no hace falta, falta del todo en cerca del 15% de la población.",
+        "en": "Yes: the palmaris longus, a muscle that's barely needed anymore, is completely absent in around 15 percent of people."
+      },
+      "detail": {
+        "es": "Es un tendón fino visible en la muñeca al apretar el pulgar contra el meñique, herencia de antepasados que lo usaban para trepar o para mover la piel de la palma. Su ausencia no afecta a la fuerza de la mano, porque otros músculos ya hacen su trabajo.",
+        "en": "It's a thin tendon visible on the wrist when you press your thumb against your little finger, a leftover from ancestors who used it for climbing or for moving the skin of the palm. Its absence doesn't affect hand strength, because other muscles already do its job."
+      },
+      "source": "PMC — Palmaris Longus Muscle's Prevalence and Anatomical Variations",
+      "sourceUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4596262/"
+    },
+    {
+      "id": "cuerpo-nunca-perfectamente-simetrico",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Existe alguien con la cara y el cuerpo perfectamente simétricos?",
+        "en": "Does anyone actually have a perfectly symmetrical face and body?"
+      },
+      "answer": {
+        "es": "No: la simetría perfecta prácticamente nunca existe, ni en la cara ni, mucho menos, por dentro.",
+        "en": "No: perfect symmetry practically never exists, not in the face and certainly not on the inside."
+      },
+      "detail": {
+        "es": "Por fuera el cuerpo humano parece bastante simétrico, pero por dentro es marcadamente asimétrico: el tamaño, la forma y la posición de los órganos internos difieren de un lado a otro. Las pequeñas diferencias entre las dos mitades de tu cara son variación normal, no un defecto.",
+        "en": "On the outside the human body looks fairly symmetrical, but internally it's markedly asymmetric: the size, shape, and position of internal organs differ from one side to the other. The small differences between the two halves of your face are normal variation, not a flaw."
+      },
+      "source": "PMC — Measuring Asymmetry from High-Density 3D Surface Scans",
+      "sourceUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6306226/"
+    },
+    {
+      "id": "respirar-limite-es-el-co2",
+      "category": "cuerpo",
+      "question": {
+        "es": "Cuando aguantas la respiración bajo el agua, ¿lo que te obliga a salir es que te falte oxígeno?",
+        "en": "When you hold your breath underwater, is it the lack of oxygen that finally forces you up?"
+      },
+      "answer": {
+        "es": "No: es la acumulación de dióxido de carbono en la sangre, no la falta de oxígeno, la que dispara el impulso de respirar.",
+        "en": "No: it's the buildup of carbon dioxide in your blood, not a lack of oxygen, that triggers the urge to breathe."
+      },
+      "detail": {
+        "es": "Ese detalle es peligroso en apnea: alguien puede seguir teniendo suficiente oxígeno cuando todavía no siente ninguna urgencia por respirar, y desmayarse antes de notar la alarma. Por eso los buceadores en apnea se desmayan con cierta frecuencia sin previo aviso.",
+        "en": "That detail is dangerous in freediving: someone can still have enough oxygen while feeling no urgency to breathe yet, and pass out before ever sensing the alarm. That's why freedivers black out fairly often with no warning."
+      },
+      "source": "University of Pennsylvania — Evolutionary Psychology Blog",
+      "sourceUrl": "https://web.sas.upenn.edu/kurzbanepblog/2011/02/07/why-cant-you-hold-your-breath-until-youre-dead/"
+    },
+    {
+      "id": "golpe-calor-cuarenta-grados",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿A partir de qué temperatura interna deja el cuerpo de poder regularse a sí mismo por calor?",
+        "en": "At what internal temperature does the body stop being able to regulate itself from heat?"
+      },
+      "answer": {
+        "es": "Un golpe de calor se define por encima de los 40 grados centígrados, y a partir de ahí el propio cerebro empieza a fallar.",
+        "en": "Heat stroke is defined above 40 degrees Celsius, and from that point the brain itself starts to malfunction."
+      },
+      "detail": {
+        "es": "No es solo un termómetro alto: por encima de esa línea aparece disfunción del sistema nervioso central, y sin enfriamiento rápido el cuadro avanza hacia el fallo de varios órganos a la vez. Lo que más decide el desenlace no es solo cuánto sube la temperatura, sino cuánto tiempo se mantiene ahí.",
+        "en": "It's not just a high thermometer reading: above that line, central nervous system dysfunction sets in, and without rapid cooling the condition can progress to failure of multiple organs at once. What most decides the outcome isn't only how high the temperature climbs, but how long it stays elevated."
+      },
+      "source": "Cleveland Clinic — Heat Stroke",
+      "sourceUrl": "https://my.clevelandclinic.org/health/diseases/21812-heatstroke"
+    },
+    {
+      "id": "hipotermia-deja-de-tiritar",
+      "category": "cuerpo",
+      "question": {
+        "es": "Si tienes mucho frío, tiritas. Entonces, ¿por qué en el frío más peligroso de todos deja de pasarte?",
+        "en": "When you're very cold, you shiver. So why does that stop happening in the most dangerous cold of all?"
+      },
+      "answer": {
+        "es": "Porque por debajo de los 28 grados de temperatura corporal el cuerpo ya no tiene energía ni para seguir tiritando.",
+        "en": "Because below 28 degrees Celsius of body temperature, the body no longer has the energy left to keep shivering."
+      },
+      "detail": {
+        "es": "Tiritar es en realidad una defensa activa que genera calor quemando energía; cuando la hipotermia se vuelve grave, esa defensa se apaga y el temblor cesa justo cuando más falta hace. Es la señal de que el corazón y el cerebro están empezando a fallar, no de que el frío haya pasado.",
+        "en": "Shivering is actually an active defense that generates heat by burning energy; once hypothermia turns severe, that defense shuts off and the shivering stops exactly when it's needed most. It's a sign the heart and brain are starting to fail, not that the cold has passed."
+      },
+      "source": "Cleveland Clinic — Hypothermia",
+      "sourceUrl": "https://my.clevelandclinic.org/health/diseases/21164-hypothermia-low-body-temperature"
+    },
+    {
+      "id": "inanicion-limite-semanas",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Qué falla primero en un cuerpo que deja de comer: la energía o algo menos obvio?",
+        "en": "In a body that stops eating, what fails first: the energy, or something less obvious?"
+      },
+      "answer": {
+        "es": "No es la falta de calorías: la fragilidad aparece entre los 30 y los 50 días, y depende de la grasa de la que se partía.",
+        "en": "Not the missing calories: frailty sets in between days 30 and 50, and it depends on the fat reserve you started from."
+      },
+      "detail": {
+        "es": "El cuerpo cambia de combustible y tira de grasa, así que lo que marca el límite no es el porcentaje de peso perdido sino la reserva inicial. En los pocos casos históricos registrados de ayuno absoluto, el deterioro grave llegaba entre los 30 y los 50 días.",
+        "en": "The body switches fuel and runs on fat, so the limit is set by the reserve you began with rather than by the percentage of weight lost. In the few recorded historical cases of total fasting, serious decline arrived between days 30 and 50."
+      },
+      "source": "PMC — Complete and Voluntary Starvation of 50 Days",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4982520/"
+    },
+    {
+      "id": "alopecia-cicatricial-sin-retorno",
+      "category": "cuerpo",
+      "question": {
+        "es": "En casi toda calvicie el pelo puede volver a salir. ¿Hay algún tipo en el que ya no vuelva nunca?",
+        "en": "In most hair loss, hair can eventually grow back. Is there a kind where it truly never can?"
+      },
+      "answer": {
+        "es": "Sí, cuando la inflamación destruye el folículo y en su lugar crece tejido cicatricial: ahí no hay marcha atrás.",
+        "en": "Yes, when inflammation destroys the follicle and scar tissue grows in its place instead: there's no going back from that."
+      },
+      "detail": {
+        "es": "Se llama alopecia cicatricial, y ataca la parte del folículo desde la que normalmente se regenera el pelo. Una vez que la fibrosis ocupa ese espacio, el pelo ya no puede volver a crecer ahí, por lo que la única estrategia que funciona es frenar la inflamación antes de que llegue tan lejos.",
+        "en": "It's called scarring alopecia, and it attacks the part of the follicle from which hair normally regenerates. Once fibrosis takes over that space, hair can no longer grow there, which is why the only strategy that works is stopping the inflammation before it gets that far."
+      },
+      "source": "Cleveland Clinic — Scarring (Cicatricial) Alopecia",
+      "sourceUrl": "https://my.clevelandclinic.org/health/diseases/24582-scarring-alopecia"
+    },
+    {
+      "id": "situs-inversus-organos-espejo",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Puede alguien tener el corazón, el hígado y el resto de órganos colocados en el lado contrario al habitual?",
+        "en": "Can someone have their heart, liver, and other organs placed on the opposite side from usual?"
+      },
+      "answer": {
+        "es": "Sí: se llama situs inversus, pasa en 1 de cada 10.000 personas, y el pecho y el abdomen están dispuestos como en un espejo.",
+        "en": "Yes: it is called situs inversus, it affects about 1 in every 10,000 people, and the chest and abdomen are mirrored."
+      },
+      "detail": {
+        "es": "Casi siempre no hay ningún síntoma, porque la estructura y la función de los órganos siguen siendo normales, solo que del lado opuesto. El riesgo real aparece si además hay un defecto cardíaco asociado, algo que ocurre en una minoría de los casos.",
+        "en": "There is almost always no symptom at all, because the structure and function of the organs remain normal, just on the opposite side. The real risk shows up only if there's an associated heart defect, which happens in a minority of cases."
+      },
+      "source": "Cleveland Clinic — Situs Inversus",
+      "sourceUrl": "https://my.clevelandclinic.org/health/diseases/23486-situs-inversus"
+    },
+    {
+      "id": "menisco-zonas-sin-sangre",
+      "category": "cuerpo",
+      "question": {
+        "es": "Dos roturas de menisco en la misma rodilla, ¿por qué una cicatriza sola y la otra necesita cirugía?",
+        "en": "Two meniscus tears in the same knee, so why does one heal on its own while the other needs surgery?"
+      },
+      "answer": {
+        "es": "Porque el menisco no recibe sangre por igual: solo su borde exterior está bien irrigado, y el centro casi no tiene nada.",
+        "en": "Because the meniscus doesn't get blood evenly: only its outer edge is well supplied, and the center barely gets any."
+      },
+      "detail": {
+        "es": "El disco se divide en zonas según su riego: la exterior, bien vascularizada; una intermedia, con riego limitado; y la interior, prácticamente sin vasos ni nervios. Una rotura en esa zona interior se cura mucho peor, precisamente porque le falta lo que trae las células reparadoras.",
+        "en": "The disc is divided into zones by blood supply: an outer one that's well vascularized, a middle one with limited supply, and an inner one with almost no blood vessels or nerves at all. A tear in that inner zone heals far worse, precisely because it lacks what would deliver the repair cells."
+      },
+      "source": "PMC — The Meniscus: Basic Science and Therapeutic Approaches",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11942698/"
+    },
+    {
+      "id": "estatura-varia-durante-el-dia",
+      "category": "cuerpo",
+      "question": {
+        "es": "¿Puedes medir un poco menos por la tarde que por la mañana, sin haber encogido de verdad?",
+        "en": "Can you measure slightly shorter in the evening than in the morning, without actually having shrunk?"
+      },
+      "answer": {
+        "es": "Sí: los discos de la columna pierden agua al soportar tu peso todo el día, y eso te resta unos milímetros de estatura.",
+        "en": "Yes: the discs in your spine lose water while carrying your weight all day, which shaves a few millimeters off your height."
+      },
+      "detail": {
+        "es": "Un estudio midió una disminución media de 3,8 milímetros de longitud lumbar tras un día de actividad normal, consistente con estudios anteriores que hablaban de una pérdida de agua discal de entre el 5% y el 10%. Por la noche, sin peso encima, el disco vuelve a absorber líquido y recuperas esos milímetros mientras duermes.",
+        "en": "One study measured an average decrease of 3.8 millimeters in lumbar length after a day of normal activity, consistent with earlier studies reporting a 5 to 10 percent loss of disc water content. At night, freed from your body weight, the disc reabsorbs fluid and you regain those millimeters while you sleep."
+      },
+      "source": "PMC — Segmental Quantitative MR Imaging Analysis of Diurnal Variation of Water Content in the Lumbar Intervertebral Discs",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4296262/"
     }
   ]
 }

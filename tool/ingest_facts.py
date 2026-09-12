@@ -178,6 +178,88 @@ def check_entry(fact, where: str, known_ids: set[str]) -> list[str]:
 FIGURE_FLOOR = 20
 
 
+# Numbers written as words, because academic prose does that constantly: the
+# paper behind the cave-experiment entry says "forty-two 'physiological days'
+# compared to fifty-eight day-night cycles", and a digits-only check calls a
+# perfectly cited entry a fabrication.
+_WORD_VALUES: dict[str, int] = {
+    # English units and teens
+    "one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6,
+    "seven": 7, "eight": 8, "nine": 9, "ten": 10, "eleven": 11, "twelve": 12,
+    "thirteen": 13, "fourteen": 14, "fifteen": 15, "sixteen": 16,
+    "seventeen": 17, "eighteen": 18, "nineteen": 19,
+    # English tens
+    "twenty": 20, "thirty": 30, "forty": 40, "fifty": 50, "sixty": 60,
+    "seventy": 70, "eighty": 80, "ninety": 90,
+    # Spanish units and teens
+    "uno": 1, "dos": 2, "tres": 3, "cuatro": 4, "cinco": 5, "seis": 6,
+    "siete": 7, "ocho": 8, "nueve": 9, "diez": 10, "once": 11, "doce": 12,
+    "trece": 13, "catorce": 14, "quince": 15, "dieciseis": 16,
+    "diecisiete": 17, "dieciocho": 18, "diecinueve": 19,
+    # Spanish tens and the welded twenties
+    "veinte": 20, "veintiuno": 21, "veintidos": 22, "veintitres": 23,
+    "veinticuatro": 24, "veinticinco": 25, "veintiseis": 26,
+    "veintisiete": 27, "veintiocho": 28, "veintinueve": 29,
+    "treinta": 30, "cuarenta": 40, "cincuenta": 50, "sesenta": 60,
+    "setenta": 70, "ochenta": 80, "noventa": 90,
+    "cien": 100, "mil": 1000,
+}
+
+_WORD_MULTIPLIERS: dict[str, int] = {
+    "hundred": 100, "ciento": 100,
+    "thousand": 1000,
+    "million": 10**6, "millon": 10**6, "millones": 10**6,
+    "billion": 10**9, "billones": 10**12, "trillones": 10**18,
+}
+
+# Joins inside a single number: "sixty-three", "cuarenta y dos", "one hundred and
+# five". Anything else ends the number being read.
+_WORD_GLUE = {"y", "and"}
+
+
+def _strip_accents(text: str) -> str:
+    return (
+        text.replace("á", "a").replace("é", "e").replace("í", "i")
+        .replace("ó", "o").replace("ú", "u").replace("ü", "u")
+    )
+
+
+def _spelled_figures_in(text: str) -> set[float]:
+    """Numbers written as words, in English or Spanish."""
+    tokens = re.findall(r"[a-z]+", _strip_accents(text.lower()))
+    found: set[float] = set()
+    current = 0
+    seen_word = False
+
+    def flush() -> None:
+        nonlocal current, seen_word
+        if seen_word and current >= FIGURE_FLOOR:
+            found.add(float(current))
+        current = 0
+        seen_word = False
+
+    for token in tokens:
+        if token in _WORD_VALUES:
+            current += _WORD_VALUES[token]
+            seen_word = True
+        elif token in _WORD_MULTIPLIERS:
+            # A multiplier with nothing counted in front of it is a vague
+            # quantity, not a figure: "cientos de millones" and "hundreds of
+            # millions" promise no number, and reading them as exactly one
+            # million turns honest prose into an uncited statistic.
+            if current == 0:
+                flush()
+                continue
+            current *= _WORD_MULTIPLIERS[token]
+            seen_word = True
+        elif token in _WORD_GLUE and seen_word:
+            continue
+        else:
+            flush()
+    flush()
+    return found
+
+
 def _figures_in(text: str) -> set[float]:
     """Every number in `text`, under both locale readings of its separators.
 
@@ -203,7 +285,7 @@ def _figures_in(text: str) -> set[float]:
                 continue
             if value >= FIGURE_FLOOR:
                 found.add(value)
-    return found
+    return found | _spelled_figures_in(text)
 
 
 def check_figures(fact, where: str) -> list[str]:
@@ -305,31 +387,68 @@ def check_link(url: str) -> tuple[str, str | None]:
         return url, f"unreachable: {type(exc).__name__}"
 
 
-def interleave(existing: list[dict], new: list[dict]) -> list[dict]:
-    """Appends `new` to `existing`, keeping the category rotation going.
+# Cards at the start of the file that no merge may disturb. The opening is the
+# only editorial control there is over which question a new user meets first
+# (§3.2), and it was chosen by hand.
+CURATED_HEAD = 12
 
-    Always takes from whichever category has the most cards left, never the one
-    just placed. A fixed round-robin looks right until the smallest category runs
-    dry, and then every remaining card of the biggest one lands in a single block
-    at the end — with these batch sizes that was a run of fourteen. Draining the
-    largest bucket first keeps them finishing together, so the longest run stays
-    at the two the hand-written catalogue already has.
+
+def interleave(existing: list[dict], new: list[dict]) -> list[dict]:
+    """Threads `new` through `existing`, never letting a category run build up.
+
+    Appending was the obvious thing and it is wrong. It survived the first merge
+    only because that batch held all four categories in similar numbers; a batch
+    of one category lands as a single block, and seventy-nine body cards in a row
+    read as an app that got stuck — exactly what §3.2 forbids.
+
+    So the new cards are spread across the whole file instead. Each one is placed
+    where neither neighbour shares its category, at roughly even spacing, and a
+    card that finds no room waits for the next gap rather than being forced in.
+    The existing order is otherwise untouched, and the curated opening is left
+    completely alone.
     """
+    if not new:
+        return list(existing)
+
     buckets: dict[str, list[dict]] = defaultdict(list)
     for fact in new:
         buckets[fact["category"]].append(fact)
 
-    merged = list(existing)
-    previous = existing[-1]["category"] if existing else None
+    head, tail = existing[:CURATED_HEAD], existing[CURATED_HEAD:]
+    merged = list(head)
+    # One insertion every `stride` existing cards spreads the batch evenly. The
+    # floor of 1 matters when the batch is larger than the file it joins.
+    stride = max(1, len(tail) // (len(new) + 1))
+    remaining = len(new)
 
-    while any(buckets.values()):
-        options = [c for c in ROTATION if buckets[c] and c != previous]
-        # Only the just-placed category still has cards: unavoidable from here on.
+    for position, fact in enumerate(tail):
+        merged.append(fact)
+        if not remaining or (position + 1) % stride:
+            continue
+
+        previous = merged[-1]["category"]
+        following = tail[position + 1]["category"] if position + 1 < len(tail) else None
+        # Biggest bucket first, so no category is left over to clump at the end.
+        options = [
+            category
+            for category in sorted(buckets, key=lambda c: -len(buckets[c]))
+            if buckets[category]
+            and category != previous
+            and category != following
+        ]
         if not options:
-            options = [c for c in ROTATION if buckets[c]]
-        category = max(options, key=lambda c: len(buckets[c]))
-        merged.append(buckets[category].pop(0))
-        previous = category
+            continue
+        merged.append(buckets[options[0]].pop(0))
+        remaining -= 1
+
+    # Whatever never found a gap goes on the end, still avoiding a run.
+    leftovers = [fact for bucket in buckets.values() for fact in bucket]
+    previous = merged[-1]["category"]
+    while leftovers:
+        nxt = next((f for f in leftovers if f["category"] != previous), leftovers[0])
+        leftovers.remove(nxt)
+        merged.append(nxt)
+        previous = nxt["category"]
 
     return merged
 
