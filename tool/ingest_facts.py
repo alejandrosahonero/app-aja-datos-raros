@@ -178,20 +178,31 @@ def check_entry(fact, where: str, known_ids: set[str]) -> list[str]:
 FIGURE_FLOOR = 20
 
 
-def _figures_in(text: str) -> set[str]:
-    """Digit groups worth citing, normalised so 1.500 and 1,500 compare equal."""
-    found: set[str] = set()
+def _figures_in(text: str) -> set[float]:
+    """Every number in `text`, under both locale readings of its separators.
+
+    "10,000" is ten thousand to an English page and ten to a Spanish one, and
+    "99,965" is a legitimate decimal in Spanish and a legitimate thousands group
+    in English. Nothing in the string itself settles which, so both readings are
+    returned and a figure counts as cited when *any* reading matches. Being
+    generous here is the right trade: this check exists to catch numbers the
+    citation never mentions, not to police formatting.
+    """
+    found: set[float] = set()
     for raw in re.findall(r"\d[\d.,]*", text):
         digits = raw.rstrip(".,")
-        # Drop the thousands separators, keep a decimal comma as a dot so
-        # "99,965" and "99.965" are the same number to this check.
-        plain = digits.replace(".", "").replace(",", ".")
-        try:
-            value = float(plain)
-        except ValueError:
-            continue
-        if value >= FIGURE_FLOOR:
-            found.add(plain.rstrip("0").rstrip(".") if "." in plain else plain)
+        readings = {
+            digits.replace(",", "").replace(".", ""),  # separators are thousands
+            digits.replace(".", "").replace(",", "."),  # comma is the decimal mark
+            digits.replace(",", ""),  # dot is the decimal mark
+        }
+        for reading in readings:
+            try:
+                value = float(reading)
+            except ValueError:
+                continue
+            if value >= FIGURE_FLOOR:
+                found.add(value)
     return found
 
 
@@ -214,8 +225,9 @@ def check_figures(fact, where: str) -> list[str]:
         for lang, text in value.items():
             missing = _figures_in(str(text)) - evidence
             if missing:
+                shown = sorted(f"{v:g}" for v in missing)
                 problems.append(
-                    f"{where}: {key}.{lang} states {sorted(missing)}, which the "
+                    f"{where}: {key}.{lang} states {shown}, which the "
                     f"_evidence quote does not contain — quote the sentence that "
                     f"carries the figure, or drop the figure"
                 )

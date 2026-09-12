@@ -1,0 +1,553 @@
+[
+  {
+    "id": "higado-dos-tercios",
+    "category": "cuerpo",
+    "question": {
+      "es": "Si te quitaran dos tercios del hígado, ¿qué le pasaría al trozo que queda?",
+      "en": "If two-thirds of your liver were removed, what would happen to what's left?"
+    },
+    "answer": {
+      "es": "Vuelve a crecer hasta recuperar el tamaño original entero.",
+      "en": "It grows back until it reaches the original full size again."
+    },
+    "detail": {
+      "es": "Es la única víscera humana capaz de esto: tras extirpar dos tercios en una operación, las células que quedan se multiplican y restauran la masa perdida en pocas semanas. Es la base de los trasplantes de donante vivo, donde a ambas partes les vuelve a crecer un hígado completo.",
+      "en": "It's the only human organ capable of this: after two-thirds is removed in surgery, the remaining cells multiply and restore the lost mass within weeks. It's the basis of living-donor transplants, where both the donor and recipient end up with a full liver again."
+    },
+    "source": "PMC — Cellular and Molecular Basis of Liver Regeneration",
+    "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7108750/",
+    "_evidence": "within a short period after partial hepatectomy (PHx), which typically involves surgical removal of two-thirds of the liver, the tissue grows back essentially to 100% of its original size"
+  },
+  {
+    "id": "rinones-media-taza",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Cuánta sangre pasan tus riñones por su filtro en un solo minuto?",
+      "en": "How much blood do your kidneys filter in a single minute?"
+    },
+    "answer": {
+      "es": "Alrededor de media taza, sin descanso, minuto tras minuto durante toda tu vida.",
+      "en": "About half a cup, without a break, minute after minute for your entire life."
+    },
+    "detail": {
+      "es": "Ese ritmo constante es lo que permite retirar los desechos de la sangre antes de que se acumulen. Los riñones no tienen turno de descanso: si se paran unos minutos, las toxinas empiezan a subir de inmediato.",
+      "en": "That constant pace is what keeps waste from building up in the blood. Kidneys don't get a shift off: if they stop for a few minutes, toxins start rising right away."
+    },
+    "source": "NIDDK — Your Kidneys & How They Work",
+    "sourceUrl": "https://www.niddk.nih.gov/health-information/kidney-disease/kidneys-how-they-work",
+    "_evidence": "about a half cup of blood every minute"
+  },
+  {
+    "id": "globulos-rojos-120-dias",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Cuánto tiempo vive un glóbulo rojo antes de que tu cuerpo lo destruya?",
+      "en": "How long does a red blood cell live before your body destroys it?"
+    },
+    "answer": {
+      "es": "Unos 120 días, y luego el bazo y el hígado se encargan de eliminarlo.",
+      "en": "About 120 days, and then the spleen and liver take care of eliminating it."
+    },
+    "detail": {
+      "es": "Células especializadas llamadas macrófagos reconocen a los glóbulos rojos ya envejecidos al pasar por esos dos órganos y los engullen. El hierro que liberan no se desperdicia: vuelve a la médula ósea para fabricar glóbulos rojos nuevos.",
+      "en": "Specialized cells called macrophages recognize aged red blood cells as they pass through those two organs and engulf them. The iron they release isn't wasted: it goes back to the bone marrow to make new red blood cells."
+    },
+    "source": "PMC — How do red blood cells know when to die?",
+    "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5414242/",
+    "_evidence": "Human red blood cells (RBCs) are normally phagocytized by macrophages of splenic and hepatic sinusoids at 120 days of age."
+  },
+  {
+    "id": "pulmones-nunca-vacios",
+    "category": "cuerpo",
+    "question": {
+      "es": "Aunque expulses todo el aire que puedas de un soplido, ¿se quedan tus pulmones vacíos?",
+      "en": "Even if you blow out all the air you can, do your lungs end up empty?"
+    },
+    "answer": {
+      "es": "No, siempre queda alrededor de un litro atrapado dentro y no hay forma de sacarlo.",
+      "en": "No, about a liter always stays trapped inside, and there's no way to force it out."
+    },
+    "detail": {
+      "es": "Ese resto se llama volumen residual y no es un fallo: mantiene los diminutos sacos de aire de los pulmones ligeramente inflados entre respiración y respiración. Si se vaciaran del todo, se pegarían entre sí y volver a inflarlos costaría un esfuerzo enorme.",
+      "en": "That leftover air is called residual volume, and it's not a malfunction: it keeps the lungs' tiny air sacs slightly inflated between breaths. If they emptied completely, they'd stick together, and reinflating them would take enormous effort."
+    },
+    "source": "StatPearls (NCBI) — Physiology, Residual Volume",
+    "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK493170/",
+    "_evidence": "Reference values for residual volume are 1 to 1.2 L"
+  },
+  {
+    "id": "grasa-parda-recien-nacidos",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Por qué un bebé recién nacido tiene un tipo de grasa que un adulto casi no tiene?",
+      "en": "Why does a newborn baby have a type of fat that an adult barely has?"
+    },
+    "answer": {
+      "es": "Porque esa grasa, la parda, genera calor quemándose directamente, sin necesidad de tiritar.",
+      "en": "Because that fat, brown fat, generates heat by burning directly, with no need to shiver."
+    },
+    "detail": {
+      "es": "En los recién nacidos supone entre el 2 % y el 5 % de todo su peso corporal, porque aún no saben tiritar para entrar en calor. Los adultos conservan pequeños depósitos alrededor del cuello y el pecho, que se activan solo con el frío.",
+      "en": "In newborns it makes up between 2% and 5% of their entire body weight, because they can't yet shiver to warm themselves up. Adults keep small deposits around the neck and chest, which switch on only in the cold."
+    },
+    "source": "Cleveland Clinic — Brown Fat",
+    "sourceUrl": "https://my.clevelandclinic.org/health/body/24015-brown-fat",
+    "_evidence": "In newborns, brown fat makes up 2% to 5% of their total body weight."
+  },
+  {
+    "id": "cerebro-veinte-por-ciento",
+    "category": "cuerpo",
+    "question": {
+      "es": "Sin mover un dedo, solo por existir, ¿qué parte de tu energía diaria gasta tu cerebro?",
+      "en": "Without moving a finger, just by existing, how much of your daily energy does your brain use?"
+    },
+    "answer": {
+      "es": "En reposo, alrededor de una quinta parte de toda la energía de tu cuerpo.",
+      "en": "At rest, about a fifth of your body's entire energy budget."
+    },
+    "detail": {
+      "es": "Un órgano que pesa poco más de kilo y medio se lleva ese porcentaje solo para mantener encendidas sus neuronas y mover señales eléctricas entre ellas. En niños pequeños esa proporción es todavía mayor, porque el cerebro sigue construyéndose.",
+      "en": "An organ that weighs a little over three pounds takes up that share just to keep its neurons running and moving electrical signals between them. In young children the proportion is even higher, because the brain is still under construction."
+    },
+    "source": "BrainFacts.org — How Much Energy Does the Brain Use?",
+    "sourceUrl": "https://www.brainfacts.org/brain-anatomy-and-function/anatomy/2019/how-much-energy-does-the-brain-use-020119",
+    "_evidence": "For the average adult in a resting state, the brain consumes about 20 percent of the body's energy."
+  },
+  {
+    "id": "medula-osea-fabrica-sangre",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Dónde se fabrica de verdad tu sangre, y no es donde corre?",
+      "en": "Where is your blood actually manufactured, and it isn't where it flows?"
+    },
+    "answer": {
+      "es": "Dentro de tus huesos, en la médula, que produce miles de millones de células nuevas cada día.",
+      "en": "Inside your bones, in the marrow, which produces billions of new cells every day."
+    },
+    "detail": {
+      "es": "Esa fábrica funciona sin parar durante toda la vida, reponiendo glóbulos rojos, blancos y plaquetas al mismo ritmo en que se van gastando. Está protegida dentro del hueso, uno de los rincones más resguardados del cuerpo, lejos de cualquier golpe externo.",
+      "en": "That factory runs nonstop for a lifetime, replacing red cells, white cells and platelets at the same rate they wear out. It sits protected inside bone, one of the most shielded corners of the body, safe from outside knocks."
+    },
+    "source": "Cleveland Clinic — Bone Marrow",
+    "sourceUrl": "https://my.clevelandclinic.org/health/body/22818-bone-marrow",
+    "_evidence": "It's responsible for creating billions of red blood cells daily, along with white blood cells and platelets."
+  },
+  {
+    "id": "esqueleto-siete-anos",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Sigues teniendo el mismo esqueleto que tenías hace diez años?",
+      "en": "Do you still have the same skeleton you had ten years ago?"
+    },
+    "answer": {
+      "es": "No del todo: tus huesos se renuevan por completo cada siete años más o menos.",
+      "en": "Not quite: your bones fully renew themselves about every seven years."
+    },
+    "detail": {
+      "es": "Unas células destruyen hueso viejo mientras otras construyen hueso nuevo en su lugar, un proceso constante llamado remodelación ósea. Va tan rápido que, pieza a pieza, el esqueleto entero termina siendo distinto del que tenías antes.",
+      "en": "Some cells break down old bone while others build new bone in its place, a constant process called bone remodeling. It moves fast enough that, piece by piece, the entire skeleton ends up being different from the one you had before."
+    },
+    "source": "Cleveland Clinic — 15 Facts About Your Bones and Skeletal System",
+    "sourceUrl": "https://health.clevelandclinic.org/facts-about-the-skeletal-system",
+    "_evidence": "Bones repair themselves so quickly that you have a new skeleton about every seven years."
+  },
+  {
+    "id": "adn-bebe-cerebro-materno",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Puede quedarse ADN de tu hijo dentro de tu propio cerebro para siempre?",
+      "en": "Can your child's DNA stay inside your own brain forever?"
+    },
+    "answer": {
+      "es": "Puede: células del feto cruzan a la madre durante el embarazo y algunas se instalan en su cerebro y se quedan décadas.",
+      "en": "It can: fetal cells cross into the mother during pregnancy, and some settle into her brain and stay there for decades."
+    },
+    "detail": {
+      "es": "En un estudio, más de sesenta de cada cien cerebros femeninos examinados llevaban ADN masculino de un embarazo pasado. Las mujeres con menos de ese ADN infantil en el cerebro tenían más probabilidad de haber sufrido alzhéimer, así que puede que ese rastro ajeno esté ayudando a protegerlas.",
+      "en": "In one study, more than sixty out of every hundred female brains examined carried male DNA left over from a past pregnancy. Women with less of that child-derived DNA in their brains were more likely to have had Alzheimer's, so that borrowed trace may be helping protect them."
+    },
+    "source": "PMC — Male Microchimerism in the Human Female Brain",
+    "sourceUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3458919/",
+    "_evidence": "63% of the females (37 of 59) tested harbored male microchimerism in the brain."
+  },
+  {
+    "id": "bebe-nace-cerebro-medias",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Por qué naces con el cerebro todavía a medio terminar, y no ya completo?",
+      "en": "Why are you born with your brain still half-finished, instead of already complete?"
+    },
+    "answer": {
+      "es": "Porque un cerebro de tamaño adulto no cabría por el canal del parto, así que sales con menos del 30 % de ese tamaño.",
+      "en": "Because an adult-sized brain wouldn't fit through the birth canal, so you come out at less than 30% of that size."
+    },
+    "detail": {
+      "es": "Nace con el cerebro a menos del 30 % del tamaño adulto, porque más no cabría por el canal del parto. El precio es toda esa indefensión inicial; el premio es que gran parte de la construcción ocurre ya fuera, moldeada por lo que el bebé ve y oye.",
+      "en": "It is born with its brain at less than 30 percent of adult size, because more would not fit through the birth canal. The price is all that early helplessness; the prize is that most of the building happens outside, shaped by what the baby sees and hears."
+    },
+    "source": "Scientific American — Why Humans Give Birth to Helpless Babies",
+    "sourceUrl": "https://www.scientificamerican.com/blog/observations/why-humans-give-birth-to-helpless-babies/",
+    "_evidence": "Human babies are thus born when their brains are less than 30 percent of adult brain size so that they can fit through the narrow passageway."
+  },
+  {
+    "id": "ghrelina-hormona-del-hambre",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Quién manda de verdad la señal de «tengo hambre», el estómago o el cerebro?",
+      "en": "Who actually sends the \"I'm hungry\" signal, your stomach or your brain?"
+    },
+    "answer": {
+      "es": "Empieza en el estómago: cuando está vacío libera una hormona que avisa al cerebro de que toca comer.",
+      "en": "It starts in the stomach: when it's empty it releases a hormone that tells the brain it's time to eat."
+    },
+    "detail": {
+      "es": "Esa hormona se llama grelina y en cuanto empiezas a comer sus niveles caen otra vez. Es una vía de una sola dirección: el estómago decide cuándo avisar, y el cerebro solo recibe el mensaje.",
+      "en": "That hormone is called ghrelin, and as soon as you start eating its levels drop again. It's a one-way channel: the stomach decides when to send the alert, and the brain only receives the message."
+    },
+    "source": "Cleveland Clinic — Ghrelin",
+    "sourceUrl": "https://my.clevelandclinic.org/health/body/22804-ghrelin",
+    "_evidence": "Ghrelin levels increase when your stomach is empty. Your body releases it to let your brain (specifically, your hypothalamus) know when it's time to eat."
+  },
+  {
+    "id": "cortisol-antes-alarma",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Por qué te cuesta menos espabilarte media hora después de despertar que en el primer minuto?",
+      "en": "Why is it easier to feel awake half an hour after waking up than in the first minute?"
+    },
+    "answer": {
+      "es": "Porque tu nivel de cortisol no está más alto al despertar: llega a su pico entre 30 y 60 minutos después.",
+      "en": "Because cortisol isn't at its highest the moment you wake up: it peaks somewhere between 30 and 60 minutes later."
+    },
+    "detail": {
+      "es": "Ese repunte se llama respuesta de cortisol al despertar y es distinta del ritmo circadiano de fondo que ya venía subiendo desde antes del amanecer. Es la hormona que te empuja a ponerte en marcha, y tarda su rato en llegar al máximo aunque ya estés de pie.",
+      "en": "That spike is called the cortisol awakening response, and it's separate from the underlying circadian rhythm that was already rising before dawn. It's the hormone that pushes you into gear, and it takes a while to peak even once you're already up."
+    },
+    "source": "PMC — The circadian system modulates the cortisol awakening response in humans",
+    "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9669756/",
+    "_evidence": "circulating cortisol usually peaks 30–60 min after awakening from nocturnal sleep"
+  },
+  {
+    "id": "leche-solo-de-bebe",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Por qué tantos adultos pierden poco a poco la capacidad de digerir bien la leche?",
+      "en": "Why do so many adults gradually lose the ability to properly digest milk?"
+    },
+    "answer": {
+      "es": "Porque la enzima que la digiere está pensada para la infancia y, en la mayoría de la especie, se apaga después.",
+      "en": "Because the enzyme that digests it is built for infancy and, in most of the species, switches off afterward."
+    },
+    "detail": {
+      "es": "Esa enzima, la lactasa, baja su actividad tras el destete en la mayor parte de la población mundial, aunque el grado varía mucho según el origen. Solo algunos grupos, sobre todo del norte de Europa, conservaron por herencia genética la capacidad de seguir digiriendo leche toda la vida.",
+      "en": "That enzyme, lactase, drops in activity after weaning in most of the world's population, though the degree varies a lot by ancestry. Only some groups, especially from northern Europe, kept the genetic ability to keep digesting milk for life."
+    },
+    "source": "PMC — Lactose malabsorption and intolerance",
+    "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4040760/",
+    "_evidence": "In a majority of humans, the enzyme lactase at the jejunal brush border is reduced in activity after weaning."
+  },
+  {
+    "id": "grupo-o-contra-malaria",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Puede el grupo sanguíneo que heredaste protegerte de una enfermedad que ni conoces?",
+      "en": "Could the blood type you inherited protect you from a disease you've never even had?"
+    },
+    "answer": {
+      "es": "Sí: tener sangre del grupo O se asocia a menos riesgo de sufrir malaria grave.",
+      "en": "Yes: having type O blood is linked to a lower risk of severe malaria."
+    },
+    "detail": {
+      "es": "Los glóbulos rojos infectados de tipo O se agrupan menos entre sí, y esos grumos son justo lo que taponaría vasos pequeños y dañaría órganos. Es una de las pistas de por qué siguen existiendo varios grupos sanguíneos: cada uno pudo ofrecer ventaja distinta frente a una infección distinta a lo largo de la historia.",
+      "en": "Infected type O red blood cells clump together less, and those clumps are exactly what would clog small vessels and damage organs. It's one clue as to why several blood types still exist: each one may have offered a different edge against a different infection over history."
+    },
+    "source": "PMC — Association of ABO blood group with severe falciparum malaria in adults",
+    "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3215225/",
+    "_evidence": "Meta-analysis of previous studies, including the current one, highlighted the protective nature of blood group 'O' to severe malaria (P = 0.01)."
+  },
+  {
+    "id": "adrenalina-no-entra-cerebro",
+    "category": "cuerpo",
+    "question": {
+      "es": "El subidón de adrenalina de un susto, ¿entra realmente en tu cerebro?",
+      "en": "Does the adrenaline rush from a scare actually get into your brain?"
+    },
+    "answer": {
+      "es": "No: esa hormona circula por la sangre pero no logra atravesar la barrera que protege el cerebro.",
+      "en": "No: that hormone circulates through the blood but can't cross the barrier that protects the brain."
+    },
+    "detail": {
+      "es": "La misma familia de hormonas, la noradrenalina, sí cruza la placenta de una embarazada hacia el feto, pero se queda fuera del cerebro adulto. Así que todo lo que sientes en la cabeza durante el subidón —alerta, foco, miedo— llega por otras vías nerviosas, no porque la hormona haya entrado ahí.",
+      "en": "The related hormone norepinephrine does cross the placenta from a pregnant woman to her fetus, but it stays outside the adult brain. So everything you feel in your head during the rush — alertness, focus, fear — arrives through other nerve pathways, not because the hormone got in there."
+    },
+    "source": "StatPearls (NCBI) — Norepinephrine",
+    "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK537259/",
+    "_evidence": "Norepinephrine crosses the placenta but doesn't cross the blood-brain barrier."
+  },
+  {
+    "id": "insulina-perros-personas",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Cómo se descubrió la hormona que hoy mantiene con vida a millones de diabéticos?",
+      "en": "How was the hormone that today keeps millions of diabetics alive discovered?"
+    },
+    "answer": {
+      "es": "Atando el conducto del páncreas de varios perros y extrayendo lo que quedaba intacto dentro.",
+      "en": "By tying off the pancreatic duct in several dogs and extracting what stayed intact inside."
+    },
+    "detail": {
+      "es": "El páncreas del perro se encogía, pero unas zonas llamadas islotes de Langerhans sobrevivían, y de ahí salió el primer extracto de insulina. Inyectado en perros diabéticos, les devolvió la salud casi de inmediato; antes de eso, la diabetes tipo 1 era una condena de muerte sin remedio.",
+      "en": "The dog's pancreas shriveled, but regions called the islets of Langerhans survived, and that's where the first insulin extract came from. Injected into diabetic dogs, it restored their health almost immediately; before that, type 1 diabetes had been an inescapable death sentence."
+    },
+    "source": "Mayo Clinic Proceedings — Frederick Banting, Nobel Laureate for Discovery of Insulin",
+    "sourceUrl": "https://www.mayoclinicproceedings.org/article/S0025-6196(11)63086-3/fulltext",
+    "_evidence": "they tied off the pancreatic ducts of several dogs for 7 weeks. Although the pancreas became shriveled, the islets of Langerhans remained intact, and a solution was extracted from them. The injection of this extract into diabetic dogs quickly restored the health of the dogs."
+  },
+  {
+    "id": "placenta-organo-desechable",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Existe un órgano entero que tu cuerpo fabrica solo para tirarlo después?",
+      "en": "Is there an entire organ your body builds only to throw it away afterward?"
+    },
+    "answer": {
+      "es": "Sí, la placenta: hace de pulmón, riñón e hígado del feto y luego se desecha.",
+      "en": "Yes, the placenta: it acts as the fetus's lungs, kidneys and liver, and is then thrown away."
+    },
+    "detail": {
+      "es": "Se expulsa poco después del parto, normalmente dentro de la media hora siguiente, cuando esas funciones ya han pasado a los órganos propios del recién nacido. Es el único órgano humano diseñado desde el principio para tener fecha de caducidad.",
+      "en": "It's delivered shortly after birth, usually within the following half hour, once those functions have already passed to the newborn's own organs. It's the only human organ designed from the start to have an expiration date."
+    },
+    "source": "Cleveland Clinic — Placenta",
+    "sourceUrl": "https://my.clevelandclinic.org/health/body/22337-placenta",
+    "_evidence": "You deliver the placenta shortly after your baby is born (usually within 30 minutes)."
+  },
+  {
+    "id": "telomeros-cuentan-tus-divisiones",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Tienen tus células una forma de contar cuántas veces se han dividido ya?",
+      "en": "Do your cells have a way of counting how many times they've already divided?"
+    },
+    "answer": {
+      "es": "Sí: unos capuchones al final de los cromosomas se acortan un poco en cada división.",
+      "en": "Yes: caps at the end of the chromosomes get a little shorter with every division."
+    },
+    "detail": {
+      "es": "Se llaman telómeros, y cuando se quedan demasiado cortos la célula deja de dividirse para siempre o se autodestruye. Es un reloj biológico literal: cuenta divisiones, no años, y por eso unos tejidos envejecen mucho más rápido que otros según cuánto se hayan estado renovando.",
+      "en": "They're called telomeres, and once they get too short the cell either stops dividing forever or self-destructs. It's a literal biological clock: it counts divisions, not years, which is why some tissues age much faster than others depending on how much they've had to renew themselves."
+    },
+    "source": "PMC — Telomere Biology and Human Phenotype",
+    "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6356320/",
+    "_evidence": "The length of telomeres is known to shorten with each cell division... Upon leaving the cell cycle, the cell either enters senescence (defined as the irreversible cessation of division) or apoptosis"
+  },
+  {
+    "id": "respirar-boca-cambia-cara",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Puede la forma de respirar de un niño cambiarle la forma de la cara para siempre?",
+      "en": "Can the way a child breathes permanently change the shape of their face?"
+    },
+    "answer": {
+      "es": "Sí: respirar por la boca en vez de por la nariz durante años puede reorientar el crecimiento de la mandíbula.",
+      "en": "Yes: breathing through the mouth instead of the nose for years can redirect how the jaw grows."
+    },
+    "detail": {
+      "es": "En estudios con niños que respiran así de forma habitual, la mandíbula y el maxilar giran hacia atrás y hacia abajo en vez de crecer hacia delante. Es un efecto lento, ladrillo a ladrillo durante la infancia, no algo que se note de un día para otro.",
+      "en": "In studies of children who habitually breathe this way, the jaw and upper jaw rotate backward and downward instead of growing forward. It's a slow effect, built brick by brick through childhood, not something that shows up overnight."
+    },
+    "source": "PMC — Effects of mouth breathing on facial skeletal development in children",
+    "sourceUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7944632/",
+    "_evidence": "the mandible and maxilla rotated backward and downward, and the occlusal plane was steep"
+  },
+  {
+    "id": "feto-bosteza-utero",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Puede un feto bostezar dentro del útero si ahí nunca ha respirado aire?",
+      "en": "Can a fetus yawn inside the womb if it has never breathed air in there?"
+    },
+    "answer": {
+      "es": "Sí, se ve por ecografía desde el final del primer trimestre, aunque no entre ni salga aire.",
+      "en": "Yes, it shows up on ultrasound from the end of the first trimester, even though no air goes in or out."
+    },
+    "detail": {
+      "es": "La boca se abre y se cierra despacio, imitando el gesto entero de una inhalación y una exhalación, sin ningún propósito respiratorio. Cuanto más avanza el embarazo, menos bosteza el feto, así que parece tener más que ver con que el cerebro se esté terminando de formar que con el sueño o el cansancio.",
+      "en": "The mouth opens and closes slowly, mimicking the whole gesture of an inhale and exhale, with no respiratory purpose at all. The further the pregnancy goes, the less the fetus yawns, so it seems tied more to the brain finishing its wiring than to sleepiness or fatigue."
+    },
+    "source": "PMC — Development of Fetal Yawn Compared with Non-Yawn Mouth Openings",
+    "sourceUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3503956/",
+    "_evidence": "yawning has been reported from the end of the first trimester"
+  },
+  {
+    "id": "bacterias-fabrican-vitamina-k",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Quién fabrica buena parte de una vitamina que tu cuerpo necesita y no está en tu dieta?",
+      "en": "Who makes a good share of a vitamin your body needs that isn't fully covered by your diet?"
+    },
+    "answer": {
+      "es": "Las bacterias que viven en tu intestino, que producen su propia versión de la vitamina K ahí dentro.",
+      "en": "The bacteria living in your gut, which produce their own version of vitamin K right there inside you."
+    },
+    "detail": {
+      "es": "Esa forma se llama menaquinona y se genera sobre todo en una parte concreta del intestino delgado, el íleon. Es un ejemplo claro de que ese ecosistema de bacterias no es solo un pasajero: le devuelve algo al cuerpo que lo hospeda.",
+      "en": "That form is called menaquinone, and it's generated mainly in one specific stretch of the small intestine, the ileum. It's a clear example that this bacterial ecosystem isn't just a passenger: it gives something back to the body that hosts it."
+    },
+    "source": "PMC — Role of Vitamin K in Intestinal Health",
+    "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8769504/",
+    "_evidence": "MKs are mainly synthesized by gut microbiota, predominantly in the ileum."
+  },
+  {
+    "id": "hormona-crecimiento-de-noche",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Cuándo trabaja más la hormona que hace crecer tu cuerpo, de día o mientras duermes?",
+      "en": "When does the hormone that makes your body grow work hardest, during the day or while you sleep?"
+    },
+    "answer": {
+      "es": "Casi toda su producción diaria ocurre justo al principio de la noche, nada más entrar en sueño profundo.",
+      "en": "Almost all of its daily output happens right at the start of the night, the moment you slip into deep sleep."
+    },
+    "detail": {
+      "es": "En los hombres, alrededor del 70 % de toda la hormona de crecimiento que se libera en un día sale durante esas primeras horas de sueño profundo. Es una de las razones por las que dormir mal en la infancia y la adolescencia puede notarse después en el desarrollo.",
+      "en": "In men, about 70% of all the growth hormone released in a day comes out during those first hours of deep sleep. It's one of the reasons poor sleep in childhood and adolescence can show up later in development."
+    },
+    "source": "SLEEP journal — Interrelations Between Sleep and the Somatotropic Axis",
+    "sourceUrl": "https://academic.oup.com/sleep/article-pdf/21/6/553/8564987/sleep-21-6-553.pdf",
+    "_evidence": "In men, approximately 70% of the daily GH output occurs during early sleep throughout adulthood."
+  },
+  {
+    "id": "tiroides-ritmo-celular",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Puede una glándula del tamaño de una mariposa decidir la velocidad de cada célula de tu cuerpo?",
+      "en": "Can a butterfly-sized gland decide the speed of every single cell in your body?"
+    },
+    "answer": {
+      "es": "Sí, es justo lo que hace la tiroides con la hormona que produce.",
+      "en": "Yes, that's exactly what the thyroid does through the hormone it produces."
+    },
+    "detail": {
+      "es": "Esa hormona afecta a todas las células y órganos del cuerpo, acelerando o frenando cuánta energía consumen a partir de la comida. Si la tiroides produce de más o de menos, el metabolismo entero cambia de marcha aunque no hayas cambiado ni de dieta ni de actividad.",
+      "en": "That hormone affects every cell and organ in the body, speeding up or slowing down how much energy they draw from food. If the thyroid produces too much or too little, the entire metabolism shifts gear even if diet and activity haven't changed at all."
+    },
+    "source": "Cleveland Clinic — Thyroid Hormone",
+    "sourceUrl": "https://my.clevelandclinic.org/health/articles/22391-thyroid-hormone",
+    "_evidence": "Thyroid hormone (T3 and T4) affects every cell and all the organs in your body"
+  },
+  {
+    "id": "reloj-maestro-cerebro",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Tiene tu cuerpo un único reloj que manda sobre todos los demás?",
+      "en": "Does your body have a single clock that bosses around all the others?"
+    },
+    "answer": {
+      "es": "Sí, un grupo diminuto de neuronas en el cerebro que se pone en hora con la luz que entra por los ojos.",
+      "en": "Yes, a tiny cluster of neurons in the brain that sets itself by the light coming in through the eyes."
+    },
+    "detail": {
+      "es": "Ese reloj maestro coordina relojes más pequeños repartidos por el pulmón, el hígado, el riñón, el corazón y el músculo, cada uno con su propio ritmo diario de genes. Sin la luz de la mañana que lo reajusta, el reloj se va desviando del día real por su cuenta.",
+      "en": "That master clock coordinates smaller clocks spread through the lung, liver, kidney, heart and muscle, each running its own daily rhythm of genes. Without the morning light that resets it, the clock drifts away from the real day on its own."
+    },
+    "source": "PMC — Molecular analysis of mammalian circadian rhythms (review)",
+    "sourceUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC555564/",
+    "_evidence": "the suprachiasmatic nucleus uses humoral and neuronal inputs to coordinate peripheral circadian clocks, with peripheral organs including the lung, liver, kidney, heart, and muscle producing circadian gene expression based on photic input to the SCN"
+  },
+  {
+    "id": "oxitocina-hormona-del-amor",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Es la misma hormona la que hace que salga la leche y la que se llama «hormona del amor»?",
+      "en": "Is it the same hormone that makes milk flow and the one nicknamed the \"love hormone\"?"
+    },
+    "answer": {
+      "es": "Sí: la oxitocina provoca las contracciones del parto, hace salir la leche, y encima influye en el apego afectivo.",
+      "en": "Yes: oxytocin triggers labor contractions, makes milk flow, and on top of that influences emotional bonding."
+    },
+    "detail": {
+      "es": "La fabrica el hipotálamo, pero se guarda y se libera desde una glándula distinta, la hipófisis posterior. Cuando el bebé succiona el pecho, esa misma hormona hace que la leche se libere de inmediato, y también parece intensificar el vínculo entre madre e hijo y entre parejas.",
+      "en": "It's made by the hypothalamus, but it's stored and released from a different gland, the posterior pituitary. When a baby sucks at the breast, that same hormone makes the milk let down right away, and it also appears to deepen the bond between mother and child and between partners."
+    },
+    "source": "Cleveland Clinic — Oxytocin",
+    "sourceUrl": "https://my.clevelandclinic.org/health/articles/22618-oxytocin",
+    "_evidence": "When your baby sucks at your breast, oxytocin secretion causes the milk to release so your baby can feed."
+  },
+  {
+    "id": "intestino-repara-cada-dia",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Por qué el revestimiento de tu intestino no se desgasta como el resto de tejidos?",
+      "en": "Why doesn't the lining of your intestine wear out like other tissues?"
+    },
+    "answer": {
+      "es": "Porque se regenera cada día entero, en vez de ir aguantando el roce hasta que se estropea.",
+      "en": "Because it regenerates completely every single day, instead of enduring the friction until it wears out."
+    },
+    "detail": {
+      "es": "Células madre alojadas en la base de sus pliegues fabrican reemplazos constantes para una superficie que aguanta ácido, enzimas y el roce continuo de la comida al pasar. Es de los tejidos que más rápido se renueva en todo el cuerpo, precisamente porque su trabajo lo desgasta más rápido que a ningún otro.",
+      "en": "Stem cells tucked at the base of its folds keep churning out replacements for a surface that takes a beating from acid, enzymes and the constant friction of food passing through. It's one of the fastest-renewing tissues in the entire body, precisely because its job wears it out faster than anything else."
+    },
+    "source": "The Rockefeller University — How the intestine replaces and repairs itself",
+    "sourceUrl": "https://www.rockefeller.edu/news/32474-how-the-intestine-replaces-and-repairs-itself-2/",
+    "_evidence": "the lining of the intestines must regenerate on a daily basis to remain equal to the task"
+  },
+  {
+    "id": "bazo-se-encoge-buceando",
+    "category": "cuerpo",
+    "question": {
+      "es": "Al aguantar la respiración bajo el agua, ¿hace algo tu bazo aparte de esperar?",
+      "en": "While you're holding your breath underwater, does your spleen do anything besides wait?"
+    },
+    "answer": {
+      "es": "Se contrae y vacía en la sangre una reserva de glóbulos rojos para estirar el oxígeno disponible.",
+      "en": "It contracts and empties a reserve of red blood cells into the blood to stretch out the available oxygen."
+    },
+    "detail": {
+      "es": "Ese chorro extra de glóbulos rojos eleva de golpe la capacidad de la sangre para transportar oxígeno justo cuando más falta hace. Los apneistas entrenados aprovechan este efecto de forma más marcada que alguien que nunca practica la inmersión.",
+      "en": "That extra burst of red blood cells suddenly raises the blood's capacity to carry oxygen right when it's needed most. Trained breath-hold divers tap into this effect more strongly than someone who never practices diving."
+    },
+    "source": "PMC — Effects of hyperventilation on... spleen contraction during serial static apneas",
+    "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10363065/",
+    "_evidence": "Spleen contraction which elevates the circulating amount of erythrocytes resulting in enhanced oxygen stores"
+  },
+  {
+    "id": "humanos-mamiferos-mas-sudan",
+    "category": "cuerpo",
+    "question": {
+      "es": "De todos los mamíferos, ¿por qué eres tú el que más glándulas de sudor tiene por centímetro de piel?",
+      "en": "Of all mammals, why are you the one with the most sweat glands per square centimeter of skin?"
+    },
+    "answer": {
+      "es": "Porque tu piel tiene, de media, diez veces más glándulas de sudor que la de un chimpancé.",
+      "en": "Because your skin has, on average, ten times more sweat glands than a chimpanzee's."
+    },
+    "detail": {
+      "es": "Esa densidad tan alta, sumada a tener mucho menos pelo que el resto de primates, convirtió al sudor en el sistema de refrigeración más eficaz entre todos los mamíferos. Es una de las razones por las que un humano puede correr largas distancias bajo el sol sin sobrecalentarse, algo que la mayoría de animales no soporta.",
+      "en": "That high density, combined with having far less body hair than other primates, turned sweating into the most efficient cooling system among all mammals. It's one of the reasons a human can run long distances under the sun without overheating, something most animals can't handle."
+    },
+    "source": "PMC — En1 sweat we trust: How the evolution of an Engrailed 1 enhancer made humans the sweatiest ape",
+    "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9629119/",
+    "_evidence": "human eccrine sweat gland density is on average ten times that of chimpanzees and macaques"
+  },
+  {
+    "id": "corazon-bombea-tu-sangre",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Cuánta sangre mueve tu corazón en el minuto que tardas en leer esta pregunta?",
+      "en": "How much blood does your heart move in the minute it takes you to read this question?"
+    },
+    "answer": {
+      "es": "Casi seis litros, más sangre de la que hay en todo tu cuerpo junto.",
+      "en": "Almost six liters, more blood than your entire body holds at once."
+    },
+    "detail": {
+      "es": "Como el volumen total de sangre de una persona adulta ronda los cinco litros, en poco más de un minuto el corazón ya ha reciclado toda esa sangre entera al menos una vez. Y lo repite, minuto tras minuto, sin pararse a pensarlo nunca.",
+      "en": "Since an adult's total blood volume is around five liters, in just over a minute the heart has already recycled that entire supply at least once. And it does it again, minute after minute, without ever stopping to think about it."
+    },
+    "source": "Cleveland Clinic — Fun Facts About Your Heart",
+    "sourceUrl": "https://health.clevelandclinic.org/fun-facts-about-your-heart",
+    "_evidence": "Each minute, your heart pumps nearly 1.5 gallons (5.7 liters) of blood."
+  }
+]
