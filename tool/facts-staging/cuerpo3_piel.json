@@ -1,0 +1,515 @@
+[
+  {
+    "id": "piel-se-renueva-mes",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Cada cuánto tiempo tienes, en sentido literal, una piel completamente nueva?",
+      "en": "How literally new is the skin covering your body right now?"
+    },
+    "answer": {
+      "es": "La epidermis entera se sustituye por células nuevas en aproximadamente un mes.",
+      "en": "Your entire epidermis is replaced by new cells in about a month."
+    },
+    "detail": {
+      "es": "Las células nacen en la capa más profunda y suben empujándose hasta la superficie, donde se desprenden. Con la edad el proceso se frena: en alguien de sesenta o setenta años puede tardar el doble.",
+      "en": "Cells are born in the deepest layer and get pushed upward until they reach the surface and flake off. The process slows with age, taking up to twice as long in someone in their sixties or seventies."
+    },
+    "source": "Skin Cancer Foundation — 10 Surprising Things About Your Skin",
+    "sourceUrl": "https://www.skincancer.org/blog/10-surprising-things-about-your-skin/",
+    "_evidence": "It takes about a month for newly formed skin cells to make their way to the surface — a timeframe that decreases with age. Cell turnover can take as much as six to eight weeks in someone in their 60s or 70s."
+  },
+  {
+    "id": "callo-por-keratina",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Por qué se te forma un callo duro justo donde el zapato roza siempre?",
+      "en": "Why does a hard callus form exactly where your shoe keeps rubbing?"
+    },
+    "answer": {
+      "es": "Porque la piel produce keratina de más ahí para blindarse contra ese roce concreto.",
+      "en": "Because your skin produces extra keratin right there to shield itself against that specific friction."
+    },
+    "detail": {
+      "es": "La hiperqueratosis por presión es tu piel construyendo su propia armadura en el punto exacto que detecta como amenaza repetida. Quitar la causa —cambiar de calzado— basta para que el callo desaparezca solo.",
+      "en": "Pressure-related hyperkeratosis is your skin building its own armor at the exact spot it flags as a repeated threat. Removing the cause, like changing shoes, is often enough for the callus to disappear on its own."
+    },
+    "source": "Cleveland Clinic — Hyperkeratosis",
+    "sourceUrl": "https://my.clevelandclinic.org/health/diseases/hyperkeratosis",
+    "_evidence": "The thickening occurs when your body produces too much keratin, a protein found in your skin's outer layer. Pressure-related hyperkeratosis: Thickening of your skin due to inflammation, irritation or pressure."
+  },
+  {
+    "id": "tatuaje-macrofagos-relevo",
+    "category": "cuerpo",
+    "question": {
+      "es": "Las células que atrapan la tinta de un tatuaje mueren en semanas, ¿por qué el dibujo no se borra con ellas?",
+      "en": "The cells that trap tattoo ink die within weeks, so why doesn't the design fade away with them?"
+    },
+    "answer": {
+      "es": "Porque al morir sueltan la tinta y otra célula nueva la recoge de inmediato, en un relevo que no termina nunca.",
+      "en": "Because when they die they release the ink and a fresh cell picks it up immediately, in a relay that never ends."
+    },
+    "detail": {
+      "es": "Unos macrófagos de la dermis engullen la tinta, pero sus enzimas no pueden descomponerla, así que se quedan atascados con ella dentro. Cuando ese macrófago muere, monocitos jóvenes de la sangre entran, recapturan los pigmentos liberados y se instalan en su lugar.",
+      "en": "Macrophages in the dermis swallow the ink, but their enzymes cannot break it down, so they get stuck holding it. When that macrophage dies, young monocytes from the blood rush in, recapture the released pigment, and settle in its place."
+    },
+    "source": "UCSF Synapse — Why Tattoos Stay Put",
+    "sourceUrl": "https://synapse.ucsf.edu/articles/2024/05/28/why-tattoos-stay-put",
+    "_evidence": "Molecules of ink remain inside the macrophages, staining these immune cell fighters. ... young, wannabe macrophages in the blood, known as monocytes, quickly infiltrate the dermis, eat up the released pigments, and sit pretty."
+  },
+  {
+    "id": "queloide-genes-colageno",
+    "category": "cuerpo",
+    "question": {
+      "es": "Dos personas se hacen el mismo corte, ¿por qué a una le queda un bulto que sigue creciendo?",
+      "en": "Two people get the exact same cut, so why does one end up with a flat scar and the other with a growing lump?"
+    },
+    "answer": {
+      "es": "Porque la segunda tiene un rasgo genético que hace que su piel fabrique más colágeno del necesario al cerrar la herida.",
+      "en": "Because the second person carries a genetic trait that makes their skin produce more collagen than the wound actually needs."
+    },
+    "detail": {
+      "es": "Es lo que se llama piel propensa a queloides: se hereda, corre en ciertas familias y es más común en tonos de piel oscuros y entre los 10 y los 30 años. El gen exacto responsable todavía no se conoce.",
+      "en": "It is called keloid-prone skin: it runs in families and is more common in darker skin tones and between ages 10 and 30. The exact gene responsible is still unknown."
+    },
+    "source": "Cleveland Clinic — Keloid Scar",
+    "sourceUrl": "https://my.clevelandclinic.org/health/diseases/keloid-scar",
+    "_evidence": "You may have a genetic trait that makes your body more likely to make more collagen, which is known as keloid-prone skin... The exact gene that causes this is unknown... Are between 10 and 30 years old."
+  },
+  {
+    "id": "unas-manos-mas-rapido-golpes",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Por qué las uñas de tus manos crecen más del doble de rápido que las de tus pies?",
+      "en": "Why do your fingernails grow more than twice as fast as your toenails?"
+    },
+    "answer": {
+      "es": "Porque los pequeños golpes que reciben los dedos de la mano cada día riegan la matriz de la uña con más sangre.",
+      "en": "Because the small daily knocks your fingers take flood the nail matrix with more blood."
+    },
+    "detail": {
+      "es": "Las uñas de las manos crecen 3,47 mm al mes frente a los 1,62 mm de las de los pies. Cada golpecito es un microtrauma que la matriz interpreta como señal para acelerar la producción, algo que a un dedo del pie, mucho más protegido, casi nunca le pasa.",
+      "en": "Fingernails grow 3.47 mm a month versus 1.62 mm for toenails. Each small knock is a micro-trauma the matrix reads as a cue to speed up production, something a well-protected toe almost never experiences."
+    },
+    "source": "Clinical Correlations (NYU Grossman School of Medicine) — Why Do Toenails Grow More Slowly Than Fingernails?",
+    "sourceUrl": "https://www.clinicalcorrelations.org/2014/11/14/why-do-toenails-grow-more-slowly-than-fingernails/",
+    "_evidence": "Fingernails grow a little over twice as quickly as toenails: an average rate of 3.47 mm/month compared to 1.62 mm/month... Trauma may lead to increased blood and nutrient supply to the affected area, resulting in increased growth."
+  },
+  {
+    "id": "esmalte-sin-celulas-vivas",
+    "category": "cuerpo",
+    "question": {
+      "es": "Si te rompes un hueso, se suelda. Si te rompes el esmalte de un diente, ¿por qué nunca se suelda?",
+      "en": "A broken bone can heal itself. So why can a chipped tooth's enamel never do the same?"
+    },
+    "answer": {
+      "es": "Porque las células que fabrican el esmalte se suicidan en cuanto termina el diente, y sin ellas nadie puede repararlo.",
+      "en": "Because the cells that build enamel kill themselves off the moment the tooth is finished, leaving no one behind to repair it."
+    },
+    "detail": {
+      "es": "Esos fabricantes se llaman ameloblastos, y desaparecen por apoptosis cuando el diente sale a la boca, dejando el esmalte sin una sola célula viva. Por eso es el tejido más mineralizado del cuerpo humano y, a la vez, el único que no puede regenerarse.",
+      "en": "Those builder cells are called ameloblasts, and they die off by apoptosis once the tooth erupts, leaving enamel without a single living cell. That makes it the most mineralized tissue in the human body, and also the one that can never regenerate."
+    },
+    "source": "PMC — Tooth Formation: Are the Hardest Tissues of the Human Body Hard to Regenerate?",
+    "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7312198/",
+    "_evidence": "enamel becomes acellular after it is formed... ameloblasts undergo apoptosis, which makes enamel the most mineralized acellular tissue in the human body."
+  },
+  {
+    "id": "dientes-veinte-y-treintaydos",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Por qué de niño te bastan 20 dientes y de adulto necesitas 32?",
+      "en": "Why do 20 teeth cover a child's mouth but an adult's needs 32?"
+    },
+    "answer": {
+      "es": "Porque los 12 que se añaden después son molares nuevos, no reemplazos de ninguno de leche.",
+      "en": "Because the 12 that show up later are brand-new molars, not replacements for any baby tooth."
+    },
+    "detail": {
+      "es": "Los 20 dientes de leche erupcionan entre los 4 meses y los 6 años y se van cambiando uno a uno. Pero la boca adulta suma además tres molares por cuadrante que jamás tuvieron una versión infantil, incluidas las muelas del juicio.",
+      "en": "The 20 baby teeth erupt between 4 months and 6 years of age and get swapped out one by one. But the adult mouth also gains three molars per quadrant that never had a baby-tooth counterpart, wisdom teeth included."
+    },
+    "source": "Cleveland Clinic — Teeth: Anatomy, Types, Function & Care",
+    "sourceUrl": "https://my.clevelandclinic.org/health/body/24655-teeth",
+    "_evidence": "Most children have 20 primary teeth that grow in (erupt) between the ages of 4 months old and 6 years old... Most adults have 32 permanent teeth."
+  },
+  {
+    "id": "canas-celulas-madre-atascadas",
+    "category": "cuerpo",
+    "question": {
+      "es": "El pelo blanco no está vacío por dentro, ¿qué es exactamente lo que le falta?",
+      "en": "White hair hasn't run out of substance. So what, exactly, has it stopped receiving?"
+    },
+    "answer": {
+      "es": "Le falta el pigmento, porque las células que debían fabricarlo se quedaron atascadas antes de llegar a su puesto.",
+      "en": "It lacks pigment, because the cells meant to make it got stuck before ever reaching their post."
+    },
+    "detail": {
+      "es": "Cada vez que un folículo se renueva, algunas células madre del pigmento se quedan atrapadas en un compartimento del folículo y ya no maduran ni viajan a la zona donde deberían regenerar melanocitos. El pelo sigue creciendo con normalidad, solo que ya sin color.",
+      "en": "Every time a follicle renews itself, some pigment stem cells get trapped in a compartment of the follicle and never mature or travel to the zone where they should regenerate melanocytes. The hair keeps growing normally, just without any color."
+    },
+    "source": "NYU Langone News — Study Links 'Stuck' Stem Cells to Hair Turning Gray",
+    "sourceUrl": "https://nyulangone.org/news/study-links-stuck-stem-cells-hair-turning-gray",
+    "_evidence": "As hair ages, sheds, and then repeatedly grows back, increasing numbers of McSCs get stuck in the stem cell compartment called the hair follicle bulge... These cells remained incapable of regenerating or maturing into pigment-producing melanocytes."
+  },
+  {
+    "id": "rigor-mortis-calcio-atp",
+    "category": "cuerpo",
+    "question": {
+      "es": "Tras morir, ¿por qué el cuerpo se pone rígido en vez de simplemente quedarse flácido?",
+      "en": "After death, why does the body turn rigid instead of just staying limp?"
+    },
+    "answer": {
+      "es": "Porque sin energía para soltar el músculo, las fibras se quedan trabadas en la misma contracción para siempre.",
+      "en": "Because with no energy left to release the muscle, the fibers stay locked in whatever contraction they were in."
+    },
+    "detail": {
+      "es": "Al morir, el calcio se filtra dentro de las fibras musculares y engancha la actina con la miosina, lo que produce la contracción. En vida, el ATP separa ese enganche para relajar el músculo, pero sin ATP la unión no se puede romper: el cuerpo se endurece en horas y tarda entre uno y dos días en volver a soltarse.",
+      "en": "After death, calcium leaks into muscle fibers and locks actin onto myosin, producing contraction. In life, ATP breaks that bond to relax the muscle, but without ATP the bond cannot release: the body stiffens within hours and takes one to two days to loosen again."
+    },
+    "source": "NCBI StatPearls — Postmortem Changes",
+    "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK539741/",
+    "_evidence": "Rigor mortis typically begins within 1 to 2 hours, becomes fully established by 12 hours, and resolves over the subsequent 24 to 48 hours. ... Absence of ATP prevents dissociation of the actin-myosin complex formed during contraction."
+  },
+  {
+    "id": "cartilago-sin-sangre-cicatriza-lento",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Por qué una lesión de cartílago tarda tanto más en curarse que un corte en la piel?",
+      "en": "Why does a cartilage injury take so much longer to heal than a cut on your skin?"
+    },
+    "answer": {
+      "es": "Porque el cartílago no tiene vasos sanguíneos propios, así que le llega el alimento por goteo lento en vez de por reparto directo.",
+      "en": "Because cartilage has no blood vessels of its own, so nutrients reach it by slow seepage instead of direct delivery."
+    },
+    "detail": {
+      "es": "Sin sangre que traiga oxígeno ni células reparadoras al instante, el tejido depende de la difusión desde estructuras vecinas, un proceso mucho más lento. Es la misma razón por la que algunas lesiones de cartílago solo se arreglan con cirugía y no con el simple paso del tiempo.",
+      "en": "With no blood to deliver oxygen or repair cells on the spot, the tissue depends on diffusion from nearby structures, a much slower process. That is also why some cartilage injuries only get fixed with surgery rather than simply healing over time."
+    },
+    "source": "Cleveland Clinic — Cartilage",
+    "sourceUrl": "https://my.clevelandclinic.org/health/body/23173-cartilage",
+    "_evidence": "Because cartilage is avascular (a medical term meaning it doesn't directly receive blood flow), it usually takes longer to heal than other parts of your body."
+  },
+  {
+    "id": "memoria-inmunitaria-mas-rapida",
+    "category": "cuerpo",
+    "question": {
+      "es": "La primera vez que te vacunas tardas dos semanas en tener anticuerpos, ¿por qué el refuerzo los da en días?",
+      "en": "Antibodies take two weeks to show up after your first vaccine, so why does a booster deliver them in days?"
+    },
+    "answer": {
+      "es": "Porque quedan células de memoria de la primera vez y ya no hay que fabricar la defensa desde cero.",
+      "en": "Because memory cells from the first exposure stick around, so the defense no longer needs to be built from scratch."
+    },
+    "detail": {
+      "es": "En la primera infección hacen falta dos semanas para que haya anticuerpos detectables. En una respuesta de memoria, esas mismas cantidades se producen en solo dos a cuatro días, porque las células que mejor funcionaron la vez anterior ya están esperando, listas para multiplicarse.",
+      "en": "During the first infection, it takes two weeks for detectable antibodies to appear. During a memory response, the same amounts show up in just two to four days, because the cells that worked best the first time are already waiting, ready to multiply."
+    },
+    "source": "ASM.org — Understanding Immunological Memory",
+    "sourceUrl": "https://asm.org/articles/2023/may/understanding-immunological-memory",
+    "_evidence": "it takes 2 weeks for detectable antibodies to be generated; however, during a memory response, sufficient quantities of antibodies are produced in only 2-4 days."
+  },
+  {
+    "id": "alergia-identifica-mal-inofensivo",
+    "category": "cuerpo",
+    "question": {
+      "es": "El polen no es peligroso, entonces, ¿por qué tu cuerpo te hace estornudar como si lo fuera?",
+      "en": "Pollen isn't dangerous, so why does your body make you sneeze as if it were?"
+    },
+    "answer": {
+      "es": "Porque tu sistema inmune confunde esa proteína inofensiva con un virus o una bacteria y monta la misma defensa que usaría contra ellos.",
+      "en": "Because your immune system mistakes that harmless protein for a virus or bacteria and launches the same defense it would use against one."
+    },
+    "detail": {
+      "es": "Una alergia es, literalmente, un error de identificación: el sistema inmune trata proteínas de polen, comida o pelo de mascota como si fueran un patógeno peligroso. Los síntomas —estornudos, hinchazón, picor— no son daño del alérgeno, sino la propia reacción de defensa disparada por error.",
+      "en": "An allergy is literally a case of mistaken identity: the immune system treats proteins from pollen, food, or pet fur as if they were a dangerous pathogen. The symptoms — sneezing, swelling, itching — aren't damage from the allergen itself, but the defense reaction firing off by mistake."
+    },
+    "source": "Cleveland Clinic — Allergies",
+    "sourceUrl": "https://my.clevelandclinic.org/health/diseases/8610-allergies",
+    "_evidence": "Allergies happen when your immune system mistakenly identifies foreign proteins — in pollen, pet dander, medications, food or other substances — as something harmful (as if it were a virus or bacteria)."
+  },
+  {
+    "id": "tolerancia-oral-intestino-no-ataca",
+    "category": "cuerpo",
+    "question": {
+      "es": "Tu intestino está lleno de bacterias extrañas, ¿por qué tu sistema inmune no las ataca a todas?",
+      "en": "Your gut is packed with foreign bacteria, so why doesn't your immune system attack all of it?"
+    },
+    "answer": {
+      "es": "Porque el sistema inmune del intestino aprende activamente a no responder frente a lo que reconoce como comida o bacterias normales.",
+      "en": "Because the gut's immune system actively learns not to respond to what it recognizes as normal food or bacteria."
+    },
+    "detail": {
+      "es": "Ese aprendizaje se llama tolerancia oral, y no es simple pasividad: son bacterias «buenas» las que entrenan a las células inmunes locales para no dispararse contra los antígenos de la dieta ni contra los propios microbios comensales. Cuando ese entrenamiento falla, aparecen alergias alimentarias.",
+      "en": "That learning is called oral tolerance, and it's not mere passivity: certain 'good' bacteria train local immune cells not to fire against dietary antigens or against the resident microbes themselves. When that training fails, food allergies can appear."
+    },
+    "source": "PMC — Regulation of Oral Immune Tolerance by the Microbiome in Food Allergy",
+    "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6800633/",
+    "_evidence": "Oral tolerance is an active process of local and systemic immune unresponsiveness to orally ingested antigens such as food. The gut immune system must balance responses to commensal bacteria (microbiome), innocuous antigens, and pathogens."
+  },
+  {
+    "id": "autoinmune-cuerpo-se-ataca",
+    "category": "cuerpo",
+    "question": {
+      "es": "Tu sistema inmune existe para defenderte, ¿puede volverse contra ti mismo?",
+      "en": "Your immune system exists to defend you, so can it turn against you instead?"
+    },
+    "answer": {
+      "es": "Sí: en una enfermedad autoinmune, ese mismo sistema ataca tu propio cuerpo en vez de protegerlo.",
+      "en": "Yes: in an autoimmune disease, that same system attacks your own body instead of protecting it."
+    },
+    "detail": {
+      "es": "El sistema inmune funciona como una vigilancia que detecta virus, bacterias o toxinas y envía glóbulos blancos a eliminarlos. Cuando falla, esa vigilancia confunde tejido propio con una amenaza, y el resultado es la inflamación crónica de enfermedades como el lupus o la artritis reumatoide.",
+      "en": "The immune system normally works like a security patrol, detecting viruses, bacteria, or toxins and sending white blood cells to eliminate them. When it malfunctions, that patrol mistakes the body's own tissue for a threat, producing the chronic inflammation seen in diseases like lupus or rheumatoid arthritis."
+    },
+    "source": "Cleveland Clinic — Autoimmune Diseases",
+    "sourceUrl": "https://my.clevelandclinic.org/health/diseases/21624-autoimmune-diseases",
+    "_evidence": "Autoimmune diseases are health conditions that happen when your immune system attacks your body instead of defending it."
+  },
+  {
+    "id": "tapon-plaquetario-temporal",
+    "category": "cuerpo",
+    "question": {
+      "es": "Cuando te cortas, la sangre deja de salir casi al momento, ¿pero eso ya es la herida cerrada?",
+      "en": "When you cut yourself, the bleeding stops almost instantly, but is the wound already sealed at that point?"
+    },
+    "answer": {
+      "es": "No: lo primero que se forma es solo un tapón provisional de plaquetas, un parche de emergencia mientras llega el cierre de verdad.",
+      "en": "No: what forms first is only a temporary platelet plug, an emergency patch while the real seal gets built."
+    },
+    "detail": {
+      "es": "Ese tapón de plaquetas frena la hemorragia en segundos, pero es débil y provisional. Solo cuando se activa la cascada de coagulación y se forma una malla de fibrina entrecruzada queda el coágulo definitivo que de verdad cierra la herida.",
+      "en": "That platelet plug slows the bleeding within seconds, but it's weak and provisional. Only once the coagulation cascade kicks in and a cross-linked fibrin mesh forms does the definitive clot that actually seals the wound take shape."
+    },
+    "source": "NCBI StatPearls — Physiology, Hemostasis",
+    "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK545263/",
+    "_evidence": "Formation of a temporary 'platelet plug.' ... facilitates a series of enzymatic activations that lead to the formation of a clot with platelets and fibrin polymer."
+  },
+  {
+    "id": "higado-se-regenera-dos-tercios",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Se puede extirpar dos tercios de un órgano y que vuelva a crecer hasta su tamaño de siempre?",
+      "en": "Can you remove two-thirds of an organ and have it grow back to its original size?"
+    },
+    "answer": {
+      "es": "Con el hígado, sí: aunque se quiten dos tercios, el tejido que queda vuelve a crecer hasta el 100% de su tamaño original.",
+      "en": "With the liver, yes: even after two-thirds of it is removed, the remaining tissue grows back to essentially 100 percent of its original size."
+    },
+    "detail": {
+      "es": "Este proceso, llamado hepatectomía parcial en su versión quirúrgica, es lo que permite los trasplantes de donante vivo: la porción donada y la que queda en el donante se regeneran cada una por su lado. Ningún otro órgano sólido del cuerpo tiene una capacidad de recuperación parecida.",
+      "en": "This process, called partial hepatectomy in its surgical form, is exactly what makes living-donor liver transplants possible: both the donated portion and the piece left behind regenerate on their own. No other solid organ in the body has a comparable capacity to bounce back."
+    },
+    "source": "PMC — Cellular and Molecular Basis of Liver Regeneration",
+    "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7108750/",
+    "_evidence": "within a short period after partial hepatectomy (PHx), which typically involves surgical removal of two-thirds of the liver, the tissue grows back essentially to 100% of its original size."
+  },
+  {
+    "id": "nervio-periferico-regenera-central-no",
+    "category": "cuerpo",
+    "question": {
+      "es": "Un nervio del brazo cortado puede volver a crecer, ¿por qué uno de la médula espinal casi nunca lo hace?",
+      "en": "A severed nerve in your arm can grow back, so why does one in your spinal cord almost never do the same?"
+    },
+    "answer": {
+      "es": "Porque los nervios del cuerpo tienen unas células de apoyo que fabrican un camino de regreso, y los del cerebro y la médula no.",
+      "en": "Because nerves in your limbs have support cells that build a path back, and the ones in your brain and spinal cord don't."
+    },
+    "detail": {
+      "es": "Esas células de apoyo, las de Schwann, crean un entorno que favorece el crecimiento del axón, que avanza a un ritmo de entre 1 y 3 milímetros al día. En el sistema nervioso central falta ese andamiaje, así que una lesión ahí casi nunca se repara con regeneración real.",
+      "en": "Those support cells, called Schwann cells, create an environment that favors axon growth, which advances at a rate of about 1 to 3 millimeters a day. The central nervous system lacks that scaffolding, so an injury there almost never heals through true regeneration."
+    },
+    "source": "PMC — Neurobiology of Peripheral Nerve Injury, Regeneration, and Functional Recovery",
+    "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3603172/",
+    "_evidence": "Axon regeneration proceeds at a rate of 1-3 mm/d... create a growth-permissive environment for injured axons contrary to the central nervous system (CNS) response to injuries."
+  },
+  {
+    "id": "musculo-palmar-largo-ausente",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Es posible que te falte un músculo entero del brazo y ni siquiera lo hayas notado?",
+      "en": "Is it possible for you to be missing an entire forearm muscle and never have noticed?"
+    },
+    "answer": {
+      "es": "Sí: el palmar largo, un músculo que ya casi no hace falta, falta del todo en cerca del 15% de la población.",
+      "en": "Yes: the palmaris longus, a muscle that's barely needed anymore, is completely absent in around 15 percent of people."
+    },
+    "detail": {
+      "es": "Es un tendón fino visible en la muñeca al apretar el pulgar contra el meñique, herencia de antepasados que lo usaban para trepar o para mover la piel de la palma. Su ausencia no afecta a la fuerza de la mano, porque otros músculos ya hacen su trabajo.",
+      "en": "It's a thin tendon visible on the wrist when you press your thumb against your little finger, a leftover from ancestors who used it for climbing or for moving the skin of the palm. Its absence doesn't affect hand strength, because other muscles already do its job."
+    },
+    "source": "PMC — Palmaris Longus Muscle's Prevalence and Anatomical Variations",
+    "sourceUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4596262/",
+    "_evidence": "The traditional knowledge is that PL muscle is absent in 15% of the global population."
+  },
+  {
+    "id": "cuerpo-nunca-perfectamente-simetrico",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Existe alguien con la cara y el cuerpo perfectamente simétricos?",
+      "en": "Does anyone actually have a perfectly symmetrical face and body?"
+    },
+    "answer": {
+      "es": "No: la simetría perfecta prácticamente nunca existe, ni en la cara ni, mucho menos, por dentro.",
+      "en": "No: perfect symmetry practically never exists, not in the face and certainly not on the inside."
+    },
+    "detail": {
+      "es": "Por fuera el cuerpo humano parece bastante simétrico, pero por dentro es marcadamente asimétrico: el tamaño, la forma y la posición de los órganos internos difieren de un lado a otro. Las pequeñas diferencias entre las dos mitades de tu cara son variación normal, no un defecto.",
+      "en": "On the outside the human body looks fairly symmetrical, but internally it's markedly asymmetric: the size, shape, and position of internal organs differ from one side to the other. The small differences between the two halves of your face are normal variation, not a flaw."
+    },
+    "source": "PMC — Measuring Asymmetry from High-Density 3D Surface Scans",
+    "sourceUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6306226/",
+    "_evidence": "The human form is, generally, externally symmetrical and internally asymmetrical... Perfect bilateral body symmetry seldom exists, and mammals in particular have marked asymmetry in the size, shape and position of the internal organs."
+  },
+  {
+    "id": "respirar-limite-es-el-co2",
+    "category": "cuerpo",
+    "question": {
+      "es": "Cuando aguantas la respiración bajo el agua, ¿lo que te obliga a salir es que te falte oxígeno?",
+      "en": "When you hold your breath underwater, is it the lack of oxygen that finally forces you up?"
+    },
+    "answer": {
+      "es": "No: es la acumulación de dióxido de carbono en la sangre, no la falta de oxígeno, la que dispara el impulso de respirar.",
+      "en": "No: it's the buildup of carbon dioxide in your blood, not a lack of oxygen, that triggers the urge to breathe."
+    },
+    "detail": {
+      "es": "Ese detalle es peligroso en apnea: alguien puede seguir teniendo suficiente oxígeno cuando todavía no siente ninguna urgencia por respirar, y desmayarse antes de notar la alarma. Por eso los buceadores en apnea se desmayan con cierta frecuencia sin previo aviso.",
+      "en": "That detail is dangerous in freediving: someone can still have enough oxygen while feeling no urgency to breathe yet, and pass out before ever sensing the alarm. That's why freedivers black out fairly often with no warning."
+    },
+    "source": "University of Pennsylvania — Evolutionary Psychology Blog",
+    "sourceUrl": "https://web.sas.upenn.edu/kurzbanepblog/2011/02/07/why-cant-you-hold-your-breath-until-youre-dead/",
+    "_evidence": "Results such as these point to the idea that it's the buildup of CO2, rather than the lack of oxygen, that gives rise to the impulse to breathe... the fact that the urge to breathe seems to be triggered by high CO2 levels may also be the reason that free diving participants pass out with some frequency."
+  },
+  {
+    "id": "golpe-calor-cuarenta-grados",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿A partir de qué temperatura interna deja el cuerpo de poder regularse a sí mismo por calor?",
+      "en": "At what internal temperature does the body stop being able to regulate itself from heat?"
+    },
+    "answer": {
+      "es": "Un golpe de calor se define por encima de los 40 grados centígrados, y a partir de ahí el propio cerebro empieza a fallar.",
+      "en": "Heat stroke is defined above 40 degrees Celsius, and from that point the brain itself starts to malfunction."
+    },
+    "detail": {
+      "es": "No es solo un termómetro alto: por encima de esa línea aparece disfunción del sistema nervioso central, y sin enfriamiento rápido el cuadro avanza hacia el fallo de varios órganos a la vez. Lo que más decide el desenlace no es solo cuánto sube la temperatura, sino cuánto tiempo se mantiene ahí.",
+      "en": "It's not just a high thermometer reading: above that line, central nervous system dysfunction sets in, and without rapid cooling the condition can progress to failure of multiple organs at once. What most decides the outcome isn't only how high the temperature climbs, but how long it stays elevated."
+    },
+    "source": "Cleveland Clinic — Heat Stroke",
+    "sourceUrl": "https://my.clevelandclinic.org/health/diseases/21812-heatstroke",
+    "_evidence": "Heat stroke causes your body temperature to soar to dangerous levels, typically above 104 degrees Fahrenheit (40 degrees Celsius)."
+  },
+  {
+    "id": "hipotermia-deja-de-tiritar",
+    "category": "cuerpo",
+    "question": {
+      "es": "Si tienes mucho frío, tiritas. Entonces, ¿por qué en el frío más peligroso de todos deja de pasarte?",
+      "en": "When you're very cold, you shiver. So why does that stop happening in the most dangerous cold of all?"
+    },
+    "answer": {
+      "es": "Porque por debajo de los 28 grados de temperatura corporal el cuerpo ya no tiene energía ni para seguir tiritando.",
+      "en": "Because below 28 degrees Celsius of body temperature, the body no longer has the energy left to keep shivering."
+    },
+    "detail": {
+      "es": "Tiritar es en realidad una defensa activa que genera calor quemando energía; cuando la hipotermia se vuelve grave, esa defensa se apaga y el temblor cesa justo cuando más falta hace. Es la señal de que el corazón y el cerebro están empezando a fallar, no de que el frío haya pasado.",
+      "en": "Shivering is actually an active defense that generates heat by burning energy; once hypothermia turns severe, that defense shuts off and the shivering stops exactly when it's needed most. It's a sign the heart and brain are starting to fail, not that the cold has passed."
+    },
+    "source": "Cleveland Clinic — Hypothermia",
+    "sourceUrl": "https://my.clevelandclinic.org/health/diseases/21164-hypothermia-low-body-temperature",
+    "_evidence": "Loss of shivering... occurs when body temperature is less than 82.4 F (28 C)."
+  },
+  {
+    "id": "inanicion-limite-semanas",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Qué falla primero en un cuerpo que deja de comer: la energía o algo menos obvio?",
+      "en": "In a body that stops eating, what fails first: the energy, or something less obvious?"
+    },
+    "answer": {
+      "es": "No es la falta de calorías: la fragilidad aparece entre los 30 y los 50 días, y depende de la grasa de la que se partía.",
+      "en": "Not the missing calories: frailty sets in between days 30 and 50, and it depends on the fat reserve you started from."
+    },
+    "detail": {
+      "es": "El cuerpo cambia de combustible y tira de grasa, así que lo que marca el límite no es el porcentaje de peso perdido sino la reserva inicial. En los pocos casos históricos registrados de ayuno absoluto, el deterioro grave llegaba entre los 30 y los 50 días.",
+      "en": "The body switches fuel and runs on fat, so the limit is set by the reserve you began with rather than by the percentage of weight lost. In the few recorded historical cases of total fasting, serious decline arrived between days 30 and 50."
+    },
+    "source": "PMC — Complete and Voluntary Starvation of 50 Days",
+    "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4982520/",
+    "_evidence": "patients were frail between 30 and 50 days, and death was noted to occur between days 43 and 70."
+  },
+  {
+    "id": "alopecia-cicatricial-sin-retorno",
+    "category": "cuerpo",
+    "question": {
+      "es": "En casi toda calvicie el pelo puede volver a salir. ¿Hay algún tipo en el que ya no vuelva nunca?",
+      "en": "In most hair loss, hair can eventually grow back. Is there a kind where it truly never can?"
+    },
+    "answer": {
+      "es": "Sí, cuando la inflamación destruye el folículo y en su lugar crece tejido cicatricial: ahí no hay marcha atrás.",
+      "en": "Yes, when inflammation destroys the follicle and scar tissue grows in its place instead: there's no going back from that."
+    },
+    "detail": {
+      "es": "Se llama alopecia cicatricial, y ataca la parte del folículo desde la que normalmente se regenera el pelo. Una vez que la fibrosis ocupa ese espacio, el pelo ya no puede volver a crecer ahí, por lo que la única estrategia que funciona es frenar la inflamación antes de que llegue tan lejos.",
+      "en": "It's called scarring alopecia, and it attacks the part of the follicle from which hair normally regenerates. Once fibrosis takes over that space, hair can no longer grow there, which is why the only strategy that works is stopping the inflammation before it gets that far."
+    },
+    "source": "Cleveland Clinic — Scarring (Cicatricial) Alopecia",
+    "sourceUrl": "https://my.clevelandclinic.org/health/diseases/24582-scarring-alopecia",
+    "_evidence": "Inflammation destroys this part of the follicle and causes scar tissue to grow (fibrosis), so hair can't regenerate."
+  },
+  {
+    "id": "situs-inversus-organos-espejo",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Puede alguien tener el corazón, el hígado y el resto de órganos colocados en el lado contrario al habitual?",
+      "en": "Can someone have their heart, liver, and other organs placed on the opposite side from usual?"
+    },
+    "answer": {
+      "es": "Sí: se llama situs inversus, pasa en 1 de cada 10.000 personas, y el pecho y el abdomen están dispuestos como en un espejo.",
+      "en": "Yes: it is called situs inversus, it affects about 1 in every 10,000 people, and the chest and abdomen are mirrored."
+    },
+    "detail": {
+      "es": "Casi siempre no hay ningún síntoma, porque la estructura y la función de los órganos siguen siendo normales, solo que del lado opuesto. El riesgo real aparece si además hay un defecto cardíaco asociado, algo que ocurre en una minoría de los casos.",
+      "en": "There is almost always no symptom at all, because the structure and function of the organs remain normal, just on the opposite side. The real risk shows up only if there's an associated heart defect, which happens in a minority of cases."
+    },
+    "source": "Cleveland Clinic — Situs Inversus",
+    "sourceUrl": "https://my.clevelandclinic.org/health/diseases/23486-situs-inversus",
+    "_evidence": "a rare condition where the organs in your chest and abdomen are reversed, like a mirror image of normal human anatomy... affects about 1 in every 10,000 people."
+  },
+  {
+    "id": "menisco-zonas-sin-sangre",
+    "category": "cuerpo",
+    "question": {
+      "es": "Dos roturas de menisco en la misma rodilla, ¿por qué una cicatriza sola y la otra necesita cirugía?",
+      "en": "Two meniscus tears in the same knee, so why does one heal on its own while the other needs surgery?"
+    },
+    "answer": {
+      "es": "Porque el menisco no recibe sangre por igual: solo su borde exterior está bien irrigado, y el centro casi no tiene nada.",
+      "en": "Because the meniscus doesn't get blood evenly: only its outer edge is well supplied, and the center barely gets any."
+    },
+    "detail": {
+      "es": "El disco se divide en zonas según su riego: la exterior, bien vascularizada; una intermedia, con riego limitado; y la interior, prácticamente sin vasos ni nervios. Una rotura en esa zona interior se cura mucho peor, precisamente porque le falta lo que trae las células reparadoras.",
+      "en": "The disc is divided into zones by blood supply: an outer one that's well vascularized, a middle one with limited supply, and an inner one with almost no blood vessels or nerves at all. A tear in that inner zone heals far worse, precisely because it lacks what would deliver the repair cells."
+    },
+    "source": "PMC — The Meniscus: Basic Science and Therapeutic Approaches",
+    "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11942698/",
+    "_evidence": "The red-red zone is a highly vascular region, and the white-white zone is a avascular and aneural region... tears in the white-white zone have been believed to have a poor healing potential."
+  },
+  {
+    "id": "estatura-varia-durante-el-dia",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Puedes medir un poco menos por la tarde que por la mañana, sin haber encogido de verdad?",
+      "en": "Can you measure slightly shorter in the evening than in the morning, without actually having shrunk?"
+    },
+    "answer": {
+      "es": "Sí: los discos de la columna pierden agua al soportar tu peso todo el día, y eso te resta unos milímetros de estatura.",
+      "en": "Yes: the discs in your spine lose water while carrying your weight all day, which shaves a few millimeters off your height."
+    },
+    "detail": {
+      "es": "Un estudio midió una disminución media de 3,8 milímetros de longitud lumbar tras un día de actividad normal, consistente con estudios anteriores que hablaban de una pérdida de agua discal de entre el 5% y el 10%. Por la noche, sin peso encima, el disco vuelve a absorber líquido y recuperas esos milímetros mientras duermes.",
+      "en": "One study measured an average decrease of 3.8 millimeters in lumbar length after a day of normal activity, consistent with earlier studies reporting a 5 to 10 percent loss of disc water content. At night, freed from your body weight, the disc reabsorbs fluid and you regain those millimeters while you sleep."
+    },
+    "source": "PMC — Segmental Quantitative MR Imaging Analysis of Diurnal Variation of Water Content in the Lumbar Intervertebral Discs",
+    "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4296262/",
+    "_evidence": "The decrease in lumbar length by 2.1% (mean, -3.8 mm) after daily activity demonstrated in our study, was consistent with previous studies... total water content in normal lumbar discs in human will decrease by 5-10% throughout the day."
+  }
+]

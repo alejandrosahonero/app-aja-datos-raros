@@ -19,7 +19,7 @@ if (hasKeystore) {
 }
 
 android {
-    namespace = "com.alejandrosahonero.app_template"
+    namespace = "com.alejandrosahonero.aja"
 
     // Pinned to 37: required by permission_handler 13 and
     // flutter_secure_storage 11. Do not lower it.
@@ -29,11 +29,15 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+        // Required by flutter_local_notifications: it uses java.time APIs that
+        // do not exist below API 26, and minSdk is 24. Without this the build
+        // fails at :app:checkDebugAarMetadata.
+        isCoreLibraryDesugaringEnabled = true
     }
 
     defaultConfig {
         // CANNOT be changed after the first publication on Google Play.
-        applicationId = "com.alejandrosahonero.app_template"
+        applicationId = "com.alejandrosahonero.aja"
         minSdk = 24
         // Play requires targeting a recent API every year (deadline is usually
         // 31 August). `flutter.targetSdkVersion` tracks the Flutter stable
@@ -76,6 +80,12 @@ android {
             isMinifyEnabled = false
         }
     }
+}
+
+dependencies {
+    // Backport of java.time & friends for API < 26. Version floor comes from
+    // flutter_local_notifications (>= 2.1.4).
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
 }
 
 kotlin {

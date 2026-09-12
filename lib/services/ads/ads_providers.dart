@@ -1,6 +1,6 @@
-import 'package:app_template/services/ads/ads_service.dart';
-import 'package:app_template/services/ads/consent_service.dart';
-import 'package:app_template/services/billing/premium_controller.dart';
+import 'package:aja/services/ads/ads_service.dart';
+import 'package:aja/services/ads/consent_service.dart';
+import 'package:aja/services/billing/premium_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final Provider<ConsentService> consentServiceProvider =

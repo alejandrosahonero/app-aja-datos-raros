@@ -1,0 +1,439 @@
+[
+  {
+    "id": "tetracromatas-cuarto-color",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Puede el ojo humano tener un cuarto tipo de célula para ver colores que tú no ves?",
+      "en": "Can a human eye carry a fourth type of color receptor that shows colors you can't see?"
+    },
+    "answer": {
+      "es": "Sí: se llama tetracromacia y da un cuarto tipo de cono, capaz de distinguir cientos de millones de colores más.",
+      "en": "Yes: it's called tetrachromacy, a fourth cone type able to tell apart hundreds of millions more colors."
+    },
+    "detail": {
+      "es": "Con tres conos distinguimos varios millones de colores; con cuatro, cientos de millones. El gen que lo permite vive en el cromosoma X, así que casi siempre aparece en mujeres, y solo unas pocas superan además las pruebas de comportamiento que confirman que su cerebro realmente usa ese cuarto canal.",
+      "en": "Three cones let us tell apart several million colors; four cones, hundreds of millions. The gene lives on the X chromosome, so it shows up almost only in women, and only a handful pass the behavioral tests that confirm the brain actually uses that fourth channel."
+    },
+    "source": "Cleveland Clinic — Tetrachromacy",
+    "sourceUrl": "https://my.clevelandclinic.org/health/articles/tetrachromacy",
+    "_evidence": "People with tetrachromacy have four types of cones and can tell apart hundreds of millions of colors... That happens in about 12% of females"
+  },
+  {
+    "id": "supercatadores-lengua-rosa",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Por qué a una de cada cuatro personas les sabe insufrible lo que a otras apenas les sabe a nada?",
+      "en": "Why does one in four people find some foods unbearably bitter while others barely notice a taste?"
+    },
+    "answer": {
+      "es": "Porque son «supercatadores»: tienen hasta diez veces más papilas gustativas que el resto.",
+      "en": "Because they're \"supertasters\": they carry up to ten times more taste papillae than everyone else."
+    },
+    "detail": {
+      "es": "La bióloga Linda Bartoshuk descubrió que uno de cada cuatro adultos cualifica como supercatador. Se les puede detectar tiñendo la lengua: sus papilas fungiformes, donde viven las papilas gustativas, quedan como puntitos rosas apretados unos contra otros en vez de dispersos.",
+      "en": "Biologist Linda Bartoshuk found that about one in four adults qualifies as a supertaster. They can be spotted by staining the tongue: their fungiform papillae, which hold the taste buds, show up as pink dots packed tightly together instead of scattered."
+    },
+    "source": "Smithsonian Magazine — A Matter of Taste",
+    "sourceUrl": "https://www.smithsonianmag.com/science-nature/a-matter-of-taste-180940699/",
+    "_evidence": "About one in four, she discovered, qualified as supertasters"
+  },
+  {
+    "id": "palabra-en-la-punta-de-la-lengua",
+    "category": "cuerpo",
+    "question": {
+      "es": "Sabes exactamente la palabra que quieres decir, entonces, ¿por qué se queda atascada justo antes de salir?",
+      "en": "You know exactly which word you want, so why does it get stuck right before coming out?"
+    },
+    "answer": {
+      "es": "Porque una parte del cerebro detecta el atasco y sigue insistiendo mientras otra palabra parecida bloquea el paso.",
+      "en": "Because one brain region flags the jam and keeps pushing while a similar-sounding word blocks the way."
+    },
+    "detail": {
+      "es": "La corteza cingulada anterior actúa como supervisora: nota el conflicto de «lo sé, pero no me sale» y sigue buscando. El fallo suele estar en el último paso, el que traduce el significado en sonidos concretos, y se vuelve más frecuente con la edad porque esas zonas se van reduciendo.",
+      "en": "The anterior cingulate cortex acts as a supervisor, flagging the \"I know this but can't get it out\" conflict and keeps searching. The breakdown usually happens at the last step, the one that turns meaning into actual sounds, and it grows more frequent with age as those brain areas shrink."
+    },
+    "source": "The Conversation — What happens in the brain when there's a word on the tip of the tongue?",
+    "sourceUrl": "https://theconversation.com/what-happens-in-the-brain-when-theres-a-word-on-the-tip-of-the-tongue-246091",
+    "_evidence": "The anterior cingulate cortex acts like a supervisor, signaling that there's a conflict: 'I know this word, but I can't retrieve it!'"
+  },
+  {
+    "id": "misofonia-masticar-enfada",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Por qué el sonido de alguien masticando puede desatarte una rabia que no logras controlar?",
+      "en": "Why can the sound of someone chewing set off a rage you can't seem to control?"
+    },
+    "answer": {
+      "es": "Porque en algunas personas ese sonido concreto dispara una zona del cerebro ligada al peligro, no a la simple molestia.",
+      "en": "Because in some people that specific sound triggers a brain region tied to danger, not mere annoyance."
+    },
+    "detail": {
+      "es": "Se llama misofonia y afecta, según las estimaciones, entre un 10 % y un 20 % de la gente, algo más a las mujeres. En un escáner, oír masticar o respirar dispara la corteza insular anterior mucho más que en quien no la tiene, y con ella llega sudor, tensión muscular y el pulso acelerado.",
+      "en": "It's called misophonia and, by some estimates, affects between 10% and 20% of people, somewhat more women than men. On a scan, hearing chewing or breathing spikes the anterior insular cortex far more than in someone without it, bringing sweating, muscle tension and a racing heartbeat along with it."
+    },
+    "source": "UCLA Health — Misophonia is somewhat common, not widely known",
+    "sourceUrl": "https://www.uclahealth.org/news/article/misophonia-somewhat-common-not-widely-known",
+    "_evidence": "between 10% and 20% of people experience it"
+  },
+  {
+    "id": "tartamudez-desaparece-cantando",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Por qué alguien que tartamudea al hablar puede cantar una canción entera sin trabarse ni una vez?",
+      "en": "Why can someone who stutters while speaking sing an entire song without stumbling once?"
+    },
+    "answer": {
+      "es": "Porque cantar activa el habla de otra manera: sin la presión de encontrar palabras ni de mantener el ritmo de una conversación.",
+      "en": "Because singing engages speech differently: without the pressure of finding words or keeping conversational timing."
+    },
+    "detail": {
+      "es": "Al cantar ya conocemos la letra de memoria, así que desaparece la búsqueda de palabras que puede disparar el bloqueo, y el ritmo fijo de la música marca por sí solo cuándo llega la siguiente sílaba. La evidencia muestra además que el cerebro funciona de forma distinta cuando canta que cuando habla.",
+      "en": "When singing, the lyrics are already known by heart, so the word-searching that can trigger a block disappears, and the music's fixed rhythm alone cues when the next syllable lands. Evidence also shows the brain functions differently while singing than while talking."
+    },
+    "source": "Stuttering Foundation — Singing and Stuttering: What We Know",
+    "sourceUrl": "https://www.stutteringhelp.org/content/singing-and-stuttering-what-we-know-0",
+    "_evidence": "There is no time pressure in singing nor is there any communicative pressure."
+  },
+  {
+    "id": "espalda-menos-tacto-que-dedo",
+    "category": "cuerpo",
+    "question": {
+      "es": "Dos alfileres a milímetros en el dedo se notan como dos, ¿por qué en la espalda hacen falta centímetros?",
+      "en": "Two pins millimeters apart feel like two on your finger — why would your back need centimeters?"
+    },
+    "answer": {
+      "es": "Porque la piel no tiene la misma resolución en todo el cuerpo: los campos receptores del dedo son mucho más pequeños que los de la espalda.",
+      "en": "Because skin doesn't have the same resolution everywhere: the finger's receptive fields are far smaller than the back's."
+    },
+    "detail": {
+      "es": "La diferencia viene de la cantidad de receptores por centímetro cuadrado, muchísimo mayor en la piel sin pelo de dedos, labios y lengua. Por eso una zona tan pequeña como la yema del dedo puede leer braille y la espalda entera apenas distingue un roce de dos.",
+      "en": "The difference comes down to receptor density per square centimeter, far higher in the hairless skin of fingers, lips and tongue. That's why an area as small as a fingertip can read braille while the entire back barely tells one touch from two."
+    },
+    "source": "Medicine LibreTexts (Introduction to Neuroscience) — Touch: The Skin",
+    "sourceUrl": "https://med.libretexts.org/Sandboxes/admin/Introduction_to_Neuroscience_(Hedges)/05:_Sensory_Systems/5.10:_Touch-_The_Skin",
+    "_evidence": "The hand has a smaller threshold for discerning between two points than does the back, a result of the different sized in receptive fields."
+  },
+  {
+    "id": "ojos-tardan-en-ver-de-noche",
+    "category": "cuerpo",
+    "question": {
+      "es": "Apagas la luz y no ves nada, ¿cuánto tarda tu ojo en adaptarse de verdad a la oscuridad?",
+      "en": "You switch off the light and see nothing, so how long does your eye really take to adapt to darkness?"
+    },
+    "answer": {
+      "es": "Los conos, que ven color, se adaptan en unos 10 minutos; los bastones, que ven en penumbra, tardan varias horas en terminar.",
+      "en": "The color-seeing cones adapt in about 10 minutes; the rods that see in dim light take several hours to fully finish."
+    },
+    "detail": {
+      "es": "Las pupilas se dilatan en segundos, pero eso solo deja pasar más luz, no aumenta la sensibilidad de la retina. Esa sensibilidad depende de que un pigmento llamado rodopsina se regenere dentro de los bastones, un proceso lento que explica por qué a los cinco minutos ya ves algo y a la media hora ves mucho más.",
+      "en": "Pupils dilate within seconds, but that only lets in more light, not more retinal sensitivity. That sensitivity depends on a pigment called rhodopsin regenerating inside the rods, a slow process that explains why five minutes in you can already see something, and by half an hour you see far more."
+    },
+    "source": "WTAMU — How long does it take our eyes to fully adapt to darkness?",
+    "sourceUrl": "https://www.wtamu.edu/~cbaird/sq/2013/08/09/how-long-does-it-take-our-eyes-to-fully-adapt-to-darkness/",
+    "_evidence": "Cone cells take about 10 minutes to adapt to the dark. Rod cells take several hours to become completely dark adapted."
+  },
+  {
+    "id": "tinnitus-nace-en-el-cerebro",
+    "category": "cuerpo",
+    "question": {
+      "es": "Ese pitido que oyes sin que suene nada, ¿nace de verdad en tu oído o en otro sitio?",
+      "en": "That ringing you hear when nothing is actually sounding — does it really start in your ear, or somewhere else?"
+    },
+    "answer": {
+      "es": "Nace en el cerebro: cuando el oído pierde células sensibles, ciertas neuronas auditivas se vuelven hiperactivas para rellenar el silencio.",
+      "en": "It starts in the brain: when the ear loses sensory cells, certain auditory neurons turn overactive to fill in the silence."
+    },
+    "detail": {
+      "es": "Se llama tinnitus, y algunos expertos lo explican como una adaptación de los circuitos cerebrales al daño del oído interno, no como un fallo del oído en sí. Es la razón de que se le compare con el dolor de un miembro fantasma: el órgano ya no manda esa señal, pero el cerebro sigue generándola.",
+      "en": "It's called tinnitus, and some experts explain it as the brain's circuits adapting to inner-ear damage, rather than a fault of the ear itself. That's why it gets compared to phantom-limb pain: the organ no longer sends that signal, but the brain keeps generating it anyway."
+    },
+    "source": "Hearing Loss Association of America — Tinnitus",
+    "sourceUrl": "https://www.hearingloss.org/understanding-hearing-loss/types-causes-and-treatments/tinnitus/",
+    "_evidence": "Some experts believe that tinnitus is caused by neural circuits in the brain adapting to inner ear damage (the loss of sensory hair cells)."
+  },
+  {
+    "id": "cerebro-bilingue-doble-freno",
+    "category": "cuerpo",
+    "question": {
+      "es": "Cuando hablas dos idiomas, ¿qué hace tu cerebro con el idioma que en ese momento no estás usando?",
+      "en": "When you speak two languages, what does your brain do with the one you're not using right now?"
+    },
+    "answer": {
+      "es": "No lo apaga: lo mantiene activo de fondo y tiene que inhibirlo activamente cada vez que hablas en el otro.",
+      "en": "It doesn't switch it off: it keeps it active in the background and has to actively inhibit it every time you speak the other one."
+    },
+    "detail": {
+      "es": "Cambiar de idioma pone en marcha una red de zonas frontales y parietales que seleccionan la palabra correcta mientras frenan la del idioma que no toca. Ese ejercicio constante de selección e inhibición es justo lo que entrena, y refuerza, el control cognitivo general del cerebro bilingüe.",
+      "en": "Switching languages engages a network of frontal and parietal regions that select the right word while holding back the one from the language not in use. That constant exercise of selecting and inhibiting is exactly what trains, and strengthens, the bilingual brain's general cognitive control."
+    },
+    "source": "PMC — Bilingual Cognitive Control in Language Switching",
+    "sourceUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4152243/",
+    "_evidence": "This mechanism enables bilinguals to select the lexical item in the target language while inhibiting the non-target language."
+  },
+  {
+    "id": "cueva-sin-reloj-siffre",
+    "category": "cuerpo",
+    "question": {
+      "es": "Sin luz ni reloj, ¿cuánto puede desviarse tu sentido del tiempo del calendario real?",
+      "en": "With no light, no clock and no one to talk to, how far can your sense of time drift from the real calendar?"
+    },
+    "answer": {
+      "es": "En un experimento real, mucho: el sujeto solo contó internamente 42 días vividos mientras arriba habían pasado 58 ciclos de día y noche.",
+      "en": "In a real experiment, plenty: the subject only counted 42 lived days internally while 58 day-night cycles had actually passed on the surface."
+    },
+    "detail": {
+      "es": "El geólogo Michel Siffre pasó sesenta y tres días en una cueva de los Alpes sin ninguna referencia externa de hora ni de fecha. Su cuerpo entró en un ritmo «libre»: percibió internamente 42 «días fisiológicos» mientras arriba transcurrían 58 ciclos de día y noche.",
+      "en": "Geologist Michel Siffre spent sixty-three days in an Alpine cave with no external cue of time or date whatsoever. His body slipped into a \"free-running\" rhythm: he internally counted 42 \"physiological days\" while 58 day-night cycles passed on the surface."
+    },
+    "source": "Journal of History and Philosophy of the Life Sciences (PMC) — Timeless Spaces: Field Experiments in the Physiological Study of Circadian Rhythms, 1938–1963",
+    "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10115684/",
+    "_evidence": "After sixty-three days underground, Siffre 'lost' two weeks of time as his body began to 'free run'... In his estimation, he experienced forty-two 'physiological days' compared to fifty-eight day-night cycles above ground."
+  },
+  {
+    "id": "ceguera-de-caras-prosopagnosia",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Puedes ver perfectamente una cara y aun así no tener ni idea de quién es?",
+      "en": "Can you see a face perfectly clearly and still have no idea whose face it is?"
+    },
+    "answer": {
+      "es": "Sí, se llama prosopagnosia: el cerebro no reconoce caras aunque la vista funcione con normalidad.",
+      "en": "Yes, it's called prosopagnosia: the brain fails to recognize faces even though eyesight works normally."
+    },
+    "detail": {
+      "es": "Puede aparecer de nacimiento o tras un daño cerebral, y varía en grado: algunos solo dudan ante caras poco familiares, otros no distinguen ni a su pareja por la calle. Algunas estimaciones la sitúan en hasta un 2,5 % de la población, con un origen genético identificable en los casos de nacimiento.",
+      "en": "It can be present from birth or follow brain damage, and its severity varies: some people only struggle with unfamiliar faces, others can't recognize their own partner on the street. Some estimates put it as high as 2.5% of the population, with an identifiable genetic origin in the congenital cases."
+    },
+    "source": "Cleveland Clinic — Prosopagnosia (Face Blindness)",
+    "sourceUrl": "https://my.clevelandclinic.org/health/diseases/23412-prosopagnosia-face-blindness",
+    "_evidence": "some research showing as much as 2.5% of people have it to some degree"
+  },
+  {
+    "id": "numeros-con-color-sinestesia",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Puede un número en blanco y negro tener, para ti, un color fijo desde siempre?",
+      "en": "Can a plain black-and-white number carry, for you, a fixed color it has always had?"
+    },
+    "answer": {
+      "es": "Para algunas personas sí: es la sinestesia grafema-color, y les afecta a cerca del 4 % de la población.",
+      "en": "For some people it does: it's grapheme-color synesthesia, and it affects close to 4% of the population."
+    },
+    "detail": {
+      "es": "Al mirar un número o una letra, se activa a la vez la zona cerebral que procesa esa forma y el área V4, encargada del color, como si estuvieran conectadas de más. No hay una única explicación aceptada, pero la teoría dominante habla de un exceso de conexiones entre esas dos regiones vecinas del cerebro.",
+      "en": "Looking at a number or letter fires the brain region that processes its shape at the same time as area V4, which handles color, as if the two were over-connected. There's no single accepted explanation, but the leading theory points to an excess of connections between those two neighboring brain regions."
+    },
+    "source": "PMC — Grapheme-Color Synesthesia and Its Connection to Memory",
+    "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11416151/",
+    "_evidence": "Synesthesia...affects 4.4% of the world population."
+  },
+  {
+    "id": "tocarte-la-nariz-a-ciegas",
+    "category": "cuerpo",
+    "question": {
+      "es": "Con los ojos cerrados, ¿cómo sabe tu mano exactamente dónde está tu nariz para tocarla sin fallar?",
+      "en": "With your eyes closed, how does your hand know exactly where your nose is well enough to touch it?"
+    },
+    "answer": {
+      "es": "Gracias a la propiocepción: un sentido aparte de la vista que informa en todo momento de la posición de cada articulación.",
+      "en": "Thanks to proprioception: a sense separate from sight that constantly reports where every joint is."
+    },
+    "detail": {
+      "es": "Receptores repartidos por músculos, tendones y articulaciones miden el ángulo y el estiramiento de cada parte del cuerpo y lo envían al cerebro sin parar. Es justo lo que comprueba un médico al pedirte que, con los ojos cerrados, toques tu nariz con el dedo repetidas veces.",
+      "en": "Receptors scattered through muscles, tendons and joints constantly measure the angle and stretch of every body part and send it to the brain. That's exactly what a doctor checks by asking you to close your eyes and touch your nose with a fingertip, over and over."
+    },
+    "source": "Cleveland Clinic — Proprioception",
+    "sourceUrl": "https://my.clevelandclinic.org/health/articles/proprioception",
+    "_evidence": "people with a healthy sense of proprioception can close their eyes and accurately touch their fingers to their noses"
+  },
+  {
+    "id": "oidos-explotan-en-el-avion",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Por qué te «explotan» los oídos al aterrizar y no, por ejemplo, al subir una escalera igual de rápido?",
+      "en": "Why do your ears \"pop\" when a plane lands, but not when you climb stairs just as fast?"
+    },
+    "answer": {
+      "es": "Porque el cambio de presión del vuelo es demasiado rápido para que la trompa de Eustaquio lo compense a tiempo.",
+      "en": "Because the pressure change during flight is too fast for the eustachian tube to compensate in time."
+    },
+    "detail": {
+      "es": "Esa trompa conecta el oído medio con la garganta y normalmente igual la presión de los dos lados del tímpano dejando pasar aire. En el despegue y el aterrizaje la presión cambia más rápido de lo que el tubo puede reaccionar, y de ahí el taponamiento hasta que un bostezo o un trago la fuerzan a abrirse.",
+      "en": "That tube connects the middle ear to the throat and normally equalizes pressure on both sides of the eardrum by letting air through. During takeoff and landing the pressure shifts faster than the tube can react, hence the stuffed feeling until a yawn or a swallow forces it open."
+    },
+    "source": "Cleveland Clinic — Airplane Ear",
+    "sourceUrl": "https://my.clevelandclinic.org/health/diseases/17929-airplane-ear",
+    "_evidence": "Air pressure changes when airplanes take off and land. That change happens faster than your eustachian tubes can react."
+  },
+  {
+    "id": "parpadeo-antes-de-pensar",
+    "category": "cuerpo",
+    "question": {
+      "es": "Un portazo te hace parpadear antes de que te dé tiempo a asustarte, entonces, ¿quién decide cerrar tus ojos?",
+      "en": "A slammed door makes you blink before you even have time to feel scared — so who decides to shut your eyes?"
+    },
+    "answer": {
+      "es": "Nadie que puedas controlar: la señal va directa del tronco cerebral al párpado, sin pasar por la parte consciente del cerebro.",
+      "en": "No one you can control: the signal goes straight from the brainstem to the eyelid, skipping the conscious part of the brain entirely."
+    },
+    "detail": {
+      "es": "Es el reflejo de sobresalto acústico, y ese atajo por el tronco encefálico —sin pasar por la corteza— es lo que lo hace tan rápido: ocurre en aproximadamente una centésima de segundo. Sirve para proteger un órgano tan delicado como el ojo antes de que algo pueda golpearlo.",
+      "en": "It's the acoustic startle-blink reflex, and that shortcut through the brainstem, bypassing the cortex, is what makes it so fast: it happens in about a hundredth of a second. Its job is to protect an organ as delicate as the eye before anything can strike it."
+    },
+    "source": "The Conversation — Curious Kids: Why do you blink when there is a sudden loud noise close by?",
+    "sourceUrl": "https://theconversation.com/curious-kids-why-do-you-blink-when-there-is-a-sudden-loud-noise-close-by-99437",
+    "_evidence": "The blink happens especially fast - in about a hundredth of a second"
+  },
+  {
+    "id": "eco-del-sonido-en-la-mente",
+    "category": "cuerpo",
+    "question": {
+      "es": "Una frase ya terminó de sonar, entonces, ¿por qué todavía puedes «oírla» un instante después?",
+      "en": "A sentence has already stopped sounding, so why can you still \"hear\" it for a moment afterward?"
+    },
+    "answer": {
+      "es": "Porque el sonido se queda unos segundos en una memoria de brevísima duración antes de desaparecer.",
+      "en": "Because sound lingers for a few seconds in an extremely short-lived memory before it fades away."
+    },
+    "detail": {
+      "es": "Se llama memoria ecoica, y retiene la información auditiva entre 2 y 3 segundos, más tiempo que su equivalente visual. Ese margen es el que permite entender una frase larga: el cerebro guarda el principio en espera de que llegue el final para darle sentido junto.",
+      "en": "It's called echoic memory, and it holds auditory information for about 2 to 3 seconds, longer than its visual counterpart. That window is what lets you understand a long sentence: the brain holds onto the beginning while it waits for the end, so it can make sense of both together."
+    },
+    "source": "American Psychological Association — APA Dictionary of Psychology, \"echoic memory\"",
+    "sourceUrl": "https://dictionary.apa.org/echoic-memory",
+    "_evidence": "echoic memory: the retention of auditory information for a brief period (2–3 seconds) after the end of the stimulus. Also called auditory sensory memory."
+  },
+  {
+    "id": "piernas-inquietas-de-noche",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Por qué la necesidad incontrolable de mover las piernas casi siempre llega de noche y nunca de día?",
+      "en": "Why does the urge to move your legs almost always strike at night and almost never by day?"
+    },
+    "answer": {
+      "es": "Porque el mensajero químico que lo frena, la dopamina, tiene un ritmo diario y toca fondo justo por la noche.",
+      "en": "Because the chemical messenger that keeps it in check, dopamine, follows a daily rhythm that bottoms out at night."
+    },
+    "detail": {
+      "es": "En el síndrome de piernas inquietas, la dopamina llega a su punto más bajo hacia las tres de la madrugada, y la melatonina, que sube al anochecer, frena aún más su liberación. Ese doble bajón coincide justo con el momento en que los síntomas empeoran.",
+      "en": "In restless legs syndrome, dopamine hits its lowest point around 3 a.m., and melatonin, which rises at nightfall, further suppresses its release. That double dip lines up exactly with when symptoms get worse."
+    },
+    "source": "PMC — Circadian rhythm in restless legs syndrome",
+    "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9995399/",
+    "_evidence": "levels in plasma typically peak at 8 a.m. and gradually decrease to 60% of the peak between 8 p.m. and 10 p.m., with the nadir occurring at ~3 a.m."
+  },
+  {
+    "id": "acento-extranjero-de-repente",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Puedes despertarte un día hablando tu propio idioma con un acento que nunca tuviste?",
+      "en": "Can you wake up one day speaking your own language with an accent you never had before?"
+    },
+    "answer": {
+      "es": "Sí, ocurre de verdad: se llama síndrome del acento extranjero y suele seguir a un daño en el cerebro.",
+      "en": "Yes, it really happens: it's called foreign accent syndrome, and it usually follows brain damage."
+    },
+    "detail": {
+      "es": "Un ictus, un golpe en la cabeza o una lesión cerebral pueden alterar la zona que produce el habla y dejar un acento que ni el propio hablante reconoce como suyo. Es tan raro que, desde el primer caso documentado en 1907, apenas un centenar de personas lo han sufrido en todo el mundo.",
+      "en": "A stroke, a head injury or a brain lesion can disrupt the region that produces speech and leave behind an accent the speaker doesn't even recognize as their own. It's so rare that, since the first documented case in 1907, only about a hundred people worldwide have been diagnosed with it."
+    },
+    "source": "Cleveland Clinic — Foreign Accent Syndrome (FAS)",
+    "sourceUrl": "https://my.clevelandclinic.org/health/diseases/25242-foreign-accent-syndrome-fas",
+    "_evidence": "Pierre Marie, a French neurologist, first described the condition in 1907. There are about 100 confirmed cases on record since then."
+  },
+  {
+    "id": "esparragos-nariz-que-no-huele",
+    "category": "cuerpo",
+    "question": {
+      "es": "¿Por qué algunas narices son incapaces de detectar el olor tan característico de los espárragos en la orina?",
+      "en": "Why are some noses simply unable to detect that distinctive smell asparagus gives urine?"
+    },
+    "answer": {
+      "es": "Porque una variación genética concreta les impide oler ese compuesto en particular, sin que falle nada más de su olfato.",
+      "en": "Because a specific genetic variant blocks that particular compound alone, without any other flaw in their sense of smell."
+    },
+    "detail": {
+      "es": "Se llama anosmia específica: quien la tiene huele con normalidad cualquier otra cosa, pero es ciego a un olor muy concreto. En un estudio, poco más de un 6 % de los participantes no detectó el olor de los espárragos en la orina, ligado a una variante cerca del gen del receptor olfativo OR2M7.",
+      "en": "It's called specific anosmia: people who have it smell everything else normally but are blind to one particular odor. In one study, just over 6% of participants failed to detect the asparagus smell in urine, linked to a variant near the OR2M7 olfactory receptor gene."
+    },
+    "source": "Chemical Senses — Excretion and Perception of a Characteristic Odor in Urine after Asparagus Ingestion",
+    "sourceUrl": "https://academic.oup.com/chemse/article/36/1/9/442551",
+    "_evidence": "2 people out of 31 who participated in the sensory tests failed to detect the odor (6.4%)"
+  },
+  {
+    "id": "olor-que-a-un-tercio-no-existe",
+    "category": "cuerpo",
+    "question": {
+      "es": "El mismo olor de sudor, ¿por qué para algunas narices ni siquiera está ahí?",
+      "en": "That same sweaty smell — why isn't it even there for some noses?"
+    },
+    "answer": {
+      "es": "Porque cerca de un tercio de la gente no puede olerlo en absoluto, y quienes sí lo huelen ni siquiera coinciden en cómo describirlo.",
+      "en": "Because roughly a third of people can't smell it at all, and those who can don't even agree on how to describe it."
+    },
+    "detail": {
+      "es": "El compuesto se llama androstenona, y en un estudio un 30,75 % de los participantes resultó anósmico a él. De los que sí lo perciben, muchos lo describen como algo desagradable, «sudoroso» o «áspero», mientras que otros lo describen como «dulce» o «floral»: la misma molécula, entrando por la misma nariz, puede olerse de formas opuestas.",
+      "en": "The compound is called androstenone, and in one study 30.75% of participants turned out unable to smell it at all. Among those who can, many describe it as unpleasant, \"sweaty\" or \"harsh\", while others call the very same molecule \"sweet\" or \"floral\": the same compound, hitting the same nose, can register as opposite smells."
+    },
+    "source": "PMC — Olfactory training in specific anosmia to androstenone",
+    "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12273440/",
+    "_evidence": "103 out of 335 participants (30.75 %) were classified as anosmic for androstenone"
+  },
+  {
+    "id": "mirar-de-reojo-para-ver-mejor",
+    "category": "cuerpo",
+    "question": {
+      "es": "Para ver una estrella débil, ¿por qué los astrónomos aconsejan mirar a su lado y no a ella?",
+      "en": "To spot a faint star at night, why do astronomers say to look beside it instead of straight at it?"
+    },
+    "answer": {
+      "es": "Porque el centro del ojo está lleno de células que necesitan luz intensa, y los bordes están llenos de las que funcionan a oscuras.",
+      "en": "Because the center of the eye is packed with cells that need bright light, and the edges are packed with the ones that work in the dark."
+    },
+    "detail": {
+      "es": "Esa técnica se llama visión periférica o «desviada», y aprovecha que la zona de la retina fuera del centro, cargada de bastones, es unas 4 magnitudes más sensible a la luz débil que el centro, cargado de conos —una diferencia enorme en la escala con la que se mide el brillo de una estrella—. Es también la razón de que un objeto tenue casi desaparezca en cuanto lo miras fijamente.",
+      "en": "The technique is called averted vision, and it works because the retina's outer region, packed with rods, is about 4 magnitudes more sensitive to dim light than the rod-poor center, packed with cones — a huge gap on the scale used to measure a star's brightness. It's also why a faint object nearly vanishes the moment you stare straight at it."
+    },
+    "source": "NASA Night Sky Network / Astronomical Society of the Pacific — The Eye and How It Works when Viewing Faint Astronomical Objects",
+    "sourceUrl": "https://nightsky.jpl.nasa.gov/documents/837/TTKReadyObserve1.pdf",
+    "_evidence": "The rods are about 4 magnitudes more sensitive to light than the cones."
+  },
+  {
+    "id": "picor-que-viene-del-higado",
+    "category": "cuerpo",
+    "question": {
+      "es": "Un picor por todo el cuerpo sin ronchas ni marcas en la piel, ¿de dónde puede venir si no es de la piel?",
+      "en": "An all-over itch with not a single rash or mark on the skin — where can it come from if not the skin?"
+    },
+    "answer": {
+      "es": "Puede venir del hígado: algunas enfermedades hepáticas producen un picor intenso sin ninguna lesión visible.",
+      "en": "It can come from the liver: certain liver diseases cause intense itching with no visible skin lesion at all."
+    },
+    "detail": {
+      "es": "En la colestasis, la piel de quien lo sufre está libre de lesiones propias del picor, aunque puedan aparecer arañazos por rascarse. No está del todo resuelto qué lo desencadena exactamente —las sales biliares acumuladas eran la sospechosa obvia, pero el picor a veces desaparece justo cuando esas sales están más altas—, y una de las hipótesis con más peso apunta a un exceso de opioides propios del cuerpo.",
+      "en": "In cholestasis, the skin of someone suffering it carries none of the lesions itching usually leaves behind, though scratch marks can still appear. What exactly triggers it isn't fully settled — built-up bile salts were the obvious suspect, but the itch sometimes fades right when those salts peak — and one leading hypothesis points instead to a surplus of the body's own opioids."
+    },
+    "source": "NCBI Bookshelf — Pruritus of Cholestasis",
+    "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK200923/",
+    "_evidence": "The skin of patients with pruritus from liver disease is devoid of primary pruritic skin lesions"
+  },
+  {
+    "id": "torpe-nada-mas-despertar",
+    "category": "cuerpo",
+    "question": {
+      "es": "Ya estás despierto, ¿por qué tu cabeza sigue funcionando los primeros minutos como si siguiera dormida?",
+      "en": "You're already awake, so why does your head keep working as if it were still asleep for the first few minutes?"
+    },
+    "answer": {
+      "es": "Porque no todo el cerebro se despierta a la vez: partes clave para pensar con claridad tardan más en ponerse en marcha.",
+      "en": "Because the brain doesn't wake up all at once: the parts key to clear thinking take longer to come back online."
+    },
+    "detail": {
+      "es": "Se llama inercia del sueño y suele durar entre 15 y 60 minutos, más si venías muy falto de sueño. Es peor cuanto más brusco es el despertar desde el sueño profundo, esa fase en la que el cuerpo baja de temperatura y el cerebro produce ondas lentas que aún no ha terminado de apagar.",
+      "en": "It's called sleep inertia and usually lasts 15 to 60 minutes, longer if you were badly sleep-deprived. It's worse the more abruptly you're woken from deep sleep, the stage where body temperature drops and the brain produces slow waves it hasn't finished switching off yet."
+    },
+    "source": "Cleveland Clinic — Sleep Inertia",
+    "sourceUrl": "https://health.clevelandclinic.org/sleep-inertia",
+    "_evidence": "Sleep inertia usually lasts anywhere from 15 to 60 minutes."
+  }
+]

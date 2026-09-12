@@ -1,0 +1,539 @@
+#!/usr/bin/env python3
+"""Validates researched fact batches and merges them into the bundled catalogue.
+
+Research lands in a staging directory as one JSON array per category, each entry
+carrying an extra `_evidence` field with the sentence copied from the page that
+backs the claim. That field never ships: it exists so a human can audit the batch
+without opening a hundred tabs, and this script strips it on the way in.
+
+Nothing here trusts the researcher. Every entry is re-checked against the same
+rules the Dart parser applies, plus the editorial gates from §3.2 of CLAUDE.md
+that the parser cannot express: a live https source, a question that fits on a
+card, no id that already exists.
+
+Usage
+-----
+    # Report what the batch looks like, changing nothing
+    python3 tool/ingest_facts.py --check
+
+    # Same, and hit every sourceUrl to find dead links (slow, worth it)
+    python3 tool/ingest_facts.py --check --links
+
+    # Merge the entries that pass into assets/data/facts.json
+    python3 tool/ingest_facts.py --apply
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import sys
+import urllib.error
+import urllib.request
+from collections import Counter, defaultdict
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+BUNDLED = ROOT / "assets" / "data" / "facts.json"
+
+CATEGORIES = {"cuerpo", "lenguaje", "historia", "ciencia"}
+REQUIRED = {"id", "category", "question", "answer", "detail", "source", "sourceUrl"}
+LOCALIZED = ("question", "answer", "detail")
+
+# The card and the 1080x1920 story image both shrink text to fit, but only down
+# to a floor (34pt); past it the question is clipped instead. These ceilings sit
+# a little above the longest entry in the hand-written catalogue — question 84,
+# answer 164, detail 328 — so a batch that blows past them is writing essays,
+# not cards.
+MAX_QUESTION = 110
+MAX_ANSWER = 170
+MAX_DETAIL = 460
+
+# Sources that have already produced fabricated citations in this project, or
+# that are aggregators with no primary reporting behind them.
+BANNED_HOSTS = (
+    "reddit.com",
+    "quora.com",
+    "pinterest.",
+    "medium.com",
+    "buzzfeed.com",
+    "listverse.com",
+    "factretriever.com",
+    "thefactsite.com",
+    "chatgpt.com",
+    "claude.ai",
+    # Homework-answer sites. Two entries cited one of these for textbook physics
+    # and the URLs had already rotted by the time the batch was reviewed.
+    "vaia.com",
+    "coursehero.com",
+    "chegg.com",
+    "brainly.",
+    # Commercial health and psychology media. Medically reviewed is not the same
+    # as primary, and this catalogue is one bad health claim away from trouble:
+    # anything these cover is also on Cleveland Clinic, Mayo, NHS or PMC.
+    "healthline.com",
+    "verywellmind.com",
+    "verywellhealth.com",
+    "simplypsychology.org",
+    "scienceblog.com",
+)
+
+# The reading order the user gets. §3.2: a run of same-category cards under the
+# "all" filter reads like the app got stuck, so new entries are woven in the
+# same rotation as the existing file rather than appended in blocks.
+ROTATION = ("cuerpo", "ciencia", "historia", "lenguaje")
+
+
+def load_json(path: Path):
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        sys.exit(f"error: {path} is not valid JSON — {exc}")
+
+
+def check_entry(fact, where: str, known_ids: set[str]) -> list[str]:
+    """Everything that can be judged without touching the network."""
+    problems: list[str] = []
+
+    if not isinstance(fact, dict):
+        return [f"{where}: not an object"]
+
+    missing = REQUIRED - set(fact)
+    if missing:
+        return [f"{where}: missing {sorted(missing)}"]
+
+    fid = str(fact["id"])
+    where = fid
+
+    if fid in known_ids:
+        problems.append(f"{where}: id already exists in the catalogue")
+    if not fid.replace("-", "").isalnum() or fid != fid.lower():
+        problems.append(f"{where}: id must be lowercase kebab-case, ascii only")
+
+    if fact["category"] not in CATEGORIES:
+        problems.append(f"{where}: unknown category {fact['category']!r}")
+
+    for key in LOCALIZED:
+        value = fact[key]
+        if not isinstance(value, dict) or not {"es", "en"} <= set(value):
+            problems.append(f"{where}: {key} needs both 'es' and 'en'")
+            continue
+        for lang, text in value.items():
+            if not str(text).strip():
+                problems.append(f"{where}: {key}.{lang} is empty")
+
+    question = fact.get("question", {})
+    if isinstance(question, dict):
+        for lang, text in question.items():
+            if len(str(text)) > MAX_QUESTION:
+                problems.append(
+                    f"{where}: question.{lang} is {len(text)} chars "
+                    f"(max {MAX_QUESTION}) — it will clip on the story image"
+                )
+        # Spanish opens the interrogative clause, not necessarily the sentence:
+        # "Si el hielo es sólido, ¿por qué resbala?" is correct punctuation.
+        if isinstance(question.get("es"), str) and not (
+            "¿" in question["es"] and question["es"].rstrip().endswith("?")
+        ):
+            problems.append(f"{where}: question.es must contain '¿' and end in '?'")
+        if isinstance(question.get("en"), str) and not question["en"].endswith("?"):
+            problems.append(f"{where}: question.en must be interrogative")
+
+    for key, limit in (("answer", MAX_ANSWER), ("detail", MAX_DETAIL)):
+        value = fact.get(key, {})
+        if isinstance(value, dict):
+            for lang, text in value.items():
+                if len(str(text)) > limit:
+                    problems.append(
+                        f"{where}: {key}.{lang} is {len(text)} chars (max {limit})"
+                    )
+
+    if not str(fact["source"]).strip():
+        problems.append(f"{where}: empty source — no fact ships unsourced")
+
+    url = str(fact["sourceUrl"])
+    if not url.startswith("https://"):
+        problems.append(f"{where}: sourceUrl must be an https link")
+    if any(host in url for host in BANNED_HOSTS):
+        problems.append(f"{where}: {url} is not an acceptable source")
+
+    if not str(fact.get("_evidence", "")).strip():
+        problems.append(
+            f"{where}: no _evidence — the quoted sentence from the page is how "
+            f"a human audits this without reopening every tab"
+        )
+    else:
+        problems += check_figures(fact, where)
+
+    problems += check_scale_words(fact, where)
+
+    return problems
+
+
+# Numbers small enough to be prose rather than data. "one of the two", "three
+# days", "the first" — nobody needs a citation for those, and demanding one
+# floods the report until the real cases are invisible.
+FIGURE_FLOOR = 20
+
+
+# Numbers written as words, because academic prose does that constantly: the
+# paper behind the cave-experiment entry says "forty-two 'physiological days'
+# compared to fifty-eight day-night cycles", and a digits-only check calls a
+# perfectly cited entry a fabrication.
+_WORD_VALUES: dict[str, int] = {
+    # English units and teens
+    "one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6,
+    "seven": 7, "eight": 8, "nine": 9, "ten": 10, "eleven": 11, "twelve": 12,
+    "thirteen": 13, "fourteen": 14, "fifteen": 15, "sixteen": 16,
+    "seventeen": 17, "eighteen": 18, "nineteen": 19,
+    # English tens
+    "twenty": 20, "thirty": 30, "forty": 40, "fifty": 50, "sixty": 60,
+    "seventy": 70, "eighty": 80, "ninety": 90,
+    # Spanish units and teens
+    "uno": 1, "dos": 2, "tres": 3, "cuatro": 4, "cinco": 5, "seis": 6,
+    "siete": 7, "ocho": 8, "nueve": 9, "diez": 10, "once": 11, "doce": 12,
+    "trece": 13, "catorce": 14, "quince": 15, "dieciseis": 16,
+    "diecisiete": 17, "dieciocho": 18, "diecinueve": 19,
+    # Spanish tens and the welded twenties
+    "veinte": 20, "veintiuno": 21, "veintidos": 22, "veintitres": 23,
+    "veinticuatro": 24, "veinticinco": 25, "veintiseis": 26,
+    "veintisiete": 27, "veintiocho": 28, "veintinueve": 29,
+    "treinta": 30, "cuarenta": 40, "cincuenta": 50, "sesenta": 60,
+    "setenta": 70, "ochenta": 80, "noventa": 90,
+    "cien": 100, "mil": 1000,
+}
+
+_WORD_MULTIPLIERS: dict[str, int] = {
+    "hundred": 100, "ciento": 100,
+    "thousand": 1000,
+    "million": 10**6, "millon": 10**6, "millones": 10**6,
+    "billion": 10**9, "billones": 10**12, "trillones": 10**18,
+}
+
+# Joins inside a single number: "sixty-three", "cuarenta y dos", "one hundred and
+# five". Anything else ends the number being read.
+_WORD_GLUE = {"y", "and"}
+
+
+def _strip_accents(text: str) -> str:
+    return (
+        text.replace("á", "a").replace("é", "e").replace("í", "i")
+        .replace("ó", "o").replace("ú", "u").replace("ü", "u")
+    )
+
+
+def _spelled_figures_in(text: str) -> set[float]:
+    """Numbers written as words, in English or Spanish."""
+    tokens = re.findall(r"[a-z]+", _strip_accents(text.lower()))
+    found: set[float] = set()
+    current = 0
+    seen_word = False
+
+    def flush() -> None:
+        nonlocal current, seen_word
+        if seen_word and current >= FIGURE_FLOOR:
+            found.add(float(current))
+        current = 0
+        seen_word = False
+
+    for token in tokens:
+        if token in _WORD_VALUES:
+            current += _WORD_VALUES[token]
+            seen_word = True
+        elif token in _WORD_MULTIPLIERS:
+            # A multiplier with nothing counted in front of it is a vague
+            # quantity, not a figure: "cientos de millones" and "hundreds of
+            # millions" promise no number, and reading them as exactly one
+            # million turns honest prose into an uncited statistic.
+            if current == 0:
+                flush()
+                continue
+            current *= _WORD_MULTIPLIERS[token]
+            seen_word = True
+        elif token in _WORD_GLUE and seen_word:
+            continue
+        else:
+            flush()
+    flush()
+    return found
+
+
+def _figures_in(text: str) -> set[float]:
+    """Every number in `text`, under both locale readings of its separators.
+
+    "10,000" is ten thousand to an English page and ten to a Spanish one, and
+    "99,965" is a legitimate decimal in Spanish and a legitimate thousands group
+    in English. Nothing in the string itself settles which, so both readings are
+    returned and a figure counts as cited when *any* reading matches. Being
+    generous here is the right trade: this check exists to catch numbers the
+    citation never mentions, not to police formatting.
+    """
+    found: set[float] = set()
+    for raw in re.findall(r"\d[\d.,]*", text):
+        digits = raw.rstrip(".,")
+        readings = {
+            digits.replace(",", "").replace(".", ""),  # separators are thousands
+            digits.replace(".", "").replace(",", "."),  # comma is the decimal mark
+            digits.replace(",", ""),  # dot is the decimal mark
+        }
+        for reading in readings:
+            try:
+                value = float(reading)
+            except ValueError:
+                continue
+            if value >= FIGURE_FLOOR:
+                found.add(value)
+    return found | _spelled_figures_in(text)
+
+
+def check_figures(fact, where: str) -> list[str]:
+    """Every figure the card states has to appear in the quoted evidence.
+
+    Not "somewhere on the page" — in the quote. Five entries in the first big
+    batch carried numbers their citation never mentioned (a fleet of 45 pigeons,
+    snow that is 90-95 % air), and each one had to be caught by reading. A
+    figure that is real but uncited is still a figure nobody can check, so the
+    fix is either a fuller quote or no figure.
+    """
+    evidence = _figures_in(str(fact["_evidence"]))
+    problems: list[str] = []
+
+    for key in ("answer", "detail"):
+        value = fact.get(key)
+        if not isinstance(value, dict):
+            continue
+        for lang, text in value.items():
+            missing = _figures_in(str(text)) - evidence
+            if missing:
+                shown = sorted(f"{v:g}" for v in missing)
+                problems.append(
+                    f"{where}: {key}.{lang} states {shown}, which the "
+                    f"_evidence quote does not contain — quote the sentence that "
+                    f"carries the figure, or drop the figure"
+                )
+    return problems
+
+
+# The Spanish long scale and the English short scale collide exactly where big
+# numbers live, and each spelling reads as correct on its own.
+SCALE_TRAP = (
+    ("billón", "billones", 10**12, "trillion", 10**12),
+    ("trillón", "trillones", 10**18, "quintillion", 10**18),
+)
+
+
+def check_scale_words(fact, where: str) -> list[str]:
+    """Catches a big number that is right in one language and wrong in the other.
+
+    `billón` is 10^12 and `trillón` is 10^18, while English `billion` is 10^9 and
+    `trillion` 10^12. So the honest translation of "38 trillion" is "38 billones",
+    and of "25 sextillion" is "25.000 trillones". One entry shipped through a full
+    audit with the Spanish reading a thousand times short, because each side was
+    internally consistent and only reading them together exposes it.
+    """
+    problems: list[str] = []
+    for key in ("answer", "detail"):
+        value = fact.get(key)
+        if not isinstance(value, dict):
+            continue
+        es, en = str(value.get("es", "")).lower(), str(value.get("en", "")).lower()
+
+        for singular, plural, _, english_equivalent, _ in SCALE_TRAP:
+            if singular not in es and plural not in es:
+                continue
+            # "billones" is only correct opposite "trillion"; seeing the English
+            # cognate instead is the mistranslation this check exists for.
+            cognate = singular.replace("ón", "ion")
+            if cognate in en and english_equivalent not in en:
+                problems.append(
+                    f"{where}: {key} pairs Spanish '{plural}' with English "
+                    f"'{cognate}' — these differ by a factor of a thousand. "
+                    f"Spanish '{plural}' translates to '{english_equivalent}'"
+                )
+    return problems
+
+
+# Answers that mean "this checker is not welcome", not "this page is gone".
+# Britannica, the CDC, Mayo Clinic and etymonline all serve real pages to a
+# browser and a 403 (or a redirect loop) to a script. Failing an entry over that
+# would throw away the best sources in the catalogue, so these are reported for a
+# human to open and do not reject the entry.
+BOT_WALL_STATUSES = (401, 403, 429)
+
+
+def check_link(url: str) -> tuple[str, str | None]:
+    """Returns (url, problem) — a 404 here means the entry cannot ship."""
+    request = urllib.request.Request(
+        url,
+        headers={"User-Agent": "Mozilla/5.0 (compatible; aja-catalogue-check/1.0)"},
+        method="GET",
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=20) as response:
+            response.read(1024)
+            return url, None
+    except urllib.error.HTTPError as exc:
+        if exc.code in BOT_WALL_STATUSES:
+            return url, f"warn: HTTP {exc.code}, blocks bots — open it by hand"
+        return url, f"HTTP {exc.code} (dead)"
+    except urllib.error.URLError as exc:
+        # A redirect loop is the other shape a bot wall takes.
+        if "redirect" in str(exc.reason).lower():
+            return url, "warn: redirect loop, blocks bots — open it by hand"
+        return url, f"unreachable: {type(exc).__name__}"
+    except Exception as exc:  # noqa: BLE001 - any failure is a link to look at
+        return url, f"unreachable: {type(exc).__name__}"
+
+
+# Cards at the start of the file that no merge may disturb. The opening is the
+# only editorial control there is over which question a new user meets first
+# (§3.2), and it was chosen by hand.
+CURATED_HEAD = 12
+
+
+def interleave(existing: list[dict], new: list[dict]) -> list[dict]:
+    """Threads `new` through `existing`, never letting a category run build up.
+
+    Appending was the obvious thing and it is wrong. It survived the first merge
+    only because that batch held all four categories in similar numbers; a batch
+    of one category lands as a single block, and seventy-nine body cards in a row
+    read as an app that got stuck — exactly what §3.2 forbids.
+
+    So the new cards are spread across the whole file instead. Each one is placed
+    where neither neighbour shares its category, at roughly even spacing, and a
+    card that finds no room waits for the next gap rather than being forced in.
+    The existing order is otherwise untouched, and the curated opening is left
+    completely alone.
+    """
+    if not new:
+        return list(existing)
+
+    buckets: dict[str, list[dict]] = defaultdict(list)
+    for fact in new:
+        buckets[fact["category"]].append(fact)
+
+    head, tail = existing[:CURATED_HEAD], existing[CURATED_HEAD:]
+    merged = list(head)
+    # One insertion every `stride` existing cards spreads the batch evenly. The
+    # floor of 1 matters when the batch is larger than the file it joins.
+    stride = max(1, len(tail) // (len(new) + 1))
+    remaining = len(new)
+
+    for position, fact in enumerate(tail):
+        merged.append(fact)
+        if not remaining or (position + 1) % stride:
+            continue
+
+        previous = merged[-1]["category"]
+        following = tail[position + 1]["category"] if position + 1 < len(tail) else None
+        # Biggest bucket first, so no category is left over to clump at the end.
+        options = [
+            category
+            for category in sorted(buckets, key=lambda c: -len(buckets[c]))
+            if buckets[category]
+            and category != previous
+            and category != following
+        ]
+        if not options:
+            continue
+        merged.append(buckets[options[0]].pop(0))
+        remaining -= 1
+
+    # Whatever never found a gap goes on the end, still avoiding a run.
+    leftovers = [fact for bucket in buckets.values() for fact in bucket]
+    previous = merged[-1]["category"]
+    while leftovers:
+        nxt = next((f for f in leftovers if f["category"] != previous), leftovers[0])
+        leftovers.remove(nxt)
+        merged.append(nxt)
+        previous = nxt["category"]
+
+    return merged
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--stage", type=Path, required=True, help="staging directory")
+    parser.add_argument("--check", action="store_true", help="validate only")
+    parser.add_argument("--apply", action="store_true", help="merge into the asset")
+    parser.add_argument("--links", action="store_true", help="also fetch every url")
+    args = parser.parse_args()
+
+    if not args.check and not args.apply:
+        sys.exit("error: pass --check or --apply")
+
+    bundled = load_json(BUNDLED)
+    known_ids = {f["id"] for f in bundled["facts"]}
+
+    batches = sorted(p for p in args.stage.glob("*.json"))
+    if not batches:
+        sys.exit(f"error: no .json batches in {args.stage}")
+
+    accepted: list[dict] = []
+    rejected: list[str] = []
+    warnings: list[str] = []
+    seen: set[str] = set()
+
+    for path in batches:
+        entries = load_json(path)
+        if not isinstance(entries, list):
+            rejected.append(f"{path.name}: root must be a JSON array")
+            continue
+        for i, fact in enumerate(entries):
+            problems = check_entry(fact, f"{path.name}[{i}]", known_ids | seen)
+            if problems:
+                rejected.extend(problems)
+                continue
+            seen.add(fact["id"])
+            accepted.append(fact)
+
+    if args.links and accepted:
+        print(f"fetching {len(accepted)} sources...", file=sys.stderr)
+        urls = {f["sourceUrl"] for f in accepted}
+        with ThreadPoolExecutor(max_workers=12) as pool:
+            results = dict(pool.map(check_link, urls))
+        still_good = []
+        for fact in accepted:
+            problem = results.get(fact["sourceUrl"])
+            if problem is None:
+                still_good.append(fact)
+            elif problem.startswith("warn:"):
+                # The page is there, the checker just is not allowed in. Keep the
+                # entry and print the URL so a human can open it once.
+                warnings.append(f"{fact['id']}: {fact['sourceUrl']} — {problem[6:]}")
+                still_good.append(fact)
+            else:
+                rejected.append(f"{fact['id']}: {fact['sourceUrl']} — {problem}")
+        accepted = still_good
+
+    by_category = Counter(f["category"] for f in accepted)
+    print(f"batches:  {', '.join(p.name for p in batches)}")
+    print(f"accepted: {len(accepted)}  ({dict(by_category)})")
+    print(f"rejected: {len(rejected)}")
+    for problem in rejected[:60]:
+        print(f"  - {problem}")
+    if len(rejected) > 60:
+        print(f"  ... and {len(rejected) - 60} more")
+
+    if warnings:
+        print(f"\nkept, but unverifiable by machine: {len(warnings)}")
+        for warning in warnings:
+            print(f"  ! {warning}")
+
+    if not args.apply:
+        return
+
+    for fact in accepted:
+        fact.pop("_evidence", None)
+
+    bundled["facts"] = interleave(bundled["facts"], accepted)
+    BUNDLED.write_text(
+        json.dumps(bundled, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    print(f"\nwritten: {len(bundled['facts'])} questions in assets/data/facts.json")
+
+
+if __name__ == "__main__":
+    main()

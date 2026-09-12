@@ -29,6 +29,11 @@ final class StorageException extends AppException {
   const StorageException(super.message, {super.cause});
 }
 
+/// A bundled or remote data source is missing or malformed.
+final class DataException extends AppException {
+  const DataException(super.message, {super.cause});
+}
+
 /// The user cancelled a flow that had already started.
 final class CancelledByUserException extends AppException {
   const CancelledByUserException([super.message = 'Cancelled by user']);

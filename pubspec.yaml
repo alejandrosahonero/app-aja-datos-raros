@@ -1,6 +1,6 @@
-name: app_template
-description: "Plantilla base modular en Flutter para desarrollo rápido de aplicaciones Android. Incluye integración de Google AdMob, gestión de permisos Android 12+, tematización Material 3 y arquitectura escalable."
-# Evita publicar accidentalmente la plantilla en pub.dev.
+name: aja
+description: "Ajá: Datos Curiosos Raros. Mazo deslizable de preguntas incómodas con su respuesta y fuente verificable."
+# App privada: nunca se publica en pub.dev.
 publish_to: "none"
 
 # versionName + versionCode. Incrementar SIEMPRE el build number (+N) en cada
@@ -33,10 +33,14 @@ dependencies:
   in_app_purchase: ^3.3.0
 
   # --- Plataforma ---------------------------------------------------------
-  # Permisos runtime Android 12+ (Bluetooth, ubicación, notificaciones).
-  permission_handler: ^13.0.0
   # Diálogo nativo de reseña de Google Play tras un momento de éxito.
   in_app_review: ^2.0.12
+
+  # Hoja de compartir del sistema. Es el único camino soportado para entregar
+  # una imagen a Instagram o TikTok sin integrar sus SDKs: pesa ~50 KB de Dart,
+  # no toca el arranque (se carga al primer uso) y evita cuatro dependencias
+  # propietarias. La imagen se pinta con dart:ui, sin paquetes extra.
+  share_plus: ^13.3.0
 
   # --- Persistencia -------------------------------------------------------
   # Clave-valor simple: flags, contadores, preferencias de UI.
@@ -49,6 +53,19 @@ dependencies:
   # La versión la fija flutter_localizations del SDK de Flutter (pinning).
   intl: ^0.20.2
   cupertino_icons: ^1.0.8
+  # Cliente HTTP oficial de dart.dev. Se usa solo para las aportaciones de los
+  # usuarios: una petición POST a un endpoint, sin SDK propietario. Se elige
+  # frente a dart:io porque acepta un `http.Client` inyectado, y eso es lo que
+  # permite testear el envío sin red.
+  http: ^1.6.0
+  flutter_local_notifications: ^22.3.0
+  timezone: ^0.11.1
+  flutter_timezone: ^5.1.0
+  # Directorio de soporte de la app, para cachear en disco el catálogo remoto.
+  # No va en shared_preferences a propósito: las prefs se cargan enteras en
+  # memoria al arrancar, y medio mega de JSON ahí es coste en cada arranque.
+  path_provider: ^2.1.6
+  url_launcher: ^6.3.2
 
 dev_dependencies:
   flutter_test:
@@ -59,5 +76,8 @@ flutter:
   uses-material-design: true
   # Activa la generación de AppLocalizations a partir de lib/l10n/*.arb.
   generate: true
-  # assets:
-  #   - assets/images/     # WebP para bitmaps, SVG para iconografía.
+  assets:
+    # Catálogo de datos empaquetado. Sin backend en el MVP: se parsea una vez
+    # fuera del isolate principal y se cachea en memoria.
+    - assets/data/
+
