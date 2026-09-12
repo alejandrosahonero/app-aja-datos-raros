@@ -64,6 +64,20 @@ BANNED_HOSTS = (
     "thefactsite.com",
     "chatgpt.com",
     "claude.ai",
+    # Homework-answer sites. Two entries cited one of these for textbook physics
+    # and the URLs had already rotted by the time the batch was reviewed.
+    "vaia.com",
+    "coursehero.com",
+    "chegg.com",
+    "brainly.",
+    # Commercial health and psychology media. Medically reviewed is not the same
+    # as primary, and this catalogue is one bad health claim away from trouble:
+    # anything these cover is also on Cleveland Clinic, Mayo, NHS or PMC.
+    "healthline.com",
+    "verywellmind.com",
+    "verywellhealth.com",
+    "simplypsychology.org",
+    "scienceblog.com",
 )
 
 # The reading order the user gets. §3.2: a run of same-category cards under the
