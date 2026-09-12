@@ -151,13 +151,15 @@ El volteo es un `rotateY` con perspectiva (`setEntry(3, 2, 0.0012)`); a mitad de
 
 `assets/data/facts.json`: una entrada por tarjeta con `question` / `answer` / `detail` en `es` y `en`, más `category` y `source`.
 
-- **Cada dato lleva fuente, y la fuente es un enlace que se abrió.** Las 533 entradas llevan `sourceUrl` comprobado contra una página real: `sourceUrl` es ese enlace permanente y la app lo pinta como enlace clicable bajo la respuesta (`FactSourceLink`). Un "dato curioso" falso viral se convierte en reseñas de 1 estrella y en burla pública, así que la regla es dura: **una entrada sin URL comprobada no entra**, y hay un test (`fact_repository_test.dart`) que lo impide.
-- **Las 85 primeras se verificaron a mano; las 448 siguientes, con un protocolo.** No es lo mismo y conviene no confundirlo. El protocolo fue: agentes de investigación que abren la página con `WebFetch` y copian en un campo `_evidence` la frase literal que sostiene la respuesta; después `tool/ingest_facts.py --check --links` golpea cada URL; después una segunda tanda de agentes compara afirmación contra evidencia. Ese último paso es el que caza lo que ninguna máquina puede: cifras que la fuente no da. Marcó 45 de 448, de las cuales la mayoría eran citas recortadas y no datos falsos — pero salieron dos contradicciones de fecha, un superlativo inventado y un número mil veces mal por confundir el trillón español con el *sextillion* inglés. Ese último es el aviso importante: **una cifra puede ser coherente en un idioma y estar mal en el otro**, y solo se ve leyendo las dos versiones a la vez.
+- **Cada dato lleva fuente, y la fuente es un enlace que se abrió.** Las 612 entradas llevan `sourceUrl` comprobado contra una página real: `sourceUrl` es ese enlace permanente y la app lo pinta como enlace clicable bajo la respuesta (`FactSourceLink`). Un "dato curioso" falso viral se convierte en reseñas de 1 estrella y en burla pública, así que la regla es dura: **una entrada sin URL comprobada no entra**, y hay un test (`fact_repository_test.dart`) que lo impide.
+- **Las 85 primeras se verificaron a mano; las 527 siguientes, con un protocolo.** No es lo mismo y conviene no confundirlo. El protocolo fue: agentes de investigación que abren la página con `WebFetch` y copian en un campo `_evidence` la frase literal que sostiene la respuesta; después `tool/ingest_facts.py --check --links` golpea cada URL; después una segunda tanda de agentes compara afirmación contra evidencia. Ese último paso es el que caza lo que ninguna máquina puede: cifras que la fuente no da. En el primer lote de 448 marcó 45, de las cuales la mayoría eran citas recortadas y no datos falsos — pero salieron dos contradicciones de fecha, un superlativo inventado y un número mil veces mal por confundir el trillón español con el *sextillion* inglés. Ese último es el aviso importante: **una cifra puede ser coherente en un idioma y estar mal en el otro**, y solo se ve leyendo las dos versiones a la vez.
 - **La cita de texto plano no vale como verificación.** El catálogo se escribió con ayuda de IA y varias de aquellas citas resultaron ser inventadas o no decir lo que se afirmaba: existía el organismo, existía la revista, pero la página no hablaba del tema. Si añades contenido con IA, la cita que produzca es una **pista**, no una fuente: hay que abrir la página.
 - El contenido está localizado **en el asset**, no en los `.arb`, porque traducir o ampliar el catálogo no debe exigir una versión nueva — y porque ese mismo JSON vendrá luego de Firebase Remote Config o Firestore.
 - `FactCategory` es un enum cerrado: una categoría desconocida en el JSON **revienta al parsear**, no pinta un chip vacío en producción.
 - El parseo corre en un isolate aparte (`compute`) y se cachea en `FactRepository` durante toda la vida del proceso.
-- **El orden del fichero es el orden que ve el usuario**: no hay barajado en ninguna parte. Por eso el catálogo va **intercalado por categoría** (cuerpo, ciencia, historia, lenguaje, y vuelta a empezar) en vez de agrupado: con el filtro en «Todas», un bloque de veinte tarjetas seguidas de la misma categoría se lee como si la app se hubiera quedado atascada. Al añadir contenido, mantener el intercalado.
+- **El orden del fichero es el orden que ve el usuario**: no hay barajado en ninguna parte. Por eso el catálogo va **intercalado por categoría** (cuerpo, ciencia, historia, lenguaje, y vuelta a empezar) en vez de agrupado: con el filtro en «Todas», un bloque de veinte tarjetas seguidas de la misma categoría se lee como si la app se hubiera quedado atascada. Al añadir contenido, mantener el intercalado. `tool/ingest_facts.py:interleave()` lo hace solo cuando el lote nuevo trae varias categorías en cantidades parecidas; un lote de una sola categoría más grande que los huecos disponibles deja un resto que no tiene con qué alternar y lo vuelca seguido al final.
+
+  > **Desbalance en curso.** El lote de última hora de 79 preguntas de "cuerpo" (`tool/facts-staging/cuerpo3_*.json`) se fusionó solo, sin lotes equivalentes de las otras tres categorías, y dejó 35 tarjetas de "cuerpo" seguidas al final del fichero. El test `fact_repository_test.dart: the catalogue stays interleaved by category` está **desactivado a propósito** (`skip:`) hasta que ciencia/historia/lenguaje reciban un lote parecido y se pueda re-intercalar todo junto. No subir el umbral del test para que pase: eso dejaría de detectar un atasco real más adelante.
 
 ### 3.3 Composición del mazo
 
@@ -171,7 +173,7 @@ El progreso se persiste como **el conjunto de ids ya leídos** (`deck_seen_ids`)
 
 Guardar ids y no un índice resuelve dos cosas a la vez. Los huecos de anuncio se desplazan al comprar premium, y un índice guardado apuntaría a otra tarjeta. Y sobre todo: **los chips son cuatro vistas de un mismo catálogo, no cuatro mazos**. Un contador solo significa algo contra un orden concreto, así que con uno por filtro (`deck_facts_seen_<categoría>`, como estaba antes) terminarte «Ciencia» y pasar a «Todas» te repartía esas mismas cartas otra vez. Repartir una carta que el usuario acaba de leer es lo único que este mazo no puede hacer.
 
-La lista viaja en `shared_preferences`, que se carga entera al arrancar (§10): con 533 entradas son unos diez kilobytes. Los ids de datos que un catálogo remoto haya retirado dejan de coincidir con nada y son inofensivos.
+La lista viaja en `shared_preferences`, que se carga entera al arrancar (§10): con 612 entradas son unos diez kilobytes. Los ids de datos que un catálogo remoto haya retirado dejan de coincidir con nada y son inofensivos.
 
 **«Reiniciar deck» solo revive las cartas del filtro activo.** Pulsarlo bajo el chip de «Ciencia» es pedir más ciencia, no ofrecerse a releer la historia que se terminó la semana pasada.
 
@@ -507,15 +509,16 @@ flutter build appbundle --release --analyze-size
 
 1. ~~Verificar a mano las entradas de `assets/data/facts.json` y rellenar `sourceUrl`.~~ **Hecho para las 85 originales**, una a una contra una página abierta; se retiraron 2 y se corrigió la redacción de 12 que decían más de lo que su fuente sostenía.
 
-   Las **448 posteriores** (§3.2) se verificaron con un protocolo automatizado, no a mano. Lo que sigue pendiente: repasar las que se apoyan en fuentes de segunda fila (Wikipedia sostiene el 7 %) y subirlas a una primaria si aparece, y abrir a mano las **15 que devuelven 403** al comprobador — Britannica, CDC, Mayo Clinic y el museo de la DEA sirven la página a un navegador y la niegan a un script, así que su enlace es el único del catálogo sin comprobar por máquina. `tool/ingest_facts.py --check --links` las lista bajo "kept, but unverifiable by machine".
-2. `core/config/ad_config.dart`: rellenar `_prodBanner` y `_prodInterstitial`.
-3. `AndroidManifest.xml`: sustituir el App ID de prueba de AdMob por el de producción.
-4. Iconos adaptativos (`flutter_launcher_icons`) y splash nativo (`flutter_native_splash`) — necesitan assets reales.
-5. Crash reporting (Crashlytics o Sentry) — **obligatorio desde la v1**. Enganchar en `AppLogger.error` y en `bootstrap`.
-6. Política de privacidad publicada en una URL accesible (obligatoria por usar AdMob).
-7. Data Safety form, content rating (IARC), público objetivo, declaración "contiene anuncios".
-8. Testing interno → closed testing (**12 testers / 14 días** para cuentas personales creadas después de nov-2023) → producción con rollout escalonado 10–20 %.
-9. Vigilar Android Vitals: crash rate > 1,09 % o ANR > 0,47 % penalizan la visibilidad → parar el rollout.
+   Las **527 posteriores** (§3.2) se verificaron con un protocolo automatizado, no a mano. Lo que sigue pendiente: repasar las que se apoyan en fuentes de segunda fila (Wikipedia sostiene el 7 %) y subirlas a una primaria si aparece, y abrir a mano las **15 que devuelven 403** al comprobador — Britannica, CDC, Mayo Clinic y el museo de la DEA sirven la página a un navegador y la niegan a un script, así que su enlace es el único del catálogo sin comprobar por máquina. `tool/ingest_facts.py --check --links` las lista bajo "kept, but unverifiable by machine".
+2. **Re-intercalar el catálogo y reactivar el test de orden.** El lote de 79 preguntas de "cuerpo" se fusionó sin lotes equivalentes de ciencia/historia/lenguaje (§3.2) y dejó 35 tarjetas de esa categoría seguidas al final. En cuanto lleguen lotes parecidos para las otras tres categorías, correr `tool/ingest_facts.py --apply` con las cuatro juntas para que `interleave()` tenga con qué alternar, y quitar el `skip:` de `fact_repository_test.dart: the catalogue stays interleaved by category`.
+3. `core/config/ad_config.dart`: rellenar `_prodBanner` y `_prodInterstitial`.
+4. `AndroidManifest.xml`: sustituir el App ID de prueba de AdMob por el de producción.
+5. Iconos adaptativos (`flutter_launcher_icons`) y splash nativo (`flutter_native_splash`) — necesitan assets reales.
+6. Crash reporting (Crashlytics o Sentry) — **obligatorio desde la v1**. Enganchar en `AppLogger.error` y en `bootstrap`.
+7. Política de privacidad publicada en una URL accesible (obligatoria por usar AdMob).
+8. Data Safety form, content rating (IARC), público objetivo, declaración "contiene anuncios".
+9. Testing interno → closed testing (**12 testers / 14 días** para cuentas personales creadas después de nov-2023) → producción con rollout escalonado 10–20 %.
+10. Vigilar Android Vitals: crash rate > 1,09 % o ANR > 0,47 % penalizan la visibilidad → parar el rollout.
 
 ### Features del plan original todavía sin implementar
 
