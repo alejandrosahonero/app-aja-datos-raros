@@ -1,55 +1,63 @@
-# facts-staging — lote investigado, **sin revisar por un humano**
+# facts-staging — de la investigación al catálogo
 
-Nada de esto ha entrado en `assets/data/facts.json` todavía, y no debe entrar en
-bloque. Son 166 entradas producidas por agentes de investigación siguiendo
-`BRIEF.md`, con el protocolo de §3.2: buscar, **abrir la página**, y copiar en
-`_evidence` la frase literal que sostiene la respuesta.
+Los ficheros **sueltos en este directorio** son lotes investigados y **sin
+fusionar**. `merged/` guarda los que ya entraron en `assets/data/facts.json`.
 
-Lo que ya está comprobado por máquina (`tool/ingest_facts.py --check --links`):
+Los fusionados se conservan con su `_evidence` intacto a propósito: es la
+trazabilidad de por qué entró cada dato, y `_evidence` nunca viaja al APK — el
+script lo borra al fusionar.
 
-- Esquema completo, categoría válida, ids sin colisión con el catálogo actual.
-- Longitudes que caben en la tarjeta y en la imagen 1080x1920.
-- `sourceUrl` https, dominio no vetado, y **la URL responde** — cero enlaces
-  muertos en las 159 comprobadas.
-
-Lo que **no** puede comprobar una máquina, y es justo donde falló el catálogo
-original doce veces: **que la página diga lo que la respuesta afirma**. La URL
-puede existir, el organismo puede ser real, y la página puede no hablar del tema.
-Para eso está `_evidence`: se lee la frase citada junto a la respuesta y se ve de
-un vistazo si la entrada dice más de lo que la fuente sostiene.
-
-## Repaso pendiente antes de fusionar
-
-- [ ] Leer `_evidence` de las 166 y tumbar las que se estiren más que su fuente.
-- [ ] Mirar con lupa las que se apoyan en Wikipedia (es fuente de segunda fila,
-      §13.1) y subirlas a una primaria donde se pueda.
-- [ ] Abrir a mano las 3 de Britannica: devuelven 403 al comprobador automático,
-      así que su enlace está sin verificar por máquina.
-- [ ] Comprobar que ninguna repite tema con las 85 que ya existen.
-
-## Fusionar
+## Cómo se usa
 
 ```bash
+# Esquema, longitudes, ids, cifras citadas, trampa de escala. No toca la red.
+python3 tool/ingest_facts.py --stage tool/facts-staging --check
+
+# Lo mismo, y golpea cada sourceUrl. Lento y vale la pena.
 python3 tool/ingest_facts.py --stage tool/facts-staging --check --links
+
+# Fusiona lo que pasa: borra _evidence y teje las entradas en la rotación.
 python3 tool/ingest_facts.py --stage tool/facts-staging --apply
 ```
 
-`--apply` borra `_evidence` y teje las entradas en la rotación de categorías del
-fichero en vez de pegar cuatro bloques al final (§3.2: un bloque largo de la misma
-categoría se lee como si la app se hubiera atascado).
+`--apply` entrelaza por categoría en vez de pegar bloques al final. Vaciando
+primero el cubo más grande, así que la racha máxima de una misma categoría se
+queda en 2 — la que tiene el catálogo escrito a mano. Un bloque largo de la misma
+categoría se lee como si la app se hubiera atascado (§3.2).
 
-Para fusionar solo una parte, saca del directorio los ficheros que no quieras o
-recorta los arrays.
+## Qué comprueba la máquina y qué no
 
-## De dónde salió cada lote
+**Sí:** esquema completo, categoría válida, ids sin colisión, longitudes que
+sobreviven a la imagen 1080x1920, `sourceUrl` https y de dominio no vetado, que la
+URL responda, **que toda cifra escrita aparezca en la frase de `_evidence`**, y la
+trampa del billón/trillón entre español e inglés.
 
-Cuatro agentes en paralelo, uno por categoría. Los cuatro se cortaron por límite
-de la API antes de llegar a las 100 que pedía el encargo; escribían por tandas, así
-que lo que hay es lo investigado hasta el corte, no un lote completo.
+**No:** que la página diga lo que la respuesta afirma más allá de las cifras. Eso
+sigue necesitando leer `_evidence` junto a la respuesta. Es exactamente donde el
+catálogo original falló doce veces.
 
-| Fichero | Entradas | Encargo |
+Las dos puertas de cifras existen porque en el lote de 448 hubo que cazar a mano
+cinco números que la fuente no sostenía y uno que estaba **mil veces mal en español
+y bien en inglés** (`trillón` es 10¹⁸ y `trillion` 10¹²). Ambas cosas son ahora
+automáticas.
+
+## Un 403 no es un enlace muerto
+
+Britannica, la CDC, Mayo Clinic y etymonline sirven la página a un navegador y la
+niegan a un script. Esas entradas se **conservan** y se listan aparte, bajo
+`kept, but unverifiable by machine`, para abrirlas a mano una vez. Rechazarlas
+tiraría las mejores fuentes del catálogo.
+
+Distinto es el investigador: **si no pudo abrir la página, no puede ponerla como
+fuente.** `BRIEF.md` lo exige — `sourceUrl` tiene que ser algo que se leyó.
+
+## Historial
+
+| Lote | Entradas | Estado |
 |---|---|---|
-| `ciencia.json` | 40 | física cotidiana, diseño industrial, astronomía, probabilidad |
-| `cuerpo.json` | 34 | reflejos, sentidos que mienten, mitos médicos desmentidos |
-| `historia.json` | 38 | solapamientos temporales, orígenes accidentales, burocracia vigente |
-| `lenguaje.json` | 54 | etimologías, signos, bulos etimológicos famosos |
+| Primero (8 ficheros en `merged/`) | 448 | Fusionado. Catálogo de 85 → 533. |
+
+Del primer lote, una auditoría de afirmación-contra-evidencia marcó 45. La mayoría
+eran citas recortadas, no datos falsos. Lo que sí salió: dos contradicciones de
+fecha, un superlativo inventado, una atribución a una persona que la fuente no
+menciona, y el error de escala numérica. Todo corregido antes de fusionar.

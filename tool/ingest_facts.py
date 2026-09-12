@@ -27,6 +27,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 import urllib.error
 import urllib.request
@@ -149,7 +150,100 @@ def check_entry(fact, where: str, known_ids: set[str]) -> list[str]:
             f"{where}: no _evidence — the quoted sentence from the page is how "
             f"a human audits this without reopening every tab"
         )
+    else:
+        problems += check_figures(fact, where)
 
+    problems += check_scale_words(fact, where)
+
+    return problems
+
+
+# Numbers small enough to be prose rather than data. "one of the two", "three
+# days", "the first" — nobody needs a citation for those, and demanding one
+# floods the report until the real cases are invisible.
+FIGURE_FLOOR = 20
+
+
+def _figures_in(text: str) -> set[str]:
+    """Digit groups worth citing, normalised so 1.500 and 1,500 compare equal."""
+    found: set[str] = set()
+    for raw in re.findall(r"\d[\d.,]*", text):
+        digits = raw.rstrip(".,")
+        # Drop the thousands separators, keep a decimal comma as a dot so
+        # "99,965" and "99.965" are the same number to this check.
+        plain = digits.replace(".", "").replace(",", ".")
+        try:
+            value = float(plain)
+        except ValueError:
+            continue
+        if value >= FIGURE_FLOOR:
+            found.add(plain.rstrip("0").rstrip(".") if "." in plain else plain)
+    return found
+
+
+def check_figures(fact, where: str) -> list[str]:
+    """Every figure the card states has to appear in the quoted evidence.
+
+    Not "somewhere on the page" — in the quote. Five entries in the first big
+    batch carried numbers their citation never mentioned (a fleet of 45 pigeons,
+    snow that is 90-95 % air), and each one had to be caught by reading. A
+    figure that is real but uncited is still a figure nobody can check, so the
+    fix is either a fuller quote or no figure.
+    """
+    evidence = _figures_in(str(fact["_evidence"]))
+    problems: list[str] = []
+
+    for key in ("answer", "detail"):
+        value = fact.get(key)
+        if not isinstance(value, dict):
+            continue
+        for lang, text in value.items():
+            missing = _figures_in(str(text)) - evidence
+            if missing:
+                problems.append(
+                    f"{where}: {key}.{lang} states {sorted(missing)}, which the "
+                    f"_evidence quote does not contain — quote the sentence that "
+                    f"carries the figure, or drop the figure"
+                )
+    return problems
+
+
+# The Spanish long scale and the English short scale collide exactly where big
+# numbers live, and each spelling reads as correct on its own.
+SCALE_TRAP = (
+    ("billón", "billones", 10**12, "trillion", 10**12),
+    ("trillón", "trillones", 10**18, "quintillion", 10**18),
+)
+
+
+def check_scale_words(fact, where: str) -> list[str]:
+    """Catches a big number that is right in one language and wrong in the other.
+
+    `billón` is 10^12 and `trillón` is 10^18, while English `billion` is 10^9 and
+    `trillion` 10^12. So the honest translation of "38 trillion" is "38 billones",
+    and of "25 sextillion" is "25.000 trillones". One entry shipped through a full
+    audit with the Spanish reading a thousand times short, because each side was
+    internally consistent and only reading them together exposes it.
+    """
+    problems: list[str] = []
+    for key in ("answer", "detail"):
+        value = fact.get(key)
+        if not isinstance(value, dict):
+            continue
+        es, en = str(value.get("es", "")).lower(), str(value.get("en", "")).lower()
+
+        for singular, plural, _, english_equivalent, _ in SCALE_TRAP:
+            if singular not in es and plural not in es:
+                continue
+            # "billones" is only correct opposite "trillion"; seeing the English
+            # cognate instead is the mistranslation this check exists for.
+            cognate = singular.replace("ón", "ion")
+            if cognate in en and english_equivalent not in en:
+                problems.append(
+                    f"{where}: {key} pairs Spanish '{plural}' with English "
+                    f"'{cognate}' — these differ by a factor of a thousand. "
+                    f"Spanish '{plural}' translates to '{english_equivalent}'"
+                )
     return problems
 
 
