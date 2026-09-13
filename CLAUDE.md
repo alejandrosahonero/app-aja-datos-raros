@@ -264,7 +264,11 @@ Dos sistemas encadenados: **cada día pide un número de datos**, y **cumplirlo 
 
 **El día paga lo que pidió**: cumplir un objetivo de 15 son 15 puntos; uno de 8, ocho. Es justo sin necesidad de inventarse una constante. Y **paga una sola vez**: seguir leyendo después suma datos al contador pero no más puntos.
 
-**Rangos** (`Rank`): Curioso · Preguntón · Sabelotodo · Erudito · Enciclopedia · Oráculo, en 0 / 60 / 180 / 400 / 800 / 1400 puntos. Con una media de ~11 puntos por día perfecto, el segundo cae dentro de la primera semana — pronto para demostrar que el sistema funciona — y el último más allá de cien días cumplidos, que es donde debe estar un rango final. La barra de la pantalla de progreso mide **desde el suelo del rango actual**, no desde cero: una barra única para toda la escalera se pasaría semanas sin moverse.
+**Rangos** (`Rank`): seis familias — Curioso · Preguntón · Sabelotodo · Erudito · Enciclopedia · Oráculo — y las cinco primeras se dividen en tres niveles (**I, II, III**) antes de dar paso a la siguiente familia, así que la escalera real tiene **16 peldaños**: 0 / 20 / 40 / 60 / 100 / 140 / 180 / 250 / 320 / 400 / 530 / 660 / 800 / 1000 / 1200 / 1400 puntos. `Rank` sigue siendo un único enum plano de 16 valores — `curiousI`…`curiousIII`, `inquisitiveI`…, hasta `oracle` — no dos conceptos separados de "familia" y "nivel"; `RankStyle.label()` es quien junta el nombre de la familia con el numeral romano (el numeral no vive en el `.arb`: I/II/III se leen igual en cualquier idioma que la app soporte).
+
+**Oráculo, la última familia, se queda sin dividir a propósito.** Es la cima de la escalera: no hay una familia siguiente hacia la que repartir tramos, así que trocearla solo inventaría un techo que nadie pidió. Los puntos ganados después de llegar se acumulan sin límite y sin ningún nivel nuevo que anunciar — `Rank.oracle.next` es `null` y así se queda.
+
+Con una media de ~11 puntos por día perfecto, el segundo peldaño (Curioso II, a 20 puntos) cae en un par de días — pronto para demostrar que el sistema funciona — y Oráculo, a 1400, más allá de cien días cumplidos, que es donde debe estar el techo. La barra de la pantalla de progreso mide **desde el suelo del nivel actual**, no desde cero: una barra única para toda la escalera se pasaría semanas sin moverse.
 
 **Dónde se ve.** Un anillo en la **barra superior** del mazo, con el icono del rango dentro. Ahí y no sobre las tarjetas: el mazo ya cede alto a los chips y al banner, y esto sería lo tercero en pedirle una franja. Al tocarlo se abre `/progress`, que es donde vive la explicación completa, la escalera entera y el estado del día.
 
@@ -273,7 +277,7 @@ Dos sistemas encadenados: **cada día pide un número de datos**, y **cumplirlo 
 | Qué pasa | Qué sale |
 |---|---|
 | Se cumple el objetivo | Un `SnackBar`. Pasa todos los días y un modal acabaría siendo lo que el usuario aprende a cerrar. |
-| Se sube de rango | Un diálogo. Pasa seis veces en la vida de la app, y es el único premio que tienen los puntos. |
+| Se sube de rango | Un diálogo. Con la escalera de 16 peldaños pasa dieciséis veces en la vida de la app en vez de seis, y sigue siendo el único premio que tienen los puntos — subir de nivel dentro de una misma familia (Curioso I → II) dispara el mismo diálogo que cambiar de familia. Si algún día eso se siente como demasiada interrupción, la palanca es tratar ese caso aparte en `showGoalEvent` (`goal_celebration.dart`), no tocar los umbrales de `Rank`. |
 
 **El día se cierra desde el reloj, no desde memoria.** `registerLearned` relee el día guardado en cada escritura, así que una app abierta desde antes de medianoche se pone al día con la primera tarjeta que se voltee; `refresh()` existe para el caso de volver del segundo plano sin haber tocado nada todavía. Los contadores de ayer no se borran hasta la siguiente escritura, pero **nunca se leen**: la comparación con el reloj los enmascara, y por eso un `awarded` viejo no puede pagar el objetivo de hoy.
 
@@ -323,12 +327,13 @@ El App ID de prueba también está declarado en `android/app/src/main/AndroidMan
 `AppConfig.interstitialEveryNActions` (9) **y** `AppConfig.minIntervalBetweenInterstitials` (3 min).
 Una "acción de valor" aquí es **una tarjeta descartada**. Como las tarjetas se consumen rápido, el que manda en la práctica es el suelo de 3 minutos. No añadir atajos que salten el pacing.
 
-**Tarjeta de anuncio (`AdDeckCard`).** Dos reglas que no se relajan:
+**Tarjeta de anuncio (`AdDeckCard`).** Comportamiento estilo Tinder: mover un poco la tarjeta de encima ya deja ver el anuncio de debajo **reproduciéndose**, no cargando.
 
-1. **Pedir el creativo y pintarlo son dos cosas distintas, y solo la segunda es una impresión.** El `AdWidget` se monta **únicamente en `depth == 0`**: las tarjetas que esperan detrás están tapadas al 95 %, y pintar un anuncio que nadie puede ver es justo lo que AdMob cuenta como impresión inválida. Esta regla no se relaja.
-2. **La petición sale una tarjeta antes** (`AppConfig.deckAdPreloadDepth`, hoy 1). Pedirla solo al llegar arriba es lo que hacía que el anuncio apareciera tarde, después de un parpadeo del argumento de "quitar anuncios". Precargando, llegar arriba es un repintado y no una ida y vuelta a la red. Subir esa profundidad es pedir creativos que quizá nadie vea, así que se queda en 1.
-3. Mientras la petición está en vuelo la tarjeta **reserva el hueco vacío**, no enseña el argumento de pago. Ese argumento significa "no entró nada" —sin consentimiento, sin inventario, sin unidad configurada— y sacarlo durante una carga que va a funcionar es como la tarjeta acaba cambiando de opinión delante del usuario.
-4. La etiqueta **"Publicidad" siempre visible**. Un anuncio mimetizado sin etiqueta es un rechazo por *deceptive ads*.
+1. **La petición sale en cuanto la tarjeta existe**, sea cual sea su profundidad (`AppConfig.deckAdPreloadDepth = deckVisibleCards - 1`, cubre toda la pila visible). Es el máximo margen posible: no hay una posición más atrás desde la que precargar.
+2. **El `AdWidget` se monta en cuanto el creativo carga**, en la profundidad en la que esté la tarjeta en ese momento — tapada por la(s) de encima, igual que Tinder. Antes se montaba solo en `depth == 0`, y ese retraso era justo lo que se veía: un `AdWidget` es una vista de plataforma nativa, y la primera vez que se infla cuesta un instante perceptible. Montarlo pronto mueve ese coste detrás de la tarjeta de encima, donde no se ve; montarlo tarde lo pagaba el usuario mirando.
+3. Esto no cambia cuándo AdMob cuenta una impresión: su propio sistema de viewability (Active View) decide eso por cuánto del anuncio está realmente visible en pantalla y durante cuánto tiempo, no por si el `AdWidget` existe en el árbol de widgets. Un anuncio tapado al 95 % sigue sin ser una impresión visible se monte antes o después — lo único que cambia es *cuándo* se construye la vista, no si se enseña estando tapada.
+4. Mientras la petición está en vuelo la tarjeta **reserva el hueco vacío**, no enseña el argumento de pago. Ese argumento significa "no entró nada" —sin consentimiento, sin inventario, sin unidad configurada— y sacarlo durante una carga que va a funcionar es como la tarjeta acaba cambiando de opinión delante del usuario.
+5. La etiqueta **"Publicidad" siempre visible**. Un anuncio mimetizado sin etiqueta es un rechazo por *deceptive ads*. Esta regla, a diferencia de la del montaje, no se relaja.
 
 `SwipeDeck` pasa al `builder` la **profundidad** de cada tarjeta, no un booleano "es la de arriba": una tarjeta puede necesitar empezar a trabajar antes de ser alcanzable, y eso no cabe en un `bool`.
 
