@@ -125,7 +125,7 @@ class _DeckBodyState extends ConsumerState<_DeckBody> {
           // useful thing the user can do, so the chips must not disappear with
           // the cards.
           const _CategoryChips(),
-          const SizedBox(height: AppSpacing.xs),
+          const SizedBox(height: AppSpacing.hairline),
           const _DeckBanner(),
           Expanded(
             child: state.isExhausted
@@ -506,7 +506,7 @@ class _DeckBanner extends StatelessWidget {
         anchored: false,
         // Inside the banner, not around it: an empty slot must cost the deck
         // nothing at all, gap included.
-        padding: EdgeInsets.only(bottom: AppSpacing.xs),
+        padding: EdgeInsets.only(bottom: AppSpacing.hairline),
       ),
     );
   }
