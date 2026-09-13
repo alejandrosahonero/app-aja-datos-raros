@@ -187,10 +187,21 @@ class _TodayCard extends StatelessWidget {
 
 /// The whole ladder, so the next rank is a thing the user can aim at rather
 /// than a surprise.
+///
+/// Always exactly six medallions — one per **named** rank, never sixteen.
+/// A family not reached yet shows its bare name with no numeral: "Preguntón
+/// I" is not a real destination to aim at, "Preguntón" is. Once the user has
+/// actually reached a tier inside a family, that family's medallion switches
+/// to the specific tier — its own or, once the user has moved past the whole
+/// family, the last one reached (`III`), which is the peak that family ever
+/// showed the user and stays claimed after moving on.
 class _RankLadder extends StatelessWidget {
   const _RankLadder({required this.held});
 
   final Rank held;
+
+  /// Curioso .. Oráculo.
+  static final int _familyCount = Rank.oracle.family + 1;
 
   @override
   Widget build(BuildContext context) {
@@ -198,42 +209,92 @@ class _RankLadder extends StatelessWidget {
       title: context.l10n.goalsRankLadder,
       icon: Icons.military_tech_outlined,
       children: <Widget>[
-        for (final Rank rank in Rank.values)
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: AppSpacing.xs),
-            child: Row(
-              children: <Widget>[
-                Icon(
-                  rank.icon,
-                  size: 20,
-                  // Ranks above the one held are dimmed rather than hidden:
-                  // what is coming is the reason to come back tomorrow.
-                  color: rank.index <= held.index
-                      ? context.colors.primary
-                      : context.colors.outlineVariant,
-                ),
-                const SizedBox(width: AppSpacing.sm),
-                Expanded(
-                  child: Text(
-                    rank.label(context),
-                    style: context.texts.bodyMedium?.copyWith(
-                      fontWeight: rank == held ? FontWeight.w700 : null,
-                      color: rank.index <= held.index
-                          ? null
-                          : context.colors.onSurfaceVariant,
-                    ),
-                  ),
-                ),
-                Text(
-                  context.l10n.goalsRankPointsShort(rank.minPoints),
-                  style: context.texts.labelSmall?.copyWith(
-                    color: context.colors.onSurfaceVariant,
-                  ),
-                ),
-              ],
+        SizedBox(
+          height: 132,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount: _familyCount,
+            separatorBuilder: (BuildContext context, int index) =>
+                const SizedBox(width: AppSpacing.md),
+            itemBuilder: (BuildContext context, int index) =>
+                _RankMedallion(family: index, held: held),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+/// One rank's spot on the ladder: a big icon, its name below, its point
+/// threshold below that.
+class _RankMedallion extends StatelessWidget {
+  const _RankMedallion({required this.family, required this.held});
+
+  /// Which of the six named ranks this medallion represents.
+  final int family;
+
+  final Rank held;
+
+  static const double _diameter = 64;
+
+  @override
+  Widget build(BuildContext context) {
+    final List<Rank> tiers = Rank.values
+        .where((Rank rank) => rank.family == family)
+        .toList(growable: false);
+    final Rank first = tiers.first;
+    final Rank last = tiers.last;
+
+    final bool isCurrentFamily = family == held.family;
+    final bool isPastFamily = family < held.family;
+    final bool isReached = isCurrentFamily || isPastFamily;
+
+    // Still climbing this family: show the exact tier held. Already moved on:
+    // show the last tier this family ever paid out, which is the one that was
+    // actually earned before leaving it behind. Not reached at all: `first`
+    // only lends its icon here, never its numeral — see `familyLabel` below.
+    final Rank display = isCurrentFamily ? held : (isPastFamily ? last : first);
+
+    final Color iconColor = isReached
+        ? context.colors.onPrimaryContainer
+        : context.colors.onSurfaceVariant;
+
+    return SizedBox(
+      width: 88,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Container(
+            width: _diameter,
+            height: _diameter,
+            decoration: BoxDecoration(
+              color: isReached
+                  ? context.colors.primaryContainer
+                  : context.colors.surfaceContainerHighest,
+              shape: BoxShape.circle,
+            ),
+            child: Icon(display.icon, size: 30, color: iconColor),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Text(
+            isReached ? display.label(context) : display.familyLabel(context),
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: context.texts.labelMedium?.copyWith(
+              fontWeight: isCurrentFamily ? FontWeight.w700 : null,
+              color: isReached ? null : context.colors.onSurfaceVariant,
             ),
           ),
-      ],
+          const SizedBox(height: AppSpacing.xs / 2),
+          Text(
+            context.l10n.goalsRankPointsShort(display.minPoints),
+            style: context.texts.labelSmall?.copyWith(
+              color: context.colors.onSurfaceVariant,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

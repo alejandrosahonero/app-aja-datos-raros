@@ -5,9 +5,12 @@ import 'package:flutter/material.dart';
 /// Name and icon for each rank, kept out of the domain the same way
 /// `FactCategory`'s label is: the enum is a threshold table, not a widget.
 extension RankStyle on Rank {
-  /// The name shared by a rank's three tiers — what [label] shows on its own
-  /// for Oráculo, which never got split into tiers.
-  String _family(BuildContext context) => switch (this) {
+  /// The name shared by a rank's three tiers, with no numeral — what [label]
+  /// shows on its own for Oráculo, which never got split into tiers, and what
+  /// the progress screen's ladder shows for a family the user has not reached
+  /// any tier of yet (§3.8: the ladder always lists the six names; a numbered
+  /// tier only replaces one once actually reached).
+  String familyLabel(BuildContext context) => switch (this) {
     Rank.curiousI ||
     Rank.curiousII ||
     Rank.curiousIII => context.l10n.rankCurious,
@@ -51,7 +54,7 @@ extension RankStyle on Rank {
 
   /// "Curioso II", or plain "Oráculo" at the top of the ladder.
   String label(BuildContext context) {
-    final String family = _family(context);
+    final String family = familyLabel(context);
     final String? tier = _tier;
     return tier == null ? family : '$family $tier';
   }

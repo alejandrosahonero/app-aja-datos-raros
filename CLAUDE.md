@@ -272,6 +272,12 @@ Con una media de ~11 puntos por día perfecto, el segundo peldaño (Curioso II, 
 
 **Dónde se ve.** Un anillo en la **barra superior** del mazo, con el icono del rango dentro. Ahí y no sobre las tarjetas: el mazo ya cede alto a los chips y al banner, y esto sería lo tercero en pedirle una franja. Al tocarlo se abre `/progress`, que es donde vive la explicación completa, la escalera entera y el estado del día.
 
+**La escalera de `/progress` muestra siempre las seis familias, nunca los 16 peldaños.** Cada medallón es una familia (`Rank.family`, `curiousI/II/III` → familia 0, …, `oracle` solo → familia 5), con su icono grande arriba, el nombre debajo y los puntos debajo del nombre. El numeral solo aparece **al alcanzarlo**:
+
+- Familia aún no alcanzada → nombre plano ("Preguntón"), sin numeral. Un "Preguntón I" que todavía no es real no es una meta, es ruido.
+- Familia actual → el tier exacto que se tiene (`held`), con su numeral.
+- Familia ya superada → el **último** tier que llegó a pagar (`III`), no el nombre plano. Es el techo real que esa familia mostró antes de dejarla atrás, y se queda ganado.
+
 **El aviso está graduado por lo que vale interrumpir:**
 
 | Qué pasa | Qué sale |

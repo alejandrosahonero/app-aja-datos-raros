@@ -48,6 +48,14 @@ enum Rank {
     return held;
   }
 
+  /// Which of the six named ranks this tier belongs to (0 = Curioso, …,
+  /// 5 = Oráculo). The first five names hold exactly three tiers each, so
+  /// integer division by 3 lands all of `curiousI`/`II`/`III` on family 0 and
+  /// so on; Oráculo (index 15) lands alone on family 5, since it was never
+  /// split. Used to group the ladder by name in the progress screen without
+  /// hard-coding which indices belong together there.
+  int get family => index ~/ 3;
+
   /// The next one up, or null at the top of the ladder.
   Rank? get next =>
       index + 1 < Rank.values.length ? Rank.values[index + 1] : null;
