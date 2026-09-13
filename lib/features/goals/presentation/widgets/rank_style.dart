@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:aja/core/extensions/build_context_x.dart';
 import 'package:aja/features/goals/domain/rank.dart';
 import 'package:flutter/material.dart';
@@ -80,4 +82,45 @@ extension RankStyle on Rank {
     Rank.encyclopediaIII => Icons.auto_stories_outlined,
     Rank.oracle => Icons.auto_awesome,
   };
+}
+
+/// "How rare is this rank?" — deliberately an **estimate**, never a measured
+/// statistic.
+///
+/// This app has no backend, no accounts, and no analytics pipeline (§3.5,
+/// §3.6: every network touchpoint that exists was chosen to avoid exactly
+/// that), so it has never counted how many real installs reached any rank and
+/// has no way to. What [RankRarity.estimatedRarityPercent] returns instead is
+/// a hand-picked curve, not a fitted one: days needed to reach a rank at the
+/// ~11 points/perfect-day pace documented in CLAUDE.md §3.8, run through an
+/// assumed 40%-of-remaining-players-lost-per-week decay — a plausible shape
+/// for a daily-habit app, chosen for a believable curve, not measured from
+/// this app's own users or anyone else's.
+///
+/// Zero data collection either way: nothing here reads or sends anything, it
+/// only does arithmetic on [Rank.minPoints], which is already a compile-time
+/// constant. See CLAUDE.md §3.8 for why this exists instead of a real
+/// percentile.
+extension RankRarity on Rank {
+  static const double _avgPointsPerPerfectDay = 11;
+  static const double _weeklyRetention = 0.6;
+
+  double get estimatedRarityPercent {
+    final double weeks = (minPoints / _avgPointsPerPerfectDay) / 7;
+    return 100 * math.pow(_weeklyRetention, weeks).toDouble();
+  }
+
+  /// The sentence for the progress screen, phrased as "estimado" on purpose —
+  /// see the extension doc for why this must never read as a measured claim.
+  ///
+  /// Below 1% comes back as its own string rather than a rounded number: a
+  /// measured statistic would show "0.04%", and printing that much precision
+  /// on a number nobody measured is what would make this feel like a real
+  /// (and fabricated) statistic instead of an honest estimate.
+  String rarityLabel(BuildContext context) {
+    final double percent = estimatedRarityPercent;
+    return percent < 1
+        ? context.l10n.goalsRarityBelowOne
+        : context.l10n.goalsRarityApprox(percent.round());
+  }
 }

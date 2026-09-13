@@ -113,6 +113,19 @@ class _RankHeader extends StatelessWidget {
             color: context.colors.onSurfaceVariant,
           ),
         ),
+        // Skipped at the very first tier: everybody is there on day one, so
+        // "estimated: ~100%" would be noise, not a fact worth telling anyone.
+        if (rank != Rank.curiousI) ...<Widget>[
+          const SizedBox(height: AppSpacing.xs),
+          Text(
+            rank.rarityLabel(context),
+            textAlign: TextAlign.center,
+            style: context.texts.labelSmall?.copyWith(
+              color: context.colors.onSurfaceVariant,
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+        ],
       ],
     );
   }
@@ -209,16 +222,18 @@ class _RankLadder extends StatelessWidget {
       title: context.l10n.goalsRankLadder,
       icon: Icons.military_tech_outlined,
       children: <Widget>[
-        SizedBox(
-          height: 132,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: _familyCount,
-            separatorBuilder: (BuildContext context, int index) =>
-                const SizedBox(width: AppSpacing.md),
-            itemBuilder: (BuildContext context, int index) =>
-                _RankMedallion(family: index, held: held),
-          ),
+        // A Wrap, not a horizontal list: all six have to be on screen at
+        // once, with nothing to scroll to find the rest of the ladder. It
+        // reflows into two or three rows depending on width and text scale
+        // instead of assuming a fixed row count.
+        Wrap(
+          alignment: WrapAlignment.center,
+          spacing: AppSpacing.md,
+          runSpacing: AppSpacing.md,
+          children: <Widget>[
+            for (int family = 0; family < _familyCount; family++)
+              _RankMedallion(family: family, held: held),
+          ],
         ),
       ],
     );
