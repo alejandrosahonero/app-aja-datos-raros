@@ -278,6 +278,10 @@ Con una media de ~11 puntos por día perfecto, el segundo peldaño (Curioso II, 
 - Familia actual → el tier exacto que se tiene (`held`), con su numeral.
 - Familia ya superada → el **último** tier que llegó a pagar (`III`), no el nombre plano. Es el techo real que esa familia mostró antes de dejarla atrás, y se queda ganado.
 
+**«Estimado: ~N % llega tan lejos» (`RankRarity`, `rank_style.dart`) es un cálculo, no un dato medido.** La app no tiene backend, ni cuentas, ni analítica — nunca ha contado cuántas instalaciones reales llegaron a ningún rango y no tiene forma de hacerlo sin empezar a recolectar algo. El número sale de aplicar una curva de retención inventada (60 % de los jugadores restantes se pierde cada semana, una forma plausible para una app de hábito diario, no ajustada a datos reales) sobre los días que tardaría un jugador perfecto en llegar (~11 puntos/día, §3.8 arriba). **La palabra "Estimado" en el texto no es decorativa**: cambiarla por una redacción que suene a estadística real ("el 3 % de los usuarios llegó aquí") sería mentirle al usuario sobre qué es este número. Se oculta en Curioso I (100 % trivial, todo el mundo empieza ahí) y por debajo del 1 % se enseña como "menos del 1 %" en vez de un decimal — un decimal es la clase de precisión que solo tiene sentido si de verdad se midió algo.
+
+Si algún día se quiere una cifra real: exige un punto de contacto con un servidor (aunque sea anónimo, sin login) que hay que declarar en el formulario de Data Safety como "App activity", no vinculado a la identidad. La opción más barata sería un contador agregado en Firestore (`increment()` por rango alcanzado, sin ningún id), del mismo tamaño de decisión que ya se tomó para el catálogo remoto (§3.6) y las aportaciones (§3.5) — pero es una dependencia nueva (`firebase_core` + `cloud_firestore`) y una declaración nueva, así que no se ha hecho porque no se pidió.
+
 **El aviso está graduado por lo que vale interrumpir:**
 
 | Qué pasa | Qué sale |
@@ -355,6 +359,8 @@ Si no entra ningún creativo (sin consentimiento, sin inventario, sin unidad con
 **El banner del mazo va arriba, nunca abajo.** El mazo es una superficie que se arrastra en cuatro direcciones, y un banner anclado al borde inferior bajo ese gesto es el ejemplo de manual del clic accidental. Colocado sobre las tarjetas el dedo no lo pisa nunca al salir de un deslizamiento. **No moverlo abajo.**
 
 Si no entra creativo, o el usuario es premium, el widget no ocupa nada (`SizedBox.shrink`): la tarjeta recupera el espacio en vez de dejar una franja gris. En pantallas pequeñas el banner y los chips comen alto que era de la tarjeta; el mazo va en un `Expanded` y cede, pero conviene revisarlo con `textScaleFactor` alto (§14).
+
+**El hueco visible bajo el banner no siempre es un padding de la app.** `getLargeAnchoredAdaptiveBannerAdSize` puede reservar hasta un 15 % del alto de pantalla — es lo que exige la propia API, no algo que este widget decida — y si el creativo servido es más bajo que eso (el creativo de prueba de Google, sobre todo, suele serlo), lo que sobra se ve como fondo oscuro entre el anuncio y las tarjetas, porque la vista de plataforma es transparente donde no hay creativo. `_DeckBanner` y `AdaptiveBannerAd` ya van sin ningún padding propio (§ arriba); si ese hueco sigue molestando, la única palanca real es cambiar a un `AdSize` fijo (`AdSize.banner`, 320x50) en vez de adaptativo — sacrifica el eCPM que justifica lo adaptativo, así que es una decisión de producto, no un ajuste de espaciado.
 
 **Consentimiento (UMP).** `services/ads/consent_service.dart` usa el UMP SDK que ya incluye `google_mobile_ads` (sin dependencia extra):
 `requestConsentInfoUpdate` → `loadAndShowConsentFormIfRequired` → `canRequestAds()`.
