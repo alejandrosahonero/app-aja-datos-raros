@@ -125,7 +125,7 @@ class _DeckBodyState extends ConsumerState<_DeckBody> {
           // useful thing the user can do, so the chips must not disappear with
           // the cards.
           const _CategoryChips(),
-          const SizedBox(height: AppSpacing.sm),
+          const SizedBox(height: AppSpacing.xs),
           const _DeckBanner(),
           Expanded(
             child: state.isExhausted
@@ -163,8 +163,9 @@ class _DeckBodyState extends ConsumerState<_DeckBody> {
                   favorited: favorites.contains(fact.id),
                   onTap: isTop ? () => unawaited(_reveal(context, ref)) : null,
                 ),
-                // Depth and not `isTop`: the ad card fetches its creative one
-                // place early so it is not still loading when it arrives.
+                // Depth and not `isTop`: the ad card fetches and renders its
+                // creative as soon as it exists, however deep in the stack, so
+                // it is already playing underneath by the time it arrives.
                 AdItem() => AdDeckCard(depth: depth),
               };
             },
@@ -505,7 +506,7 @@ class _DeckBanner extends StatelessWidget {
         anchored: false,
         // Inside the banner, not around it: an empty slot must cost the deck
         // nothing at all, gap included.
-        padding: EdgeInsets.only(bottom: AppSpacing.sm),
+        padding: EdgeInsets.only(bottom: AppSpacing.xs),
       ),
     );
   }
