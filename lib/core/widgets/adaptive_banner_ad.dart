@@ -18,6 +18,18 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 /// Adaptive sizing (instead of a fixed 320x50) is what AdMob recommends: it
 /// picks the best height for the current screen width and yields a better
 /// eCPM.
+///
+/// That height is a **reservation, not a promise**: `getLargeAnchoredAdaptive
+/// BannerAdSize` can claim up to 15% of the screen's height, and whatever the
+/// served creative does not fill inside that box shows through as blank space
+/// — dark background here, since the platform view behind an unfilled banner
+/// is transparent. It is most visible with Google's own test creative, which
+/// is shorter than most real ones. There is no app-side fix for this: shrink
+/// the reservation and eCPM drops, since it is the same call that yields the
+/// adaptive-height win described above. If a build ever needs a guaranteed-
+/// tight banner regardless of eCPM, the escape hatch is a fixed `AdSize`
+/// (`AdSize.banner`, 320x50) instead of the adaptive call — a real product
+/// trade-off, not something to switch to quietly.
 class AdaptiveBannerAd extends ConsumerStatefulWidget {
   const AdaptiveBannerAd({
     super.key,

@@ -125,7 +125,9 @@ class _DeckBodyState extends ConsumerState<_DeckBody> {
           // useful thing the user can do, so the chips must not disappear with
           // the cards.
           const _CategoryChips(),
-          const SizedBox(height: AppSpacing.hairline),
+          // No gap at all: a small SizedBox used to sit here, still visible as
+          // dead space, and the deck needs the height more than the seam
+          // between chips and banner does.
           const _DeckBanner(),
           Expanded(
             child: state.isExhausted
@@ -501,14 +503,10 @@ class _DeckBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: AdaptiveBannerAd(
-        anchored: false,
-        // Inside the banner, not around it: an empty slot must cost the deck
-        // nothing at all, gap included.
-        padding: EdgeInsets.only(bottom: AppSpacing.hairline),
-      ),
-    );
+    // No padding at all: any remaining gap below the ad is not app layout
+    // wasting space — see AdaptiveBannerAd's class doc for where it comes
+    // from and why this widget cannot close it.
+    return const Center(child: AdaptiveBannerAd(anchored: false));
   }
 }
 
