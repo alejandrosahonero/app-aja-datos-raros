@@ -179,7 +179,7 @@
 
   "rankCurious": "Curioso",
   "@rankCurious": {
-    "description": "Rango 1 de 6"
+    "description": "Familia de rango 1 de 6. Esta y las tres siguientes se muestran con un numeral romano detrás (I, II, III) para sus tres niveles; el numeral se añade en código, no aquí. La última familia (rankOracle) no tiene niveles."
   },
   "rankInquisitive": "Preguntón",
   "rankKnowItAll": "Sabelotodo",

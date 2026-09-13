@@ -5,14 +5,33 @@
 /// week — early enough to show the user the system works — and the last one out
 /// past a hundred completed days, which is where a top rank belongs.
 ///
+/// Each of the first five ranks is split into three tiers — I, II, III —
+/// before the name changes, so the ladder reads as sixteen steps instead of
+/// six without moving where any of the six names sit or how far the climb
+/// runs. The **last** rank, Oráculo, is deliberately left whole: it is the top
+/// of the ladder, there is nothing above it to divide the wait into, and
+/// splitting it would just be inventing a ceiling nobody asked for. Points
+/// earned past it keep counting forever with no further tier to announce —
+/// see [next] and [progressTo].
+///
 /// Flutter-free on purpose, like `FactCategory`: the name and the icon are a
 /// presentation concern and live in `rank_style.dart`.
 enum Rank {
-  curious(0),
-  inquisitive(60),
-  knowItAll(180),
-  scholar(400),
-  encyclopedia(800),
+  curiousI(0),
+  curiousII(20),
+  curiousIII(40),
+  inquisitiveI(60),
+  inquisitiveII(100),
+  inquisitiveIII(140),
+  knowItAllI(180),
+  knowItAllII(250),
+  knowItAllIII(320),
+  scholarI(400),
+  scholarII(530),
+  scholarIII(660),
+  encyclopediaI(800),
+  encyclopediaII(1000),
+  encyclopediaIII(1200),
   oracle(1400);
 
   const Rank(this.minPoints);

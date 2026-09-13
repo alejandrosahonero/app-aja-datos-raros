@@ -7,14 +7,14 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('Rank.forPoints', () {
     test('starts everybody at the bottom', () {
-      expect(Rank.forPoints(0), Rank.curious);
-      expect(Rank.forPoints(-10), Rank.curious);
+      expect(Rank.forPoints(0), Rank.curiousI);
+      expect(Rank.forPoints(-10), Rank.curiousI);
     });
 
     test('promotes exactly on the threshold, not one point later', () {
       for (final Rank rank in Rank.values) {
         expect(Rank.forPoints(rank.minPoints), rank);
-        if (rank != Rank.curious) {
+        if (rank != Rank.curiousI) {
           expect(Rank.forPoints(rank.minPoints - 1), isNot(rank));
         }
       }
@@ -41,28 +41,36 @@ void main() {
     });
 
     test('counts down the points still owed', () {
-      expect(Rank.curious.pointsTo(0), Rank.inquisitive.minPoints);
-      expect(Rank.curious.pointsTo(50), Rank.inquisitive.minPoints - 50);
+      final int nextTier = Rank.curiousI.next!.minPoints;
+      expect(Rank.curiousI.pointsTo(0), nextTier);
+      expect(Rank.curiousI.pointsTo(nextTier - 5), 5);
     });
 
     test('never reports a negative debt', () {
-      expect(Rank.curious.pointsTo(Rank.inquisitive.minPoints + 100), 0);
+      final int nextTier = Rank.curiousI.next!.minPoints;
+      expect(Rank.curiousI.pointsTo(nextTier + 100), 0);
     });
   });
 
   group('Rank.progressTo', () {
     test('measures across the current band, not from zero', () {
-      // Half way between 60 and 180 is 120, and the bar must read 50% there —
-      // a bar measured from zero would show 67% and creep forward even on days
-      // that earned nothing towards the next rank.
-      final int middle =
-          (Rank.inquisitive.minPoints + Rank.knowItAll.minPoints) ~/ 2;
-      expect(Rank.inquisitive.progressTo(middle), closeTo(0.5, 0.01));
+      // Half way between a tier's floor and the next one's, the bar must read
+      // 50% — a bar measured from zero would creep forward even on days that
+      // earned nothing towards the next tier.
+      final int floor = Rank.inquisitiveI.minPoints;
+      final int ceiling = Rank.inquisitiveI.next!.minPoints;
+      expect(
+        Rank.inquisitiveI.progressTo((floor + ceiling) ~/ 2),
+        closeTo(0.5, 0.01),
+      );
     });
 
     test('is empty on arrival and full on departure', () {
-      expect(Rank.inquisitive.progressTo(Rank.inquisitive.minPoints), 0);
-      expect(Rank.inquisitive.progressTo(Rank.knowItAll.minPoints), 1);
+      expect(Rank.inquisitiveI.progressTo(Rank.inquisitiveI.minPoints), 0);
+      expect(
+        Rank.inquisitiveI.progressTo(Rank.inquisitiveI.next!.minPoints),
+        1,
+      );
     });
 
     test('is full at the top of the ladder', () {
