@@ -130,7 +130,7 @@ Una pila de tarjetas, una detrás de otra. Solo la de arriba responde al dedo.
 
 El eje dominante decide la acción: un arrastre de 200 px hacia arriba y 60 px a la izquierda es un guardado, no un descarte.
 
-**Filtro de categoría: fila de chips** (`_CategoryChips`), arriba del todo y por encima del banner. Sustituye al `PopupMenuButton` que vivía en la barra superior: los chips cuestan alto que era de la tarjeta, pero enseñan las categorías sin abrir nada y cambiar de una es un toque en vez de tres. Siguen visibles en la pantalla de "te has quedado sin preguntas", que es justo donde cambiar de categoría es lo más útil que puede hacer el usuario. Volver a tocar el chip ya seleccionado **no** limpia el filtro: en una fila de filtros un toque significa "enséñame este".
+**Filtro de categoría: fila de chips** (`_CategoryChips`), arriba del todo, justo encima de las cartas. Sustituye al `PopupMenuButton` que vivía en la barra superior: los chips cuestan alto que era de la tarjeta, pero enseñan las categorías sin abrir nada y cambiar de una es un toque en vez de tres. Siguen visibles en la pantalla de "te has quedado sin preguntas", que es justo donde cambiar de categoría es lo más útil que puede hacer el usuario. Volver a tocar el chip ya seleccionado **no** limpia el filtro: en una fila de filtros un toque significa "enséñame este".
 
 `SwipeDeck` (`features/facts/presentation/widgets/swipe_deck.dart`) **solo posee el gesto**. Notifica hacia arriba y repinta a partir de `items`/`index`. El estado del mazo — posición, volteo — vive en `DeckController`, y por eso se puede testear sin animaciones.
 
@@ -270,7 +270,7 @@ Dos sistemas encadenados: **cada día pide un número de datos**, y **cumplirlo 
 
 Con una media de ~11 puntos por día perfecto, el segundo peldaño (Curioso II, a 20 puntos) cae en un par de días — pronto para demostrar que el sistema funciona — y Oráculo, a 1400, más allá de cien días cumplidos, que es donde debe estar el techo. La barra de la pantalla de progreso mide **desde el suelo del nivel actual**, no desde cero: una barra única para toda la escalera se pasaría semanas sin moverse.
 
-**Dónde se ve.** Un anillo en la **barra superior** del mazo, con el icono del rango dentro. Ahí y no sobre las tarjetas: el mazo ya cede alto a los chips y al banner, y esto sería lo tercero en pedirle una franja. Al tocarlo se abre `/progress`, que es donde vive la explicación completa, la escalera entera y el estado del día.
+**Dónde se ve.** Un anillo en la **barra superior** del mazo, con el icono del rango dentro. Ahí y no sobre las tarjetas: el mazo ya cede alto a los chips, y esto sería lo segundo en pedirle una franja. Al tocarlo se abre `/progress`, que es donde vive la explicación completa, la escalera entera y el estado del día.
 
 **La escalera de `/progress` muestra siempre las seis familias, nunca los 16 peldaños.** Cada medallón es una familia (`Rank.family`, `curiousI/II/III` → familia 0, …, `oracle` solo → familia 5), con su icono grande arriba, el nombre debajo y los puntos debajo del nombre. El numeral solo aparece **al alcanzarlo**:
 
@@ -347,20 +347,15 @@ Una "acción de valor" aquí es **una tarjeta descartada**. Como las tarjetas se
 
 `SwipeDeck` pasa al `builder` la **profundidad** de cada tarjeta, no un booleano "es la de arriba": una tarjeta puede necesitar empezar a trabajar antes de ser alcanzable, y eso no cabe en un `bool`.
 
+**La precarga solo funciona si `SwipeDeck` no destruye la tarjeta al llegar arriba.** `SwipeDeck._buildCard` construye la tarjeta de encima y las de detrás con **la misma forma de árbol de widgets**, variando solo valores (`isTop`), y no por capricho: antes eran dos métodos separados, uno envolvía en `GestureDetector` y el otro en `Transform.translate`, ambos con la misma `ValueKey`. `Widget.canUpdate` exige que coincidan tipo y key — al no coincidir el tipo, Flutter tiraba el subárbol entero (con el `AdDeckCard` y su `BannerAd` ya cargado dentro) cada vez que una carta pasaba de profundidad 1 a 0, y montaba uno nuevo desde cero. Toda la precarga de los puntos 1-2 de arriba era un no-op en la práctica: el anuncio siempre "empezaba a cargar" justo al llegar arriba, porque su estado acababa de nacer. Si se vuelve a tocar `_buildCard`, mantener la misma forma para `isTop` y no-`isTop` es la condición, no un detalle de estilo.
+
 Si no entra ningún creativo (sin consentimiento, sin inventario, sin unidad configurada) la tarjeta cae a un argumento discreto de "quitar anuncios" en vez de un rectángulo en blanco: mantiene el ritmo del mazo y coloca el paywall justo detrás de un momento de valor.
 
 > **Pendiente:** el plan original pedía un *native ad* real. Requiere una `NativeAdFactory` en Kotlin más su layout XML. Lo que hay ahora es un 300x250 dentro del mismo `DeckCardShell` que el contenido — cero código nativo y misma sensación. Migrar solo si el eCPM lo justifica.
 
-**Banner.** `AdaptiveBannerAd` es el único sitio donde vive la política de colocación. Tiene dos modos:
+**Banner.** `AdaptiveBannerAd` sigue existiendo como infraestructura de `BaseScreen` (`showBanner: true`, colocado **debajo** del contenido vía `anchored: true`), pero **ninguna pantalla lo activa hoy** — ni siquiera el mazo. Tenía un banner en línea propio (`_DeckBanner`, entre los chips y las cartas) y se quitó: entre la tarjeta de anuncio dentro del mazo (cada `adCardEveryNCards`) y el interstitial, un banner fijo encima era inventario de más y solo restaba pantalla a la tarjeta, sin aportar un formato distinto. **No volver a añadir un banner al mazo** sin una razón de producto nueva.
 
-- `anchored: true` (por defecto): lo coloca `BaseScreen` **debajo** del contenido, nunca superpuesto. Hoy no lo activa ninguna pantalla — `SettingsScreen`, `PaywallScreen` y `FavoritesScreen` van con `showBanner: false`.
-- `anchored: false`: **en línea, dentro del layout**. Es el que usa el mazo, entre los chips de categoría y las tarjetas.
-
-**El banner del mazo va arriba, nunca abajo.** El mazo es una superficie que se arrastra en cuatro direcciones, y un banner anclado al borde inferior bajo ese gesto es el ejemplo de manual del clic accidental. Colocado sobre las tarjetas el dedo no lo pisa nunca al salir de un deslizamiento. **No moverlo abajo.**
-
-Si no entra creativo, o el usuario es premium, el widget no ocupa nada (`SizedBox.shrink`): la tarjeta recupera el espacio en vez de dejar una franja gris. En pantallas pequeñas el banner y los chips comen alto que era de la tarjeta; el mazo va en un `Expanded` y cede, pero conviene revisarlo con `textScaleFactor` alto (§14).
-
-**El hueco visible bajo el banner no siempre es un padding de la app.** `getLargeAnchoredAdaptiveBannerAdSize` puede reservar hasta un 15 % del alto de pantalla — es lo que exige la propia API, no algo que este widget decida — y si el creativo servido es más bajo que eso (el creativo de prueba de Google, sobre todo, suele serlo), lo que sobra se ve como fondo oscuro entre el anuncio y las tarjetas, porque la vista de plataforma es transparente donde no hay creativo. `_DeckBanner` y `AdaptiveBannerAd` ya van sin ningún padding propio (§ arriba); si ese hueco sigue molestando, la única palanca real es cambiar a un `AdSize` fijo (`AdSize.banner`, 320x50) en vez de adaptativo — sacrifica el eCPM que justifica lo adaptativo, así que es una decisión de producto, no un ajuste de espaciado.
+Si algún día se activa `AdaptiveBannerAd` en otra pantalla: si no entra creativo, o el usuario es premium, el widget no ocupa nada (`SizedBox.shrink`), y el hueco que se ve mientras hay creativo no siempre es un padding propio — `getLargeAnchoredAdaptiveBannerAdSize` puede reservar hasta un 15 % del alto de pantalla sea cual sea el tamaño real del creativo servido (más notorio con el creativo de prueba de Google, que suele ser más bajo que eso), y lo que sobra se ve como fondo oscuro porque la vista de plataforma es transparente donde no hay creativo. La única palanca real contra eso es un `AdSize` fijo (`AdSize.banner`, 320x50) en vez de adaptativo — sacrifica el eCPM que justifica lo adaptativo, así que es una decisión de producto, no un ajuste de espaciado.
 
 **Consentimiento (UMP).** `services/ads/consent_service.dart` usa el UMP SDK que ya incluye `google_mobile_ads` (sin dependencia extra):
 `requestConsentInfoUpdate` → `loadAndShowConsentFormIfRequired` → `canRequestAds()`.
