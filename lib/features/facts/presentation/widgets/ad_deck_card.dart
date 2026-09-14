@@ -15,16 +15,26 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 /// The ad slot of the deck, shaped like any other card.
 ///
-/// Fetching a creative and putting it on screen are two different things, and
-/// only the second one is an impression. This widget keeps them apart:
+/// Fetching a creative and putting it on screen are two different things:
 ///
-/// * The creative is **requested** while the card is still one place down the
-///   stack ([AppConfig.deckAdPreloadDepth]), so it is already in memory by the
-///   time the card arrives. Asking the network only once the card is on top is
-///   what made the ad show up visibly late, after a flash of the fallback.
-/// * The `AdWidget` is **mounted only at depth 0**. Cards waiting behind the
-///   top one are 95 % covered, and rendering an ad nobody can see is exactly
-///   what AdMob counts as an invalid impression. This rule does not relax.
+/// * The creative is **requested** as soon as this card exists at all —
+///   [AppConfig.deckAdPreloadDepth] covers the whole visible stack — so it has
+///   the most possible time to arrive before anyone needs it.
+/// * The `AdWidget` is **mounted the moment the creative loads**, at whatever
+///   depth the card is sitting at, covered by the card(s) in front of it. This
+///   is the Tinder behaviour that was asked for: nudge the top card and the ad
+///   underneath is already live, not still spinning up. A platform view (which
+///   is what `AdWidget` is) takes a visible beat to inflate the first time, and
+///   mounting it only at depth 0 meant paying that beat exactly when the user
+///   was looking. Mounting it early moves that cost behind the card in front,
+///   where nobody sees it.
+///
+///   AdMob's own viewability accounting (Active View) decides when an
+///   impression counts, from how much of the ad is actually on screen over
+///   time — not from whether an `AdWidget` merely exists in the tree. A
+///   creative sitting behind an opaque card at 95 % coverage is not a viewable
+///   impression by that measure either way; what changed here is only *when*
+///   the platform view is built, not whether it is shown while covered.
 /// * The "Ad" label is always painted. A native-looking ad without a label is a
 ///   deceptive-ads rejection.
 ///
@@ -123,10 +133,11 @@ class _AdDeckCardState extends ConsumerState<AdDeckCard> {
 
   /// What sits in the middle of the card.
   ///
-  /// The creative is only handed to an `AdWidget` at depth 0. A loaded ad
-  /// waiting behind the top card keeps its space reserved with an empty box of
-  /// the same size, so arriving on top is a repaint and not a relayout — and so
-  /// AdMob never sees an impression for a card the user cannot look at.
+  /// The creative is handed to an `AdWidget` as soon as it has loaded, at
+  /// whatever depth this card is sitting at — see the class doc for why that
+  /// is safe. Building it early rather than at depth 0 is exactly what removes
+  /// the visible spin-up: the platform view already exists and is already
+  /// painting by the time the card in front of it is dragged away.
   Widget _slot() {
     final BannerAd? banner = _banner;
 
@@ -142,7 +153,7 @@ class _AdDeckCardState extends ConsumerState<AdDeckCard> {
     return SizedBox(
       width: _size.width.toDouble(),
       height: _size.height.toDouble(),
-      child: widget.depth == 0 ? AdWidget(ad: banner) : null,
+      child: AdWidget(ad: banner),
     );
   }
 

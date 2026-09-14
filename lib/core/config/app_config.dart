@@ -64,15 +64,16 @@ abstract final class AppConfig {
 
   /// How deep in the stack an ad card starts **fetching** its creative.
   ///
-  /// Requesting the creative and putting it on screen are two different things,
-  /// and only the second one is an impression. Waiting for the card to reach
-  /// the top before asking the network is what makes the ad arrive visibly
-  /// late; fetching one card early means the creative is already in memory when
-  /// the card comes up, so the swap is a repaint rather than a round trip.
+  /// Set to the back of the visible stack ([deckVisibleCards] - 1): the moment
+  /// the ad card is built at all — the deepest position it can ever start
+  /// in — it already starts loading. That is the most lead time this card can
+  /// ever get, so raising this further would do nothing.
   ///
-  /// The `AdWidget` itself is still mounted only at depth 0 — see [AdDeckCard].
-  /// Keep this small: every preloaded card is a request that may never be seen.
-  static const int deckAdPreloadDepth = 1;
+  /// [AdDeckCard] also *renders* the creative as soon as it has loaded, at
+  /// whatever depth it is sitting at — covered by the cards in front of it,
+  /// the same way Tinder's stack already has its next card's ad playing before
+  /// you swipe. See the "why render early is safe" note on [AdDeckCard].
+  static const int deckAdPreloadDepth = deckVisibleCards - 1;
 
   /// Fraction of the card width a horizontal drag has to cover before it counts
   /// as a swipe instead of a hesitation.

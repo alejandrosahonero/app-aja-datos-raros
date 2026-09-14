@@ -177,9 +177,21 @@
   },
   "goalsSeeProgress": "Ver progreso",
 
+  "goalsRarityBelowOne": "Estimado: menos del 1 % de quienes empiezan llega tan lejos.",
+  "@goalsRarityBelowOne": {
+    "description": "Debajo del anillo de rango en /progress. 'Estimado' es la palabra que importa: no es un dato medido de usuarios reales, es un cálculo a partir de lo que tarda un jugador perfecto en llegar (ver RankRarity en rank_style.dart). No cambiar a una redacción que suene a estadística real."
+  },
+  "goalsRarityApprox": "Estimado: alrededor del {percent} % de quienes empiezan llega tan lejos.",
+  "@goalsRarityApprox": {
+    "description": "Igual que goalsRarityBelowOne pero con un número aproximado (1-99). Ver esa entrada para la advertencia sobre no sonar a dato medido.",
+    "placeholders": {
+      "percent": { "type": "int" }
+    }
+  },
+
   "rankCurious": "Curioso",
   "@rankCurious": {
-    "description": "Rango 1 de 6"
+    "description": "Familia de rango 1 de 6. Esta y las tres siguientes se muestran con un numeral romano detrás (I, II, III) para sus tres niveles; el numeral se añade en código, no aquí. La última familia (rankOracle) no tiene niveles."
   },
   "rankInquisitive": "Preguntón",
   "rankKnowItAll": "Sabelotodo",

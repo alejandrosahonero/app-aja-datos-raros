@@ -99,6 +99,9 @@
   "goalsRankUpBody": "You met today's goal (+{points} points) and moved up a rank.",
   "goalsSeeProgress": "See progress",
 
+  "goalsRarityBelowOne": "Estimated: fewer than 1% of people who start get this far.",
+  "goalsRarityApprox": "Estimated: around {percent}% of people who start get this far.",
+
   "rankCurious": "Curious",
   "rankInquisitive": "Inquisitive",
   "rankKnowItAll": "Know-it-all",

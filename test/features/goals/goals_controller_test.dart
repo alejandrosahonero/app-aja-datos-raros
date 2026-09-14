@@ -68,7 +68,7 @@ void main() {
     expect(goals().awarded, isFalse);
     expect(goals().isComplete, isFalse);
     expect(DailyGoal.sizes, contains(goals().target));
-    expect(goals().rank, Rank.curious);
+    expect(goals().rank, Rank.curiousI);
   });
 
   test('flipping a card counts it', () async {
@@ -123,16 +123,16 @@ void main() {
     container = await boot(<String, Object>{
       'goals_first_day': DailyGoal.epochDayOf(day1) - 30,
       // One point short of the second rank, so any goal size crosses it.
-      'goals_points': Rank.inquisitive.minPoints - 1,
+      'goals_points': Rank.inquisitiveI.minPoints - 1,
     });
 
-    expect(goals().rank, Rank.curious);
+    expect(goals().rank, Rank.curiousIII);
 
     final GoalEvent event = await learn(goals().target);
 
     expect(event, isA<RankReached>());
-    expect((event as RankReached).rank, Rank.inquisitive);
-    expect(goals().rank, Rank.inquisitive);
+    expect((event as RankReached).rank, Rank.inquisitiveI);
+    expect(goals().rank, Rank.inquisitiveI);
   });
 
   test(
@@ -168,7 +168,12 @@ void main() {
       final int day2Target = goals().target;
       final GoalEvent event = await learn(day2Target - 1, from: 1);
 
-      expect(event, isA<GoalReached>());
+      // GoalReached or RankReached: with the ladder split into I/II/III tiers
+      // (§3.8), two small daily goals in a row are now enough to cross a tier
+      // boundary, so which of the two fires depends on the random target
+      // sizes. Either one means the day's goal was paid, which is what this
+      // test is actually about.
+      expect(event, isNot(isA<GoalUnchanged>()));
       expect(goals().points, day1Target + day2Target);
     });
 

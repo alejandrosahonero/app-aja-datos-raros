@@ -130,7 +130,7 @@ Una pila de tarjetas, una detrás de otra. Solo la de arriba responde al dedo.
 
 El eje dominante decide la acción: un arrastre de 200 px hacia arriba y 60 px a la izquierda es un guardado, no un descarte.
 
-**Filtro de categoría: fila de chips** (`_CategoryChips`), arriba del todo y por encima del banner. Sustituye al `PopupMenuButton` que vivía en la barra superior: los chips cuestan alto que era de la tarjeta, pero enseñan las categorías sin abrir nada y cambiar de una es un toque en vez de tres. Siguen visibles en la pantalla de "te has quedado sin preguntas", que es justo donde cambiar de categoría es lo más útil que puede hacer el usuario. Volver a tocar el chip ya seleccionado **no** limpia el filtro: en una fila de filtros un toque significa "enséñame este".
+**Filtro de categoría: fila de chips** (`_CategoryChips`), arriba del todo, justo encima de las cartas. Sustituye al `PopupMenuButton` que vivía en la barra superior: los chips cuestan alto que era de la tarjeta, pero enseñan las categorías sin abrir nada y cambiar de una es un toque en vez de tres. Siguen visibles en la pantalla de "te has quedado sin preguntas", que es justo donde cambiar de categoría es lo más útil que puede hacer el usuario. Volver a tocar el chip ya seleccionado **no** limpia el filtro: en una fila de filtros un toque significa "enséñame este".
 
 `SwipeDeck` (`features/facts/presentation/widgets/swipe_deck.dart`) **solo posee el gesto**. Notifica hacia arriba y repinta a partir de `items`/`index`. El estado del mazo — posición, volteo — vive en `DeckController`, y por eso se puede testear sin animaciones.
 
@@ -151,13 +151,15 @@ El volteo es un `rotateY` con perspectiva (`setEntry(3, 2, 0.0012)`); a mitad de
 
 `assets/data/facts.json`: una entrada por tarjeta con `question` / `answer` / `detail` en `es` y `en`, más `category` y `source`.
 
-- **Cada dato lleva fuente, y la fuente es un enlace que se abrió.** Las 533 entradas llevan `sourceUrl` comprobado contra una página real: `sourceUrl` es ese enlace permanente y la app lo pinta como enlace clicable bajo la respuesta (`FactSourceLink`). Un "dato curioso" falso viral se convierte en reseñas de 1 estrella y en burla pública, así que la regla es dura: **una entrada sin URL comprobada no entra**, y hay un test (`fact_repository_test.dart`) que lo impide.
-- **Las 85 primeras se verificaron a mano; las 448 siguientes, con un protocolo.** No es lo mismo y conviene no confundirlo. El protocolo fue: agentes de investigación que abren la página con `WebFetch` y copian en un campo `_evidence` la frase literal que sostiene la respuesta; después `tool/ingest_facts.py --check --links` golpea cada URL; después una segunda tanda de agentes compara afirmación contra evidencia. Ese último paso es el que caza lo que ninguna máquina puede: cifras que la fuente no da. Marcó 45 de 448, de las cuales la mayoría eran citas recortadas y no datos falsos — pero salieron dos contradicciones de fecha, un superlativo inventado y un número mil veces mal por confundir el trillón español con el *sextillion* inglés. Ese último es el aviso importante: **una cifra puede ser coherente en un idioma y estar mal en el otro**, y solo se ve leyendo las dos versiones a la vez.
+- **Cada dato lleva fuente, y la fuente es un enlace que se abrió.** Las 612 entradas llevan `sourceUrl` comprobado contra una página real: `sourceUrl` es ese enlace permanente y la app lo pinta como enlace clicable bajo la respuesta (`FactSourceLink`). Un "dato curioso" falso viral se convierte en reseñas de 1 estrella y en burla pública, así que la regla es dura: **una entrada sin URL comprobada no entra**, y hay un test (`fact_repository_test.dart`) que lo impide.
+- **Las 85 primeras se verificaron a mano; las 527 siguientes, con un protocolo.** No es lo mismo y conviene no confundirlo. El protocolo fue: agentes de investigación que abren la página con `WebFetch` y copian en un campo `_evidence` la frase literal que sostiene la respuesta; después `tool/ingest_facts.py --check --links` golpea cada URL; después una segunda tanda de agentes compara afirmación contra evidencia. Ese último paso es el que caza lo que ninguna máquina puede: cifras que la fuente no da. En el primer lote de 448 marcó 45, de las cuales la mayoría eran citas recortadas y no datos falsos — pero salieron dos contradicciones de fecha, un superlativo inventado y un número mil veces mal por confundir el trillón español con el *sextillion* inglés. Ese último es el aviso importante: **una cifra puede ser coherente en un idioma y estar mal en el otro**, y solo se ve leyendo las dos versiones a la vez.
 - **La cita de texto plano no vale como verificación.** El catálogo se escribió con ayuda de IA y varias de aquellas citas resultaron ser inventadas o no decir lo que se afirmaba: existía el organismo, existía la revista, pero la página no hablaba del tema. Si añades contenido con IA, la cita que produzca es una **pista**, no una fuente: hay que abrir la página.
 - El contenido está localizado **en el asset**, no en los `.arb`, porque traducir o ampliar el catálogo no debe exigir una versión nueva — y porque ese mismo JSON vendrá luego de Firebase Remote Config o Firestore.
 - `FactCategory` es un enum cerrado: una categoría desconocida en el JSON **revienta al parsear**, no pinta un chip vacío en producción.
 - El parseo corre en un isolate aparte (`compute`) y se cachea en `FactRepository` durante toda la vida del proceso.
-- **El orden del fichero es el orden que ve el usuario**: no hay barajado en ninguna parte. Por eso el catálogo va **intercalado por categoría** (cuerpo, ciencia, historia, lenguaje, y vuelta a empezar) en vez de agrupado: con el filtro en «Todas», un bloque de veinte tarjetas seguidas de la misma categoría se lee como si la app se hubiera quedado atascada. Al añadir contenido, mantener el intercalado.
+- **El orden del fichero es el orden que ve el usuario**: no hay barajado en ninguna parte. Por eso el catálogo va **intercalado por categoría** (cuerpo, ciencia, historia, lenguaje, y vuelta a empezar) en vez de agrupado: con el filtro en «Todas», un bloque de veinte tarjetas seguidas de la misma categoría se lee como si la app se hubiera quedado atascada. Al añadir contenido, mantener el intercalado. `tool/ingest_facts.py:interleave()` lo hace solo cuando el lote nuevo trae varias categorías en cantidades parecidas; un lote de una sola categoría más grande que los huecos disponibles deja un resto que no tiene con qué alternar y lo vuelca seguido al final.
+
+  > **Desbalance en curso.** El lote de última hora de 79 preguntas de "cuerpo" (`tool/facts-staging/cuerpo3_*.json`) se fusionó solo, sin lotes equivalentes de las otras tres categorías, y dejó 35 tarjetas de "cuerpo" seguidas al final del fichero. El test `fact_repository_test.dart: the catalogue stays interleaved by category` está **desactivado a propósito** (`skip:`) hasta que ciencia/historia/lenguaje reciban un lote parecido y se pueda re-intercalar todo junto. No subir el umbral del test para que pase: eso dejaría de detectar un atasco real más adelante.
 
 ### 3.3 Composición del mazo
 
@@ -171,7 +173,7 @@ El progreso se persiste como **el conjunto de ids ya leídos** (`deck_seen_ids`)
 
 Guardar ids y no un índice resuelve dos cosas a la vez. Los huecos de anuncio se desplazan al comprar premium, y un índice guardado apuntaría a otra tarjeta. Y sobre todo: **los chips son cuatro vistas de un mismo catálogo, no cuatro mazos**. Un contador solo significa algo contra un orden concreto, así que con uno por filtro (`deck_facts_seen_<categoría>`, como estaba antes) terminarte «Ciencia» y pasar a «Todas» te repartía esas mismas cartas otra vez. Repartir una carta que el usuario acaba de leer es lo único que este mazo no puede hacer.
 
-La lista viaja en `shared_preferences`, que se carga entera al arrancar (§10): con 533 entradas son unos diez kilobytes. Los ids de datos que un catálogo remoto haya retirado dejan de coincidir con nada y son inofensivos.
+La lista viaja en `shared_preferences`, que se carga entera al arrancar (§10): con 612 entradas son unos diez kilobytes. Los ids de datos que un catálogo remoto haya retirado dejan de coincidir con nada y son inofensivos.
 
 **«Reiniciar deck» solo revive las cartas del filtro activo.** Pulsarlo bajo el chip de «Ciencia» es pedir más ciencia, no ofrecerse a releer la historia que se terminó la semana pasada.
 
@@ -262,16 +264,30 @@ Dos sistemas encadenados: **cada día pide un número de datos**, y **cumplirlo 
 
 **El día paga lo que pidió**: cumplir un objetivo de 15 son 15 puntos; uno de 8, ocho. Es justo sin necesidad de inventarse una constante. Y **paga una sola vez**: seguir leyendo después suma datos al contador pero no más puntos.
 
-**Rangos** (`Rank`): Curioso · Preguntón · Sabelotodo · Erudito · Enciclopedia · Oráculo, en 0 / 60 / 180 / 400 / 800 / 1400 puntos. Con una media de ~11 puntos por día perfecto, el segundo cae dentro de la primera semana — pronto para demostrar que el sistema funciona — y el último más allá de cien días cumplidos, que es donde debe estar un rango final. La barra de la pantalla de progreso mide **desde el suelo del rango actual**, no desde cero: una barra única para toda la escalera se pasaría semanas sin moverse.
+**Rangos** (`Rank`): seis familias — Curioso · Preguntón · Sabelotodo · Erudito · Enciclopedia · Oráculo — y las cinco primeras se dividen en tres niveles (**I, II, III**) antes de dar paso a la siguiente familia, así que la escalera real tiene **16 peldaños**: 0 / 20 / 40 / 60 / 100 / 140 / 180 / 250 / 320 / 400 / 530 / 660 / 800 / 1000 / 1200 / 1400 puntos. `Rank` sigue siendo un único enum plano de 16 valores — `curiousI`…`curiousIII`, `inquisitiveI`…, hasta `oracle` — no dos conceptos separados de "familia" y "nivel"; `RankStyle.label()` es quien junta el nombre de la familia con el numeral romano (el numeral no vive en el `.arb`: I/II/III se leen igual en cualquier idioma que la app soporte).
 
-**Dónde se ve.** Un anillo en la **barra superior** del mazo, con el icono del rango dentro. Ahí y no sobre las tarjetas: el mazo ya cede alto a los chips y al banner, y esto sería lo tercero en pedirle una franja. Al tocarlo se abre `/progress`, que es donde vive la explicación completa, la escalera entera y el estado del día.
+**Oráculo, la última familia, se queda sin dividir a propósito.** Es la cima de la escalera: no hay una familia siguiente hacia la que repartir tramos, así que trocearla solo inventaría un techo que nadie pidió. Los puntos ganados después de llegar se acumulan sin límite y sin ningún nivel nuevo que anunciar — `Rank.oracle.next` es `null` y así se queda.
+
+Con una media de ~11 puntos por día perfecto, el segundo peldaño (Curioso II, a 20 puntos) cae en un par de días — pronto para demostrar que el sistema funciona — y Oráculo, a 1400, más allá de cien días cumplidos, que es donde debe estar el techo. La barra de la pantalla de progreso mide **desde el suelo del nivel actual**, no desde cero: una barra única para toda la escalera se pasaría semanas sin moverse.
+
+**Dónde se ve.** Un anillo en la **barra superior** del mazo, con el icono del rango dentro. Ahí y no sobre las tarjetas: el mazo ya cede alto a los chips, y esto sería lo segundo en pedirle una franja. Al tocarlo se abre `/progress`, que es donde vive la explicación completa, la escalera entera y el estado del día.
+
+**La escalera de `/progress` muestra siempre las seis familias, nunca los 16 peldaños.** Cada medallón es una familia (`Rank.family`, `curiousI/II/III` → familia 0, …, `oracle` solo → familia 5), con su icono grande arriba, el nombre debajo y los puntos debajo del nombre. El numeral solo aparece **al alcanzarlo**:
+
+- Familia aún no alcanzada → nombre plano ("Preguntón"), sin numeral. Un "Preguntón I" que todavía no es real no es una meta, es ruido.
+- Familia actual → el tier exacto que se tiene (`held`), con su numeral.
+- Familia ya superada → el **último** tier que llegó a pagar (`III`), no el nombre plano. Es el techo real que esa familia mostró antes de dejarla atrás, y se queda ganado.
+
+**«Estimado: ~N % llega tan lejos» (`RankRarity`, `rank_style.dart`) es un cálculo, no un dato medido.** La app no tiene backend, ni cuentas, ni analítica — nunca ha contado cuántas instalaciones reales llegaron a ningún rango y no tiene forma de hacerlo sin empezar a recolectar algo. El número sale de aplicar una curva de retención inventada (60 % de los jugadores restantes se pierde cada semana, una forma plausible para una app de hábito diario, no ajustada a datos reales) sobre los días que tardaría un jugador perfecto en llegar (~11 puntos/día, §3.8 arriba). **La palabra "Estimado" en el texto no es decorativa**: cambiarla por una redacción que suene a estadística real ("el 3 % de los usuarios llegó aquí") sería mentirle al usuario sobre qué es este número. Se oculta en Curioso I (100 % trivial, todo el mundo empieza ahí) y por debajo del 1 % se enseña como "menos del 1 %" en vez de un decimal — un decimal es la clase de precisión que solo tiene sentido si de verdad se midió algo.
+
+Si algún día se quiere una cifra real: exige un punto de contacto con un servidor (aunque sea anónimo, sin login) que hay que declarar en el formulario de Data Safety como "App activity", no vinculado a la identidad. La opción más barata sería un contador agregado en Firestore (`increment()` por rango alcanzado, sin ningún id), del mismo tamaño de decisión que ya se tomó para el catálogo remoto (§3.6) y las aportaciones (§3.5) — pero es una dependencia nueva (`firebase_core` + `cloud_firestore`) y una declaración nueva, así que no se ha hecho porque no se pidió.
 
 **El aviso está graduado por lo que vale interrumpir:**
 
 | Qué pasa | Qué sale |
 |---|---|
 | Se cumple el objetivo | Un `SnackBar`. Pasa todos los días y un modal acabaría siendo lo que el usuario aprende a cerrar. |
-| Se sube de rango | Un diálogo. Pasa seis veces en la vida de la app, y es el único premio que tienen los puntos. |
+| Se sube de rango | Un diálogo. Con la escalera de 16 peldaños pasa dieciséis veces en la vida de la app en vez de seis, y sigue siendo el único premio que tienen los puntos — subir de nivel dentro de una misma familia (Curioso I → II) dispara el mismo diálogo que cambiar de familia. Si algún día eso se siente como demasiada interrupción, la palanca es tratar ese caso aparte en `showGoalEvent` (`goal_celebration.dart`), no tocar los umbrales de `Rank`. |
 
 **El día se cierra desde el reloj, no desde memoria.** `registerLearned` relee el día guardado en cada escritura, así que una app abierta desde antes de medianoche se pone al día con la primera tarjeta que se voltee; `refresh()` existe para el caso de volver del segundo plano sin haber tocado nada todavía. Los contadores de ayer no se borran hasta la siguiente escritura, pero **nunca se leen**: la comparación con el reloj los enmascara, y por eso un `awarded` viejo no puede pagar el objetivo de hoy.
 
@@ -321,27 +337,25 @@ El App ID de prueba también está declarado en `android/app/src/main/AndroidMan
 `AppConfig.interstitialEveryNActions` (9) **y** `AppConfig.minIntervalBetweenInterstitials` (3 min).
 Una "acción de valor" aquí es **una tarjeta descartada**. Como las tarjetas se consumen rápido, el que manda en la práctica es el suelo de 3 minutos. No añadir atajos que salten el pacing.
 
-**Tarjeta de anuncio (`AdDeckCard`).** Dos reglas que no se relajan:
+**Tarjeta de anuncio (`AdDeckCard`).** Comportamiento estilo Tinder: mover un poco la tarjeta de encima ya deja ver el anuncio de debajo **reproduciéndose**, no cargando.
 
-1. **Pedir el creativo y pintarlo son dos cosas distintas, y solo la segunda es una impresión.** El `AdWidget` se monta **únicamente en `depth == 0`**: las tarjetas que esperan detrás están tapadas al 95 %, y pintar un anuncio que nadie puede ver es justo lo que AdMob cuenta como impresión inválida. Esta regla no se relaja.
-2. **La petición sale una tarjeta antes** (`AppConfig.deckAdPreloadDepth`, hoy 1). Pedirla solo al llegar arriba es lo que hacía que el anuncio apareciera tarde, después de un parpadeo del argumento de "quitar anuncios". Precargando, llegar arriba es un repintado y no una ida y vuelta a la red. Subir esa profundidad es pedir creativos que quizá nadie vea, así que se queda en 1.
-3. Mientras la petición está en vuelo la tarjeta **reserva el hueco vacío**, no enseña el argumento de pago. Ese argumento significa "no entró nada" —sin consentimiento, sin inventario, sin unidad configurada— y sacarlo durante una carga que va a funcionar es como la tarjeta acaba cambiando de opinión delante del usuario.
-4. La etiqueta **"Publicidad" siempre visible**. Un anuncio mimetizado sin etiqueta es un rechazo por *deceptive ads*.
+1. **La petición sale en cuanto la tarjeta existe**, sea cual sea su profundidad (`AppConfig.deckAdPreloadDepth = deckVisibleCards - 1`, cubre toda la pila visible). Es el máximo margen posible: no hay una posición más atrás desde la que precargar.
+2. **El `AdWidget` se monta en cuanto el creativo carga**, en la profundidad en la que esté la tarjeta en ese momento — tapada por la(s) de encima, igual que Tinder. Antes se montaba solo en `depth == 0`, y ese retraso era justo lo que se veía: un `AdWidget` es una vista de plataforma nativa, y la primera vez que se infla cuesta un instante perceptible. Montarlo pronto mueve ese coste detrás de la tarjeta de encima, donde no se ve; montarlo tarde lo pagaba el usuario mirando.
+3. Esto no cambia cuándo AdMob cuenta una impresión: su propio sistema de viewability (Active View) decide eso por cuánto del anuncio está realmente visible en pantalla y durante cuánto tiempo, no por si el `AdWidget` existe en el árbol de widgets. Un anuncio tapado al 95 % sigue sin ser una impresión visible se monte antes o después — lo único que cambia es *cuándo* se construye la vista, no si se enseña estando tapada.
+4. Mientras la petición está en vuelo la tarjeta **reserva el hueco vacío**, no enseña el argumento de pago. Ese argumento significa "no entró nada" —sin consentimiento, sin inventario, sin unidad configurada— y sacarlo durante una carga que va a funcionar es como la tarjeta acaba cambiando de opinión delante del usuario.
+5. La etiqueta **"Publicidad" siempre visible**. Un anuncio mimetizado sin etiqueta es un rechazo por *deceptive ads*. Esta regla, a diferencia de la del montaje, no se relaja.
 
 `SwipeDeck` pasa al `builder` la **profundidad** de cada tarjeta, no un booleano "es la de arriba": una tarjeta puede necesitar empezar a trabajar antes de ser alcanzable, y eso no cabe en un `bool`.
+
+**La precarga solo funciona si `SwipeDeck` no destruye la tarjeta al llegar arriba.** `SwipeDeck._buildCard` construye la tarjeta de encima y las de detrás con **la misma forma de árbol de widgets**, variando solo valores (`isTop`), y no por capricho: antes eran dos métodos separados, uno envolvía en `GestureDetector` y el otro en `Transform.translate`, ambos con la misma `ValueKey`. `Widget.canUpdate` exige que coincidan tipo y key — al no coincidir el tipo, Flutter tiraba el subárbol entero (con el `AdDeckCard` y su `BannerAd` ya cargado dentro) cada vez que una carta pasaba de profundidad 1 a 0, y montaba uno nuevo desde cero. Toda la precarga de los puntos 1-2 de arriba era un no-op en la práctica: el anuncio siempre "empezaba a cargar" justo al llegar arriba, porque su estado acababa de nacer. Si se vuelve a tocar `_buildCard`, mantener la misma forma para `isTop` y no-`isTop` es la condición, no un detalle de estilo.
 
 Si no entra ningún creativo (sin consentimiento, sin inventario, sin unidad configurada) la tarjeta cae a un argumento discreto de "quitar anuncios" en vez de un rectángulo en blanco: mantiene el ritmo del mazo y coloca el paywall justo detrás de un momento de valor.
 
 > **Pendiente:** el plan original pedía un *native ad* real. Requiere una `NativeAdFactory` en Kotlin más su layout XML. Lo que hay ahora es un 300x250 dentro del mismo `DeckCardShell` que el contenido — cero código nativo y misma sensación. Migrar solo si el eCPM lo justifica.
 
-**Banner.** `AdaptiveBannerAd` es el único sitio donde vive la política de colocación. Tiene dos modos:
+**Banner.** `AdaptiveBannerAd` sigue existiendo como infraestructura de `BaseScreen` (`showBanner: true`, colocado **debajo** del contenido vía `anchored: true`), pero **ninguna pantalla lo activa hoy** — ni siquiera el mazo. Tenía un banner en línea propio (`_DeckBanner`, entre los chips y las cartas) y se quitó: entre la tarjeta de anuncio dentro del mazo (cada `adCardEveryNCards`) y el interstitial, un banner fijo encima era inventario de más y solo restaba pantalla a la tarjeta, sin aportar un formato distinto. **No volver a añadir un banner al mazo** sin una razón de producto nueva.
 
-- `anchored: true` (por defecto): lo coloca `BaseScreen` **debajo** del contenido, nunca superpuesto. Hoy no lo activa ninguna pantalla — `SettingsScreen`, `PaywallScreen` y `FavoritesScreen` van con `showBanner: false`.
-- `anchored: false`: **en línea, dentro del layout**. Es el que usa el mazo, entre los chips de categoría y las tarjetas.
-
-**El banner del mazo va arriba, nunca abajo.** El mazo es una superficie que se arrastra en cuatro direcciones, y un banner anclado al borde inferior bajo ese gesto es el ejemplo de manual del clic accidental. Colocado sobre las tarjetas el dedo no lo pisa nunca al salir de un deslizamiento. **No moverlo abajo.**
-
-Si no entra creativo, o el usuario es premium, el widget no ocupa nada (`SizedBox.shrink`): la tarjeta recupera el espacio en vez de dejar una franja gris. En pantallas pequeñas el banner y los chips comen alto que era de la tarjeta; el mazo va en un `Expanded` y cede, pero conviene revisarlo con `textScaleFactor` alto (§14).
+Si algún día se activa `AdaptiveBannerAd` en otra pantalla: si no entra creativo, o el usuario es premium, el widget no ocupa nada (`SizedBox.shrink`), y el hueco que se ve mientras hay creativo no siempre es un padding propio — `getLargeAnchoredAdaptiveBannerAdSize` puede reservar hasta un 15 % del alto de pantalla sea cual sea el tamaño real del creativo servido (más notorio con el creativo de prueba de Google, que suele ser más bajo que eso), y lo que sobra se ve como fondo oscuro porque la vista de plataforma es transparente donde no hay creativo. La única palanca real contra eso es un `AdSize` fijo (`AdSize.banner`, 320x50) en vez de adaptativo — sacrifica el eCPM que justifica lo adaptativo, así que es una decisión de producto, no un ajuste de espaciado.
 
 **Consentimiento (UMP).** `services/ads/consent_service.dart` usa el UMP SDK que ya incluye `google_mobile_ads` (sin dependencia extra):
 `requestConsentInfoUpdate` → `loadAndShowConsentFormIfRequired` → `canRequestAds()`.
@@ -507,15 +521,16 @@ flutter build appbundle --release --analyze-size
 
 1. ~~Verificar a mano las entradas de `assets/data/facts.json` y rellenar `sourceUrl`.~~ **Hecho para las 85 originales**, una a una contra una página abierta; se retiraron 2 y se corrigió la redacción de 12 que decían más de lo que su fuente sostenía.
 
-   Las **448 posteriores** (§3.2) se verificaron con un protocolo automatizado, no a mano. Lo que sigue pendiente: repasar las que se apoyan en fuentes de segunda fila (Wikipedia sostiene el 7 %) y subirlas a una primaria si aparece, y abrir a mano las **15 que devuelven 403** al comprobador — Britannica, CDC, Mayo Clinic y el museo de la DEA sirven la página a un navegador y la niegan a un script, así que su enlace es el único del catálogo sin comprobar por máquina. `tool/ingest_facts.py --check --links` las lista bajo "kept, but unverifiable by machine".
-2. `core/config/ad_config.dart`: rellenar `_prodBanner` y `_prodInterstitial`.
-3. `AndroidManifest.xml`: sustituir el App ID de prueba de AdMob por el de producción.
-4. Iconos adaptativos (`flutter_launcher_icons`) y splash nativo (`flutter_native_splash`) — necesitan assets reales.
-5. Crash reporting (Crashlytics o Sentry) — **obligatorio desde la v1**. Enganchar en `AppLogger.error` y en `bootstrap`.
-6. Política de privacidad publicada en una URL accesible (obligatoria por usar AdMob).
-7. Data Safety form, content rating (IARC), público objetivo, declaración "contiene anuncios".
-8. Testing interno → closed testing (**12 testers / 14 días** para cuentas personales creadas después de nov-2023) → producción con rollout escalonado 10–20 %.
-9. Vigilar Android Vitals: crash rate > 1,09 % o ANR > 0,47 % penalizan la visibilidad → parar el rollout.
+   Las **527 posteriores** (§3.2) se verificaron con un protocolo automatizado, no a mano. Lo que sigue pendiente: repasar las que se apoyan en fuentes de segunda fila (Wikipedia sostiene el 7 %) y subirlas a una primaria si aparece, y abrir a mano las **15 que devuelven 403** al comprobador — Britannica, CDC, Mayo Clinic y el museo de la DEA sirven la página a un navegador y la niegan a un script, así que su enlace es el único del catálogo sin comprobar por máquina. `tool/ingest_facts.py --check --links` las lista bajo "kept, but unverifiable by machine".
+2. **Re-intercalar el catálogo y reactivar el test de orden.** El lote de 79 preguntas de "cuerpo" se fusionó sin lotes equivalentes de ciencia/historia/lenguaje (§3.2) y dejó 35 tarjetas de esa categoría seguidas al final. En cuanto lleguen lotes parecidos para las otras tres categorías, correr `tool/ingest_facts.py --apply` con las cuatro juntas para que `interleave()` tenga con qué alternar, y quitar el `skip:` de `fact_repository_test.dart: the catalogue stays interleaved by category`.
+3. `core/config/ad_config.dart`: rellenar `_prodBanner` y `_prodInterstitial`.
+4. `AndroidManifest.xml`: sustituir el App ID de prueba de AdMob por el de producción.
+5. Iconos adaptativos (`flutter_launcher_icons`) y splash nativo (`flutter_native_splash`) — necesitan assets reales.
+6. Crash reporting (Crashlytics o Sentry) — **obligatorio desde la v1**. Enganchar en `AppLogger.error` y en `bootstrap`.
+7. Política de privacidad publicada en una URL accesible (obligatoria por usar AdMob).
+8. Data Safety form, content rating (IARC), público objetivo, declaración "contiene anuncios".
+9. Testing interno → closed testing (**12 testers / 14 días** para cuentas personales creadas después de nov-2023) → producción con rollout escalonado 10–20 %.
+10. Vigilar Android Vitals: crash rate > 1,09 % o ANR > 0,47 % penalizan la visibilidad → parar el rollout.
 
 ### Features del plan original todavía sin implementar
 

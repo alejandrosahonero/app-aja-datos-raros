@@ -4,7 +4,6 @@ import 'package:aja/core/extensions/build_context_x.dart';
 import 'package:aja/core/routing/app_routes.dart';
 import 'package:aja/core/theme/app_spacing.dart';
 import 'package:aja/core/utils/app_logger.dart';
-import 'package:aja/core/widgets/adaptive_banner_ad.dart';
 import 'package:aja/core/widgets/app_loader.dart';
 import 'package:aja/core/widgets/base_screen.dart';
 import 'package:aja/core/widgets/error_view.dart';
@@ -33,12 +32,11 @@ import 'package:go_router/go_router.dart';
 
 /// The whole app: a stack of cards you swipe through.
 ///
-/// `showBanner: false` on purpose, and yet the deck does carry a banner. What
-/// it refuses is `BaseScreen`'s *anchored* one: the body is a drag surface that
-/// reaches the bottom of the screen, and a banner under a drag gesture is the
-/// textbook accidental-click layout. The deck places its own inline instead —
-/// above the cards, where a swipe never drags the finger across it. See
-/// [_DeckBanner].
+/// `showBanner: false`: no anchored banner from `BaseScreen`, and no inline
+/// one of its own either — the ad card already dealt into the stack
+/// (`AdItem`/`AdDeckCard`, every `AppConfig.adCardEveryNCards` content cards)
+/// plus the interstitial pacing are the deck's ad inventory. A standing banner
+/// on top of that read as clutter rather than another impression worth having.
 class DeckScreen extends ConsumerWidget {
   const DeckScreen({super.key});
 
@@ -120,13 +118,15 @@ class _DeckBodyState extends ConsumerState<_DeckBody> {
       ),
       child: Column(
         children: <Widget>[
-          // Filter and banner sit above the deck and survive both states. The
+          // The filter sits above the deck and survives both states. The
           // exhausted screen is exactly where switching category is the most
           // useful thing the user can do, so the chips must not disappear with
           // the cards.
           const _CategoryChips(),
-          const SizedBox(height: AppSpacing.sm),
-          const _DeckBanner(),
+          // Small on purpose: just enough that the chips and the top card
+          // don't visually touch. No banner sits here any more (see
+          // DeckScreen's class doc), so this is the only gap left to tune.
+          const SizedBox(height: AppSpacing.md),
           Expanded(
             child: state.isExhausted
                 ? const DeckExhaustedView()
@@ -163,8 +163,9 @@ class _DeckBodyState extends ConsumerState<_DeckBody> {
                   favorited: favorites.contains(fact.id),
                   onTap: isTop ? () => unawaited(_reveal(context, ref)) : null,
                 ),
-                // Depth and not `isTop`: the ad card fetches its creative one
-                // place early so it is not still loading when it arrives.
+                // Depth and not `isTop`: the ad card fetches and renders its
+                // creative as soon as it exists, however deep in the stack, so
+                // it is already playing underneath by the time it arrives.
                 AdItem() => AdDeckCard(depth: depth),
               };
             },
@@ -483,30 +484,6 @@ class _CategoryChip extends StatelessWidget {
       // Re-tapping the selected chip must not clear the filter: on a filter
       // row, a tap means "show me this one".
       onSelected: (bool _) => onSelected(),
-    );
-  }
-}
-
-/// Banner slot between the filter and the deck.
-///
-/// Above the cards on purpose. An anchored banner under a full-screen drag
-/// surface is the textbook accidental-click layout, and this deck is dragged in
-/// four directions; here the finger never travels over the ad on its way out of
-/// a swipe. It also renders nothing at all — no reserved strip — for premium
-/// users and whenever no creative loads, so the card gets the space back
-/// instead of staring at a grey box.
-class _DeckBanner extends StatelessWidget {
-  const _DeckBanner();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: AdaptiveBannerAd(
-        anchored: false,
-        // Inside the banner, not around it: an empty slot must cost the deck
-        // nothing at all, gap included.
-        padding: EdgeInsets.only(bottom: AppSpacing.sm),
-      ),
     );
   }
 }

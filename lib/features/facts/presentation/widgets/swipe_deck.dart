@@ -315,11 +315,7 @@ class _SwipeDeckState extends State<SwipeDeck>
         for (int i = last - 1; i >= widget.index; i--) {
           final DeckItem item = widget.items[i];
           final int depth = i - widget.index;
-          cards.add(
-            depth == 0
-                ? _buildTopCard(context, item, size)
-                : _buildBackCard(context, item, depth),
-          );
+          cards.add(_buildCard(context, item, depth, size));
         }
 
         return Stack(fit: StackFit.expand, children: cards);
@@ -327,43 +323,63 @@ class _SwipeDeckState extends State<SwipeDeck>
     );
   }
 
-  Widget _buildTopCard(BuildContext context, DeckItem item, Size size) {
-    final DeckSwipeProgress progress = _currentProgress();
+  /// Builds one card, top or back, as **the same shape of widget tree either
+  /// way** — only the values inside change with [depth].
+  ///
+  /// This used to be two separate methods, one per role, and that was a bug:
+  /// the top card was a `GestureDetector` and a back card was a bare
+  /// `Transform.translate`, both carrying the same `ValueKey<String>(item.key)`
+  /// but at different `runtimeType`s. `Widget.canUpdate` requires both to
+  /// match, so the moment an ad card advanced from depth 1 to depth 0, Flutter
+  /// found a type mismatch at that key, tore down the whole subtree — the
+  /// `AdDeckCard` element deep inside it included — and mounted a fresh one.
+  /// That silently threw away the `BannerAd` [AdDeckCard] had already spent a
+  /// card's worth of head start preloading, which is why the ad still visibly
+  /// started loading only once it reached the top: every single time, its
+  /// state had just been destroyed and rebuilt from nothing on the way there.
+  ///
+  /// Keeping one shape and branching only on values (`isTop`) keeps Flutter's
+  /// reconciliation on the "update in place" path for every depth change, so
+  /// [AdDeckCard]'s element — and the banner it preloaded — survives all the
+  /// way from the back of the stack to the top.
+  Widget _buildCard(BuildContext context, DeckItem item, int depth, Size size) {
+    final bool isTop = depth == 0;
+    final DeckSwipeProgress progress = isTop
+        ? _currentProgress()
+        : DeckSwipeProgress.idle;
+
+    final Widget stack = Stack(
+      fit: StackFit.expand,
+      children: <Widget>[
+        widget.builder(context, item, depth),
+        if (isTop && widget.overlayBuilder != null)
+          IgnorePointer(child: widget.overlayBuilder!(context, progress)),
+      ],
+    );
 
     return GestureDetector(
       key: ValueKey<String>(item.key),
       behavior: HitTestBehavior.opaque,
-      onPanUpdate: _onPanUpdate,
-      onPanEnd: (DragEndDetails details) => _onPanEnd(details, size),
+      // Null callbacks on a back card mean its GestureDetector never actually
+      // does anything — harmless, since the opaque top card always covers the
+      // full stack and is hit-tested first. The IgnorePointer below is what
+      // actually keeps a back card inert; this is only here so its widget
+      // shape matches the top card's.
+      onPanUpdate: isTop ? _onPanUpdate : null,
+      onPanEnd: isTop ? (DragEndDetails details) => _onPanEnd(details, size) : null,
       child: Transform.translate(
-        offset: _drag,
+        offset: isTop ? _drag : Offset(0, depth * 12.0),
         child: Transform.rotate(
           // Pivot below the card so it tilts like a real card being pulled off
-          // a stack instead of spinning around its middle.
+          // a stack instead of spinning around its middle. Angle is 0 for a
+          // back card, so the origin does nothing there.
           origin: const Offset(0, 320),
-          angle: progress.signedHorizontal * 0.12,
-          child: Stack(
-            fit: StackFit.expand,
-            children: <Widget>[
-              widget.builder(context, item, 0),
-              if (widget.overlayBuilder != null)
-                IgnorePointer(child: widget.overlayBuilder!(context, progress)),
-            ],
+          angle: isTop ? progress.signedHorizontal * 0.12 : 0,
+          child: Transform.scale(
+            scale: isTop ? 1 : 1 - depth * 0.04,
+            child: isTop ? stack : IgnorePointer(child: stack),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildBackCard(BuildContext context, DeckItem item, int depth) {
-    // Cards behind peek out from under the top one. They never animate on
-    // their own, hence the const-friendly static transform.
-    return Transform.translate(
-      key: ValueKey<String>(item.key),
-      offset: Offset(0, depth * 12.0),
-      child: Transform.scale(
-        scale: 1 - depth * 0.04,
-        child: IgnorePointer(child: widget.builder(context, item, depth)),
       ),
     );
   }
