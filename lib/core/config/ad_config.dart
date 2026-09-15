@@ -18,11 +18,10 @@ abstract final class AdConfig {
   static const String _testInterstitial =
       'ca-app-pub-3940256099942544/1033173712';
 
-  // --- Production unit ids (fill in from the AdMob console) ---------------
-  // Leave empty until the real units exist: an empty id disables the format
-  // instead of crashing.
-  static const String _prodBanner = '';
-  static const String _prodInterstitial = '';
+  // --- Production unit ids ------------------------------------------------
+  static const String _prodBanner = 'ca-app-pub-4073049276319773/8651424247';
+  static const String _prodInterstitial =
+      'ca-app-pub-4073049276319773/7745536689';
 
   /// Serves both the anchored adaptive banner and the medium rectangle used by
   /// the ad card inside the deck: a banner unit serves any banner size, so a

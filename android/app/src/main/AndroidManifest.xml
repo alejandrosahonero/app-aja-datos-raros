@@ -57,7 +57,7 @@
              ============================================================== -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713" />
+            android:value="ca-app-pub-4073049276319773~4797965837" />
 
         <!-- Delays ad SDK initialization until MobileAds.initialize() is
              called, so nothing competes with the first frame. -->
