@@ -3,6 +3,17 @@ import java.util.Properties
 
 plugins {
     id("com.android.application")
+    // Applied explicitly (version comes from settings.gradle.kts's
+    // pluginManagement) instead of left for each plugin to apply on its own.
+    // `android.builtInKotlin=false` (gradle.properties) means :app owns this
+    // instead of Flutter's newer built-in-Kotlin path, and without it every
+    // plugin that touches Kotlin (flutter_timezone, in_app_review,
+    // sentry_flutter) was applying its own KGP version — the exact thing
+    // Flutter's own "Future versions of Flutter will fail to build" warning
+    // is about, and it also broke Android Studio's Gradle sync when opening
+    // this android/ folder directly (no `prepareKotlinBuildScriptModel` task
+    // on :app without a single, real Kotlin application here).
+    id("org.jetbrains.kotlin.android")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
