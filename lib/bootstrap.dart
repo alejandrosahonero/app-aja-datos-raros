@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:aja/app.dart';
+import 'package:aja/core/config/sentry_config.dart';
 import 'package:aja/core/utils/app_logger.dart';
 import 'package:aja/features/facts/presentation/providers/facts_providers.dart';
 import 'package:aja/l10n/generated/app_localizations.dart';
@@ -13,6 +14,7 @@ import 'package:aja/services/storage/storage_providers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Application entry point logic.
@@ -27,6 +29,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// Everything else — AdMob, UMP consent, billing — starts **after** the first
 /// frame in [_initializeAfterFirstFrame].
 Future<void> bootstrap() async {
+  // Release-only, same convention as AdConfig: an empty DSN disables the SDK
+  // instead of crashing, so a debug build never reports and can't pollute
+  // production's crash rate with local testing.
+  await SentryFlutter.init((SentryFlutterOptions options) {
+    options.dsn = kReleaseMode ? SentryConfig.dsn : '';
+  });
+
   await runZonedGuarded<Future<void>>(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
