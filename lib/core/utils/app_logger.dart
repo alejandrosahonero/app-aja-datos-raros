@@ -37,7 +37,7 @@ abstract final class AppLogger {
       Sentry.captureException(
         error ?? message,
         stackTrace: stackTrace,
-        withScope: (SentryScope scope) => scope.setTag('logger', name),
+        withScope: (Scope scope) => scope.setTag('logger', name),
       ),
     );
   }
