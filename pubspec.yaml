@@ -72,6 +72,10 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+  # Genera el splash nativo a partir de flutter_native_splash: abajo. Solo
+  # dev_dependency: no viaja en el binario, solo corre `dart run
+  # flutter_native_splash:create` para escribir los drawables/estilos nativos.
+  flutter_native_splash: ^2.4.8
 
 flutter:
   uses-material-design: true
@@ -81,4 +85,24 @@ flutter:
     # Catálogo de datos empaquetado. Sin backend en el MVP: se parsea una vez
     # fuera del isolate principal y se cachea en memoria.
     - assets/data/
+    - assets/branding/
+
+# Splash nativo (CLAUDE.md §13 pendiente #5). Fondo blanco a propósito: el
+# logo usa morados muy oscuros en sus sombras, y sobre cualquier fondo oscuro
+# esas sombras se funden y se pierde el trazo — mismo motivo por el que la
+# imagen de compartir (§3.4) fija su paleta al esquema claro.
+#
+# Regenerar tras cambiar la imagen o el color:
+#   dart run flutter_native_splash:create
+# Y para quitarlo (por ejemplo, antes de reemplazarlo por otro):
+#   dart run flutter_native_splash:remove
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: assets/branding/splash_logo.png
+  android_12:
+    color: "#FFFFFF"
+    image: assets/branding/splash_logo.png
+  android: true
+  ios: false
+  web: false
 
