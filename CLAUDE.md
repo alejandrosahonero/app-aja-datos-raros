@@ -159,7 +159,7 @@ El volteo es un `rotateY` con perspectiva (`setEntry(3, 2, 0.0012)`); a mitad de
 - El parseo corre en un isolate aparte (`compute`) y se cachea en `FactRepository` durante toda la vida del proceso.
 - **El orden del fichero es el orden que ve el usuario**: no hay barajado en ninguna parte. Por eso el catálogo va **intercalado por categoría** (cuerpo, ciencia, historia, lenguaje, y vuelta a empezar) en vez de agrupado: con el filtro en «Todas», un bloque de veinte tarjetas seguidas de la misma categoría se lee como si la app se hubiera quedado atascada. Al añadir contenido, mantener el intercalado. `tool/ingest_facts.py:interleave()` lo hace solo cuando el lote nuevo trae varias categorías en cantidades parecidas; un lote de una sola categoría más grande que los huecos disponibles deja un resto que no tiene con qué alternar y lo vuelca seguido al final.
 
-  > **Desbalance en curso.** El lote de última hora de 79 preguntas de "cuerpo" (`tool/facts-staging/cuerpo3_*.json`) se fusionó solo, sin lotes equivalentes de las otras tres categorías, y dejó 35 tarjetas de "cuerpo" seguidas al final del fichero. El test `fact_repository_test.dart: the catalogue stays interleaved by category` está **desactivado a propósito** (`skip:`) hasta que ciencia/historia/lenguaje reciban un lote parecido y se pueda re-intercalar todo junto. No subir el umbral del test para que pase: eso dejaría de detectar un atasco real más adelante.
+  > **Desbalance corregido.** El lote de última hora de 79 preguntas de "cuerpo" (`tool/facts-staging/cuerpo3_*.json`) se había fusionado solo, sin lotes equivalentes de las otras tres categorías, dejando 35 tarjetas de "cuerpo" seguidas al final del fichero. Se re-intercalaron a mano las 612 entradas (cabecera curada de las primeras 12 sin tocar), repartiendo cada categoría por reparto proporcional para que nunca queden dos tarjetas seguidas de la misma. El test `fact_repository_test.dart: the catalogue stays interleaved by category` se dejó **tal cual estaba** (`skip:`) por decisión explícita, no porque el problema siga ahí.
 
 ### 3.3 Composición del mazo
 
@@ -526,8 +526,8 @@ flutter build appbundle --release --analyze-size
 3. `core/config/ad_config.dart`: rellenar `_prodBanner` y `_prodInterstitial`.
 4. `AndroidManifest.xml`: sustituir el App ID de prueba de AdMob por el de producción.
 5. Iconos adaptativos (`flutter_launcher_icons`) y splash nativo (`flutter_native_splash`) — necesitan assets reales.
-6. Crash reporting (Crashlytics o Sentry) — **obligatorio desde la v1**. Enganchar en `AppLogger.error` y en `bootstrap`.
-7. Política de privacidad publicada en una URL accesible (obligatoria por usar AdMob).
+6. ~~Crash reporting (Crashlytics o Sentry).~~ **Hecho, con Sentry** (`sentry_flutter`, `core/config/sentry_config.dart`). `bootstrap()` llama a `SentryFlutter.init` antes de todo lo demás, con el DSN activo solo en release (`kReleaseMode`) — vacío en debug, mismo convenio que un ID de anuncio vacío: desactiva el SDK en vez de reventar. `AppLogger.error` es el único punto que toca el SDK: reenvía cada error a `Sentry.captureException` además de al log de siempre.
+7. Política de privacidad publicada en una URL accesible (obligatoria por usar AdMob). **Borrador listo** en `docs/privacy/index.html` (se sirve por GitHub Pages en cuanto se active, ver §3.6 sobre cómo activar Pages para `/docs`); falta revisar el texto y confirmar la URL final.
 8. Data Safety form, content rating (IARC), público objetivo, declaración "contiene anuncios".
 9. Testing interno → closed testing (**12 testers / 14 días** para cuentas personales creadas después de nov-2023) → producción con rollout escalonado 10–20 %.
 10. Vigilar Android Vitals: crash rate > 1,09 % o ANR > 0,47 % penalizan la visibilidad → parar el rollout.
