@@ -212,7 +212,7 @@ Las instrucciones de montaje y el código del script están en `core/config/cont
 - **La carga no lleva ningún identificador.** Ni ad id, ni install id, ni modelo de móvil. Es una decisión de producto: mantiene la declaración del Data Safety en «contenido de usuario, opcional, no vinculado a la identidad».
 - **El endpoint es público y sin autenticar**, que está bien para un buzón de sugerencias y mal para cualquier otra cosa. Hay límite de longitud y un mínimo de 30 s entre envíos, pero **cada fila es texto no fiable**: no pegar nunca una aportación en el catálogo sin leerla.
 
-> **Antes de publicar:** activar esto obliga a declarar contenido de usuario en el formulario de Data Safety y a mencionarlo en la política de privacidad.
+> **Activado.** `ContributionConfig.endpoint` ya apunta al Apps Script real. Declarado en el formulario de Data Safety y mencionado en `docs/privacy/index.html` §4, incluida la vía para pedir que se borre una aportación (un correo, ya que el envío no lleva identificador con el que automatizarlo).
 
 ### 3.6 Catálogo remoto — añadir preguntas sin publicar versión
 
