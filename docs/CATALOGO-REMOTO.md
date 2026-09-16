@@ -1,11 +1,21 @@
 # Catálogo remoto de Ajá
 
+> Este fichero es documentación de mantenimiento, no la portada del sitio. Se
+> llama `CATALOGO-REMOTO.md` a propósito, no `README.md`: GitHub Pages
+> convierte automáticamente un `README.md` en la página de inicio, y estas
+> instrucciones internas de edición no tienen por qué ser lo primero que ve
+> cualquiera que visite la URL pública. `docs/.nojekyll` además desactiva el
+> procesado de Jekyll para toda la carpeta, así que ni este fichero ni
+> `verificacion-fuentes.md` se renderizan como HTML — la URL raíz del sitio
+> sirve `docs/index.html` (que solo redirige a la política de privacidad), y
+> `facts.json` se sigue sirviendo tal cual en su propia ruta.
+
 Este directorio se publica con **GitHub Pages**. `facts.json` es el catálogo que la
 app descarga para añadir, corregir o retirar preguntas **sin publicar una versión
 nueva en Play**.
 
-No borres este README: GitHub Pages sirve la carpeta entera, y `facts.json` es el
-único fichero que la app lee.
+No borres este fichero: documenta cómo mantener `facts.json`, el único que la app
+lee.
 
 ## Cómo se fusiona
 

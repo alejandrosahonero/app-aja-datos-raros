@@ -51,7 +51,7 @@ Un JSON estático y no Firebase: cuesta una petición GET y cero dependencias, e
 
 La red **solo puede sumar**. Sin conexión, 404, cuerpo truncado o JSON corrupto acaban igual: se usa lo que ya había. Una entrada mal formada se descarta y las demás siguen; un fichero que dejaría el catálogo vacío se ignora entero. La descarga se aplica en el **siguiente arranque**, para no mover las cartas a quien está leyendo.
 
-Pasos para añadir contenido: **[`docs/README.md`](docs/README.md)**. Validador: `python3 tool/build_remote_catalog.py --check`.
+Pasos para añadir contenido: **[`docs/CATALOGO-REMOTO.md`](docs/CATALOGO-REMOTO.md)**. Validador: `python3 tool/build_remote_catalog.py --check`.
 
 ---
 
