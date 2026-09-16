@@ -1,6 +1,6 @@
-import 'package:app_template/core/config/app_config.dart';
-import 'package:app_template/services/review/review_service.dart';
-import 'package:app_template/services/storage/key_value_store.dart';
+import 'package:aja/core/config/app_config.dart';
+import 'package:aja/services/review/review_service.dart';
+import 'package:aja/services/storage/key_value_store.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

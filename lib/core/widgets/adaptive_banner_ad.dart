@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:app_template/core/utils/app_logger.dart';
-import 'package:app_template/services/ads/ads_providers.dart';
-import 'package:app_template/services/ads/ads_service.dart';
-import 'package:app_template/services/billing/premium_controller.dart';
+import 'package:aja/core/utils/app_logger.dart';
+import 'package:aja/services/ads/ads_providers.dart';
+import 'package:aja/services/ads/ads_service.dart';
+import 'package:aja/services/billing/premium_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -18,8 +18,39 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 /// Adaptive sizing (instead of a fixed 320x50) is what AdMob recommends: it
 /// picks the best height for the current screen width and yields a better
 /// eCPM.
+///
+/// That height is a **reservation, not a promise**: `getLargeAnchoredAdaptive
+/// BannerAdSize` can claim up to 15% of the screen's height, and whatever the
+/// served creative does not fill inside that box shows through as blank space
+/// — dark background here, since the platform view behind an unfilled banner
+/// is transparent. It is most visible with Google's own test creative, which
+/// is shorter than most real ones. There is no app-side fix for this: shrink
+/// the reservation and eCPM drops, since it is the same call that yields the
+/// adaptive-height win described above. If a build ever needs a guaranteed-
+/// tight banner regardless of eCPM, the escape hatch is a fixed `AdSize`
+/// (`AdSize.banner`, 320x50) instead of the adaptive call — a real product
+/// trade-off, not something to switch to quietly.
 class AdaptiveBannerAd extends ConsumerStatefulWidget {
-  const AdaptiveBannerAd({super.key});
+  const AdaptiveBannerAd({
+    super.key,
+    this.anchored = true,
+    this.padding = EdgeInsets.zero,
+  });
+
+  /// Applied only when a creative is actually on screen.
+  ///
+  /// Kept here rather than around the widget so the "no ad, no reserved space"
+  /// promise holds: a gap wrapped around it from outside survives the empty
+  /// case and leaves a hole in the layout.
+  final EdgeInsetsGeometry padding;
+
+  /// True when the banner sits at the bottom edge of the screen, where it has
+  /// to clear the system navigation bar.
+  ///
+  /// Set it to false for a banner placed inside the layout: there the system
+  /// inset is somebody else's problem, and applying it would open a gap in the
+  /// middle of the screen.
+  final bool anchored;
 
   @override
   ConsumerState<AdaptiveBannerAd> createState() => _AdaptiveBannerAdState();
@@ -118,13 +149,14 @@ class _AdaptiveBannerAdState extends ConsumerState<AdaptiveBannerAd> {
       return const SizedBox.shrink();
     }
 
-    return SafeArea(
-      top: false,
-      child: SizedBox(
-        width: size.width.toDouble(),
-        height: size.height.toDouble(),
-        child: AdWidget(ad: banner),
-      ),
+    final Widget ad = SizedBox(
+      width: size.width.toDouble(),
+      height: size.height.toDouble(),
+      child: AdWidget(ad: banner),
     );
+
+    final Widget padded = Padding(padding: widget.padding, child: ad);
+
+    return widget.anchored ? SafeArea(top: false, child: padded) : padded;
   }
 }

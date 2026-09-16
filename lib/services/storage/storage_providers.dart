@@ -1,5 +1,5 @@
-import 'package:app_template/services/storage/key_value_store.dart';
-import 'package:app_template/services/storage/secure_store.dart';
+import 'package:aja/services/storage/key_value_store.dart';
+import 'package:aja/services/storage/secure_store.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';

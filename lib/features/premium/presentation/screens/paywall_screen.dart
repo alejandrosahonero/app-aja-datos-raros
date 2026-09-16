@@ -1,10 +1,10 @@
-import 'package:app_template/core/extensions/build_context_x.dart';
-import 'package:app_template/core/theme/app_spacing.dart';
-import 'package:app_template/core/widgets/app_loader.dart';
-import 'package:app_template/core/widgets/base_screen.dart';
-import 'package:app_template/core/widgets/error_view.dart';
-import 'package:app_template/services/billing/premium_controller.dart';
-import 'package:app_template/services/billing/premium_state.dart';
+import 'package:aja/core/extensions/build_context_x.dart';
+import 'package:aja/core/theme/app_spacing.dart';
+import 'package:aja/core/widgets/app_loader.dart';
+import 'package:aja/core/widgets/base_screen.dart';
+import 'package:aja/core/widgets/error_view.dart';
+import 'package:aja/services/billing/premium_controller.dart';
+import 'package:aja/services/billing/premium_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -79,6 +79,10 @@ class _PaywallBody extends ConsumerWidget {
         const SizedBox(height: AppSpacing.lg),
         const _Benefit(icon: Icons.block, textKey: _BenefitKey.noAds),
         const _Benefit(
+          icon: Icons.bookmark_outline,
+          textKey: _BenefitKey.favorites,
+        ),
+        const _Benefit(
           icon: Icons.favorite_outline,
           textKey: _BenefitKey.support,
         ),
@@ -130,7 +134,7 @@ class _PaywallBody extends ConsumerWidget {
   }
 }
 
-enum _BenefitKey { noAds, support, oneTime }
+enum _BenefitKey { noAds, favorites, support, oneTime }
 
 class _Benefit extends StatelessWidget {
   const _Benefit({required this.icon, required this.textKey});
@@ -142,6 +146,7 @@ class _Benefit extends StatelessWidget {
   Widget build(BuildContext context) {
     final String text = switch (textKey) {
       _BenefitKey.noAds => context.l10n.paywallBenefitNoAds,
+      _BenefitKey.favorites => context.l10n.paywallBenefitFavorites,
       _BenefitKey.support => context.l10n.paywallBenefitSupport,
       _BenefitKey.oneTime => context.l10n.paywallBenefitOneTime,
     };

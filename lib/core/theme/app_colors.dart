@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 /// that Material does not provide live in [AppSemanticColors].
 abstract final class AppColors {
   /// Change this to re-brand the app.
-  static const Color seed = Color(0xFF4F46E5);
+  static const Color seed = Color(0xFFC026D3);
 
   /// Optional second seed for the dark scheme. Keeping it equal to [seed]
   /// gives a consistent hue across both themes.

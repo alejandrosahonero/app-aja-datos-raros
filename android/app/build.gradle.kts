@@ -3,6 +3,17 @@ import java.util.Properties
 
 plugins {
     id("com.android.application")
+    // Applied explicitly (version comes from settings.gradle.kts's
+    // pluginManagement) instead of left for each plugin to apply on its own.
+    // `android.builtInKotlin=false` (gradle.properties) means :app owns this
+    // instead of Flutter's newer built-in-Kotlin path, and without it every
+    // plugin that touches Kotlin (flutter_timezone, in_app_review,
+    // sentry_flutter) was applying its own KGP version — the exact thing
+    // Flutter's own "Future versions of Flutter will fail to build" warning
+    // is about, and it also broke Android Studio's Gradle sync when opening
+    // this android/ folder directly (no `prepareKotlinBuildScriptModel` task
+    // on :app without a single, real Kotlin application here).
+    id("org.jetbrains.kotlin.android")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
@@ -19,7 +30,7 @@ if (hasKeystore) {
 }
 
 android {
-    namespace = "com.alejandrosahonero.app_template"
+    namespace = "com.alejandrosahonero.aja"
 
     // Pinned to 37: required by permission_handler 13 and
     // flutter_secure_storage 11. Do not lower it.
@@ -29,11 +40,15 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+        // Required by flutter_local_notifications: it uses java.time APIs that
+        // do not exist below API 26, and minSdk is 24. Without this the build
+        // fails at :app:checkDebugAarMetadata.
+        isCoreLibraryDesugaringEnabled = true
     }
 
     defaultConfig {
         // CANNOT be changed after the first publication on Google Play.
-        applicationId = "com.alejandrosahonero.app_template"
+        applicationId = "com.alejandrosahonero.aja"
         minSdk = 24
         // Play requires targeting a recent API every year (deadline is usually
         // 31 August). `flutter.targetSdkVersion` tracks the Flutter stable
@@ -76,6 +91,12 @@ android {
             isMinifyEnabled = false
         }
     }
+}
+
+dependencies {
+    // Backport of java.time & friends for API < 26. Version floor comes from
+    // flutter_local_notifications (>= 2.1.4).
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
 }
 
 kotlin {

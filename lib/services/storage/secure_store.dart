@@ -1,5 +1,5 @@
-import 'package:app_template/core/errors/app_exception.dart';
-import 'package:app_template/core/utils/app_logger.dart';
+import 'package:aja/core/errors/app_exception.dart';
+import 'package:aja/core/utils/app_logger.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 /// Encrypted key-value storage for sensitive data (purchase tokens, premium
@@ -17,7 +17,7 @@ class SecureStore {
   static const AndroidOptions androidOptions = AndroidOptions(
     // Explicit namespace so the encrypted entries stay addressable even if the
     // `applicationId` ever changes.
-    storageNamespace: 'app_template_secure',
+    storageNamespace: 'aja_secure',
   );
 
   Future<String?> read(String key) async {
