@@ -93,8 +93,17 @@ class DeckController extends AsyncNotifier<DeckState> {
   /// over which question they meet first. Only [restart] shuffles.
   static const int _curatedOrder = 0;
 
+  /// The last fact swiped away, so a shake can bring it back.
+  ///
+  /// One level deep on purpose: it exists to rescue a swipe the user did not
+  /// mean, not to turn the deck into a history browser. Session-only, and
+  /// dropped whenever the deck is rebuilt — after a filter change or a restart
+  /// the position it points at belongs to a different deck.
+  _SkipRecord? _lastSkip;
+
   @override
   Future<DeckState> build() async {
+    _lastSkip = null;
     final List<Fact> all = await ref.watch(factsProvider.future);
     final FactCategory? category = ref.watch(categoryFilterProvider);
 
@@ -212,6 +221,14 @@ class DeckController extends AsyncNotifier<DeckState> {
       return dismissed;
     }
 
+    _lastSkip = _SkipRecord(
+      index: current.index,
+      factId: dismissed.fact.id,
+      // A card pinned by a notification can already be read; undoing its
+      // swipe must not mark it unread.
+      wasSeen: current.seenIds.contains(dismissed.fact.id),
+    );
+
     final Set<String> seenIds = <String>{...current.seenIds, dismissed.fact.id};
 
     state = AsyncData<DeckState>(
@@ -224,6 +241,35 @@ class DeckController extends AsyncNotifier<DeckState> {
 
     await _persistSeen(seenIds);
     return dismissed;
+  }
+
+  /// Whether [undoNext] has something to bring back.
+  bool get canUndoNext {
+    final _SkipRecord? record = _lastSkip;
+    final DeckState? current = state.value;
+    return record != null && current != null && record.index < current.index;
+  }
+
+  /// Puts the last swiped fact back on top, unread again.
+  ///
+  /// The index goes back to where that card was, so an ad card swiped after it
+  /// simply comes round again. Returns false when there is nothing to undo.
+  Future<bool> undoNext() async {
+    final _SkipRecord? record = _lastSkip;
+    final DeckState? current = state.value;
+    if (!canUndoNext) return false;
+    _lastSkip = null;
+
+    final Set<String> seenIds = record!.wasSeen
+        ? current!.seenIds
+        : (Set<String>.of(current!.seenIds)..remove(record.factId));
+
+    state = AsyncData<DeckState>(
+      current.copyWith(index: record.index, seenIds: seenIds, revealed: false),
+    );
+
+    await _persistSeen(seenIds);
+    return true;
   }
 
   /// Back to a full deck of the current filter, **in a new order**.
@@ -254,6 +300,7 @@ class DeckController extends AsyncNotifier<DeckState> {
 
     await store.setInt(_seedKey(category), seed);
     await _persistSeen(seenIds);
+    _lastSkip = null;
 
     state = AsyncData<DeckState>(
       _deckFor(
@@ -283,4 +330,17 @@ class DeckController extends AsyncNotifier<DeckState> {
 
   static String _seedKey(FactCategory? category) =>
       '$_seedKeyPrefix${category?.id ?? 'all'}';
+}
+
+@immutable
+class _SkipRecord {
+  const _SkipRecord({
+    required this.index,
+    required this.factId,
+    required this.wasSeen,
+  });
+
+  final int index;
+  final String factId;
+  final bool wasSeen;
 }

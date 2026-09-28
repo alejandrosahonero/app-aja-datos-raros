@@ -128,6 +128,8 @@ Una pila de tarjetas, una detrás de otra. Solo la de arriba responde al dedo.
 | **Tocar la tarjeta** | Igual que deslizar a la derecha (voltear). |
 | **Botones inferiores** | "Siguiente", "Compartir la pregunta", "Guardar" y "Ver respuesta". **No son decorativos**: una interfaz solo-arrastre es inutilizable con lector de pantalla y la penaliza el escaneo de accesibilidad de Play. No borrarlos. |
 
+**Agitar el móvil = deshacer** (`ShakeDetector`, `sensors_plus`). Abre un diálogo de confirmación para deshacer la última acción que se hace sin querer: **pasar una tarjeta** (`DeckController.undoNext`, la devuelve arriba y sin leer) o **guardar/quitar de guardadas**. Un solo nivel: rescata un gesto accidental, no es un historial. Pide confirmación porque agitar también puede ser accidental. El sensor solo se escucha con el mazo en pantalla y la app en primer plano, y exige varias sacudidas fuertes en menos de un segundo para que un golpe suelto no dispare nada.
+
 El eje dominante decide la acción: un arrastre de 200 px hacia arriba y 60 px a la izquierda es un guardado, no un descarte.
 
 **Filtro de categoría: fila de chips** (`_CategoryChips`), arriba del todo, justo encima de las cartas. Sustituye al `PopupMenuButton` que vivía en la barra superior: los chips cuestan alto que era de la tarjeta, pero enseñan las categorías sin abrir nada y cambiar de una es un toque en vez de tres. Siguen visibles en la pantalla de "te has quedado sin preguntas", que es justo donde cambiar de categoría es lo más útil que puede hacer el usuario. Volver a tocar el chip ya seleccionado **no** limpia el filtro: en una fila de filtros un toque significa "enséñame este".

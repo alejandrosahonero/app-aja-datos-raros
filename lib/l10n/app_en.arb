@@ -61,6 +61,12 @@
     }
   },
   "deckShareError": "We could not prepare the image to share.",
+  "deckUndoTitle": "Undo?",
+  "deckUndoSkip": "Go back to the card you just passed.",
+  "deckUndoFavoriteAdded": "Remove the card you just saved.",
+  "deckUndoFavoriteRemoved": "Save again the card you just removed.",
+  "deckUndoConfirm": "Undo",
+  "deckUndoNothing": "Nothing to undo.",
   "deckCategoryAll": "All",
 
   "categoryBody": "Human body",
