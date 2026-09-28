@@ -83,6 +83,12 @@
     }
   },
   "deckShareError": "No hemos podido preparar la imagen para compartir.",
+  "deckUndoTitle": "¿Deshacer?",
+  "deckUndoSkip": "Volver a la tarjeta que acabas de pasar.",
+  "deckUndoFavoriteAdded": "Quitar de guardadas la tarjeta que acabas de guardar.",
+  "deckUndoFavoriteRemoved": "Volver a guardar la tarjeta que acabas de quitar.",
+  "deckUndoConfirm": "Deshacer",
+  "deckUndoNothing": "No hay nada que deshacer.",
   "deckCategoryAll": "Todas",
 
   "categoryBody": "Cuerpo humano",

@@ -61,7 +61,8 @@ abstract final class ContributionConfig {
   /// still get written to the on-device outbox and the tap counter still adds
   /// up, so nothing the user does is lost, and the first build with a real URL
   /// flushes the backlog.
-  static const String endpoint = '';
+  static const String endpoint =
+      'https://script.google.com/macros/s/AKfycbyqzDUeaUErdypsEUpfzzhiA37rN3aHTx2mZF5IT9nldyckOOWD46Ai_9b8Tz2DrGcCPQ/exec';
 
   static bool get isConfigured => endpoint.isNotEmpty;
 

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer' as developer;
 
 import 'package:aja/app.dart';
 import 'package:aja/core/config/sentry_config.dart';
@@ -32,9 +33,24 @@ Future<void> bootstrap() async {
   // Release-only, same convention as AdConfig: an empty DSN disables the SDK
   // instead of crashing, so a debug build never reports and can't pollute
   // production's crash rate with local testing.
-  await SentryFlutter.init((SentryFlutterOptions options) {
-    options.dsn = kReleaseMode ? SentryConfig.dsn : '';
-  });
+  //
+  // Guarded on purpose: this runs before `runZonedGuarded` below even exists,
+  // so it is the one place in the whole startup sequence with no safety net.
+  // A crash-reporting SDK that fails to initialize must never be the reason
+  // the app itself never reaches the first frame.
+  try {
+    await SentryFlutter.init((SentryFlutterOptions options) {
+      options.dsn = kReleaseMode ? SentryConfig.dsn : '';
+    });
+  } on Object catch (error, stackTrace) {
+    developer.log(
+      'Sentry initialization failed',
+      name: 'app',
+      level: 1000,
+      error: error,
+      stackTrace: stackTrace,
+    );
+  }
 
   await runZonedGuarded<Future<void>>(
     () async {

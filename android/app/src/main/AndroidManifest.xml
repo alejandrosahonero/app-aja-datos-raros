@@ -120,6 +120,32 @@
             android:value="2" />
 
         <!-- ==============================================================
+             WORKMANAGER AUTO-INIT — DISABLED.
+             Nothing in this app calls the WorkManager API; androidx.work
+             only arrives transitively (via a native SDK, most likely Play
+             Core, whose consumer proguard rules already live in
+             proguard-rules.pro). Its default app-startup provider builds a
+             Room-backed database (`WorkDatabase`) at process start, before
+             any Activity exists — and in the very first release build with
+             R8 enabled that build threw and crashed the app before the
+             splash screen could render:
+               "Failed to create an instance of androidx.work.impl.WorkDatabase"
+             Since nothing here schedules WorkManager jobs, removing its
+             initializer avoids that database ever being created instead of
+             chasing which R8 keep rule it was missing.
+             ============================================================== -->
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
+            <meta-data
+                android:name="androidx.work.WorkManagerInitializer"
+                android:value="androidx.startup"
+                tools:node="remove" />
+        </provider>
+
+        <!-- ==============================================================
              SCHEDULED NOTIFICATIONS
              Android drops every pending alarm on reboot and on app update.
              These two receivers, from flutter_local_notifications, put the

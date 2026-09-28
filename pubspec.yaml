@@ -67,6 +67,10 @@ dependencies:
   path_provider: ^2.1.6
   url_launcher: ^6.3.2
   sentry_flutter: ^9.30.0
+  # Acelerómetro para "agitar para deshacer" en el mazo. Plugin oficial de
+  # flutter.dev (plus), sin permisos en Android y sin coste en el arranque: el
+  # sensor solo se escucha mientras el mazo está en pantalla y en primer plano.
+  sensors_plus: ^7.1.0
 
 dev_dependencies:
   flutter_test:

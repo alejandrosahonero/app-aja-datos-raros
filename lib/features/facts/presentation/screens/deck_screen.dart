@@ -17,6 +17,7 @@ import 'package:aja/features/facts/presentation/widgets/ad_deck_card.dart';
 import 'package:aja/features/facts/presentation/widgets/deck_exhausted_view.dart';
 import 'package:aja/features/facts/presentation/widgets/deck_swipe_progress.dart';
 import 'package:aja/features/facts/presentation/widgets/fact_card.dart';
+import 'package:aja/features/facts/presentation/widgets/shake_detector.dart';
 import 'package:aja/features/facts/presentation/widgets/swipe_deck.dart';
 import 'package:aja/features/goals/domain/goals_state.dart';
 import 'package:aja/features/goals/presentation/providers/goals_controller.dart';
@@ -99,6 +100,14 @@ class _DeckBodyState extends ConsumerState<_DeckBody> {
   /// second share sheet behind the first one.
   bool _sharing = false;
 
+  /// What a shake would undo. Only the two actions a stray swipe can do by
+  /// accident: passing a card and saving (or unsaving) it. Flipping and sharing
+  /// undo themselves, one with a second flip and the other by closing a sheet.
+  _UndoableAction? _lastAction;
+
+  /// A second shake while the dialog is up must not stack another one.
+  bool _undoDialogOpen = false;
+
   @override
   void dispose() {
     _progress.dispose();
@@ -109,32 +118,93 @@ class _DeckBodyState extends ConsumerState<_DeckBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(
-        AppSpacing.md,
-        AppSpacing.sm,
-        AppSpacing.md,
-        AppSpacing.md,
+    return ShakeDetector(
+      onShake: () => unawaited(_offerUndo(context)),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(
+          AppSpacing.md,
+          AppSpacing.sm,
+          AppSpacing.md,
+          AppSpacing.md,
+        ),
+        child: Column(
+          children: <Widget>[
+            // The filter sits above the deck and survives both states. The
+            // exhausted screen is exactly where switching category is the
+            // most useful thing the user can do, so the chips must not
+            // disappear with the cards.
+            const _CategoryChips(),
+            // Small on purpose: just enough that the chips and the top card
+            // don't visually touch. No banner sits here any more (see
+            // DeckScreen's class doc), so this is the only gap left to tune.
+            const SizedBox(height: AppSpacing.md),
+            Expanded(
+              child: state.isExhausted
+                  ? const DeckExhaustedView()
+                  : _deck(context),
+            ),
+          ],
+        ),
       ),
-      child: Column(
-        children: <Widget>[
-          // The filter sits above the deck and survives both states. The
-          // exhausted screen is exactly where switching category is the most
-          // useful thing the user can do, so the chips must not disappear with
-          // the cards.
-          const _CategoryChips(),
-          // Small on purpose: just enough that the chips and the top card
-          // don't visually touch. No banner sits here any more (see
-          // DeckScreen's class doc), so this is the only gap left to tune.
-          const SizedBox(height: AppSpacing.md),
-          Expanded(
-            child: state.isExhausted
-                ? const DeckExhaustedView()
-                : _deck(context),
+    );
+  }
+
+  /// Shake: asks before undoing, because a shake can be accidental too — a
+  /// phone tossed onto a sofa should not quietly bring a card back.
+  Future<void> _offerUndo(BuildContext context) async {
+    // Only from the deck itself: not from under a dialog, a sheet or another
+    // route pushed on top of it.
+    if (_undoDialogOpen || !(ModalRoute.of(context)?.isCurrent ?? false)) {
+      return;
+    }
+
+    final _UndoableAction? action = switch (_lastAction) {
+      _SkippedCard()
+          when !ref.read(deckControllerProvider.notifier).canUndoNext =>
+        null,
+      final _UndoableAction? other => other,
+    };
+
+    final AppLocalizations l10n = context.l10n;
+    if (action == null) {
+      context.showSnack(l10n.deckUndoNothing);
+      return;
+    }
+
+    _undoDialogOpen = true;
+    final bool? confirmed = await showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        icon: const Icon(Icons.undo_rounded),
+        title: Text(l10n.deckUndoTitle),
+        content: Text(switch (action) {
+          _SkippedCard() => l10n.deckUndoSkip,
+          _ToggledFavorite(added: true) => l10n.deckUndoFavoriteAdded,
+          _ToggledFavorite(added: false) => l10n.deckUndoFavoriteRemoved,
+        }),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text(l10n.deckUndoConfirm),
           ),
         ],
       ),
     );
+    _undoDialogOpen = false;
+
+    if (confirmed != true || !mounted) return;
+    _lastAction = null;
+
+    switch (action) {
+      case _SkippedCard():
+        await ref.read(deckControllerProvider.notifier).undoNext();
+      case _ToggledFavorite(:final String factId):
+        await ref.read(favoritesProvider.notifier).toggle(factId);
+    }
   }
 
   Widget _deck(BuildContext context) {
@@ -203,7 +273,10 @@ class _DeckBodyState extends ConsumerState<_DeckBody> {
       return;
     }
 
-    await ref.read(favoritesProvider.notifier).toggle(current.fact.id);
+    final bool added = await ref
+        .read(favoritesProvider.notifier)
+        .toggle(current.fact.id);
+    _lastAction = _ToggledFavorite(factId: current.fact.id, added: added);
   }
 
   /// Swipe down / share button.
@@ -288,11 +361,30 @@ class _DeckBodyState extends ConsumerState<_DeckBody> {
         .next();
 
     if (dismissed is FactItem) {
+      _lastAction = const _SkippedCard();
       await ref
           .read(adsServiceProvider)
           .registerActionAndMaybeShowInterstitial();
     }
   }
+}
+
+/// The last accidental-prone action, for shake-to-undo.
+sealed class _UndoableAction {
+  const _UndoableAction();
+}
+
+class _SkippedCard extends _UndoableAction {
+  const _SkippedCard();
+}
+
+class _ToggledFavorite extends _UndoableAction {
+  const _ToggledFavorite({required this.factId, required this.added});
+
+  final String factId;
+
+  /// True when the action saved the card, false when it removed it.
+  final bool added;
 }
 
 /// Palette of the four actions, in one place.
