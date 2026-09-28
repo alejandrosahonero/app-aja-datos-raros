@@ -4,24 +4,14 @@ import 'package:flutter/material.dart';
 
 /// Material 3 themes for the app.
 ///
-/// Both themes are generated from a single seed colour ([AppColors.seed]), so a
-/// new app only needs to change that constant. If you later want Android 12+
-/// wallpaper colours, pass the dynamic scheme through [light]/[dark] instead of
-/// the seeded fallback — the rest of the theme is already scheme-driven.
+/// Both schemes are hand-built in [AppColors]. Dynamic colour (Material You) is
+/// deliberately not used: it would repaint the brand with the user's wallpaper.
 abstract final class AppTheme {
-  static ThemeData light([ColorScheme? dynamicScheme]) => _build(
-    dynamicScheme ?? ColorScheme.fromSeed(seedColor: AppColors.seed),
-    AppSemanticColors.light,
-  );
+  static ThemeData light([ColorScheme? dynamicScheme]) =>
+      _build(dynamicScheme ?? AppColors.lightScheme, AppSemanticColors.light);
 
-  static ThemeData dark([ColorScheme? dynamicScheme]) => _build(
-    dynamicScheme ??
-        ColorScheme.fromSeed(
-          seedColor: AppColors.darkSeed,
-          brightness: Brightness.dark,
-        ),
-    AppSemanticColors.dark,
-  );
+  static ThemeData dark([ColorScheme? dynamicScheme]) =>
+      _build(dynamicScheme ?? AppColors.darkScheme, AppSemanticColors.dark);
 
   static ThemeData _build(ColorScheme scheme, AppSemanticColors semantic) {
     final ThemeData base = ThemeData(colorScheme: scheme);

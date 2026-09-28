@@ -30,7 +30,7 @@
 | `android:label` | `Ajá` |
 | Deep link | `aja://` |
 | Producto IAP | `premium_remove_ads` |
-| Seed color | `0xFFC026D3` |
+| Paleta | «Subrayador» (`AppColors`, §8) |
 
 `applicationId` y el ID del producto IAP **no se pueden cambiar** después de la primera publicación sin perder las compras existentes.
 
@@ -198,7 +198,7 @@ Deslizar hacia abajo (o el botón) renderiza la pregunta como PNG de **1080x1920
 - Se pinta sobre un `Canvas` (`FactStoryImage`), **no** rasterizando un widget: tiene que medir 1080x1920 exactos sea cual sea el tamaño, la densidad y el tema del móvil, y un `RepaintBoundary` te da los píxeles del dispositivo.
 - Todo lo legible vive dentro del **área segura**: las tres superficies pintan su propia interfaz sobre las franjas superior e inferior del lienzo.
 - La tarjeta es de **tamaño fijo y la pregunta se encoge** para caber, no al revés: el marco constante es lo que hace que un feed de estas se lea como una serie. Pasado el mínimo (34 pt) corta la cola en vez de desbordar.
-- La paleta sale de `AppColors.seed` y está **fijada al esquema claro**: rebrandear la app rebrandea lo compartido, y un post cuyo fondo cambia con el tema del lector parece de dos cuentas distintas.
+- La paleta sale de `AppColors.lightScheme` (fondo Tinta→Noche, píldora Rotulador) y está **fijada al esquema claro**: rebrandear la app rebrandea lo compartido, y un post cuyo fondo cambia con el tema del lector parece de dos cuentas distintas.
 - Un guardia impide que dos deslizamientos seguidos encolen dos hojas.
 
 > **Al escribir tests:** el render pasa por el motor gráfico, así que **se cuelga bajo el reloj falso de `testWidgets`**. Hace falta un `test` normal o envolverlo en `tester.runAsync`.
@@ -439,8 +439,9 @@ Para el botón explícito "Valorar la aplicación" de Ajustes se usa `openStoreL
 
 ## 8. Tema y diseño (Material 3)
 
-- Un **único seed color** (`AppColors.seed = 0xFFC026D3`) genera los esquemas claro y oscuro con `ColorScheme.fromSeed`.
-- `AppTheme.light([scheme])` / `AppTheme.dark([scheme])` aceptan un `ColorScheme` externo: si algún día se quiere Material You, se inyecta ahí sin tocar el resto del tema.
+- **Paleta «Subrayador»** (elegida en la Fase 2 de `GUIA_MARCA.md`): Tinta `#14213D` (marca oscura, texto, primario en claro), Rotulador `#FFE14A` (acento; primario en oscuro), Papel frío `#E8EBEF` (fondo), Folio `#FFFFFF` (tarjeta), Grafito `#5A6479` (secundario), Noche `#0D1322` / `#172035` (fondo y tarjeta en oscuro). La idea: el «ajá» es subrayar algo, así que el amarillo **solo marca el descubrimiento** — la primera frase de la respuesta lleva fondo de rotulador (`AppSemanticColors.highlight`). No repartir el amarillo por la interfaz: deja de significar algo.
+- Los dos `ColorScheme` están **escritos a mano** en `AppColors.lightScheme` / `darkScheme`, sin `fromSeed` (desvirtúa los tonos) y **sin Material You** (repintaría la marca con el fondo de pantalla). `surfaceTint` es transparente para que las tarjetas sigan blancas.
+- **Descartadas** (no reintroducir sin decisión del dueño): Cianotipo (plano azul + mono), Cartel (brutalista negro + violeta), Enciclopedia del 74 (mostaza/teja/oliva), Gabinete de curiosidades (verde botella + latón) y Chicle (el violeta/fucsia de la plantilla, `0xFFC026D3`, que era el seed anterior: genérico y «estética IA»).
 - Colores semánticos (success/warning) vía `ThemeExtension<AppSemanticColors>`, accesibles con `context.semanticColors`.
 - **Tokens de espaciado y radios** en `AppSpacing` / `AppRadius`. Prohibido escribir paddings a pelo.
 - `ThemeModeController` persiste claro/oscuro/sistema en `shared_preferences` de forma **síncrona** (las prefs ya están cargadas en `bootstrap`), así el primer frame no parpadea con el brillo equivocado.

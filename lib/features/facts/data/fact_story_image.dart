@@ -66,26 +66,16 @@ abstract final class FactStoryImage {
   static const double _questionMinSize = 34;
   static const double _questionHeightFactor = 1.25;
 
-  /// Brand colours, seeded exactly like the app's theme so that re-branding
-  /// through [AppColors.seed] carries over to everything shared.
+  /// Brand colours, taken from the app's light scheme so that re-branding
+  /// [AppColors] carries over to everything shared.
   ///
   /// Fixed to the light scheme on purpose: a shared image is not the user's
   /// screen, and a post whose background changes with the reader's theme
   /// setting reads as two different accounts.
-  static final ColorScheme _brand = ColorScheme.fromSeed(
-    seedColor: AppColors.seed,
-  );
+  static const ColorScheme _brand = AppColors.lightScheme;
 
-  static final Color _backgroundTop = Color.lerp(
-    AppColors.seed,
-    Colors.black,
-    0.45,
-  )!;
-  static final Color _backgroundBottom = Color.lerp(
-    AppColors.seed,
-    Colors.black,
-    0.86,
-  )!;
+  static const Color _backgroundTop = AppColors.ink;
+  static const Color _backgroundBottom = AppColors.night;
 
   /// PNG bytes of [fact]'s question, in [language].
   ///

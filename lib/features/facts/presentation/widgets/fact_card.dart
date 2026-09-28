@@ -176,8 +176,14 @@ class _CardBack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String answer = fact.answer.resolve(language);
+    // The highlighter marks the first sentence, which is the answer proper;
+    // the rest of it is the qualifier.
+    final int cut = answer.indexOf('. ');
+    final String marked = cut < 0 ? answer : answer.substring(0, cut + 1);
+    final String rest = cut < 0 ? '' : answer.substring(cut + 1);
+
     return DeckCardShell(
-      color: context.colors.primaryContainer,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -187,14 +193,11 @@ class _CardBack extends StatelessWidget {
                 child: Text(
                   context.l10n.deckAnswerLabel,
                   style: context.texts.labelLarge?.copyWith(
-                    color: context.colors.onPrimaryContainer.withValues(
-                      alpha: 0.7,
-                    ),
+                    color: context.colors.onSurfaceVariant,
                   ),
                 ),
               ),
-              if (favorited)
-                _FavoriteMark(color: context.colors.onPrimaryContainer),
+              if (favorited) _FavoriteMark(color: context.colors.primary),
             ],
           ),
           const SizedBox(height: AppSpacing.md),
@@ -205,10 +208,21 @@ class _CardBack extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    fact.answer.resolve(language),
+                  Text.rich(
+                    TextSpan(
+                      children: <InlineSpan>[
+                        TextSpan(
+                          text: marked,
+                          style: TextStyle(
+                            color: context.semanticColors.onHighlight,
+                            backgroundColor: context.semanticColors.highlight,
+                          ),
+                        ),
+                        TextSpan(text: rest),
+                      ],
+                    ),
                     style: context.texts.titleLarge?.copyWith(
-                      color: context.colors.onPrimaryContainer,
+                      color: context.colors.onSurface,
                       fontWeight: FontWeight.w600,
                       height: 1.3,
                     ),
@@ -217,7 +231,7 @@ class _CardBack extends StatelessWidget {
                   Text(
                     fact.detail.resolve(language),
                     style: context.texts.bodyMedium?.copyWith(
-                      color: context.colors.onPrimaryContainer,
+                      color: context.colors.onSurfaceVariant,
                       height: 1.45,
                     ),
                   ),
@@ -229,13 +243,13 @@ class _CardBack extends StatelessWidget {
           FactSourceLink(
             source: fact.source,
             url: fact.sourceUrl,
-            color: context.colors.onPrimaryContainer.withValues(alpha: 0.7),
+            color: context.colors.primary,
           ),
           const SizedBox(height: AppSpacing.sm),
           _SwipeLegend(
             text: context.l10n.deckHintNext,
             icon: Icons.swipe_left_alt,
-            color: context.colors.onPrimaryContainer.withValues(alpha: 0.7),
+            color: context.colors.onSurfaceVariant,
           ),
         ],
       ),

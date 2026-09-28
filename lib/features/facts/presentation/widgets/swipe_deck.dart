@@ -366,7 +366,9 @@ class _SwipeDeckState extends State<SwipeDeck>
       // actually keeps a back card inert; this is only here so its widget
       // shape matches the top card's.
       onPanUpdate: isTop ? _onPanUpdate : null,
-      onPanEnd: isTop ? (DragEndDetails details) => _onPanEnd(details, size) : null,
+      onPanEnd: isTop
+          ? (DragEndDetails details) => _onPanEnd(details, size)
+          : null,
       child: Transform.translate(
         offset: isTop ? _drag : Offset(0, depth * 12.0),
         child: Transform.rotate(
