@@ -14,6 +14,7 @@ import 'package:aja/services/review/review_providers.dart';
 import 'package:aja/services/storage/storage_providers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -55,6 +56,7 @@ Future<void> bootstrap() async {
   await runZonedGuarded<Future<void>>(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
+      _registerFontLicenses();
 
       FlutterError.onError = (FlutterErrorDetails details) {
         AppLogger.error(
@@ -182,4 +184,19 @@ Future<void> _initializeDailyQuestion(ProviderContainer container) async {
     language: language,
     title: l10n.dailyQuestionNotificationTitle,
   );
+}
+
+/// Bundled OFL fonts must ship their licence; this surfaces it in the
+/// licences page. Lazy: the files are only read when that page opens.
+void _registerFontLicenses() {
+  LicenseRegistry.addLicense(() async* {
+    for (final (String family, String file) in <(String, String)>[
+      ('Young Serif', 'assets/fonts/OFL-YoungSerif.txt'),
+      ('Figtree', 'assets/fonts/OFL-Figtree.txt'),
+    ]) {
+      yield LicenseEntryWithLineBreaks(<String>[
+        family,
+      ], await rootBundle.loadString(file));
+    }
+  });
 }

@@ -44,7 +44,10 @@ Future<void> _pumpDeck(WidgetTester tester) async {
   tester.platformDispatcher.localesTestValue = const <Locale>[Locale('es')];
   addTearDown(tester.platformDispatcher.clearLocalesTestValue);
 
-  SharedPreferences.setMockInitialValues(<String, Object>{});
+  // Past the one-time welcome, straight to the deck.
+  SharedPreferences.setMockInitialValues(<String, Object>{
+    'welcome_seen': true,
+  });
   final SharedPreferences preferences = await SharedPreferences.getInstance();
 
   await tester.pumpWidget(

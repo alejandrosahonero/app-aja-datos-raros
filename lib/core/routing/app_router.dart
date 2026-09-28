@@ -5,6 +5,8 @@ import 'package:aja/features/facts/presentation/screens/favorites_screen.dart';
 import 'package:aja/features/goals/presentation/screens/progress_screen.dart';
 import 'package:aja/features/premium/presentation/screens/paywall_screen.dart';
 import 'package:aja/features/settings/presentation/screens/settings_screen.dart';
+import 'package:aja/features/welcome/presentation/welcome_providers.dart';
+import 'package:aja/features/welcome/presentation/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -27,7 +29,22 @@ final Provider<GoRouter> routerProvider = Provider<GoRouter>((Ref ref) {
     navigatorKey: rootNavigatorKey,
     initialLocation: AppRoutes.homePath,
     debugLogDiagnostics: false,
+    // First launch goes through the welcome once. Read, not watched: the
+    // router is built once, and the screen navigates away itself.
+    redirect: (BuildContext context, GoRouterState state) {
+      final bool atWelcome = state.matchedLocation == AppRoutes.welcomePath;
+      if (!ref.read(welcomeSeenProvider) && !atWelcome) {
+        return AppRoutes.welcomePath;
+      }
+      return null;
+    },
     routes: <RouteBase>[
+      GoRoute(
+        path: AppRoutes.welcomePath,
+        name: AppRoutes.welcomeName,
+        builder: (BuildContext context, GoRouterState state) =>
+            const WelcomeScreen(),
+      ),
       GoRoute(
         path: AppRoutes.homePath,
         name: AppRoutes.homeName,

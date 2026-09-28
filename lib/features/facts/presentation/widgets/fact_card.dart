@@ -148,7 +148,7 @@ class _CardFront extends StatelessWidget {
           Text(
             fact.question.resolve(language),
             style: context.texts.headlineSmall?.copyWith(
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w400,
               height: 1.25,
             ),
           ),
@@ -223,7 +223,7 @@ class _CardBack extends StatelessWidget {
                     ),
                     style: context.texts.titleLarge?.copyWith(
                       color: context.colors.onSurface,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w400,
                       height: 1.3,
                     ),
                   ),

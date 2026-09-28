@@ -24,4 +24,8 @@ abstract final class AppRoutes {
   /// Paywall. Reachable by deep link so a campaign can land directly on it.
   static const String paywallPath = '/premium';
   static const String paywallName = 'premium';
+
+  /// One-time welcome. The router redirects here until it is dismissed.
+  static const String welcomePath = '/welcome';
+  static const String welcomeName = 'welcome';
 }

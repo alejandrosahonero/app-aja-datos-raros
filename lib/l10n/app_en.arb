@@ -1,15 +1,12 @@
 {
   "@@locale": "en",
-
   "appTitle": "Ajá",
-
   "commonCancel": "Cancel",
   "commonContinue": "Continue",
   "commonNotNow": "Not now",
   "commonRetry": "Retry",
   "commonClose": "Close",
   "commonErrorGeneric": "Something went wrong. Please try again.",
-
   "deckHintReveal": "Swipe right to see the answer",
   "deckHintNext": "Swipe left for the next one",
   "deckAnswerLabel": "The answer",
@@ -21,7 +18,6 @@
   "deckFinishedTitle": "You ran out of questions",
   "deckFinishedBody": "You've seen every one in this category. Reshuffle them, suggest your own, or ask for more.",
   "deckRestart": "Restart deck",
-
   "deckContribute": "Contribute",
   "deckAskForMore": "Ask for more",
   "contributeTitle": "Contribute a question",
@@ -38,7 +34,6 @@
   "contributeTooSoon": "Give it a moment before sending another.",
   "contributeInvalid": "Check the question and the answer.",
   "deckLoadError": "We could not load the questions.",
-
   "deckShare": "Share the question",
   "@deckShare": {
     "description": "Button and gesture that shares the card"
@@ -68,26 +63,20 @@
   "deckUndoConfirm": "Undo",
   "deckUndoNothing": "Nothing to undo.",
   "deckCategoryAll": "All",
-
   "categoryBody": "Human body",
   "categoryLanguage": "Language",
   "categoryHistory": "History",
   "categoryScience": "Everyday science",
-
   "adLabel": "Ad",
-
   "favoritesTitle": "Saved",
   "favoritesAdd": "Save this card",
   "favoritesRemove": "Remove from saved",
   "favoritesSaved": "Saved card",
   "favoritesEmptyTitle": "Nothing saved yet",
   "favoritesEmptyBody": "Swipe a card up to keep it here.",
-
   "premiumFeatureTitle": "Premium feature",
   "premiumFeatureBody": "Saving cards is part of \"Remove ads\": one payment, no subscription.",
   "premiumFeatureCta": "See what's included",
-
-
   "goalsTitle": "Progress",
   "goalsRingTooltip": "Today's goal: {learned} of {target}",
   "goalsTodayTitle": "Today's goal",
@@ -104,17 +93,14 @@
   "goalsRankUpTitle": "New rank",
   "goalsRankUpBody": "You met today's goal (+{points} points) and moved up a rank.",
   "goalsSeeProgress": "See progress",
-
   "goalsRarityBelowOne": "Estimated: fewer than 1% of people who start get this far.",
   "goalsRarityApprox": "Estimated: around {percent}% of people who start get this far.",
-
   "rankCurious": "Curious",
   "rankInquisitive": "Inquisitive",
   "rankKnowItAll": "Know-it-all",
   "rankScholar": "Scholar",
   "rankEncyclopedia": "Encyclopedia",
   "rankOracle": "Oracle",
-
   "settingsNotifications": "Reminders",
   "settingsDailyQuestion": "Question of the day",
   "settingsDailyQuestionBody": "One curious question every evening. Tap it and it goes to the top of your deck.",
@@ -134,7 +120,6 @@
   "settingsRateApp": "Rate this app",
   "settingsAbout": "About",
   "settingsVersion": "Version {version}",
-
   "premiumActive": "Premium active. No ads.",
   "paywallTitle": "Remove ads",
   "paywallHeadline": "Read without interruptions",
@@ -146,5 +131,13 @@
   "paywallRestore": "I already bought it",
   "paywallUnavailable": "The store is not available right now.",
   "paywallPending": "Processing the purchase…",
-  "paywallError": "The purchase could not be completed."
+  "paywallError": "The purchase could not be completed.",
+  "welcomeTitleLead": "Weird facts ",
+  "welcomeTitleMark": "that are true.",
+  "welcomeBody": "Every card is a question you didn't know you had. Every answer carries its source, and we opened it before putting it here.",
+  "welcomeGestureRight": "Right: see the answer",
+  "welcomeGestureLeft": "Left: next card",
+  "welcomeGestureUp": "Up: save it",
+  "welcomeGestureDown": "Down: share the question",
+  "welcomeStart": "Start"
 }

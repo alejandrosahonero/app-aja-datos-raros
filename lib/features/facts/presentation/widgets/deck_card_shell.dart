@@ -26,7 +26,11 @@ class DeckCardShell extends StatelessWidget {
     return Material(
       color: color ?? theme.colorScheme.surfaceContainerHigh,
       elevation: elevation,
-      surfaceTintColor: theme.colorScheme.primary,
+      // No M3 tint: it mixes the primary into the card, which turned the
+      // white sheet grey (navy tint) and the dark one khaki (yellow tint).
+      // Depth comes from the shadow alone.
+      surfaceTintColor: Colors.transparent,
+      shadowColor: theme.colorScheme.shadow.withValues(alpha: 0.35),
       borderRadius: BorderRadius.circular(AppRadius.lg),
       clipBehavior: Clip.antiAlias,
       child: Padding(

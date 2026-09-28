@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 
 import 'package:aja/core/errors/app_exception.dart';
 import 'package:aja/core/theme/app_colors.dart';
+import 'package:aja/core/theme/app_theme.dart';
 import 'package:aja/features/facts/domain/fact.dart';
 import 'package:flutter/material.dart';
 
@@ -155,6 +156,7 @@ abstract final class FactStoryImage {
       TextStyle(
         color: _brand.primary,
         fontSize: 38,
+        fontFamily: AppFonts.body,
         fontWeight: FontWeight.w600,
         letterSpacing: 0.2,
       ),
@@ -244,6 +246,7 @@ abstract final class FactStoryImage {
       label.toUpperCase(),
       TextStyle(
         color: _brand.onPrimaryContainer,
+        fontFamily: AppFonts.body,
         fontSize: 28,
         fontWeight: FontWeight.w700,
         letterSpacing: 2.4,
@@ -286,9 +289,8 @@ abstract final class FactStoryImage {
       labels.appName,
       const TextStyle(
         color: Colors.white,
-        fontSize: 68,
-        fontWeight: FontWeight.w800,
-        letterSpacing: -1,
+        fontFamily: AppFonts.display,
+        fontSize: 72,
       ),
       canvasWidth,
     );
@@ -296,6 +298,7 @@ abstract final class FactStoryImage {
       labels.tagline.toUpperCase(),
       TextStyle(
         color: Colors.white.withValues(alpha: 0.72),
+        fontFamily: AppFonts.body,
         fontSize: 26,
         fontWeight: FontWeight.w600,
         letterSpacing: 4,
@@ -345,8 +348,8 @@ abstract final class FactStoryImage {
 
   static TextStyle _questionStyle(double size) => TextStyle(
     color: _brand.onSurface,
+    fontFamily: AppFonts.display,
     fontSize: size,
-    fontWeight: FontWeight.w700,
     height: _questionHeightFactor,
   );
 

@@ -89,7 +89,10 @@ void main() {
     tester.platformDispatcher.localesTestValue = const <Locale>[Locale('es')];
     addTearDown(tester.platformDispatcher.clearLocalesTestValue);
 
-    SharedPreferences.setMockInitialValues(<String, Object>{});
+    // Past the one-time welcome, straight to the deck.
+    SharedPreferences.setMockInitialValues(<String, Object>{
+      'welcome_seen': true,
+    });
     final SharedPreferences preferences = await SharedPreferences.getInstance();
 
     final ProviderContainer container = ProviderContainer(

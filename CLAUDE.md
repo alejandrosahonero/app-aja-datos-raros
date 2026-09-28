@@ -63,6 +63,7 @@ lib/
 │   ├── goals/                # objetivo diario + rangos
 │   │   ├── domain/           # DailyGoal, Rank, GoalsState, GoalEvent
 │   │   └── presentation/     # GoalsController, anillo, pantalla, diálogo
+│   ├── welcome/presentation/ # bienvenida de primer arranque (§8)
 │   ├── settings/presentation/
 │   └── premium/presentation/ # paywall + diálogo de función bloqueada
 ├── services/
@@ -441,6 +442,12 @@ Para el botón explícito "Valorar la aplicación" de Ajustes se usa `openStoreL
 
 - **Paleta «Subrayador»** (elegida en la Fase 2 de `GUIA_MARCA.md`): Tinta `#14213D` (marca oscura, texto, primario en claro), Rotulador `#FFE14A` (acento; primario en oscuro), Papel frío `#E8EBEF` (fondo), Folio `#FFFFFF` (tarjeta), Grafito `#5A6479` (secundario), Noche `#0D1322` / `#172035` (fondo y tarjeta en oscuro). La idea: el «ajá» es subrayar algo, así que el amarillo **solo marca el descubrimiento** — la primera frase de la respuesta lleva fondo de rotulador (`AppSemanticColors.highlight`). No repartir el amarillo por la interfaz: deja de significar algo.
 - Los dos `ColorScheme` están **escritos a mano** en `AppColors.lightScheme` / `darkScheme`, sin `fromSeed` (desvirtúa los tonos) y **sin Material You** (repintaría la marca con el fondo de pantalla). `surfaceTint` es transparente para que las tarjetas sigan blancas.
+- **Tipografía:** Young Serif (titulares, pregunta, respuesta, logotipo; un solo peso, **nunca negrita sintética**) + Figtree 400–700 (todo lo demás). OFL, **empaquetadas** en `assets/fonts/` (nunca `google_fonts` en ejecución), licencias en `LicenseRegistry` (`bootstrap._registerFontLicenses`). Nombres en `AppFonts`. Figtree se instanció en pesos estáticos desde la variable con `fontTools`.
+- **Logo «la tilde subrayada»:** la «a» de Young Serif con la tilde hecha de un trazo de rotulador. Todo sale de **una sola geometría** en `tool/brand_assets.py`: `brand/logo.svg` (maestro), `logo-mono.svg`, iconos de Play (512/1024), icono adaptativo vectorial + monocromo (fondo Tinta), `ic_notification` (silueta; protegido del shrinker en `res/raw/keep.xml` porque solo se nombra desde Dart), mipmaps heredados de API 24–25, `splash_logo.png` y `docs/og.png`. Tras tocarlo: `python tool/brand_assets.py && dart run flutter_native_splash:create`.
+- **Bienvenida** (`features/welcome/`): una vez, sobre Tinta, explica los cuatro gestos. El router redirige a `/welcome` mientras `welcome_seen` sea falso. No pide permisos ni enseña el paywall. Los tests que montan la app entera siembran `welcome_seen: true`.
+- **Capturas golden** (`test/goldens/`, tag `golden`) del mazo, la respuesta (claro/oscuro) y la bienvenida con las fuentes reales. Solo corren en Windows (donde se generaron los masters). Mirarlas tras cada cambio visual: `flutter test --update-goldens --tags golden`.
+- **Libro de marca:** artifact «Libro de marca Ajá» (tono, logo, usos incorrectos, contraste, tipografía, piezas, descartes). Actualizarlo cuando cambie la marca.
+- `DeckCardShell` va **sin `surfaceTintColor`**: el tinte M3 volvía gris la tarjeta blanca y caqui la oscura.
 - **Descartadas** (no reintroducir sin decisión del dueño): Cianotipo (plano azul + mono), Cartel (brutalista negro + violeta), Enciclopedia del 74 (mostaza/teja/oliva), Gabinete de curiosidades (verde botella + latón) y Chicle (el violeta/fucsia de la plantilla, `0xFFC026D3`, que era el seed anterior: genérico y «estética IA»).
 - Colores semánticos (success/warning) vía `ThemeExtension<AppSemanticColors>`, accesibles con `context.semanticColors`.
 - **Tokens de espaciado y radios** en `AppSpacing` / `AppRadius`. Prohibido escribir paddings a pelo.
@@ -458,6 +465,7 @@ Para el botón explícito "Valorar la aplicación" de Ajustes se usa `openStoreL
 - Navegación por nombre: `context.goNamed(AppRoutes.settingsName)`.
 - `rootNavigatorKey` disponible para código fuera del árbol (callbacks de anuncios, stream de compras) en vez de guardar un `BuildContext` obsoleto.
 - Deep links activos desde el día 1: esquema `aja://` en el manifiesto + `flutter_deeplinking_enabled`. App Links (`https`, `autoVerify`) están comentados: activarlos requiere publicar `assetlinks.json` en el dominio.
+- Primer arranque → `redirect` a `/welcome` (§8) hasta que se descarta.
 - `errorBuilder` → `RouteErrorScreen`, para que un deep link de campaña obsoleto no crashee.
 
 ---
@@ -528,7 +536,7 @@ flutter build appbundle --release --analyze-size
 2. **Re-intercalar el catálogo y reactivar el test de orden.** El lote de 79 preguntas de "cuerpo" se fusionó sin lotes equivalentes de ciencia/historia/lenguaje (§3.2) y dejó 35 tarjetas de esa categoría seguidas al final. En cuanto lleguen lotes parecidos para las otras tres categorías, correr `tool/ingest_facts.py --apply` con las cuatro juntas para que `interleave()` tenga con qué alternar, y quitar el `skip:` de `fact_repository_test.dart: the catalogue stays interleaved by category`.
 3. `core/config/ad_config.dart`: rellenar `_prodBanner` y `_prodInterstitial`.
 4. `AndroidManifest.xml`: sustituir el App ID de prueba de AdMob por el de producción.
-5. ~~Iconos adaptativos y splash nativo.~~ **Hecho, con el logo real.** El icono se generó a mano desde Android Studio (Image Asset → Launcher Icons, no con `flutter_launcher_icons`): primer plano el logo recortado, fondo `#FFFFFF` sólido. El splash usa `flutter_native_splash` (`pubspec.yaml`, sección `flutter_native_splash:`) con la misma imagen y el mismo fondo blanco, incluida la variante Android 12+ y el modo oscuro — **fondo blanco en los dos temas a propósito**: el logo es morado muy oscuro en las sombras y se funde con cualquier fondo oscuro, mismo motivo que fija la paleta de la imagen de compartir al esquema claro (§3.4). Regenerar tras cambiar la imagen: `dart run flutter_native_splash:create` (y `:remove` antes de reemplazarla por otra).
+5. ~~Iconos adaptativos y splash nativo.~~ **Rehecho con la marca «Subrayador» (§8)**: lo de abajo describe el logo anterior (interrogación 3D sobre blanco), ya retirado. El icono se generó a mano desde Android Studio (Image Asset → Launcher Icons, no con `flutter_launcher_icons`): primer plano el logo recortado, fondo `#FFFFFF` sólido. El splash usa `flutter_native_splash` (`pubspec.yaml`, sección `flutter_native_splash:`) con la misma imagen y el mismo fondo blanco, incluida la variante Android 12+ y el modo oscuro — **fondo blanco en los dos temas a propósito**: el logo es morado muy oscuro en las sombras y se funde con cualquier fondo oscuro, mismo motivo que fija la paleta de la imagen de compartir al esquema claro (§3.4). Regenerar tras cambiar la imagen: `dart run flutter_native_splash:create` (y `:remove` antes de reemplazarla por otra).
 6. ~~Crash reporting (Crashlytics o Sentry).~~ **Hecho, con Sentry** (`sentry_flutter`, `core/config/sentry_config.dart`). `bootstrap()` llama a `SentryFlutter.init` antes de todo lo demás, con el DSN activo solo en release (`kReleaseMode`) — vacío en debug, mismo convenio que un ID de anuncio vacío: desactiva el SDK en vez de reventar. `AppLogger.error` es el único punto que toca el SDK: reenvía cada error a `Sentry.captureException` además de al log de siempre.
 7. Política de privacidad publicada en una URL accesible (obligatoria por usar AdMob). **Borrador listo** en `docs/privacy/index.html` (se sirve por GitHub Pages en cuanto se active, ver §3.6 sobre cómo activar Pages para `/docs`); falta revisar el texto y confirmar la URL final.
 8. Data Safety form, content rating (IARC), público objetivo, declaración "contiene anuncios".

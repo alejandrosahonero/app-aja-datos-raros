@@ -1,17 +1,60 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8" />
-<meta http-equiv="refresh" content="0; url=./privacy/" />
-<link rel="canonical" href="./privacy/" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ajá: Datos Curiosos Raros</title>
+<meta name="description" content="Un mazo de preguntas raras. Desliza para ver la respuesta, y cada respuesta lleva su fuente.">
+<meta name="theme-color" content="#14213D">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ajá: datos raros que son verdad">
+<meta property="og:description" content="Un mazo de preguntas raras. Desliza para ver la respuesta, y cada respuesta lleva su fuente.">
+<meta property="og:image" content="https://alejandrosahonero.github.io/app-aja-datos-raros/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<!-- Hand-written, no framework. Palette and type: CLAUDE.md §8. Fonts are
+     served from Google Fonts here only; the app bundles its own copies. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;600&display=swap">
+<style>
+  :root { --ink:#14213D; --hl:#FFE14A; --paper:#F4F6FA; --mute:#9AA5BB; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--ink); color: var(--paper); }
+  body { font: 18px/1.55 Figtree, system-ui, sans-serif; padding: 0 20px; }
+  main { max-width: 720px; margin: 0 auto; padding: 64px 0 48px; }
+  .mark { width: 88px; height: 88px; display: block; margin-bottom: 40px; }
+  h1 { font: 400 clamp(40px, 8vw, 68px)/1.12 "Young Serif", Georgia, serif; margin: 0 0 20px; text-wrap: balance; }
+  mark { background: var(--hl); color: var(--ink); padding: 0 .12em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  p.lead { color: var(--paper); opacity: .85; max-width: 52ch; margin: 0 0 32px; }
+  .cta { display: inline-block; background: var(--hl); color: var(--ink); font-weight: 600; text-decoration: none; padding: 14px 26px; border-radius: 12px; }
+  .cta:focus-visible, a:focus-visible { outline: 3px solid var(--paper); outline-offset: 3px; }
+  ul { list-style: none; padding: 0; margin: 48px 0; display: grid; gap: 14px; }
+  li { display: grid; grid-template-columns: 7.5em 1fr; gap: 12px; }
+  li b { color: var(--hl); font-weight: 600; }
+  footer { max-width: 720px; margin: 0 auto; padding: 24px 0 40px; border-top: 1px solid #26314A; font-size: 15px; color: var(--mute); }
+  footer a { color: var(--paper); }
+  @media (max-width: 420px) { li { grid-template-columns: 1fr; gap: 0; } }
+</style>
 </head>
 <body>
-<!-- La raíz de este sitio no tiene contenido propio a propósito: docs/ solo
-     existe para servir la política de privacidad (docs/privacy/) y el
-     catálogo remoto (docs/facts.json), ninguno de los dos pensado para
-     navegarse desde aquí. Esto evita que la URL pelada muestre nada más que
-     un salto directo a lo único que sí es de cara al público. -->
-<p><a href="./privacy/">Política de privacidad</a></p>
+<main>
+  <img class="mark" src="favicon.svg" alt="">
+  <h1>Datos raros <mark>que son verdad.</mark></h1>
+  <p class="lead">Ajá es un mazo de preguntas que no sabías que tenías. Desliza la tarjeta y lee la respuesta. Cada una lleva su fuente, y la abrimos antes de ponerla aquí.</p>
+  <a class="cta" href="https://play.google.com/store/apps/details?id=com.alejandrosahonero.aja">Descargar en Google Play</a>
+  <ul>
+    <li><b>A la derecha</b><span>ver la respuesta</span></li>
+    <li><b>A la izquierda</b><span>la siguiente</span></li>
+    <li><b>Hacia arriba</b><span>guardarla</span></li>
+    <li><b>Hacia abajo</b><span>compartir la pregunta</span></li>
+  </ul>
+</main>
+<footer>
+  <a href="privacy/">Política de privacidad</a>
+</footer>
 </body>
 </html>

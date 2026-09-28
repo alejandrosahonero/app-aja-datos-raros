@@ -90,21 +90,36 @@ flutter:
     # fuera del isolate principal y se cachea en memoria.
     - assets/data/
     - assets/branding/
+    # Licencias OFL de las fuentes, registradas en LicenseRegistry (bootstrap).
+    - assets/fonts/OFL-YoungSerif.txt
+    - assets/fonts/OFL-Figtree.txt
+  # Marca «Subrayador» (CLAUDE.md §8): Young Serif para titulares y la
+  # pregunta, Figtree para todo lo demás. Empaquetadas, nunca google_fonts en
+  # tiempo de ejecución: el primer frame no puede esperar a la red. Figtree se
+  # instanció en pesos estáticos desde la variable (~40 KB cada uno).
+  fonts:
+    - family: YoungSerif
+      fonts:
+        - asset: assets/fonts/YoungSerif-Regular.ttf
+    - family: Figtree
+      fonts:
+        - asset: assets/fonts/Figtree-Regular.ttf
+        - asset: assets/fonts/Figtree-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Figtree-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Figtree-Bold.ttf
+          weight: 700
 
-# Splash nativo (CLAUDE.md §13 pendiente #5). Fondo blanco a propósito: el
-# logo usa morados muy oscuros en sus sombras, y sobre cualquier fondo oscuro
-# esas sombras se funden y se pierde el trazo — mismo motivo por el que la
-# imagen de compartir (§3.4) fija su paleta al esquema claro.
-#
-# Regenerar tras cambiar la imagen o el color:
+# Splash nativo: la marca «la tilde subrayada» sobre Tinta, en claro y en
+# oscuro (la marca oscura es la misma en los dos temas). La imagen la genera
+# tool/brand_assets.py; regenerar después con:
 #   dart run flutter_native_splash:create
-# Y para quitarlo (por ejemplo, antes de reemplazarlo por otro):
-#   dart run flutter_native_splash:remove
 flutter_native_splash:
-  color: "#FFFFFF"
+  color: "#14213D"
   image: assets/branding/splash_logo.png
   android_12:
-    color: "#FFFFFF"
+    color: "#14213D"
     image: assets/branding/splash_logo.png
   android: true
   ios: false
